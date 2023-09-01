@@ -2,6 +2,8 @@
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out $CERTS_ -subj "/C=MO/L=KH/O=1337/OU=student/CN=$DOMAIN_NAME"
 
+sed -i "s/react_port/$REACT_PORT/g" /etc/nginx/sites-available/default.conf
+sed -i "s/nestjs_port/$NESTJS_PORT/g" /etc/nginx/sites-available/default.conf
 sed -i "s/my_domain/$DOMAIN_NAME/g" /etc/nginx/sites-available/default.conf
 sed -i "s/my_certs/$CERTS_/g" /etc/nginx/sites-available/default.conf
 
