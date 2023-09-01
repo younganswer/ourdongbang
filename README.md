@@ -20,12 +20,12 @@
 
 ### 장정안 (Frontend dev)
 
-<div>
-	<div>
+<div style="margin: 0; padding:0;">
+	<div style="margin: 0; padding:0;">
 		<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" />
 		<p><p/>
 	<div/>
-	<div>
+	<div style="margin: 0; padding:0;">
 		<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" />
 		<p>inetty@kookmin.ac.kr<p/>
 	<div/>
