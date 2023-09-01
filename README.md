@@ -20,32 +20,32 @@
 
 ### 장정안 (Frontend dev)
 
-<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
 inetty@kookmin.ac.kr
 <br/>
 
 ### 성정규 (Frontend dev)
 
-<a href="https://github.com/seongjeongkyu1"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href="https://github.com/seongjeongkyu1"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
 juku1133@kookmin.ac.kr
 <br/>
 
 ### 윤현승(Backend dev)
 
-<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
-<a href="https://velog.io/@yoonhs0201"><img src="https://img.shields.io/badge/Velog-20C997?style=flat-square&logo=velog&logoColor=white" /></a>
+<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
+<a href="https://velog.io/@yoonhs0201"><img src="https://img.shields.io/badge/Velog-20C997?style=flat-square&logo=velog&logoColor=white" style="height: 30px"/></a>
 yoonhs02@kookmin.ac.kr
 <br/>
 
 ### 황영서(Backend & AI dev)
 
-<a href="https://github.com/younganswer"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href="https://github.com/younganswer"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
 younganswer@kookmin.ac.kr
 <br/>
 
 ### 조현준(AI dev)
 
-<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
 juatis96@kookmin.ac.kr
 <br/>
 
