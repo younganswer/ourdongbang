@@ -39,6 +39,7 @@
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
 	<span style="margin: 4px 0 0 10px">juku1133@kookmin.ac.kr</span>
+</div>
 <br/>
 
 ### 윤현승(Backend dev)
