@@ -22,11 +22,11 @@
 
 <div style="display: grid; grid-template-columns: 100px 1fr; margin: 0 0 5px 0; padding: 0; height:30px">
 	<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" style="width: 100px"/>
-	<span style="margin: 4px 0 0 10px"></span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%"></span>
 </div>
 <div style="display: grid; grid-template-columns: 100px 1fr; margin: 0 0 5px 0; padding: 0; height:30px">
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">inetty@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">inetty@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -34,11 +34,11 @@
 
 <div>
 	<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" style="width: 100px"/>
-	<span style="margin: 4px 0 0 10px">https://github.com/seongjeongkyu1</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">https://github.com/seongjeongkyu1</span>
 </div>
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">juku1133@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">juku1133@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -46,15 +46,15 @@
 
 <div>
 	<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" style="width: 100px"/>
-	<span style="margin: 4px 0 0 10px"></span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%"></span>
 </div>
 <div>
 	<img src="https://img.shields.io/badge/Velog-20C997?style=flat-square&logo=velog&logoColor=white" alt="Velog" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">https://velog.io/@yoonhs0201</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">https://velog.io/@yoonhs0201</span>
 </div>
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">yoonhs02@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">yoonhs02@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -62,11 +62,11 @@
 
 <div>
 	<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" style="width: 100px"/>
-	<span style="margin: 4px 0 0 10px">https://github.com/younganswer</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">https://github.com/younganswer</span>
 </div>
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">younganswer@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">younganswer@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -74,11 +74,11 @@
 
 <div>
 	<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" style="width: 100px"/>
-	<span style="margin: 4px 0 0 10px"></span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%"></span>
 </div>
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">juatis96@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">juatis96@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -86,7 +86,7 @@
 
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">shiamon@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">shiamon@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -94,7 +94,7 @@
 
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">yjart322@kookmin.ac.kr</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">yjart322@kookmin.ac.kr</span>
 </div>
 <br/>
 
@@ -102,5 +102,5 @@
 
 <div>
 	<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" style="width: 100px" />
-	<span style="margin: 4px 0 0 10px">lnahyuni@naver.com</span>
+	<span style="margin: 4px 0 0 10px; heigth: 100%">lnahyuni@naver.com</span>
 </div>
