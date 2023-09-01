@@ -21,7 +21,8 @@
 ### 장정안 (Frontend dev)
 
 <a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
-<span>inetty@kookmin.ac.kr</span>
+<br>
+<span sytle="color: black; pointer: default">inetty@kookmin.ac.kr</span>
 <br/>
 
 ### 성정규 (Frontend dev)
