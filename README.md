@@ -1,11 +1,17 @@
 # 우리동방 (대학교 동아리 플랫폼 서비스)
+<br/>
+<br/>
 
 ## Index
 - [Software Architecture](#software-architecture)
 - [Contacts](#contacts)
+<br/>
+<br/>
 
 ## Software Architecture
 ![Software Architecture](./assets/Software%20Architecture.png)
+<br/>
+<br/>
 
 ## Contacts
 ### 장정안 (Frontend dev)
@@ -36,9 +42,11 @@
 
 ### 장시아 (Design)
 - [Gmail](shiamon@kookmin.ac.kr)
+<br/>
 
 ### 김연정 (Design)
 - [Gmail](yjart322@kookmin.ac.kr)
+<br/>
 
 ### 이나현 (Marketing)
 - [Gmail](lnahyuni@naver.com)
