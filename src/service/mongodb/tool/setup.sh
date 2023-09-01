@@ -3,6 +3,8 @@
 # Path for logging
 mkdir -p /var/log/mongodb
 
+sed -i "s/my_port/$PORT/g" /etc/mongod.conf
+
 # Run db at background to setup
 mongod --config /etc/mongod.conf
 
