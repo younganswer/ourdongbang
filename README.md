@@ -1,52 +1,64 @@
 # 우리동방 (대학교 동아리 플랫폼 서비스)
+
 <br/>
 <br/>
 
 ## Index
+
 - [Software Architecture](#software-architecture)
 - [Contacts](#contacts)
-<br/>
-<br/>
+  <br/>
+  <br/>
 
 ## Software Architecture
+
 ![Software Architecture](./assets/Software%20Architecture.png)
 <br/>
 <br/>
 
 ## Contacts
+
 ### 장정안 (Frontend dev)
-- [Github]()
-- [Gmail](inetty@kookmin.ac.kr)
-<br/>
+
+- ![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) <>
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) inetty@kookmin.ac.kr
+  <br/>
 
 ### 성정규 (Frontend dev)
-- [Github](https://github.com/seongjeongkyu1)
-- [Gmail](juku1133@kookmin.ac.kr)
-<br/>
+
+- ![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) <https://github.com/seongjeongkyu1>
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) juku1133@kookmin.ac.kr
+  <br/>
 
 ### 윤현승(Backend dev)
-- [Github]()
-- [Gmail](yoonhs02@kookmin.ac.kr)
-- [velog](https://velog.io/@yoonhs0201)
-<br/>
+
+- ![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) <>
+- ![velog]("https://img.shields.io/badge/Velog-20C997?style=flat-square&logo=velog&logoColor=white") <https://velog.io/@yoonhs0201>
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) yoonhs02@kookmin.ac.kr
+  <br/>
 
 ### 황영서(Backend & AI dev)
-- [Github](https://github.com/younganswer)
-- [Gmail](younganswer@kookmin.ac.kr)
-<br/>
+
+- ![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) <https://github.com/younganswer>
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) younganswer@kookmin.ac.kr
+  <br/>
 
 ### 조현준(AI dev)
-- [Github]()
-- [Gmail](juatis96@kookmin.ac.kr)
-<br/>
+
+- ![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) <>
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) juatis96@kookmin.ac.kr
+  <br/>
 
 ### 장시아 (Design)
-- [Gmail](shiamon@kookmin.ac.kr)
-<br/>
+
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) shiamon@kookmin.ac.kr
+  <br/>
 
 ### 김연정 (Design)
-- [Gmail](yjart322@kookmin.ac.kr)
-<br/>
+
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) yjart322@kookmin.ac.kr
+  <br/>
 
 ### 이나현 (Marketing)
-- [Gmail](lnahyuni@naver.com)
+
+- ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) lnahyuni@naver.com
