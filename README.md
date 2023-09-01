@@ -49,7 +49,7 @@
 
 ### 조현준(AI dev)
 
-<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
+<a href="https://github.com/hyunjoon0208"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
 
 <p>juatis96@kookmin.ac.kr</p>
 <br/>
