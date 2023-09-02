@@ -13,7 +13,7 @@ RUN set -x \
 
 RUN apt-get install -y nginx && apt-get install -y openssl
 
-COPY ./conf/default.conf /etc/nginx/sites-available/default.conf
+COPY ./conf/default /etc/nginx/sites-available/default
 COPY ./tool/setup.sh /setup.sh
 
 RUN chmod +x /setup.sh

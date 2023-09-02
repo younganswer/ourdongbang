@@ -12,6 +12,6 @@ COPY . .
 
 ENV HOME=/app
 
-RUN	npm install
+RUN	yarn install
 
 ENTRYPOINT [ "yarn", "run", "start" ]
