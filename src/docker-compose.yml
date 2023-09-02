@@ -25,8 +25,6 @@ services:
             dockerfile: Dockerfile
         env_file:
             - ./service/nestjs/.env
-        ports:
-            - '5001:5000'
         volumes:
             - nestjs_src_volume:/app/src
             - nestjs_log_volume:/app/log
@@ -46,8 +44,6 @@ services:
                 - REACT_APP_SERVER=${REACT_APP_SERVER:-http://localhost:3000}
         env_file:
             - ./service/react/.env
-        ports:
-            - '3000:3000'
         volumes:
             - react_src_volume:/app/src
         networks:
@@ -67,7 +63,7 @@ services:
         ports:
             - 443:443
         volumes:
-            - nginx:/var/log/nginx
+            - nginx_log_volume:/var/log/nginx
         networks:
             - u_dong
         depends_on:
