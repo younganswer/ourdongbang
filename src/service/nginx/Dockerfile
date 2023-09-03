@@ -11,11 +11,12 @@ RUN set -x \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y gnupg1 ca-certificates
 
-RUN apt-get install -y nginx && apt-get install -y openssl
+RUN apt-get install -y nginx
+RUN apt-get install -y openssl
 
 COPY ./conf/default /etc/nginx/sites-available/default
-COPY ./tool/setup.sh /setup.sh
+COPY ./tool /tool
 
-RUN chmod +x /setup.sh
+RUN chmod +x /tool/setup.sh
 
-ENTRYPOINT [ "/bin/bash", "/setup.sh" ]
+ENTRYPOINT [ "/bin/bash", "/tool/setup.sh" ]
