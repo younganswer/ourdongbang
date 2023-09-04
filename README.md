@@ -21,7 +21,7 @@
 ### 장정안 (Frontend dev)
 
 <p>
-	<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
+	<a href="https://github.com/jeongahn"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
 	<a href="mailto:inetty@kookmin.ac.kr"><img src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:inetty@kookmin.ac.kr" style="height: 30px"/></a>
 </p>
 <br/>
