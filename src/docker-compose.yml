@@ -61,6 +61,7 @@ services:
         env_file:
             - ./service/nginx/.env
         ports:
+            - 80:80
             - 443:443
         volumes:
             - nginx_log_volume:/var/log/nginx

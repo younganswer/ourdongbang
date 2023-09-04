@@ -10,18 +10,9 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name www.my_domain my_domain;
+	server_name www.my_domain dev.my_domain my_domain;
 
-	return 301 https://my_domain$request_uri;
-}
-
-server {
-	listen 80;
-	listen [::]:80;
-
-	server_name dev.my_domain;
-
-	return 301 https://dev.my_domain$request_uri;
+	return 301 https://$host$request_uri;
 }
 
 server {
