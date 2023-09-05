@@ -9,7 +9,7 @@ export class AuthController {
 
 	@Patch('login')
 	@ApiOperation({ summary: 'Login' })
-	@ApiResponse({ status: 200, description: 'Login' })
+	@ApiResponse({ status: 200, description: 'Success' })
 	@ApiResponse({ status: 401, description: 'Unauthorized' })
 	async login() {
 		return await this.authService.login();
