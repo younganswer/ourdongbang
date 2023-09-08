@@ -15,9 +15,11 @@ stop:
 logs:
 	@${DOCKER_COMPOSE} logs
 
-fclean:
-	@docker rmi -f $$(docker images -a -q) 2>/dev/null || true
-	@docker volume rm $$(docker volume ls -q) 2>/dev/null || true
+prune:
+	@docker container prune -f 2>/dev/null || true
+	@docker image prune -af 2>/dev/null || true
+	@docker volume prune -f 2>/dev/null || true
+	@docker network prune -f 2>/dev/null || true
 	@docker system prune -af 2>/dev/null || true
 
 .PHONY: up down stop start fclean

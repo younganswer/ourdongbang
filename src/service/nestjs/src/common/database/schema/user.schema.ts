@@ -7,6 +7,7 @@ class Club {
 		type: Types.ObjectId,
 		required: true,
 		unique: true,
+		ref: 'clubs',
 	})
 	_id: Types.ObjectId;
 }
@@ -20,13 +21,6 @@ const schemaOptions: SchemaOptions = {
 
 @Schema(schemaOptions)
 export class User {
-	@Prop({
-		type: Types.ObjectId,
-		required: true,
-		unique: true,
-	})
-	_id: Types.ObjectId;
-
 	@Prop({
 		type: String,
 		required: true,
@@ -44,9 +38,19 @@ export class User {
 		type: String,
 		required: true,
 	})
+	salt: string;
+
+	@Prop({
+		type: String,
+		required: true,
+	})
 	password: string;
 
-	@Prop({ type: String })
+	@Prop({
+		type: String,
+		required: true,
+		unique: true,
+	})
 	email: string;
 
 	@Prop({ type: String })
@@ -61,6 +65,7 @@ export class User {
 	@Prop({
 		type: Types.ObjectId,
 		unique: true,
+		ref: 'images',
 	})
 	profileImageId: Types.ObjectId;
 
