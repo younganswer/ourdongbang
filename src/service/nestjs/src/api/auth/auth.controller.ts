@@ -1,5 +1,12 @@
-import { Controller, Get, Post, Res, Body, HttpException } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiCookieAuth } from '@nestjs/swagger';
+import { Controller, Post, Res, Body, HttpException, Delete, Patch } from '@nestjs/common';
+import {
+	ApiTags,
+	ApiOperation,
+	ApiCookieAuth,
+	ApiOkResponse,
+	ApiUnauthorizedResponse,
+	ApiBadRequestResponse,
+} from '@nestjs/swagger';
 import { User } from 'common/database/schema/user.schema';
 import { JwtPayload } from 'common/auth/type';
 import { RegisterRequestDto } from './dto/request/register.dto';
@@ -16,19 +23,24 @@ export class AuthController {
 		private readonly registerService: RegisterService,
 	) {}
 
-	@Get('login')
+	@Patch('login')
 	@ApiCookieAuth()
 	@ApiOperation({ summary: 'Login' })
-	@ApiResponse({ status: 200, description: 'Logged in successfully', type: User })
-	async login(@Body() loginRequestDto: LoginRequestDto, @Res({ passthrough: true }) res: Response): Promise<User> {
+	@ApiOkResponse({ description: 'Login successfully', type: User })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	@ApiUnauthorizedResponse({ description: 'ID or password is incorrect' })
+	async login(
+		@Body() loginRequestDto: LoginRequestDto,
+		@Res({ passthrough: true }) response: Response,
+	): Promise<User> {
 		try {
 			const user = await this.loginService.login(loginRequestDto);
 			const jwt = this.cookieService.createJwt<JwtPayload>({
-				id: user.id,
+				_id: user._id.toString(),
 			});
 			const cookieOption = this.cookieService.getCookieOption();
 
-			res.cookie('accessToken', jwt, cookieOption);
+			response.cookie('access-token', jwt, cookieOption);
 			return user;
 		} catch (error) {
 			throw new HttpException(error.message, 400);
@@ -38,17 +50,33 @@ export class AuthController {
 	@Post('register')
 	@ApiCookieAuth()
 	@ApiOperation({ summary: 'Register' })
-	@ApiResponse({ status: 200, description: 'Registered successfully', type: User })
-	async register(@Body() registerRequestDto: RegisterRequestDto, @Res({ passthrough: true }) res: Response) {
+	@ApiOkResponse({ description: 'Register successfully', type: User })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async register(@Body() registerRequestDto: RegisterRequestDto, @Res({ passthrough: true }) response: Response) {
 		try {
 			const user = await this.registerService.register(registerRequestDto);
 			const jwt = this.cookieService.createJwt<JwtPayload>({
-				id: user.id,
+				_id: user._id.toString(),
 			});
 			const cookieOption = this.cookieService.getCookieOption();
 
-			res.cookie('accessToken', jwt, cookieOption);
+			response.cookie('access-token', jwt, cookieOption);
 			return user;
+		} catch (error) {
+			throw new HttpException(error.message, 400);
+		}
+	}
+
+	@Delete('signout')
+	@ApiCookieAuth()
+	@ApiOperation({ summary: 'Logout' })
+	@ApiOkResponse({ description: 'Logout successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async logout(@Res({ passthrough: true }) response: Response) {
+		try {
+			const cookieOption = this.cookieService.getCookieOption();
+
+			response.clearCookie('access-token', cookieOption);
 		} catch (error) {
 			throw new HttpException(error.message, 400);
 		}
