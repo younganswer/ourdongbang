@@ -14,7 +14,7 @@ export class RegisterRequestDto {
 	@IsNotEmpty()
 	@Length(4, 20)
 	@Trim()
-	@ApiProperty({ example: 'jhanks1221' })
+	@ApiProperty({ example: 'jhanks1221', uniqueItems: true })
 	id: string;
 
 	@IsString()
@@ -27,17 +27,17 @@ export class RegisterRequestDto {
 	@IsEmail()
 	@IsNotEmpty()
 	@Trim()
-	@ApiProperty({ example: 'inetty@kookmin.ac.kr' })
+	@ApiProperty({ example: 'inetty@kookmin.ac.kr', required: false, uniqueItems: true })
 	email: string;
 
 	@IsString()
 	@Trim()
-	@ApiProperty({ example: '소프트웨어융합학부' })
+	@ApiProperty({ example: '소프트웨어융합학부', required: false })
 	major: string;
 
 	@IsNumberString()
 	@Length(8, 8)
 	@Trim()
-	@ApiProperty({ example: '20191658' })
+	@ApiProperty({ example: '20191658', required: false, uniqueItems: true })
 	studentId: string;
 }
