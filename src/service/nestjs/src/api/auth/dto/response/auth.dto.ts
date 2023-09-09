@@ -8,5 +8,5 @@ export class AuthResponseDto {
 		example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYW5nIiwiaWF0IjoxNjI0NjQwNjY2LCJleHAiOj',
 		description: 'JWT token',
 	})
-	accessToken: string;
+	'access-token': string;
 }

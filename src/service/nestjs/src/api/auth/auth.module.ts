@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { AuthController } from './auth.controller';
 import { LoginService, CookieService, RegisterService } from './service';
-import { UserSchema } from 'common/database/schema/user.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtAuthModule } from './jwt/jwtAuth.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserSchema } from 'common/database/schema/user.schema';
 
 @Module({
-	controllers: [AuthController],
-	providers: [LoginService, CookieService, RegisterService],
 	imports: [
+		JwtAuthModule,
 		JwtModule.registerAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
@@ -25,5 +25,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 			},
 		]),
 	],
+	controllers: [AuthController],
+	providers: [LoginService, CookieService, RegisterService],
 })
 export class AuthModule {}
