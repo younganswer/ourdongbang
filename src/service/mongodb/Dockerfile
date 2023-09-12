@@ -71,7 +71,7 @@ RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	set -- 'E58830201F7DD82CD808AA84160D26BB1785BA38'; \
 	for key; do \
-		gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
+		gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"; \
 	done; \
 	mkdir -p /etc/apt/keyrings; \
 	gpg --batch --export "$@" > /etc/apt/keyrings/mongodb.gpg; \
