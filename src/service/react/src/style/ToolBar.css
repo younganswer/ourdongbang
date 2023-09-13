@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'HakgyoansimGaeulsopungB';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimGaeulsopungB.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+.font-change {
+	font-family: 'HakgyoansimGaeulsopungB';
+}
