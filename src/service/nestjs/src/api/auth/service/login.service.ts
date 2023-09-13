@@ -1,18 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from 'common/database/schema/user.schema';
 import { Model } from 'mongoose';
 import { LoginRequestDto } from '../dto/request/login.dto';
+import { User } from 'common/database/schema/user.schema';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class LoginService {
 	constructor(@InjectModel('User') private userModel: Model<User>) {}
 
-	async login(loginRequestDto: LoginRequestDto) {
+	async login(loginRequestDto: LoginRequestDto): Promise<User> {
 		try {
 			const user = await this.userModel.findOne({ id: loginRequestDto.id });
 
 			if (!user) {
+				throw new Error('ID or password is incorrect');
+			}
+			const isValid = await bcrypt.compare(loginRequestDto.password, user.password);
+			if (!isValid) {
 				throw new Error('ID or password is incorrect');
 			}
 			return user;
