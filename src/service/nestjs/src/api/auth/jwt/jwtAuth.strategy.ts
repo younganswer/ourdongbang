@@ -13,8 +13,9 @@ export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt-auth') {
 	constructor(
 		@InjectModel('User')
 		private userModel: Model<User>,
-		configService: ConfigService,
 	) {
+		const configService: ConfigService = new ConfigService();
+
 		super({
 			jwtFromRequest: ExtractJwt.fromExtractors([
 				(request: Request) => {

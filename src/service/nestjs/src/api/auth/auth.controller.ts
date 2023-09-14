@@ -1,8 +1,7 @@
-import { Controller, Post, Res, Body, HttpException, Delete, Patch, UseGuards, Req, Get } from '@nestjs/common';
+import { Controller, Post, Res, Body, HttpException, Delete, Patch } from '@nestjs/common';
 import {
 	ApiTags,
 	ApiOperation,
-	ApiCookieAuth,
 	ApiOkResponse,
 	ApiUnauthorizedResponse,
 	ApiBadRequestResponse,
@@ -14,7 +13,7 @@ import { Response } from 'express';
 import { LoginService, CookieService, RegisterService } from './service';
 import { LoginRequestDto } from './dto/request/login.dto';
 import { User } from 'common/database/schema/user.schema';
-import { JwtAuthGuard } from 'common/auth/guard';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -23,10 +22,10 @@ export class AuthController {
 		private readonly loginService: LoginService,
 		private readonly cookieService: CookieService,
 		private readonly registerService: RegisterService,
+		private readonly configService: ConfigService,
 	) {}
 
 	@Patch('login')
-	@ApiCookieAuth()
 	@ApiOperation({ summary: 'Login' })
 	@ApiOkResponse({ description: 'Login successfully', type: User })
 	@ApiBadRequestResponse({ description: 'Bad request' })
@@ -50,7 +49,6 @@ export class AuthController {
 	}
 
 	@Post('register')
-	@ApiCookieAuth()
 	@ApiOperation({ summary: 'Register' })
 	@ApiResponse({ status: 201, description: 'Register successfully', type: User })
 	@ApiBadRequestResponse({ description: 'Bad request' })
@@ -73,7 +71,6 @@ export class AuthController {
 	}
 
 	@Delete('signout')
-	@ApiCookieAuth()
 	@ApiOperation({ summary: 'Logout' })
 	@ApiOkResponse({ description: 'Logout successfully' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
