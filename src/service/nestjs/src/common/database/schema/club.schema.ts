@@ -36,3 +36,4 @@ export class Club {
 }
 
 export type ClubDocument = Club & Document;
+export const ClubSchema = SchemaFactory.createForClass(Club);
