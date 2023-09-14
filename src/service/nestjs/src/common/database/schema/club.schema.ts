@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { User } from './user.schema'
+import { Member, MemberDocument, MemberSchema } from './member.schema';
+import { ApiProperty } from '@nestjs/swagger'
 
 const schemaOptions: SchemaOptions = {
 	timestamps: true,
@@ -9,13 +11,7 @@ const schemaOptions: SchemaOptions = {
 
 @Schema(schemaOptions)
 export class Club {
-    @Prop({
-		type: Types.ObjectId,
-		required: true,
-		unique: true,
-	})
-	_id: Types.ObjectId;
-
+    @ApiProperty({ description: "동아리 이름", example: '윙크', uniqueItems: true})
     @Prop({
         type: String,
         required: true,
@@ -23,17 +19,21 @@ export class Club {
     })
     name: string;
 
+    @ApiProperty({ description: "동아리 소개글", example: '우리 동아리 짱짱!!', required: false})
     @Prop({ type: String })
     description: string;
 
+    @ApiProperty({ description: "동아리 규칙", example: '담배, 술 X', required: false})
     @Prop({ type: String })
     rule: string
 
+    @ApiProperty({description: "동아리 태그 배열", example: ["#스터디", "#가족같은 분위기"], required: false})
     @Prop({type: [String]})
-    tags: string[]; // tag는 따로 collection이 필요 한가? 아니면 그냥 string 배열을 쓸까?
+    tags: string[]; // enum을 사용해서 문자열에 이름을 주기?
 
-    // @Prop({ type: [User] }) // 에러가 나는중...
-    // members: User[];
+    @ApiProperty({description: "동아리 member들 정보",required: false})
+    @Prop({ type: [MemberSchema]})
+    members: MemberDocument[];
 }
 
 export type ClubDocument = Club & Document;
