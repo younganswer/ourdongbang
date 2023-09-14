@@ -2,9 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication) {
-	const title = 'Udong NestJS API Docs';
+	const title = 'Ourdongbang NestJS API Docs';
 	const description = `
-	This API documentation contains a detailed description of the backend services of Udong
+	This API documentation contains a detailed description of the backend services of Ourdongbang
 
 	
 	Purpose
@@ -39,20 +39,7 @@ export function setupSwagger(app: INestApplication) {
 	We hope that this API documentation will help you utilize our services effectively
 	`;
 	const version = '1.0.0';
-	const config = new DocumentBuilder()
-		.setTitle(title)
-		.setDescription(description)
-		.setVersion(version)
-		.addBearerAuth(
-			{
-				type: 'http',
-				scheme: 'bearer',
-				name: 'JWT',
-				in: 'header',
-			},
-			'api-access-token',
-		)
-		.build();
+	const config = new DocumentBuilder().setTitle(title).setDescription(description).setVersion(version).build();
 	const document = SwaggerModule.createDocument(app, config);
 
 	SwaggerModule.setup('api', app, document);
