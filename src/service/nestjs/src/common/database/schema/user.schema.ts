@@ -9,14 +9,23 @@ const schemaOptions: SchemaOptions = {
 
 @Schema(schemaOptions)
 export class User {
-	@ApiProperty({ example: '장정안' })
+	@ApiProperty({
+		example: '장정안',
+		type: String,
+		required: true,
+	})
 	@Prop({
 		type: String,
 		required: true,
 	})
 	name: string;
 
-	@ApiProperty({ example: 'jhanks1221', uniqueItems: true })
+	@ApiProperty({
+		example: 'jhanks1221',
+		type: String,
+		required: true,
+		uniqueItems: true,
+	})
 	@Prop({
 		type: String,
 		required: true,
@@ -24,19 +33,23 @@ export class User {
 	})
 	id: string;
 
-	@Prop({
+	@ApiProperty({
+		example: 'P@ssw0rd!',
 		type: String,
 		required: true,
 	})
-	salt: string;
-
 	@Prop({
 		type: String,
 		required: true,
 	})
 	password: string;
 
-	@ApiProperty({ example: 'inetty@kookmin.ac.kr', required: false, uniqueItems: true })
+	@ApiProperty({
+		example: 'inetty@kookmin.ac.kr',
+		type: String,
+		required: true,
+		uniqueItems: true,
+	})
 	@Prop({
 		type: String,
 		required: true,
@@ -44,20 +57,39 @@ export class User {
 	})
 	email: string;
 
-	@ApiProperty({ example: '소프트웨어융합학부', required: false })
-	@Prop({ type: String })
-	major: string;
-
-	@ApiProperty({ example: '20191658', required: false, uniqueItems: true })
+	@ApiProperty({
+		example: '소프트웨어융합학부',
+		type: String,
+		required: false,
+	})
 	@Prop({
 		type: String,
+		required: false,
+	})
+	major: string;
+
+	@ApiProperty({
+		example: '20191658',
+		type: String,
+		required: false,
+		uniqueItems: true,
+	})
+	@Prop({
+		type: String,
+		required: false,
 		unique: true,
 	})
 	studentId: string;
 
-	@ApiProperty({ example: '49fafa4d2ca3602935816679', required: false, uniqueItems: true, type: 'Types.ObjectId' })
+	@ApiProperty({
+		example: '49fafa4d2ca3602935816679',
+		type: Types.ObjectId,
+		required: false,
+		uniqueItems: true,
+	})
 	@Prop({
 		type: Types.ObjectId,
+		required: false,
 		unique: true,
 		ref: 'images',
 	})
@@ -65,11 +97,15 @@ export class User {
 
 	@ApiProperty({
 		example: ['37fafa4d2ca3382535816679', '82fafa4d2ca3600165816679'],
+		type: Array,
 		required: false,
-		type: 'array',
 		items: { type: 'Types.ObjectId', uniqueItems: true },
 	})
-	@Prop({ type: ['Types.ObjectId'], ref: 'clubs' })
+	@Prop({
+		type: [Types.ObjectId],
+		required: false,
+		ref: 'clubs',
+	})
 	clubs: Types.ObjectId[];
 }
 

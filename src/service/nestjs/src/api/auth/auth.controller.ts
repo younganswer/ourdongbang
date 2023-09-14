@@ -1,4 +1,4 @@
-import { Controller, Post, Res, Body, HttpException, Delete, Patch } from '@nestjs/common';
+import { Controller, Post, Res, Body, HttpException, Delete, Patch, UseGuards, Req, Get } from '@nestjs/common';
 import {
 	ApiTags,
 	ApiOperation,
@@ -6,13 +6,15 @@ import {
 	ApiOkResponse,
 	ApiUnauthorizedResponse,
 	ApiBadRequestResponse,
+	ApiResponse,
 } from '@nestjs/swagger';
-import { User } from 'common/database/schema/user.schema';
 import { JwtPayload } from 'common/auth/type';
 import { RegisterRequestDto } from './dto/request/register.dto';
 import { Response } from 'express';
 import { LoginService, CookieService, RegisterService } from './service';
 import { LoginRequestDto } from './dto/request/login.dto';
+import { User } from 'common/database/schema/user.schema';
+import { JwtAuthGuard } from 'common/auth/guard';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -36,7 +38,7 @@ export class AuthController {
 		try {
 			const user = await this.loginService.login(loginRequestDto);
 			const jwt = this.cookieService.createJwt<JwtPayload>({
-				_id: user._id.toString(),
+				_id: user['_id'],
 			});
 			const cookieOption = this.cookieService.getCookieOption();
 
@@ -50,13 +52,16 @@ export class AuthController {
 	@Post('register')
 	@ApiCookieAuth()
 	@ApiOperation({ summary: 'Register' })
-	@ApiOkResponse({ description: 'Register successfully', type: User })
+	@ApiResponse({ status: 201, description: 'Register successfully', type: User })
 	@ApiBadRequestResponse({ description: 'Bad request' })
-	async register(@Body() registerRequestDto: RegisterRequestDto, @Res({ passthrough: true }) response: Response) {
+	async register(
+		@Body() registerRequestDto: RegisterRequestDto,
+		@Res({ passthrough: true }) response: Response,
+	): Promise<User> {
 		try {
 			const user = await this.registerService.register(registerRequestDto);
 			const jwt = this.cookieService.createJwt<JwtPayload>({
-				_id: user._id.toString(),
+				_id: user['_id'],
 			});
 			const cookieOption = this.cookieService.getCookieOption();
 
@@ -77,6 +82,7 @@ export class AuthController {
 			const cookieOption = this.cookieService.getCookieOption();
 
 			response.clearCookie('access-token', cookieOption);
+			return response.json({ message: 'Logout successfully' });
 		} catch (error) {
 			throw new HttpException(error.message, 400);
 		}
