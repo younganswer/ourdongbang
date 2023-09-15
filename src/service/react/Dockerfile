@@ -4,7 +4,7 @@ LABEL 	name="react" \
 		version="1.0" \
 		description="react"
 
-EXPOSE $PORT
+EXPOSE 3000
 
 WORKDIR /app
 

@@ -17,6 +17,20 @@ services:
             - ourdongbang
         restart: always
         tty: true
+    receipt:
+        container_name: receipt
+        image: receipt
+        build:
+            context: ./service/receipt
+            dockerfile: Dockerfile
+        env_file:
+            - ./service/receipt/.env
+        volumes:
+            - receipt_src_volume:/app/src
+        networks:
+            - ourdongbang
+        restart: always
+        tty: true
     nestjs:
         container_name: nestjs
         image: nestjs
@@ -73,6 +87,20 @@ services:
         tty: true
 
 volumes:
+    mongodb_volume:
+        name: mongodb_volume
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ./service/mongodb/db
+    receipt_src_volume:
+        name: receipt_src_volume
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ./service/receipt/src
     react_src_volume:
         name: react_src_volume
         driver: local
@@ -94,13 +122,6 @@ volumes:
             type: none
             o: bind
             device: ./service/nestjs/log
-    mongodb_volume:
-        name: mongodb_volume
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./service/mongodb/db
     nginx_log_volume:
         name: nginx_log_volume
         driver: local
