@@ -1,7 +1,7 @@
 import { Trim } from '@miaooo/class-transformer-trim';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, Length } from 'class-validator';
-import { Member } from 'common/database/schema/club.schema';
+import { Member } from 'common/database/schema/member.schema';
 
 export namespace ClubDTO {
 
