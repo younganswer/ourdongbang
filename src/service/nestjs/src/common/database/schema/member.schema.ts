@@ -12,7 +12,7 @@ export class Member {
 		unique: true,
 	})
 	@ApiProperty({ description: 'user 정보' })
-	user: User;
+	user: Types.ObjectId;
 
 	@Prop({
 		type: String,
