@@ -7,7 +7,8 @@ const schemaOptions: SchemaOptions = {
 	timestamps: true,
 	collection: 'clubs',
 };
-class Member {
+@Schema()
+export class Member {
 	@Prop({
 		type: Types.ObjectId,
 		ref: 'users',
@@ -31,6 +32,9 @@ class Member {
 	@ApiProperty({ description: 'user 참여도', example: 70 })
 	participation: Number;
 }
+
+export type MemberDocument = Member & Document;
+export const MemberSchema = SchemaFactory.createForClass(Member);
 
 enum ClubTag{
 	study = "study",
@@ -59,8 +63,12 @@ export class Club {
 	tags: string[]; // enum을 사용해서 문자열에 이름을 주기?
 
 	@ApiProperty({ description: '동아리 member들 정보', required: false })
-	@Prop({ type: [Member], required: false })
-	members: Member[];
+	@Prop({ 
+		type: [MemberSchema], // Member를 사용하면 에러남;; 지원하지 않는 mongoose schema?
+    	default: [],
+		required: false 
+	})
+	members: MemberDocument[];
 }
 
 export type ClubDocument = Club & Document;
