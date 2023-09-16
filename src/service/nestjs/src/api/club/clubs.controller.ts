@@ -8,9 +8,9 @@ import {
   ApiBadRequestResponse,
   ApiBody,
   ApiQuery,
-  ApiParam
+  ApiParam,
+  ApiNotFoundResponse
  } from '@nestjs/swagger';
-import { Member } from 'common/database/schema/member.schema';
 import { ClubDTO } from './dto/club.dto';
 
 @ApiTags('club API')
@@ -26,18 +26,11 @@ export class ClubsController {
     return this.clubsService.getAll();
   }
 
-  @Get("member")
-  @ApiOperation({ summary: 'member data', description: '동아리 멤버들 정보' })
-  @ApiResponse({ status: 200, description: 'get members data successfully', type: [Member] })
-  @ApiBadRequestResponse({ description: 'Bad request' })
-  getMembers(){
-    return `This will return all members data`;
-  }
-
   @Get("search")
   @ApiOperation({ summary: 'search club', description: '이름으로 동아리 검색' })
   @ApiResponse({ status: 200, description: 'Search club successfully', type: [Club] })
   @ApiBadRequestResponse({ description: 'Bad request' })
+  @ApiNotFoundResponse({ description: 'not found'})
   search(@Query("name") searchingName:string ){
     return `we are searching for a club with a name: ${searchingName}`;
   }
@@ -46,6 +39,7 @@ export class ClubsController {
   @ApiOperation({ summary: 'get one club', description: '요청 id에 해당하는 club data 가져오기' })
   @ApiResponse({ status:200, description: 'get one club data successfully', type: Club })
   @ApiBadRequestResponse({ description: 'Bad request' })
+  @ApiNotFoundResponse({ description: 'not found'})
   getOne(@Param('id') clubId:string ){
     return `This will return one club with the id: ${clubId}`;
   }

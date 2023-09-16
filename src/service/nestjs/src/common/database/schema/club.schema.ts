@@ -1,13 +1,41 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 import { User } from './user.schema';
-import { Member, MemberDocument, MemberSchema } from './member.schema';
 import { ApiProperty } from '@nestjs/swagger';
 
 const schemaOptions: SchemaOptions = {
 	timestamps: true,
 	collection: 'clubs',
 };
+class Member {
+	@Prop({
+		type: Types.ObjectId,
+		ref: 'users',
+		required: true,
+		unique: true,
+	})
+	@ApiProperty({ description: 'user 정보' })
+	user: User;
+
+	@Prop({
+		type: String,
+		required: true,
+	})
+	@ApiProperty({ description: 'user의 권한', example: '관리자' })
+	role: String;
+
+	@Prop({
+		type: Number,
+		required: true,
+	})
+	@ApiProperty({ description: 'user 참여도', example: 70 })
+	participation: Number;
+}
+
+enum ClubTag{
+	study = "study",
+	travel = "travel",
+}
 @Schema(schemaOptions)
 export class Club {
 	@ApiProperty({ description: '동아리 이름', example: '윙크', uniqueItems: true })
@@ -31,8 +59,8 @@ export class Club {
 	tags: string[]; // enum을 사용해서 문자열에 이름을 주기?
 
 	@ApiProperty({ description: '동아리 member들 정보', required: false })
-	@Prop({ type: [MemberSchema] })
-	members: MemberDocument[];
+	@Prop({ type: [Member], required: false })
+	members: Member[];
 }
 
 export type ClubDocument = Club & Document;
