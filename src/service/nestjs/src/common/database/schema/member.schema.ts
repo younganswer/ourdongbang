@@ -1,17 +1,12 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 import { User } from './user.schema';
 import { ApiProperty } from '@nestjs/swagger';
-
-// const schemaOptions: SchemaOptions = {
-// 	timestamps: true,
-// 	collection: 'members',
-// };
 
 @Schema()
 export class Member {
 	@Prop({
-		type: mongoose.Schema.Types.ObjectId,
+		type: Types.ObjectId,
 		ref: 'users',
 		required: true,
 		unique: true,
@@ -35,5 +30,4 @@ export class Member {
 }
 
 export type MemberDocument = Member & Document;
-
 export const MemberSchema = SchemaFactory.createForClass(Member);
