@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react';
-
 interface CustomInputProps {
 	label: string;
 	value: string;
@@ -15,7 +14,12 @@ const CustomInput: React.FC<CustomInputProps> = ({ label, value, setValue, type 
 	return (
 		<div>
 			<label style={{ color: 'black' }}>{label}</label>
-			<input style={{ width: '97%', marginBottom: 30 }} value={value} type={type} onChange={handleInputChange} />
+			<input
+				style={{ width: '100%', marginBottom: 30 }}
+				value={value}
+				type={type}
+				onChange={handleInputChange}
+			/>
 		</div>
 	);
 };

@@ -4,6 +4,7 @@ import CustomInput from '../components/CustomInput';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import '../style/ToolBar.css';
 
 const LoginPage: React.FC = () => {
 	const [userId, setUserId] = useState<string>('');
@@ -14,7 +15,7 @@ const LoginPage: React.FC = () => {
 	const loginHandler = async (e: FormEvent) => {
 		try {
 			e.preventDefault();
-			if (userId.length < 3 || password.length < 6) {
+			if (userId.length < 4 || password.length < 6) {
 				throw new Error('입력하신 정보가 올바르지 않습니다.');
 			}
 			// AuthContext 파일 생성후 SetMe 코드 추가 요망
@@ -38,11 +39,15 @@ const LoginPage: React.FC = () => {
 				marginRight: 'auto',
 			}}
 		>
-			<h3 style={{ color: 'black' }}>로그인</h3>
-			<form onSubmit={loginHandler}>
+			<h3 className="font-change" style={{ color: 'black' }}>
+				로그인
+			</h3>
+			<form className="font-change" onSubmit={loginHandler}>
 				<CustomInput label="회원ID" value={userId} setValue={setUserId} />
 				<CustomInput label="비밀번호" type="password" value={password} setValue={setPassword} />
-				<button type="submit">로그인</button>
+				<button className="font-change" type="submit">
+					로그인
+				</button>
 			</form>
 		</div>
 	);

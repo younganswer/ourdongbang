@@ -5,6 +5,7 @@ import PreviewPage from 'page/PreviewPage';
 import LoginPage from 'page/LoginPage';
 import PToolBar from 'components/PToolBar';
 import { ToastContainer } from 'react-toastify';
+import RegisterPage from 'page/RegisterPage';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<PreviewPage />} />
 				<Route path="/auth/login" element={<LoginPage />} />
+				<Route path="/auth/register" element={<RegisterPage />} />
 			</Routes>
 		</div>
 	);
