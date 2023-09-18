@@ -24,6 +24,13 @@ export class Audit {
     date: string;
 
     @Prop({
+        type: String,
+        required: true,
+    })
+    @ApiProperty({ description: '작성자', example: '윤현승' })
+    auditor: string;
+
+    @Prop({
         type: Number,
         required: true,
     })
