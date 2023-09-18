@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
 import mongoose, { Document, Types } from 'mongoose';
-import { User } from './user.schema';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Schema()
