@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { LoginRequestDto } from '../dto/request/login.dto';
 import { User } from 'common/database/schema/user.schema';
 import * as bcrypt from 'bcrypt';
+import * as AuthDto from '../dto/index';
 
 @Injectable()
 export class LoginService {
 	constructor(@InjectModel('User') private userModel: Model<User>) {}
 
-	async login(loginRequestDto: LoginRequestDto): Promise<User> {
+	async login(loginRequestDto: AuthDto.Request.Login): Promise<User> {
 		try {
 			const user = await this.userModel.findOne({ id: loginRequestDto.id });
 
