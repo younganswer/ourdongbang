@@ -2,7 +2,7 @@ import { Trim } from '@miaooo/class-transformer-trim';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, Length } from 'class-validator';
 
-export class LoginRequestDto {
+export class Login {
 	@IsString()
 	@IsNotEmpty()
 	@Length(4, 20)

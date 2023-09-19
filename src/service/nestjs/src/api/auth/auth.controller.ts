@@ -8,12 +8,11 @@ import {
 	ApiResponse,
 } from '@nestjs/swagger';
 import { JwtPayload } from 'common/auth/type';
-import { RegisterRequestDto } from './dto/request/register.dto';
 import { Response } from 'express';
 import { LoginService, CookieService, RegisterService } from './service';
-import { LoginRequestDto } from './dto/request/login.dto';
 import { User } from 'common/database/schema/user.schema';
 import { ConfigService } from '@nestjs/config';
+import * as AuthDto from './dto/index';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -31,7 +30,7 @@ export class AuthController {
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	@ApiUnauthorizedResponse({ description: 'ID or password is incorrect' })
 	async login(
-		@Body() loginRequestDto: LoginRequestDto,
+		@Body() loginRequestDto: AuthDto.Request.Login,
 		@Res({ passthrough: true }) response: Response,
 	): Promise<User> {
 		try {
@@ -53,7 +52,7 @@ export class AuthController {
 	@ApiResponse({ status: 201, description: 'Register successfully', type: User })
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	async register(
-		@Body() registerRequestDto: RegisterRequestDto,
+		@Body() registerRequestDto: AuthDto.Request.Register,
 		@Res({ passthrough: true }) response: Response,
 	): Promise<User> {
 		try {
