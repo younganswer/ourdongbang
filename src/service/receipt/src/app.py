@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, render_template, Response
+from flask import Flask, request, render_template, Response, make_response
 import requests, os, uuid, time, json
 from werkzeug.utils import secure_filename
 from urllib.parse import quote
@@ -15,49 +15,32 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def remove_space(str):
 	return str.replace(" ", "")
 
-
-@app.route("/receipt", methods=["GET"])
-def index():
-	return render_template("index.html")
-
-
-@app.route("/receipt", methods=["POST"])
-def receipt_OCR():
-	# TODO: form-data로 전송된 imageId를 가져오는 로직 작성
-	# imageId = request.form["imageId"]
-	# TODO: 각각 모듈화
-	# ex) imageId parsing, image download, OCR, parsing 등등..
-	my_res = Response()
-	my_res.headers["Access-Control-Allow-Origin"] = "https://nestjs:3000"
-	my_res.set_data("success")
-	return my_res
-
+def load_image(imageId):
+	response = requests.get('https://cdn.econoi.com/news/photo/old/news/ND006/1988232117_fRmAurPs_562.jpg')
+	if response.status_code == 200:
+		
+		image = response.content
+		filename = os.path.join(app.config['UPLOAD_FOLDER'],'receipt_image.jpg')
+		with open(filename, 'wb') as f:
+			f.write(response.content)
+		return 200
+	else:
+		print("Failed to download the image. Status code:", response.status_code)
+		return make_response(response.status_code)
+	
+def receipt_recognition(code):
+	if code == 404 or code == 500:
+		return code
+	path = os.path.join(app.config['UPLOAD_FOLDER'],'receipt_image.jpg')
+	files = [('file', open(path,'rb'))]
 	api_url = os.environ["CLOVA_API_URL"]
 	secret_key = os.environ["CLOVA_API_SECRET_KEY"]
-
-	if "image" not in request.files:
-		return "이미지 파일을 선택해주세요."
-
-	files = request.files["image"]
-
-	if files.filename == "":
-		return "파일을 선택하지 않았습니다."
-
-	if files:
-		# 이미지 파일의 확장자를 확인하여 안전하게 저장합니다.
-		filename = secure_filename(files.filename)
-		filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-		files.save(filepath)
-		image_data = [("file", open(filepath, "rb"))]
-	print("files : ", files)
-	print("files's type : ", type(files))
-
 	request_json = {
-		"images": [{"format": "jpg", "name": "demo"}],
-		"requestId": str(uuid.uuid4()),
-		"version": "V2",
-		"timestamp": int(round(time.time() * 1000)),
-	}
+			"images": [{"format": "jpg", "name": "demo"}],
+			"requestId": str(uuid.uuid4()),
+			"version": "V2",
+			"timestamp": int(round(time.time() * 1000)),
+		}
 
 	payload = {"message": json.dumps(request_json).encode("UTF-8")}
 
@@ -66,7 +49,7 @@ def receipt_OCR():
 	}
 
 	response = requests.request(
-		"POST", api_url, headers=headers, data=payload, files=image_data
+		"POST", api_url, headers=headers, data=payload, files=files
 	)
 	Clova_result = response.json()
 	payment_info = Clova_result["images"][0]["receipt"]["result"]["paymentInfo"]
@@ -93,9 +76,23 @@ def receipt_OCR():
 		"storeName": store_name,
 		"price": total_price,
 	}
-	os.remove(filepath)
-	print(parsed_data)
+	
 	return parsed_data
+
+
+@app.route("/receipt", methods=["POST"])
+def receipt_OCR():
+	imageId = request.form['imageId']
+	parsed_data = receipt_recognition(load_image(imageId))
+	if parsed_data == 404 or parsed_data == 500:
+		return Response(500)
+
+	#print(parsed_data)
+	response = Response(json.dumps(parsed_data),200)
+	response.headers["Access-Control-Allow-Origin"] = "https://nestjs:3000"
+	print(response.data)
+	print(response.headers)
+	return response
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=os.environ['PORT'], debug=True)
