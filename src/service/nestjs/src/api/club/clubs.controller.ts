@@ -11,7 +11,7 @@ import {
   ApiParam,
   ApiNotFoundResponse
  } from '@nestjs/swagger';
-import { ClubDTO } from './dto/club.dto';
+ import { CreateClubDTO } from './dto/request/createClub.dto';
 
 @ApiTags('club API')
 @Controller('clubs')
@@ -46,7 +46,7 @@ export class ClubsController {
 
   @Post()
   @ApiOperation({ summary: 'create a club', description: '동아리 생성'})
-  @ApiBody({ type: ClubDTO.Request.CreateClub })
+  @ApiBody({ type: CreateClubDTO })
   @ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
   @ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
   create(@Body() clubData){
