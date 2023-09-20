@@ -46,13 +46,20 @@
 
 /* toolbar-button css classes */
 
-.toolbar-buttons {
+.Ptoolbar-buttons {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	flex-grow: 1; /* 버튼들을 가운데로 이동시키는 스타일 추가 */
-	text-align: center; /* 텍스트를 가운데 정렬 */
+}
+
+.Mtoolbar-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	flex-grow: 1; /* 버튼들을 가운데로 이동 */
+	text-align: center;
 	padding-right: 30px;
 }
 
