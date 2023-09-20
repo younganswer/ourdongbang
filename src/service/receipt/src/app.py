@@ -65,11 +65,7 @@ def receipt_recognition(code):
 		]["value"]
 	)  # 금액
 
-	# 결과 출력
-	# print("dateOfPayment :", payment_date)
-	# print("timeOfPayment :", payment_time)
-	# print("storeName :", store_name)
-	# print("price :", total_price)
+
 	parsed_data = {
 		"dateOfPayment": payment_date,
 		"timeOfPayment": payment_time,
