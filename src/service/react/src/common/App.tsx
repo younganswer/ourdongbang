@@ -8,7 +8,7 @@ import AuditPage from 'page/AuditPage';
 import CalenderPage from 'page/CalenderPage';
 import PToolBar from 'components/PToolBar';
 import { ToastContainer } from 'react-toastify';
-
+import '../style/ToolBar.css';
 function App() {
 	return (
 		<div>
