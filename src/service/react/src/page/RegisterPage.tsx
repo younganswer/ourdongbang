@@ -41,7 +41,7 @@ const RegisterPage: React.FC = () => {
 			if (password != passwordCheck) throw new Error('비밀번호가 다릅니다. 다시 확인해주세요');
 
 			await axios
-				.post('http://nestjs:3000/auth/register', {
+				.post('/auth/register', {
 					name,
 					id,
 					password,

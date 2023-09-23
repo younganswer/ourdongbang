@@ -21,8 +21,8 @@ server {
 
 	server_name www.my_domain my_domain;
 
-	ssl_certificate my_certs;
-	ssl_certificate_key my_certs_key;
+	ssl_certificate react_certs;
+	ssl_certificate_key react_certs_key;
 
 	ssl_protocols TLSv1.3;
 
@@ -42,8 +42,8 @@ server {
 
 	server_name dev.my_domain;
 
-	ssl_certificate my_certs;
-	ssl_certificate_key my_certs_key;
+	ssl_certificate nestjs_certs;
+	ssl_certificate_key nestjs_certs_key;
 
 	ssl_protocols TLSv1.3;
 
