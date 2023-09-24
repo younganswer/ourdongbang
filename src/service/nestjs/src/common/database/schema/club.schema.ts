@@ -9,9 +9,9 @@ const schemaOptions: SchemaOptions = {
 	collection: 'clubs',
 };
 
-enum ClubTag{
-	study = "study",
-	travel = "travel",
+enum ClubTag {
+	study = 'study',
+	travel = 'travel',
 }
 @Schema(schemaOptions)
 export class Club {
@@ -19,7 +19,6 @@ export class Club {
 	@Prop({
 		type: String,
 		required: true,
-		unique: true,
 	})
 	name: string;
 
@@ -31,15 +30,18 @@ export class Club {
 	@Prop({ type: String })
 	rule: string;
 
-	@ApiProperty({ description: '동아리 태그 배열', example: ['#스터디', '#가족같은 분위기'], required: false })
+	@ApiProperty({
+		description: '동아리 태그 배열',
+		example: ['#스터디', '#가족같은 분위기'],
+		required: false,
+	})
 	@Prop({ type: [String] })
 	tags: string[]; // enum을 사용해서 문자열에 이름을 주기?
 
 	@ApiProperty({ description: '동아리 member들 정보', required: false })
-	@Prop({ 
+	@Prop({
 		type: [MemberSchema], // Member를 사용하면 에러남;; 지원하지 않는 mongoose schema?
-    	default: [],
-		required: false 
+		required: false,
 	})
 	members: MemberDocument[];
 }

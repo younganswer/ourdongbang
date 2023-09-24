@@ -8,7 +8,7 @@ export class Member {
 		type: Types.ObjectId,
 		ref: 'users',
 		required: true,
-		unique: true,
+		// unique: true, 동일한 사용자가 여러 동아리 멤버로 참여할 수 있음
 	})
 	@ApiProperty({ description: 'user 정보' })
 	user: Types.ObjectId;
