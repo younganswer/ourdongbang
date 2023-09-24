@@ -19,7 +19,8 @@
 /* top-toolbar css classes */
 
 .top-toolbar {
-	position: fixed;
+	position: sticky;
+	/* position: sticky; */
 	top: 0;
 	left: 0;
 	right: 0;
