@@ -16,6 +16,8 @@ async function bootstrap() {
 			transform: true,
 		}),
 	);
+		
+	app.enableCors();
 
 	setupSwagger(app);
 	app.use(cookieParser());

@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 		if (jwt) {
 			axios
-				.get('/user/me', {
+				.get('https://dev.ourdongbang.com/user/me', {
 					headers: { Authorization: `Bearer ${jwt}` },
 				})
 				.then(result => {
