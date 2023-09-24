@@ -18,7 +18,6 @@ def remove_space(str):
 def load_image(imageId):
 	response = requests.get('https://cdn.econoi.com/news/photo/old/news/ND006/1988232117_fRmAurPs_562.jpg')
 	if response.status_code == 200:
-		
 		image = response.content
 		filename = os.path.join(app.config['UPLOAD_FOLDER'],'receipt_image.jpg')
 		with open(filename, 'wb') as f:

@@ -163,4 +163,6 @@ ENV HOME=/app
 
 RUN pip install -r requirements.txt
 
+RUN mkdir -p /app/uploads
+
 ENTRYPOINT [ "python3", "src/app.py" ]
