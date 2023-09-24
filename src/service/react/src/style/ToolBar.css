@@ -12,6 +12,10 @@
 	font-family: 'HakgyoansimGaeulsopungB';
 }
 
+.toolbar-title + button {
+	margin-left: 10px;
+}
+
 /* top-toolbar css classes */
 
 .top-toolbar {
@@ -46,14 +50,14 @@
 
 /* toolbar-button css classes */
 
-.Ptoolbar-buttons {
+.toolbar-buttons {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
 }
 
-.Mtoolbar-buttons {
+.toolbar-buttons.alt {
 	display: flex;
 	align-items: center;
 	justify-content: center;

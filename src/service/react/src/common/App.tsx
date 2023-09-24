@@ -6,16 +6,14 @@ import LoginPage from 'page/LoginPage';
 import RegisterPage from 'page/RegisterPage';
 import AuditPage from 'page/AuditPage';
 import CalendarPage from 'page/CalendarPage';
-import PToolBar from 'components/PToolBar';
-// import MToolBar from 'components/MToolBar';
+import ToolBar from 'components/ToolBar';
 import { ToastContainer } from 'react-toastify';
 import '../style/ToolBar.css';
 function App() {
 	return (
 		<div>
 			<ToastContainer />
-			<PToolBar />
-			{/* <MToolBar /> */}
+			<ToolBar />
 			<Routes>
 				<Route path="/" element={<PreviewPage />} />
 				<Route path="/auth/login" element={<LoginPage />} />
