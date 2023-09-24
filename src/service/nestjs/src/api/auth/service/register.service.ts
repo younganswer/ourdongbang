@@ -20,7 +20,7 @@ export class RegisterService {
 			registerRequestDto['password'] = await bcrypt.hash(registerRequestDto['password'], 10);
 			return await new this.userModel(registerRequestDto).save();
 		} catch (error) {
-			throw new HttpException('Bad request', 400);
+			throw new HttpException(error.message, 400);
 		}
 	}
 }

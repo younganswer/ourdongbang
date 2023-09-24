@@ -78,6 +78,7 @@ export class User {
 		type: String,
 		required: false,
 		unique: true,
+		sparse: true,
 	})
 	studentId: string;
 
@@ -91,6 +92,7 @@ export class User {
 		type: Types.ObjectId,
 		required: false,
 		unique: true,
+		sparse: true,
 		ref: 'images',
 	})
 	profileImageId: Types.ObjectId;

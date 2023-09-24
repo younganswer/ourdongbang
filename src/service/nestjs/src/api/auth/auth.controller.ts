@@ -65,6 +65,7 @@ export class AuthController {
 			response.cookie('access-token', jwt, cookieOption);
 			return user;
 		} catch (error) {
+			console.log(error)
 			throw new HttpException(error.message, 400);
 		}
 	}

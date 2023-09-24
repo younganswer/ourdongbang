@@ -54,5 +54,5 @@
 		"eslint": "^8.48.0",
 		"eslint-plugin-react": "^7.33.2"
 	},
-	"proxy": "https://nestjs:3000/"
+	"proxy": "https://dev.ourdongbang.com/"
 }
