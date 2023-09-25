@@ -10,26 +10,35 @@ import {
 	HttpException,
 	HttpStatus,
 	NotFoundException,
+	UseGuards,
+	Res,
 } from '@nestjs/common';
-import { ClubsService } from './clubs.service';
-import { Club } from 'common/database/schema/club.schema';
 import {
 	ApiTags,
 	ApiOperation,
 	ApiResponse,
 	ApiBadRequestResponse,
 	ApiBody,
-	ApiQuery,
 	ApiParam,
 	ApiNotFoundResponse,
 	PartialType,
 } from '@nestjs/swagger';
+import { Club } from 'common/database/schema/club.schema';
+import { ClubsService } from './clubs.service';
 import { CreateClubDTO } from './dto/request/createClub.dto';
+import { JwtAuthGuard } from 'common/auth/guard';
+import { Types } from 'mongoose';
+import { ScheduleService } from './service';
+import { Response } from 'express';
+import * as ClubDto from './dto/index';
 
 @ApiTags('club API')
 @Controller('clubs')
 export class ClubsController {
-	constructor(private readonly clubsService: ClubsService) {}
+	constructor(
+		private readonly clubsService: ClubsService,
+		private readonly scheduleService: ScheduleService,
+	) {}
 
 	@Get()
 	@ApiOperation({ summary: 'request all club', description: '모든 동아리 정보 가져오기' })
@@ -37,10 +46,12 @@ export class ClubsController {
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	async findAll(): Promise<Club[]> {
 		try {
-			const clubs = this.clubsService.findAll();
+			const clubs = await this.clubsService.findAll();
+
 			if (!clubs) {
 				throw new NotFoundException('Clubs not found');
 			}
+
 			return clubs;
 		} catch (error) {
 			throw new HttpException('Failed to retrieve clubs', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,12 +101,15 @@ export class ClubsController {
 	create(@Body() createClubDTO: CreateClubDTO) {
 		try {
 			const club = this.clubsService.create(createClubDTO);
+
 			if (!club) {
-				throw new NotFoundException('Club not found');
+				throw new HttpException('Bad request', 400);
 			}
+
 			return club;
 		} catch (error) {
-			throw new HttpException('업로드에 실패하였습니다', HttpStatus.BAD_REQUEST);
+			console.error(error);
+			throw new HttpException(error.message, error.status);
 		}
 	}
 
@@ -138,6 +152,37 @@ export class ClubsController {
 			return updatedClub;
 		} catch (error) {
 			throw new HttpException('Failed to update club', HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Post('/:cid/schedule')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'create a schedule' })
+	@ApiResponse({ status: 201, description: 'Schedule created successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async createSchdule(
+		@Param('cid') clubId: string,
+		@Body() createScheduleDto: ClubDto.Request.CreateScheduleDto,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const schedule = await this.scheduleService.createSchedule(createScheduleDto);
+
+			if (!schedule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const scheduleId: Types.ObjectId = schedule['_id'];
+			const club = await this.clubsService.addSchedule(clubId, scheduleId);
+
+			if (!club) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Schedule created successfully' });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
 		}
 	}
 }
