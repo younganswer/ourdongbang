@@ -11,45 +11,38 @@ const schemaOptions: SchemaOptions = {
 export class Schedule {
 	@ApiProperty({
 		example: '2023-09-14',
-		type: String,
-		required: true,
+		type: Date,
 	})
 	@Prop({
-		type: String,
-		required: true,
+		type: Date,
 	})
 	date: string;
 
 	@ApiProperty({
-		example: '한강 나들이',
+		example: '우동 먹으러 가요',
 		type: String,
-		required: true,
 	})
 	@Prop({
 		type: String,
-		required: true,
 	})
 	title: string;
 
 	@ApiProperty({
-		example: '뚝섬 한강 공원으로 나들이를 갑니다. 저녁엔 치맥까지',
+		example: '저녁 6시 수유리 우동에서 봐요',
 		type: String,
-		required: true,
+		required: false,
 	})
 	@Prop({
 		type: String,
-		required: true,
 	})
 	description: string;
 
 	@ApiProperty({
 		example: ['31fafa4d2ca3608765816679', '79fafa4d2ca3608765825379', '62fafa4d2ca3601867816679'],
 		type: [Types.ObjectId],
-		required: true,
 	})
 	@Prop({
 		type: [Types.ObjectId],
-		required: true,
 		ref: 'users',
 	})
 	attendees: Types.ObjectId[];
