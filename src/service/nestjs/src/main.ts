@@ -17,7 +17,10 @@ async function bootstrap() {
 		}),
 	);
 		
-	app.enableCors();
+	app.enableCors({
+		origin: [configService.getOrThrow('REACT_URL')],
+		credentials: true,
+	});
 
 	setupSwagger(app);
 	app.use(cookieParser());

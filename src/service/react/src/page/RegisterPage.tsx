@@ -18,7 +18,7 @@ const RegisterPage: React.FC = () => {
 	const [passwordCheck, setPasswordCheck] = useState<string>('');
 
 	const navigate = useNavigate();
-	const { setMe } = useContext(AuthContext);
+	const { setMe, setAccessTokenCookie } = useContext(AuthContext);
 
 	const registerHandler = async (e: FormEvent) => {
 		const majorList: string[] = [
@@ -41,14 +41,18 @@ const RegisterPage: React.FC = () => {
 			if (password != passwordCheck) throw new Error('비밀번호가 다릅니다. 다시 확인해주세요');
 
 			await axios
-				.post('/auth/register', {
-					name,
-					id,
-					password,
-					email,
-					major,
-					studentId,
-				})
+				.post(
+					`${process.env.REACT_APP_NESTJS_URL}/auth/register`,
+					{
+						name,
+						id,
+						password,
+						email,
+						major,
+						studentId,
+					},
+					{ withCredentials: true },
+				)
 				.then(response => {
 					setMe({
 						name: response.data.name,
@@ -63,7 +67,8 @@ const RegisterPage: React.FC = () => {
 
 					const jwtToken = response.data.token;
 
-					document.cookie = `access-token=${jwtToken}; path=/;`;
+					//document.cookie = `access-token=${jwtToken}; path=/;`;
+					setAccessTokenCookie(jwtToken);
 
 					toast.success('회원가입을 해주셔서 감사합니다.');
 					navigate('/'); // 일단 임시로 PreviewPage 경로로 설정, MainPage 생성 후 경로 변경 요망

@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 		if (jwt) {
 			axios
-				.get('https://dev.ourdongbang.com/user/me', {
+				.get(`${process.env.REACT_APP_NESTJS_URL}/user/me`, {
 					headers: { Authorization: `Bearer ${jwt}` },
 				})
 				.then(result => {
