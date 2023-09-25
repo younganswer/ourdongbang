@@ -18,7 +18,7 @@ const RegisterPage: React.FC = () => {
 	const [passwordCheck, setPasswordCheck] = useState<string>('');
 
 	const navigate = useNavigate();
-	const { setMe, setAccessTokenCookie } = useContext(AuthContext);
+	const { setMe } = useContext(AuthContext);
 
 	const registerHandler = async (e: FormEvent) => {
 		const majorList: string[] = [
@@ -64,12 +64,7 @@ const RegisterPage: React.FC = () => {
 						profileImageId: null,
 						clubs: null,
 					});
-
-					const jwtToken = response.data.token;
-
-					//document.cookie = `access-token=${jwtToken}; path=/;`;
-					setAccessTokenCookie(jwtToken);
-
+					
 					toast.success('회원가입을 해주셔서 감사합니다.');
 					navigate('/'); // 일단 임시로 PreviewPage 경로로 설정, MainPage 생성 후 경로 변경 요망
 				})
