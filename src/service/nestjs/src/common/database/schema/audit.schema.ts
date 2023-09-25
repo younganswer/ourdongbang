@@ -4,40 +4,40 @@ import { ApiProperty } from '@nestjs/swagger';
 
 const schemaOptions: SchemaOptions = {
 	timestamps: true,
-	collection: 'reviews',
+	collection: 'audits',
 };
 
 @Schema(schemaOptions)
 export class Audit {
-    @Prop({
-        type: String,
-        required: true,
-    })
-    @ApiProperty({ description: '가맹점', example: '소한마리 정릉점' })
-    franchise: string;
+	@Prop({
+		type: String,
+		required: true,
+	})
+	@ApiProperty({ description: '가맹점', example: '소한마리 정릉점' })
+	franchise: string;
 
-    @Prop({
-        type: String,
-        required: true,
-    })
-    @ApiProperty({ description: '날짜', example: '2023-09-18' })
-    date: string;
+	@Prop({
+		type: String,
+		required: true,
+	})
+	@ApiProperty({ description: '날짜', example: '2023-09-18' })
+	date: string;
 
-    @Prop({
-        type: String,
-        required: true,
-    })
-    @ApiProperty({ description: '작성자', example: '윤현승' })
-    auditor: string;
+	@Prop({
+		type: String,
+		required: true,
+	})
+	@ApiProperty({ description: '작성자', example: '윤현승' })
+	auditor: string;
 
-    @Prop({
-        type: Number,
-        required: true,
-    })
-    @ApiProperty({ description: '결제금액', example: 50000 })
-    cost: Number;
+	@Prop({
+		type: Number,
+		required: true,
+	})
+	@ApiProperty({ description: '결제금액', example: 50000 })
+	cost: Number;
 
-    @Prop({
+	@Prop({
 		type: [Types.ObjectId],
 		ref: 'images',
 		required: true,
