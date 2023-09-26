@@ -189,38 +189,35 @@ export class ClubsController {
 		}
 	}
 
-	// @Post(':cid/:uid')
-	@Post()
-	@ApiOperation({ summary: 'create a club review', description: 'review 생성' })
+	// user가 따로 배열에 굳이 저장 해야 하는지 의문이라서 일단 뺌
+	@Post('/:cid/review')
+	@ApiOperation({ summary: 'create a review', description: 'review 생성' })
 	@ApiBody({ type: CreateReviewDTO })
-	// @ApiParam({ name: 'cid', description: 'Club ID' })
-	// @ApiParam({ name: 'uid', description: 'User ID' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
 	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
 	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
 	async create(
 		@Body() createReivewDTO: CreateReviewDTO,
 		// 그냥 Body로 id를 받아오면 안되나?
-		// @Param('cid') clubId: string,
-		// @Param('uid') userId: string,
+		@Param('cid') clubId: string,
 	) {
 		try {
-			const promiseReview = this.reveiwSerice.create(createReivewDTO);
-			if (!promiseReview) {
+			const review = await this.reveiwSerice.create(createReivewDTO);
+
+			if (!review) {
 				throw new NotFoundException('review not found');
 			}
 
-			// //club의 reviews배열에 reviewId 추가
-			// const clubId = (await promiseReview.then()).clubId; // 리뷰의 clubID 추출
-			// const club = await this.clubsService.findOne(clubId); // clubId로 club을 찾음
-			// if (!club) {
-			// 	throw new NotFoundException('review not found');
-			// }
-			// club.reviews.push((await promiseReview.then())._id); // club의 reviews배열에 reviewId 추가
-			// await this.clubsService.update(clubId, club); // club 업데이트
+			const reviewId: Types.ObjectId = review['_id'];
+			const club = await this.clubsService.addReview(clubId, reviewId);
 
-			return promiseReview;
+			if (!club) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return review;
 		} catch (error) {
-			throw new HttpException('업로드에 실패하였습니다', HttpStatus.BAD_REQUEST);
+			throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

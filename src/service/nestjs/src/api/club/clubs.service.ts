@@ -39,4 +39,10 @@ export class ClubsService {
 		club.schedules.push(scheduleId);
 		return club.save();
 	}
+
+	async addReview(cludId: string | Types.ObjectId, reviewId: Types.ObjectId) {
+		const club = await this.clubModel.findById(cludId).exec();
+		club.reviews.push(reviewId);
+		return club.save();
+	}
 }
