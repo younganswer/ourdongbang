@@ -30,9 +30,9 @@ import { JwtAuthGuard } from 'common/auth/guard';
 import { Types } from 'mongoose';
 import { ScheduleService } from './service';
 import { Response } from 'express';
-import * as ClubDto from './dto/index';
 import { ReviewsService } from './service/reviews.service';
 import { CreateReviewDTO } from './dto/request/createReview.dto';
+import * as ClubDto from './dto/index';
 
 @ApiTags('club API')
 @Controller('clubs')
@@ -136,7 +136,7 @@ export class ClubsController {
 	}
 
 	@Patch(':id')
-	@ApiOperation({ summary: 'Patch a club', description: '동아리 정보 수정' })
+	@ApiOperation({ summary: 'Update a club', description: '동아리 정보 수정' })
 	@ApiResponse({ status: 200, description: '동아리 수정에 성공하였습니다' })
 	@ApiParam({
 		description: 'Club ID',
@@ -179,10 +179,131 @@ export class ClubsController {
 			const club = await this.clubsService.addSchedule(clubId, scheduleId);
 
 			if (!club) {
-				throw new HttpException('Bad request', 400);
+				throw new HttpException('Club is not found', 404);
 			}
 
 			return response.json({ message: 'Schedule created successfully' });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get('/:cid/schedule')
+	@ApiOperation({ summary: 'Get all schedule for the requested month' })
+	@ApiResponse({
+		status: 200,
+		description: 'Get all schedule for the requested month successfully',
+	})
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async getAllSchedulesForTheMonth(
+		@Param('cid') clubId: string,
+		@Query('month') month: number,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+			const schedulesForMonth = await this.scheduleService.getAllSchedulesForTheMonth(
+				scheduleIds,
+				month,
+			);
+
+			if (!schedulesForMonth) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({
+				message: 'Get all schedule for the requested month successfully',
+				schedulesForMonth,
+			});
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get('/:cid/schedule/:sid')
+	@ApiOperation({ summary: 'Get a schedule' })
+	@ApiResponse({ status: 200, description: 'Get a schedule successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async getScheduleById(
+		@Param('cid') clubId: string,
+		@Param('sid') scheduleId: string,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+
+			if (!scheduleIds.includes(scheduleId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const schedule = await this.scheduleService.getScheduleById(scheduleId);
+
+			if (!schedule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Get a schedule successfully', schedule });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Patch('/:cid/schedule/:sid')
+	@ApiOperation({ summary: 'Update a schedule' })
+	@ApiResponse({ status: 200, description: 'Update a schedule successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async updateSchedule(
+		@Param('cid') clubId: string,
+		@Param('sid') scheduleId: string,
+		@Body() updateData: Partial<ClubDto.Request.CreateScheduleDto>,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+
+			if (!scheduleIds.includes(scheduleId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const updatedSchedule = await this.scheduleService.updateSchedule(scheduleId, updateData);
+
+			if (!updatedSchedule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Update a schedule successfully', updatedSchedule });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Delete('/:cid/schedule/:sid')
+	@ApiOperation({ summary: 'Delete a schedule' })
+	@ApiResponse({ status: 200, description: 'Delete a schedule successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async deleteSchedule(
+		@Param('cid') clubId: string,
+		@Param('sid') scheduleId: string,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+
+			if (!scheduleIds.includes(scheduleId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const deletedSchedule = await this.scheduleService.deleteSchedule(scheduleId);
+
+			if (!deletedSchedule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Delete a schedule successfully', deletedSchedule });
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
@@ -205,7 +326,7 @@ export class ClubsController {
 			const review = await this.reveiwSerice.create(createReivewDTO);
 
 			if (!review) {
-				throw new NotFoundException('review not found');
+				throw new NotFoundException('Review not found');
 			}
 
 			const reviewId: Types.ObjectId = review['_id'];
@@ -217,7 +338,8 @@ export class ClubsController {
 
 			return review;
 		} catch (error) {
-			throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+			console.error(error);
+			throw new HttpException(error.message, error.status);
 		}
 	}
 }

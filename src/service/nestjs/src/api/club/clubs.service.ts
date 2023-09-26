@@ -36,12 +36,20 @@ export class ClubsService {
 
 	async addSchedule(cludId: string | Types.ObjectId, scheduleId: Types.ObjectId) {
 		const club = await this.clubModel.findById(cludId).exec();
+
 		club.schedules.push(scheduleId);
 		return club.save();
 	}
 
+	async getAllSchedules(clubId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+
+		return club.schedules;
+	}
+
 	async addReview(cludId: string | Types.ObjectId, reviewId: Types.ObjectId) {
 		const club = await this.clubModel.findById(cludId).exec();
+
 		club.reviews.push(reviewId);
 		return club.save();
 	}
