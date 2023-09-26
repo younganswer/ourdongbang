@@ -1,7 +1,7 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Club, ClubDocument } from 'common/database/schema/club.schema';
+import { Club } from 'common/database/schema/club.schema';
 import { CreateClubDTO } from './dto/request/createClub.dto';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ClubsService {
 	}
 
 	async findAll(): Promise<Club[]> {
-		return this.clubModel.find().exec();
+		return await this.clubModel.find().exec();
 	}
 
 	async findOne(id: string): Promise<Club> {
@@ -32,5 +32,11 @@ export class ClubsService {
 	async delete(id: string) {
 		const deletedClub = await this.clubModel.findByIdAndRemove({ _id: id }).exec();
 		return deletedClub;
+	}
+
+	async addSchedule(cludId: string | Types.ObjectId, scheduleId: Types.ObjectId) {
+		const club = await this.clubModel.findById(cludId).exec();
+		club.schedules.push(scheduleId);
+		return club.save();
 	}
 }

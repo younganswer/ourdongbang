@@ -1,135 +1,135 @@
 version: '3.9'
 
 services:
-    mongodb:
-        container_name: mongodb
-        image: mongo
-        build:
-            context: ./service/mongodb
-            dockerfile: Dockerfile
-        env_file:
-            - ./service/mongodb/.env
-        volumes:
-            - mongodb_volume:/data/db
-        ports:
-            - '27017:27017'
-        networks:
-            - ourdongbang
-        restart: always
-        tty: true
-    receipt:
-        container_name: receipt
-        image: receipt
-        build:
-            context: ./service/receipt
-            dockerfile: Dockerfile
-        env_file:
-            - ./service/receipt/.env
-        volumes:
-            - receipt_src_volume:/app/src
-        networks:
-            - ourdongbang
-        restart: always
-        tty: true
-    nestjs:
-        container_name: nestjs
-        image: nestjs
-        build:
-            context: ./service/nestjs
-            dockerfile: Dockerfile
-        env_file:
-            - ./service/nestjs/.env
-        volumes:
-            - nestjs_src_volume:/app/src
-            - nestjs_log_volume:/app/log
-        networks:
-            - ourdongbang
-        depends_on:
-            - mongodb
-        restart: always
-        tty: true
-    react:
-        container_name: react
-        image: react
-        build:
-            context: ./service/react
-            dockerfile: Dockerfile
-            args:
-                - REACT_APP_SERVER=${REACT_APP_SERVER:-http://localhost:3000}
-        env_file:
-            - ./service/react/.env
-        volumes:
-            - react_src_volume:/app/src
-        networks:
-            - ourdongbang
-        depends_on:
-            - nestjs
-        restart: always
-        tty: true
-    nginx:
-        container_name: nginx
-        image: nginx
-        build:
-            context: ./service/nginx
-            dockerfile: Dockerfile
-        env_file:
-            - ./service/nginx/.env
-        ports:
-            - 80:80
-            - 443:443
-        volumes:
-            - nginx_log_volume:/var/log/nginx
-        networks:
-            - ourdongbang
-        depends_on:
-            - react
-        restart: always
-        tty: true
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    build:
+      context: ./service/mongodb
+      dockerfile: Dockerfile
+    env_file:
+      - ./service/mongodb/.env
+    volumes:
+      - mongodb_volume:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - ourdongbang
+    restart: unless-stopped
+    tty: true
+  receipt:
+    container_name: receipt
+    image: receipt
+    build:
+      context: ./service/receipt
+      dockerfile: Dockerfile
+    env_file:
+      - ./service/receipt/.env
+    volumes:
+      - receipt_src_volume:/app/src
+    networks:
+      - ourdongbang
+    restart: unless-stopped
+    tty: true
+  nestjs:
+    container_name: nestjs
+    image: nestjs
+    build:
+      context: ./service/nestjs
+      dockerfile: Dockerfile
+    env_file:
+      - ./service/nestjs/.env
+    volumes:
+      - nestjs_src_volume:/app/src
+      - nestjs_log_volume:/app/log
+    networks:
+      - ourdongbang
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    tty: true
+  react:
+    container_name: react
+    image: react
+    build:
+      context: ./service/react
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_SERVER=${REACT_APP_SERVER:-http://localhost:3000}
+    env_file:
+      - ./service/react/.env
+    volumes:
+      - react_src_volume:/app/src
+    networks:
+      - ourdongbang
+    depends_on:
+      - nestjs
+    restart: unless-stopped
+    tty: true
+  nginx:
+    container_name: nginx
+    image: nginx
+    build:
+      context: ./service/nginx
+      dockerfile: Dockerfile
+    env_file:
+      - ./service/nginx/.env
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx_log_volume:/var/log/nginx
+    networks:
+      - ourdongbang
+    depends_on:
+      - react
+    restart: unless-stopped
+    tty: true
 
 volumes:
-    mongodb_volume:
-        name: mongodb_volume
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./service/mongodb/db
-    receipt_src_volume:
-        name: receipt_src_volume
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./service/receipt/src
-    react_src_volume:
-        name: react_src_volume
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./service/react/src
-    nestjs_src_volume:
-        name: nestjs_src_volume
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./service/nestjs/src
-    nestjs_log_volume:
-        name: nestjs_log_volume
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./service/nestjs/log
-    nginx_log_volume:
-        name: nginx_log_volume
-        driver: local
-        driver_opts:
-            device: ./service/nginx/log
-            type: none
-            o: bind
+  mongodb_volume:
+    name: mongodb_volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./service/mongodb/db
+  receipt_src_volume:
+    name: receipt_src_volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./service/receipt/src
+  react_src_volume:
+    name: react_src_volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./service/react/src
+  nestjs_src_volume:
+    name: nestjs_src_volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./service/nestjs/src
+  nestjs_log_volume:
+    name: nestjs_log_volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./service/nestjs/log
+  nginx_log_volume:
+    name: nginx_log_volume
+    driver: local
+    driver_opts:
+      device: ./service/nginx/log
+      type: none
+      o: bind
 
 networks:
-    ourdongbang:
-        name: ourdongbang
+  ourdongbang:
+    name: ourdongbang

@@ -39,6 +39,12 @@ export class Club {
 		required: false,
 	})
 	members: MemberDocument[];
+	@ApiProperty({ description: '동아리 일정', required: false })
+	@Prop({
+		type: [Types.ObjectId],
+		required: false,
+	})
+	schedules: Types.ObjectId[];}
 
 	@Prop({
 		type: [Types.ObjectId],
@@ -47,7 +53,6 @@ export class Club {
 	})
 	@ApiProperty({ description: 'reviews id' })
 	reviews: Types.ObjectId[];
-}
 
 export type ClubDocument = Club & Document;
 export const ClubSchema = SchemaFactory.createForClass(Club);

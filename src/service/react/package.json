@@ -53,6 +53,5 @@
 		"@typescript-eslint/parser": "^6.5.0",
 		"eslint": "^8.48.0",
 		"eslint-plugin-react": "^7.33.2"
-	},
-	"proxy": "https://dev.ourdongbang.com/"
+	}
 }

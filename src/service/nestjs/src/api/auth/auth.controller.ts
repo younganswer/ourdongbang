@@ -11,7 +11,6 @@ import { JwtPayload } from 'common/auth/type';
 import { Response } from 'express';
 import { LoginService, CookieService, RegisterService } from './service';
 import { User } from 'common/database/schema/user.schema';
-import { ConfigService } from '@nestjs/config';
 import * as AuthDto from './dto/index';
 
 @Controller('auth')
@@ -21,7 +20,6 @@ export class AuthController {
 		private readonly loginService: LoginService,
 		private readonly cookieService: CookieService,
 		private readonly registerService: RegisterService,
-		private readonly configService: ConfigService,
 	) {}
 
 	@Patch('login')
@@ -43,7 +41,8 @@ export class AuthController {
 			response.cookie('access-token', jwt, cookieOption);
 			return user;
 		} catch (error) {
-			throw new HttpException(error.message, 400);
+			console.error(error);
+			throw new HttpException(error.message, error.status);
 		}
 	}
 
@@ -65,8 +64,8 @@ export class AuthController {
 			response.cookie('access-token', jwt, cookieOption);
 			return user;
 		} catch (error) {
-			console.log(error)
-			throw new HttpException(error.message, 400);
+			console.error(error);
+			throw new HttpException(error.message, error.status);
 		}
 	}
 
@@ -81,7 +80,8 @@ export class AuthController {
 			response.clearCookie('access-token', cookieOption);
 			return response.json({ message: 'Logout successfully' });
 		} catch (error) {
-			throw new HttpException(error.message, 400);
+			console.error(error);
+			throw new HttpException(error.message, error.status);
 		}
 	}
 }
