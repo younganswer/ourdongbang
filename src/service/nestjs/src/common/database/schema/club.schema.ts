@@ -8,11 +8,6 @@ const schemaOptions: SchemaOptions = {
 	timestamps: true,
 	collection: 'clubs',
 };
-
-enum ClubTag {
-	study = 'study',
-	travel = 'travel',
-}
 @Schema(schemaOptions)
 export class Club {
 	@ApiProperty({ description: '동아리 이름', example: '윙크', uniqueItems: true })
@@ -44,14 +39,20 @@ export class Club {
 		required: false,
 	})
 	members: MemberDocument[];
-
 	@ApiProperty({ description: '동아리 일정', required: false })
 	@Prop({
 		type: [Types.ObjectId],
 		required: false,
 	})
-	schedules: Types.ObjectId[];
-}
+	schedules: Types.ObjectId[];}
+
+	@Prop({
+		type: [Types.ObjectId],
+		ref: 'reviews',
+		required: false,
+	})
+	@ApiProperty({ description: 'reviews id' })
+	reviews: Types.ObjectId[];
 
 export type ClubDocument = Club & Document;
 export const ClubSchema = SchemaFactory.createForClass(Club);

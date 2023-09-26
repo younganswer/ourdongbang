@@ -98,7 +98,7 @@ export class ClubsController {
 	@ApiBody({ type: CreateClubDTO })
 	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
 	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
-	create(@Body() createClubDTO: CreateClubDTO) {
+	createClub(@Body() createClubDTO: CreateClubDTO) {
 		try {
 			const club = this.clubsService.create(createClubDTO);
 
