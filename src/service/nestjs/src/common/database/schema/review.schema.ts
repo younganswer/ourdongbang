@@ -10,23 +10,25 @@ const schemaOptions: SchemaOptions = {
 
 @Schema(schemaOptions)
 export class Review {
-	@Prop({
-		type: String,
-		ref: 'clubs',
-		required: true,
-		unique: true,
-	})
-	@ApiProperty({ description: 'club ID', example: '650aae123f1ac83686bbd50a' })
-	clubId: string;
+	// club에서만 review_id 를 참조하면 되나? 굳이 review에서 club 참조?
 
-	@Prop({
-		type: String,
-		ref: 'users',
-		required: false,
-		unique: true,
-	})
-	@ApiProperty({ description: 'user ID', example: '6aae123f1ac836bbd50a' })
-	userId: string;
+	// @Prop({
+	// 	type: String,
+	// 	ref: 'clubs',
+	// 	required: true,
+	// 	unique: true,
+	// })
+	// @ApiProperty({ description: 'club ID', example: '650aae123f1ac83686bbd50a' })
+	// clubId: string;
+
+	// @Prop({
+	// 	type: String,
+	// 	ref: 'users',
+	// 	required: false,
+	// 	unique: true,
+	// })
+	// @ApiProperty({ description: 'user ID', example: '6aae123f1ac836bbd50a' })
+	// userId: string;
 
 	@Prop({
 		type: String,

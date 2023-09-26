@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClubsService } from './clubs.service';
 import { ClubsController } from './clubs.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ClubSchema, Review, ScheduleSchema } from 'common/database/schema';
+import { ClubSchema, Review, ReviewSchema, ScheduleSchema } from 'common/database/schema';
 import { ScheduleService } from './service';
 import { ReviewsService } from './service/reviews.service';
 
@@ -11,6 +11,7 @@ import { ReviewsService } from './service/reviews.service';
 		MongooseModule.forFeature([
 			{ name: 'Club', schema: ClubSchema },
 			{ name: 'Schedule', schema: ScheduleSchema },
+			{ name: Review.name, schema: ReviewSchema },
 		]),
 	],
 	controllers: [ClubsController],
