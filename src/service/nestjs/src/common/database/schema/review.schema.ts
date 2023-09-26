@@ -11,43 +11,43 @@ const schemaOptions: SchemaOptions = {
 @Schema(schemaOptions)
 export class Review {
 	@Prop({
-        type: Types.ObjectId,
-        ref: 'clubs',
-        required: true,
-        unique: true,
-    })
-    @ApiProperty({ description: 'club ID', example: '37fafa4d2ca3382535816679' })
-    clubId: Types.ObjectId;
+		type: String,
+		ref: 'clubs',
+		required: true,
+		unique: true,
+	})
+	@ApiProperty({ description: 'club ID', example: '650aae123f1ac83686bbd50a' })
+	clubId: string;
 
-    @Prop({
-        type: Types.ObjectId,
-        ref: 'users',
-        required: false,
-        unique: true,
-    })
-    @ApiProperty({ description: 'user ID', example: '37fafa4d2ca3382535816679' })
-    userId: Types.ObjectId;
+	@Prop({
+		type: String,
+		ref: 'users',
+		required: false,
+		unique: true,
+	})
+	@ApiProperty({ description: 'user ID', example: '6aae123f1ac836bbd50a' })
+	userId: string;
 
-    @Prop({
-        type: String,
-        required: true,
-    })
-    @ApiProperty({ description: '내용', example: '동아리가 너무 활동적이고 재밌어요!!' })
-    content: string;
+	@Prop({
+		type: String,
+		required: true,
+	})
+	@ApiProperty({ description: '내용', example: '동아리가 너무 활동적이고 재밌어요!!' })
+	content: string;
 
-    @Prop({
-        type: [String],
-        required: false,
-    })
-    @ApiProperty({ description: 'tag', example: ['#운동', '#재미', '#가족같은분위기'] })
-    tags: string[];
+	@Prop({
+		type: [String],
+		required: false,
+	})
+	@ApiProperty({ description: 'tag', example: ['#운동', '#재미', '#가족같은분위기'] })
+	tags: string[];
 
-    @Prop({
-        type: Number,
-        required: true,
-    })
-    @ApiProperty({ description: '평점', example: 5 })
-    rate: Number;
+	@Prop({
+		type: Number,
+		required: true,
+	})
+	@ApiProperty({ description: '평점', example: 5 })
+	rating: number;
 }
 
 export type ReviewDocument = Review & Document;
