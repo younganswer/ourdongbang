@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Review } from 'common/database/schema/review.schema';
 import { Model } from 'mongoose';
-import { CreateReviewDTO } from './dto/request/createReview.dto';
+import { CreateReviewDTO } from '../dto/request/createReview.dto';
 import { ClubsService } from 'api/club/clubs.service';
 
 @Injectable()

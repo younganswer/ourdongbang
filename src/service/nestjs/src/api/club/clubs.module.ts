@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { ClubsService } from './clubs.service';
 import { ClubsController } from './clubs.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ClubSchema, ScheduleSchema } from 'common/database/schema';
+import { ClubSchema, Review, ScheduleSchema } from 'common/database/schema';
 import { ScheduleService } from './service';
+import { ReviewsService } from './service/reviews.service';
 
 @Module({
 	imports: [
@@ -13,6 +14,6 @@ import { ScheduleService } from './service';
 		]),
 	],
 	controllers: [ClubsController],
-	providers: [ClubsService, ScheduleService],
+	providers: [ClubsService, ScheduleService, ReviewsService],
 })
 export class ClubsModule {}
