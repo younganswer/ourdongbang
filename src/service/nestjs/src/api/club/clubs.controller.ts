@@ -33,6 +33,8 @@ import { Response } from 'express';
 import { ReviewsService } from './service/reviews.service';
 import { CreateReviewDTO } from './dto/request/createReview.dto';
 import * as ClubDto from './dto/index';
+import { CreateMemberDTO } from './dto/request/createMember.dto';
+import { MemberService } from './service/member.service';
 
 @ApiTags('club API')
 @Controller('club')
@@ -41,6 +43,7 @@ export class ClubsController {
 		private readonly clubsService: ClubsService,
 		private readonly scheduleService: ScheduleService,
 		private readonly reveiwSerice: ReviewsService,
+		private readonly memberService: MemberService,
 	) {}
 
 	@Get()
@@ -404,6 +407,37 @@ export class ClubsController {
 			}
 
 			return deletedReview;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Post('/:cid/member')
+	@ApiOperation({ summary: 'add a member', description: 'member 추가' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiResponse({ status: 200, description: '추가 성공' })
+	async createMember(
+		@Body() createMemberDTO: CreateMemberDTO,
+		// 그냥 Body로 id를 받아오면 안되나?
+		@Param('cid') clubId: string,
+	) {
+		try {
+			const member = await this.memberService.create(createMemberDTO);
+			let club = await this.clubsService.findOne(clubId);
+
+			if (!member) {
+				throw new NotFoundException('member not found');
+			}
+
+			const memberId: Types.ObjectId = member['_id'];
+			club = await this.clubsService.addMember(clubId, memberId);
+
+			if (!club) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return member;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
