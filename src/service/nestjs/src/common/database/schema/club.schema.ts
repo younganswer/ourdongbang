@@ -44,8 +44,17 @@ export class Club {
 	@Prop({
 		type: [Types.ObjectId],
 		required: false,
+		ref: 'schedules',
 	})
 	schedules: Types.ObjectId[];
+
+	@ApiProperty({ description: '동아리 회계 문서', required: false })
+	@Prop({
+		type: [Types.ObjectId],
+		required: false,
+		ref: 'audits',
+	})
+	audits: Types.ObjectId[];
 
 	@Prop({
 		type: [Types.ObjectId],

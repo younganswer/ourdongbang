@@ -28,7 +28,7 @@ import { ClubsService } from './service/clubs.service';
 import { CreateClubDTO } from './dto/request/createClub.dto';
 import { JwtAuthGuard } from 'common/auth/guard';
 import { Types } from 'mongoose';
-import { ScheduleService } from './service';
+import { ScheduleService, AuditService } from './service';
 import { Response } from 'express';
 import { ReviewsService } from './service/reviews.service';
 import { CreateReviewDTO } from './dto/request/createReview.dto';
@@ -40,6 +40,7 @@ export class ClubsController {
 	constructor(
 		private readonly clubsService: ClubsService,
 		private readonly scheduleService: ScheduleService,
+		private readonly auditService: AuditService,
 		private readonly reveiwSerice: ReviewsService,
 	) {}
 
@@ -158,38 +159,8 @@ export class ClubsController {
 		}
 	}
 
-	@Post('/:cid/schedule')
-	@UseGuards(JwtAuthGuard)
-	@ApiOperation({ summary: 'create a schedule' })
-	@ApiResponse({ status: 201, description: 'Schedule created successfully' })
-	@ApiBadRequestResponse({ description: 'Bad request' })
-	async createSchdule(
-		@Param('cid') clubId: string,
-		@Body() createScheduleDto: ClubDto.Request.CreateScheduleDto,
-		@Res({ passthrough: true }) response: Response,
-	) {
-		try {
-			const schedule = await this.scheduleService.createSchedule(createScheduleDto);
-
-			if (!schedule) {
-				throw new HttpException('Bad request', 400);
-			}
-
-			const scheduleId: Types.ObjectId = schedule['_id'];
-			const club = await this.clubsService.addSchedule(clubId, scheduleId);
-
-			if (!club) {
-				throw new HttpException('Club is not found', 404);
-			}
-
-			return response.json({ message: 'Schedule created successfully' });
-		} catch (error) {
-			console.error(error);
-			throw new HttpException(error.message, error.status);
-		}
-	}
-
 	@Get('/:cid/schedule')
+	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get all schedule for the requested month' })
 	@ApiResponse({
 		status: 200,
@@ -202,12 +173,16 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
 			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
 			const schedulesForMonth = await this.scheduleService.getAllSchedulesForTheMonth(
 				scheduleIds,
 				month,
 			);
-
 			if (!schedulesForMonth) {
 				throw new HttpException('Bad request', 400);
 			}
@@ -223,6 +198,7 @@ export class ClubsController {
 	}
 
 	@Get('/:cid/schedule/:sid')
+	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get a schedule' })
 	@ApiResponse({ status: 200, description: 'Get a schedule successfully' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
@@ -232,14 +208,17 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
 
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
 			if (!scheduleIds.includes(scheduleId as unknown as Types.ObjectId)) {
 				throw new HttpException('Bad request', 400);
 			}
 
 			const schedule = await this.scheduleService.getScheduleById(scheduleId);
-
 			if (!schedule) {
 				throw new HttpException('Bad request', 400);
 			}
@@ -251,7 +230,42 @@ export class ClubsController {
 		}
 	}
 
+	@Post('/:cid/schedule')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'create a schedule' })
+	@ApiResponse({ status: 201, description: 'Schedule created successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async createSchdule(
+		@Param('cid') clubId: string,
+		@Body() createScheduleDto: ClubDto.Request.CreateScheduleDto,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
+			const schedule = await this.scheduleService.createSchedule(createScheduleDto);
+			if (!schedule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const scheduleId: Types.ObjectId = schedule['_id'];
+			const updatedClub = await this.clubsService.addSchedule(clubId, scheduleId);
+			if (!updatedClub) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Schedule created successfully' });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
 	@Patch('/:cid/schedule/:sid')
+	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Update a schedule' })
 	@ApiResponse({ status: 200, description: 'Update a schedule successfully' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
@@ -262,14 +276,17 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
 
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
 			if (!scheduleIds.includes(scheduleId as unknown as Types.ObjectId)) {
 				throw new HttpException('Bad request', 400);
 			}
 
 			const updatedSchedule = await this.scheduleService.updateSchedule(scheduleId, updateData);
-
 			if (!updatedSchedule) {
 				throw new HttpException('Bad request', 400);
 			}
@@ -282,6 +299,7 @@ export class ClubsController {
 	}
 
 	@Delete('/:cid/schedule/:sid')
+	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Delete a schedule' })
 	@ApiResponse({ status: 200, description: 'Delete a schedule successfully' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
@@ -291,19 +309,185 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
 
+			const scheduleIds = await this.clubsService.getAllSchedules(clubId);
 			if (!scheduleIds.includes(scheduleId as unknown as Types.ObjectId)) {
 				throw new HttpException('Bad request', 400);
 			}
 
 			const deletedSchedule = await this.scheduleService.deleteSchedule(scheduleId);
-
 			if (!deletedSchedule) {
 				throw new HttpException('Bad request', 400);
 			}
 
 			return response.json({ message: 'Delete a schedule successfully', deletedSchedule });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get('/:cid/audit')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Get all audit' })
+	@ApiResponse({ status: 200, description: 'Get all audit successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async getAllAudit(@Param('cid') clubId: string, @Res({ passthrough: true }) response: Response) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
+			const auditIds = await this.clubsService.getAllAudits(clubId);
+			if (!auditIds) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const audits = await this.auditService.getAllAudits(auditIds);
+			if (!audits) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Get all audit successfully', audits });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Post('/:cid/audit')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Create an audit' })
+	@ApiResponse({ status: 201, description: 'Audit created successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async createAudit(
+		@Param('cid') clubId: string,
+		@Body() createAuditDto: ClubDto.Request.CreateAuditDto,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
+			const audit = await this.auditService.createAudit(createAuditDto);
+			if (!audit) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const auditId: Types.ObjectId = audit['_id'];
+			const updatedClub = await this.clubsService.addAudit(clubId, auditId);
+			if (!updatedClub) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Audit created successfully' });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get('/:cid/audit/:aid')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Get an audit' })
+	@ApiResponse({ status: 200, description: 'Get an audit successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async getAuditById(
+		@Param('cid') clubId: string,
+		@Param('aid') auditId: string,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
+			const auditIds = await this.clubsService.getAllAudits(clubId);
+			if (!auditIds.includes(auditId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const audit = await this.auditService.getAuditById(auditId);
+			if (!audit) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Get an audit successfully', audit });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Patch('/:cid/audit/:aid')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Update an audit' })
+	@ApiResponse({ status: 200, description: 'Update an audit successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async updateAudit(
+		@Param('cid') clubId: string,
+		@Param('aid') auditId: string,
+		@Body() updateData: Partial<ClubDto.Request.CreateAuditDto>,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
+			const auditIds = await this.clubsService.getAllAudits(clubId);
+			if (!auditIds.includes(auditId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const updatedAudit = await this.auditService.updateAudit(auditId, updateData);
+			if (!updatedAudit) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Update an audit successfully', updatedAudit });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Delete('/:cid/audit/:aid')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Delete an audit' })
+	@ApiResponse({ status: 200, description: 'Delete an audit successfully' })
+	@ApiBadRequestResponse({ description: 'Bad request' })
+	async deleteAudit(
+		@Param('cid') clubId: string,
+		@Param('aid') auditId: string,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			if (!club) {
+				throw new HttpException('Club is not found', 404);
+			}
+
+			const auditIds = await this.clubsService.getAllAudits(clubId);
+			if (!auditIds.includes(auditId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			const deletedAudit = await this.auditService.deleteAudit(auditId);
+			if (!deletedAudit) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return response.json({ message: 'Delete an audit successfully', deletedAudit });
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
