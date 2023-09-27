@@ -53,4 +53,15 @@ export class ClubsService {
 		club.reviews.push(reviewId);
 		return club.save();
 	}
+
+	async getAllReviews(clubId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		return club.reviews;
+	}
+
+	async deleteReview(clubId: string | Types.ObjectId, reviewId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		club.reviews = club.reviews.filter(review => review.toString() !== reviewId.toString());
+		return club.save();
+	}
 }

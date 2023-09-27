@@ -109,6 +109,8 @@ export class User {
 		ref: 'clubs',
 	})
 	clubs: Types.ObjectId[];
+
+	// 만약 user가 작성한 review를 가지고 있을려면 여기에 object.id 배열이 필요한데 그러면 user생성부터 다 고쳐야할듯. [일단 안건들게]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

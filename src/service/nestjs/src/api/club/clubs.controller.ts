@@ -35,7 +35,7 @@ import { CreateReviewDTO } from './dto/request/createReview.dto';
 import * as ClubDto from './dto/index';
 
 @ApiTags('club API')
-@Controller('clubs')
+@Controller('club')
 export class ClubsController {
 	constructor(
 		private readonly clubsService: ClubsService,
@@ -317,7 +317,7 @@ export class ClubsController {
 	@ApiParam({ name: 'cid', description: 'Club ID' })
 	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
 	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
-	async create(
+	async createReview(
 		@Body() createReivewDTO: CreateReviewDTO,
 		// 그냥 Body로 id를 받아오면 안되나?
 		@Param('cid') clubId: string,
@@ -337,6 +337,73 @@ export class ClubsController {
 			}
 
 			return review;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get('/:cid/review/')
+	@ApiOperation({ summary: 'get all review of club', description: 'review 가져오기' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
+	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
+	async getAllReviews(@Param('cid') clubId: string) {
+		try {
+			const reviewIds = await this.clubsService.getAllReviews(clubId);
+
+			const reviewPromises = reviewIds.map(rid => this.reveiwSerice.getReviewById(rid));
+
+			const reviews = await Promise.all(reviewPromises);
+
+			return reviews;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Patch('/review/:rid')
+	@ApiOperation({ summary: 'update a review', description: 'review 수정' })
+	@ApiBody({ type: CreateReviewDTO })
+	@ApiParam({ name: 'rid', description: 'Review ID' })
+	@ApiResponse({ status: 200, description: '수정 성공' })
+	async updateReview(@Param('rid') reviewId: string, @Body() updateData: Partial<CreateReviewDTO>) {
+		try {
+			const updatedReview = await this.reveiwSerice.updateReview(reviewId, updateData);
+
+			if (!updatedReview) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return updatedReview;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Delete('/:cid/review/:rid')
+	@ApiOperation({ summary: 'delete a review', description: 'review 삭제' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiParam({ name: 'rid', description: 'Review ID' })
+	@ApiResponse({ status: 200, description: '삭제 성공' })
+	async deleteReview(@Param('cid') clubId: string, @Param('rid') reviewId: string) {
+		try {
+			const reviewIds = await this.clubsService.getAllReviews(clubId);
+
+			if (!reviewIds.includes(reviewId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			await this.clubsService.deleteReview(clubId, reviewId);
+			const deletedReview = await this.reveiwSerice.deleteReview(reviewId);
+
+			if (!deletedReview) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return deletedReview;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
