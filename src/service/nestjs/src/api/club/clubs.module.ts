@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ClubsService } from './clubs.service';
+import { ClubsService } from './service/clubs.service';
 import { ClubsController } from './clubs.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ClubSchema, Review, ReviewSchema, ScheduleSchema } from 'common/database/schema';
