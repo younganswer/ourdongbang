@@ -34,6 +34,12 @@ export class ClubsService {
 		return deletedClub;
 	}
 
+	async getAllSchedules(clubId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+
+		return club.schedules;
+	}
+
 	async addSchedule(cludId: string | Types.ObjectId, scheduleId: Types.ObjectId) {
 		const club = await this.clubModel.findById(cludId).exec();
 
@@ -41,10 +47,17 @@ export class ClubsService {
 		return club.save();
 	}
 
-	async getAllSchedules(clubId: string | Types.ObjectId) {
+	async getAllAudits(clubId: string | Types.ObjectId) {
 		const club = await this.clubModel.findById(clubId).exec();
 
-		return club.schedules;
+		return club.audits;
+	}
+
+	async addAudit(cludId: string | Types.ObjectId, auditId: Types.ObjectId) {
+		const club = await this.clubModel.findById(cludId).exec();
+
+		club.audits.push(auditId);
+		return club.save();
 	}
 
 	async addReview(cludId: string | Types.ObjectId, reviewId: Types.ObjectId) {
