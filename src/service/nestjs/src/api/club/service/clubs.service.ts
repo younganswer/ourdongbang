@@ -77,4 +77,10 @@ export class ClubsService {
 		club.reviews = club.reviews.filter(review => review.toString() !== reviewId.toString());
 		return club.save();
 	}
+
+	async addMember(clubId: string | Types.ObjectId, memberId: Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		club.members.push(memberId);
+		return club.save();
+	}
 }

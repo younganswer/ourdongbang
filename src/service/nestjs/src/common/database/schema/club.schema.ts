@@ -35,10 +35,10 @@ export class Club {
 
 	@ApiProperty({ description: '동아리 member들 정보', required: false })
 	@Prop({
-		type: [MemberSchema], // Member를 사용하면 에러남;; 지원하지 않는 mongoose schema?
+		type: [Types.ObjectId], // Member를 사용하면 에러남;; 지원하지 않는 mongoose schema?
 		required: false,
 	})
-	members: MemberDocument[];
+	members: Types.ObjectId[];
 
 	@ApiProperty({ description: '동아리 일정', required: false })
 	@Prop({
