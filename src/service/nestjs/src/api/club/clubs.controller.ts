@@ -24,7 +24,7 @@ import {
 	PartialType,
 } from '@nestjs/swagger';
 import { Club } from 'common/database/schema/club.schema';
-import { ClubsService } from './clubs.service';
+import { ClubsService } from './service/clubs.service';
 import { CreateClubDTO } from './dto/request/createClub.dto';
 import { JwtAuthGuard } from 'common/auth/guard';
 import { Types } from 'mongoose';

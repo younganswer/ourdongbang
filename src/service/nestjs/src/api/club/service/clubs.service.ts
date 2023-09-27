@@ -2,7 +2,7 @@ import { Model, Types } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Club } from 'common/database/schema/club.schema';
-import { CreateClubDTO } from './dto/request/createClub.dto';
+import { CreateClubDTO } from '../dto/request/createClub.dto';
 
 @Injectable()
 export class ClubsService {
