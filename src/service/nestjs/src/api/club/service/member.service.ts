@@ -24,4 +24,46 @@ export class MemberService {
 			throw new HttpException(error.message, error.status);
 		}
 	}
+
+	async findAll(memberIds: Types.ObjectId[]): Promise<Member[]> {
+		const members = [];
+		memberIds.forEach(memberId => {
+			members.push(this.memberModel.findById(memberId).exec());
+		});
+		return members;
+	}
+
+	async getMemberById(memberId: string | Types.ObjectId): Promise<Member> {
+		try {
+			return await this.memberModel.findById(memberId).exec();
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	async updateMember(
+		memberId: string | Types.ObjectId,
+		updateData: Partial<CreateMemberDTO>,
+	): Promise<Member | null> {
+		try {
+			return this.memberModel.findByIdAndUpdate(memberId, updateData, { new: true }).exec();
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	async deleteMember(memberId: string | Types.ObjectId): Promise<Member> {
+		try {
+			const deletedMember = await this.memberModel.findByIdAndRemove({ _id: memberId }).exec();
+			if (!deletedMember) {
+				throw new HttpException('존재하지 않는 유저입니다.', HttpStatus.BAD_REQUEST);
+			}
+			return deletedMember;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
 }
