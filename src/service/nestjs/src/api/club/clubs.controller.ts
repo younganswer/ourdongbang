@@ -627,4 +627,81 @@ export class ClubsController {
 			throw new HttpException(error.message, error.status);
 		}
 	}
+
+	@Get('/:cid/member/')
+	@ApiOperation({ summary: 'get all member of club', description: 'member 가져오기' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiResponse({ status: 200, description: '가져오기 성공' })
+	async getAllMembers(@Param('cid') clubId: string) {
+		try {
+			const club = await this.clubsService.findOne(clubId);
+			const memberIds = club.members;
+			const members = await Promise.all(await this.memberService.findAll(memberIds));
+
+			return members;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get('/member/:mid')
+	@ApiOperation({ summary: 'get a member', description: 'member 가져오기' })
+	@ApiParam({ name: 'mid', description: 'Member ID' })
+	@ApiResponse({ status: 200, description: '가져오기 성공' })
+	async getMember(@Param('mid') memberId: string) {
+		try {
+			const member = await this.memberService.getMemberById(memberId);
+
+			if (!member) {
+				throw new NotFoundException('member not found');
+			}
+
+			return member;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Patch('/member/:mid')
+	@ApiOperation({ summary: 'update a member', description: 'member 수정' })
+	@ApiBody({ type: CreateMemberDTO })
+	@ApiParam({ name: 'mid', description: 'Member ID' })
+	@ApiResponse({ status: 200, description: '수정 성공' })
+	async updateMember(@Param('mid') memberId: string, @Body() updateData: Partial<CreateMemberDTO>) {
+		try {
+			const updatedMember = await this.memberService.updateMember(memberId, updateData);
+
+			if (!updatedMember) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return updatedMember;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Delete(':cid/member/:mid')
+	@ApiOperation({ summary: 'delete a member', description: 'member 삭제' })
+	@ApiParam({ name: 'mid', description: 'Member ID' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiResponse({ status: 200, description: '삭제 성공' })
+	async deleteMember(@Param('mid') memberId: string, @Param('cid') clubId: string) {
+		try {
+			const deletedMember = await this.memberService.deleteMember(memberId);
+			await this.clubsService.deleteMember(clubId, memberId);
+
+			if (!deletedMember) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return deletedMember;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
 }

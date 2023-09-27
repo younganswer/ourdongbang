@@ -83,4 +83,10 @@ export class ClubsService {
 		club.members.push(memberId);
 		return club.save();
 	}
+
+	async deleteMember(clubId: string | Types.ObjectId, memberId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		club.members = club.members.filter(member => member.toString() !== memberId.toString());
+		return club.save();
+	}
 }
