@@ -13,14 +13,21 @@ export class CookieService {
 
 	getCookieOption(): CookieOptions {
 		const maxAge = 60 * 60 * 1000;
+
 		return this.configService.get('cookie') === 'production'
 			? { secure: true, sameSite: 'none', maxAge }
 			: { maxAge };
 	}
-	createJwt<T extends Record<string, string | number | boolean | Types.ObjectId>>(payload: T): string {
+
+	createJwt<T extends Record<string, string | number | boolean | Types.ObjectId>>(
+		payload: T,
+	): string {
 		return this.jwtService.sign(payload);
 	}
-	verifyJwt<T extends Record<string, string | number | boolean | Types.ObjectId>>(token: string): T {
+
+	verifyJwt<T extends Record<string, string | number | boolean | Types.ObjectId>>(
+		token: string,
+	): T {
 		return this.jwtService.verify(token);
 	}
 }
