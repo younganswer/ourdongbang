@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Profile from './profile.component';
 import { AuthContext } from 'context/AuthContext';
 import { MyPageStyle } from './myPage.style';
+import Participate from './participate.component';
 
 const MyPage = () => {
 	const { me, setMe } = useContext(AuthContext);
@@ -23,6 +24,7 @@ const MyPage = () => {
 	return (
 		<div className={MyPageStyle}>
 			<Profile user={me} />
+			<Participate />
 		</div>
 	);
 };
