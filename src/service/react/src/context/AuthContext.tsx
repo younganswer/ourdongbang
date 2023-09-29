@@ -13,7 +13,7 @@ export const AuthContext = createContext<{
 	setAccessTokenCookie: () => {},
 });
 
-type Me = {
+export type Me = {
 	name: string;
 	id: string;
 	password: string;
@@ -21,7 +21,7 @@ type Me = {
 	major: string;
 	studentId: string;
 	profileImageId: Types.ObjectId | null;
-	clubs: Types.ObjectId | null;
+	clubs: Types.ObjectId[] | null;
 };
 
 interface AuthProviderProps
