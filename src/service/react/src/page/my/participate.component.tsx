@@ -12,38 +12,40 @@ const Participation = () => {
 
 	return (
 		<div className={ParticipationStyle}>
-			<div style={{ gridRow: 2, width: '90%', margin: '0 auto 0 auto' }}>
-				<span
-					style={{
-						fontSize: '24px',
-						fontWeight: 900,
-						lineHeight: '150%' /* 36px */,
-						letterSpacing: '-0.528px',
-					}}
-				>
-					참여도 {ratio * 100}%
-				</span>
-				<span
-					style={{
-						marginLeft: '1rem',
-						fontSize: '16px',
-						fontWeight: 400,
-						lineHeight: '150%' /* 24px */,
-						letterSpacing: '-0.352px',
-					}}
-				>
-					{0.5 < ratio ? message[1] : message[0]}
-				</span>
+			<div>
+				<span>참여도 {ratio * 100}%</span>
+				<span>{0.5 < ratio ? message[1] : message[0]}</span>
 			</div>
-			<div style={{ gridRow: 3, width: '90%', margin: '0 auto 0 auto', border: '1px solid black' }}>
+			<div>
 				<div style={progressBar}></div>
 			</div>
 		</div>
 	);
 };
 
+const Activity = () => {
+	const date = '09-30';
+
+	return (
+		<div>
+			<div>{date}</div>
+			<div>참여 활동</div>
+			<div>활동 보기</div>
+		</div>
+	);
+};
+
 const Participated = () => {
-	return <div className={ParticipatedStyle}></div>;
+	return (
+		<div className={ParticipatedStyle}>
+			<span>참여 활동</span>
+			<div>
+				<Activity />
+				<Activity />
+				<Activity />
+			</div>
+		</div>
+	);
 };
 
 export const Participate = () => {
