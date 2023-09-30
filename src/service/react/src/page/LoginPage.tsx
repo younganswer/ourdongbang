@@ -1,29 +1,57 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useContext } from 'react';
 import CustomInput from '../components/CustomInput';
-// import axios from 'axios';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import '../style/ToolBar.css';
+import { AuthContext } from 'context/AuthContext';
 
 const LoginPage: React.FC = () => {
-	const [userId, setUserId] = useState<string>('');
+	const [id, setId] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+
+	const { me, setMe } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 
 	const loginHandler = async (e: FormEvent) => {
 		try {
 			e.preventDefault();
-			if (userId.length < 4 || password.length < 6) {
+			if (id.length < 4 || password.length < 6) {
 				throw new Error('입력하신 정보가 올바르지 않습니다.');
 			}
+			await axios
+				.patch(
+					`${process.env.REACT_APP_NESTJS_URL}/auth/login`,
+					{
+						id,
+						password,
+					},
+					{ withCredentials: true },
+				)
+				.then(response => {
+					setMe({
+						name: response.data.name,
+						id: response.data.id,
+						password: response.data.password,
+						email: response.data.email,
+						major: response.data.major,
+						studentId: response.data.studentId,
+						profileImageId: response.data.profileImageId,
+						clubs: response.data.clubs,
+					});
+
+					toast.success('로그인 완료');
+					navigate('/main/calendar');
+				})
+				.catch(error => {
+					console.error(error);
+					throw error;
+				});
 			// AuthContext 파일 생성후 SetMe 코드 추가 요망
 			// 후에 axios 연동 요망
 			// const result = await axios.patch('/auth/login', { userId, password });
-
-			toast.success('로그인 했습니다.');
-			navigate('/'); // 일단 임시로 PreviewPage 경로로 설정, MainPage 생성 후 경로 변경 요망
 		} catch (err) {
 			console.error(err);
 			toast.error('로그인 중 오류가 발생했습니다.');
@@ -43,7 +71,7 @@ const LoginPage: React.FC = () => {
 				로그인
 			</h3>
 			<form className="font-change" onSubmit={loginHandler}>
-				<CustomInput label="회원ID" value={userId} setValue={setUserId} />
+				<CustomInput label="회원ID" value={id} setValue={setId} />
 				<CustomInput label="비밀번호" type="password" value={password} setValue={setPassword} />
 				<button className="font-change" type="submit">
 					로그인

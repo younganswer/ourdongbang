@@ -66,7 +66,7 @@ const RegisterPage: React.FC = () => {
 					});
 
 					toast.success('회원가입을 해주셔서 감사합니다.');
-					navigate('/'); // 일단 임시로 PreviewPage 경로로 설정, MainPage 생성 후 경로 변경 요망
+					navigate('/main/calendar'); // 일단 임시로 PreviewPage 경로로 설정, MainPage 생성 후 경로 변경 요망
 				})
 				.catch(error => {
 					console.error(error);
