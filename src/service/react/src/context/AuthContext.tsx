@@ -31,7 +31,19 @@ interface AuthProviderProps
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [cookies, setCookie, removeCookie] = useCookies(['access-token']);
-	const [me, setMe] = useState<Me | null>(null);
+	const [me, setMe] = useState<Me | null>({
+		// Test dummy data
+		name: '김연정',
+		id: 'xeonxeong',
+		password: 'password',
+		email: 'yjart322@kookmin.ac.kr',
+		major: '공업디자인학과',
+		studentId: '20211523',
+		profileImageId: null,
+		clubs: [],
+	});
+
+	console.log(me);
 
 	useEffect(() => {
 		const jwt = cookies['access-token'];
@@ -55,10 +67,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				})
 				.catch(() => {
 					removeCookie('access-token');
-					setMe(null);
+					//setMe(null);
 				});
 		} else {
-			setMe(null);
+			//setMe(null);
 		}
 	}, [cookies['access-token']]);
 
