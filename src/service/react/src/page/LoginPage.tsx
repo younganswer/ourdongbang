@@ -4,14 +4,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import '../style/ToolBar.css';
 import { AuthContext } from 'context/AuthContext';
 
 const LoginPage: React.FC = () => {
 	const [id, setId] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
-	const { me, setMe } = useContext(AuthContext);
+	const { setMe } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 

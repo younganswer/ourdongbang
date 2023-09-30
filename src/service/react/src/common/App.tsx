@@ -8,7 +8,6 @@ import AuditPage from 'page/AuditPage';
 import CalendarPage from 'page/CalendarPage';
 import ToolBar from 'components/ToolBar';
 import { ToastContainer } from 'react-toastify';
-import '../style/ToolBar.css';
 import MyPage from 'page/my';
 
 function App() {
