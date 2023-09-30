@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		profileImageId: null,
 		clubs: [],
 	});
-
+	// const [me, setMe] = useState<Me | null>(null);
 	console.log(me);
 
 	useEffect(() => {
