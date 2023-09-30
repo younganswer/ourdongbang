@@ -5,22 +5,36 @@ export const ProfileStyle = css({
 	height: 789,
 	gridColumn: '1',
 	display: 'grid',
-	gridTemplateRows: '100px 1fr 64px',
+	gridTemplateRows: '60px 1fr 60px',
 	backgroundColor: 'white',
 });
 
 export const ProfileHeaderStyle = css({
 	display: 'flex',
 	justifyContent: 'space-between',
-	padding: '1rem 2rem 1rem 2rem',
+	width: '90%',
+	margin: '0 auto',
+
+	'> span': {
+		fontSize: '20px',
+		fontWeight: 300,
+		lineHeight: '60px',
+		':hover': {
+			cursor: 'pointer',
+		},
+	},
 });
 
 export const ProfileContentStyle = css({
 	width: 290,
-	margin: '0 auto 0 auto',
+	margin: '2rem auto 0 auto',
 	gridRow: '2',
 	display: 'grid',
 	gridTemplateRows: '238px 60px 1fr',
+
+	'> *:nth-child(3)': {
+		marginTop: '1rem',
+	},
 });
 
 export const ProfileImageStyle = css({
@@ -43,13 +57,26 @@ export const ProfileNameStyle = css({
 export const ProfileInformationStyle = css({
 	display: 'flex',
 	justifyContent: 'space-between',
-	margin: '1rem 0 1rem 0',
+	margin: '2rem 0',
+	height: '30px',
+
+	'> span': {
+		fontSize: '20px',
+		fontWeight: 300,
+		lineHeight: '30px',
+	},
 });
-//fontSize: '24px',
-//fontWeight: 500,
-//lineHeight: '150%' /* 36px */,
-//letterSpacing: '-0.528px',
 
 export const ProfileFooterStyle = css({
-	padding: '1rem 2rem 1rem 2rem',
+	width: '90%',
+	margin: '0 auto',
+
+	'> span': {
+		fontSize: '20px',
+		fontWeight: 300,
+		lineHeight: '60px',
+		':hover': {
+			cursor: 'pointer',
+		},
+	},
 });

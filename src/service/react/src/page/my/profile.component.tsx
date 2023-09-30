@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Me } from 'context/AuthContext';
 import { Types } from 'mongoose';
 import {
@@ -10,6 +10,7 @@ import {
 	ProfileNameStyle,
 	ProfileStyle,
 } from './profile.style';
+import { EditModal } from './edit.modal';
 
 const ProfileImage = (props: { imageId: Types.ObjectId | null }) => {
 	const { imageId } = props;
@@ -48,24 +49,35 @@ const Information = (props: { type: string; value: string }) => {
 
 const Profile = (props: { user: Me }) => {
 	const { user } = props;
+	const [isModalOpened, setIsModalOpened] = useState(false);
 
 	return (
-		<div className={ProfileStyle}>
-			<div className={ProfileHeaderStyle}>
-				<span>Setting</span>
-				<span>Edit</span>
-			</div>
-			<div className={ProfileContentStyle}>
-				<ProfileImage imageId={user.profileImageId} />
-				<span className={ProfileNameStyle}>{user.name}</span>
-				<div>
-					<Information type="Email" value={user.email} />
+		<>
+			<div className={ProfileStyle}>
+				<div className={ProfileHeaderStyle}>
+					<span>Setting</span>
+					<span
+						onClick={() => {
+							setIsModalOpened(true);
+						}}
+					>
+						Edit
+					</span>
+				</div>
+				<div className={ProfileContentStyle}>
+					<ProfileImage imageId={user.profileImageId} />
+					<span className={ProfileNameStyle}>{user.name}</span>
+					<div>
+						<Information type="Email" value={user.email} />
+						<Information type="학번" value={user.studentId} />
+					</div>
+				</div>
+				<div className={ProfileFooterStyle}>
+					<span style={{ float: 'right' }}>Logout</span>
 				</div>
 			</div>
-			<div className={ProfileFooterStyle}>
-				<span style={{ float: 'right' }}>Logout</span>
-			</div>
-		</div>
+			{isModalOpened ? <EditModal setIsModalOpened={setIsModalOpened} /> : null}
+		</>
 	);
 };
 
