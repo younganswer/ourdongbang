@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import PreviewPage from 'page/PreviewPage';
 import LoginPage from 'page/LoginPage';
 import RegisterPage from 'page/RegisterPage';
-import AuditPage from 'page/AuditPage';
+import AuditPage from 'page/Audit';
 import CalendarPage from 'page/CalendarPage';
 import ToolBar from 'components/ToolBar';
 import { ToastContainer } from 'react-toastify';
