@@ -76,7 +76,7 @@ const Profile = (props: { user: Me }) => {
 					<span style={{ float: 'right' }}>Logout</span>
 				</div>
 			</div>
-			{isModalOpened ? <EditModal setIsModalOpened={setIsModalOpened} /> : null}
+			{isModalOpened ? <EditModal user={user} setIsModalOpened={setIsModalOpened} /> : null}
 		</>
 	);
 };

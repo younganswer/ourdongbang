@@ -1,7 +1,9 @@
 import React from 'react';
 import { ParticipateStyle, ParticipatedStyle, ParticipationStyle } from './participate.style';
+import { Me } from 'context/AuthContext';
 
-const Participation = () => {
+const Participation = (props: { user: Me }) => {
+	const { user } = props;
 	const ratio = 0.65;
 	const message = ['요즘 너무 바쁜거 같아요..', '평균 보다 더 많이 참여했어요!'];
 	const progressBar = {
@@ -21,9 +23,11 @@ const Participation = () => {
 			</div>
 		</div>
 	);
+	<>{user}</>;
 };
 
-const Activity = () => {
+const Activity = (props: { user: Me }) => {
+	const { user } = props;
 	const date = '09-30';
 
 	return (
@@ -33,26 +37,31 @@ const Activity = () => {
 			<div>활동 보기</div>
 		</div>
 	);
+	<>{user}</>;
 };
 
-const Participated = () => {
+const Participated = (props: { user: Me }) => {
+	const { user } = props;
+
 	return (
 		<div className={ParticipatedStyle}>
 			<span>참여 활동</span>
 			<div>
-				<Activity />
-				<Activity />
-				<Activity />
+				<Activity user={user} />
+				<Activity user={user} />
+				<Activity user={user} />
 			</div>
 		</div>
 	);
 };
 
-export const Participate = () => {
+export const Participate = (props: { user: Me }) => {
+	const { user } = props;
+
 	return (
 		<div className={ParticipateStyle}>
-			<Participation />
-			<Participated />
+			<Participation user={user} />
+			<Participated user={user} />
 		</div>
 	);
 };
