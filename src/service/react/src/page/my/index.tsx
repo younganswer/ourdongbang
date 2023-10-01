@@ -14,7 +14,7 @@ const MyPage = () => {
 	return (
 		<div className={MyPageStyle}>
 			<Profile user={me} />
-			<Participate />
+			<Participate user={me} />
 		</div>
 	);
 };

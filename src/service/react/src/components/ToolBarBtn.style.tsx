@@ -30,7 +30,7 @@ export const toolBarBtns = css({
 export const toolBarBtn = css({
 	fontFamily: 'HakgyoansimGaeulsopungB',
 	marginLeft: 20,
-	fontSize: 15,
+	fontSize: 16,
 	cursor: 'pointer',
 	backgroundColor: 'white',
 	color: 'black',
