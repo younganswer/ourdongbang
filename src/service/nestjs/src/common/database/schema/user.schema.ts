@@ -5,6 +5,7 @@ import { Document, Types } from 'mongoose';
 const schemaOptions: SchemaOptions = {
 	timestamps: true,
 	collection: 'users',
+	autoIndex: true,
 };
 
 @Schema(schemaOptions)
@@ -78,7 +79,6 @@ export class User {
 		type: String,
 		required: false,
 		unique: true,
-		sparse: true,
 	})
 	studentId: string;
 
