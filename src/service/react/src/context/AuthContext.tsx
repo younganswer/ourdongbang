@@ -1,16 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Types } from 'mongoose';
+import axios from 'axios';
 
 export const AuthContext = createContext<{
 	me: Me | null;
 	setMe: React.Dispatch<React.SetStateAction<Me | null>>;
-	setAccessTokenCookie: (jwtToken: string) => void;
 }>({
 	me: null,
 	setMe: () => {},
-	setAccessTokenCookie: () => {},
 });
 
 export type Me = {
@@ -30,56 +28,31 @@ interface AuthProviderProps
 	}> {}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	const [cookies, setCookie, removeCookie] = useCookies(['access-token']);
+	const [, removeCookie] = useCookies(['access-token']);
 	const [me, setMe] = useState<Me | null>(null);
-	//const [me, setMe] = useState<Me | null>({
-	//	// Test dummy data
-	//	name: '김연정',
-	//	id: 'xeonxeong',
-	//	password: 'password',
-	//	email: 'yjart322@kookmin.ac.kr',
-	//	major: '공업디자인학과',
-	//	studentId: '20211523',
-	//	profileImageId: null,
-	//	clubs: [],
-	//});
 
 	useEffect(() => {
-		const jwt = cookies['access-token'];
-
-		if (jwt) {
-			axios
-				.get(`${process.env.REACT_APP_NESTJS_URL}/user/me`, {
-					withCredentials: true,
-				})
-				.then(result => {
-					setMe({
-						name: result.data.name,
-						id: result.data.id,
-						password: result.data.password,
-						email: result.data.email,
-						major: result.data.major,
-						studentId: result.data.studentId,
-						profileImageId: result.data.profileImageId || null,
-						clubs: result.data.clubs || null,
-					});
-				})
-				.catch(() => {
-					removeCookie('access-token');
-					//setMe(null);
+		axios
+			.get(`${process.env.REACT_APP_NESTJS_URL}/user/me`, {
+				withCredentials: true,
+			})
+			.then(result => {
+				setMe({
+					name: result.data.name,
+					id: result.data.id,
+					password: result.data.password,
+					email: result.data.email,
+					major: result.data.major,
+					studentId: result.data.studentId,
+					profileImageId: result.data.profileImageId || null,
+					clubs: result.data.clubs || null,
 				});
-		} else {
-			//setMe(null);
-		}
-	}, [cookies['access-token']]);
+			})
+			.catch(() => {
+				removeCookie('access-token', { path: '/' });
+				setMe(null);
+			});
+	}, [me]);
 
-	const setAccessTokenCookie = (jwtToken: string) => {
-		setCookie('access-token', jwtToken, { path: '/' });
-	};
-
-	return (
-		<AuthContext.Provider value={{ me, setMe, setAccessTokenCookie }}>
-			{children}
-		</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={{ me, setMe }}>{children}</AuthContext.Provider>;
 };
