@@ -1,11 +1,12 @@
 import { Controller, Delete, HttpException, Param, Post, Res, UseGuards } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'common/auth/guard';
 import { Response } from 'express';
 import { ImageService } from './service/image.service';
 import { S3Service } from './service/s3.service';
 
 @Controller('image')
+@ApiTags('image')
 export class ImageController {
 	constructor(
 		private readonly imageService: ImageService,
@@ -14,17 +15,16 @@ export class ImageController {
 
 	@Post('/presigned')
 	@UseGuards(JwtAuthGuard)
-	@ApiOperation({ summary: 'Get presigned url for upload image' })
-	@ApiResponse({ status: 200, description: 'Get presigned url for upload image' })
+	@ApiOperation({ summary: 'Get presigned url to upload image' })
+	@ApiResponse({ status: 200, description: 'Get presigned url to upload image' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	async getPresignedUrl(@Res({ passthrough: true }) response: Response) {
 		try {
 			const image = await this.imageService.createImage();
-			console.log(image);
 			const presignedUrl = await this.s3Service.getPresignedUrl(image['_id'].toString());
 
 			return response.status(200).json({
-				message: 'Get presigned url for upload image successfully',
+				message: 'Get presigned url to upload image successfully',
 				presignedUrl,
 			});
 		} catch (error) {

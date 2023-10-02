@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { Types } from 'mongoose';
 import axios from 'axios';
 
@@ -28,31 +27,31 @@ interface AuthProviderProps
 	}> {}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	const [, removeCookie] = useCookies(['access-token']);
 	const [me, setMe] = useState<Me | null>(null);
 
 	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_NESTJS_URL}/user/me`, {
-				withCredentials: true,
-			})
-			.then(result => {
-				setMe({
-					name: result.data.name,
-					id: result.data.id,
-					password: result.data.password,
-					email: result.data.email,
-					major: result.data.major,
-					studentId: result.data.studentId,
-					profileImageId: result.data.profileImageId || null,
-					clubs: result.data.clubs || null,
+		if (!me) {
+			axios
+				.get(`${process.env.REACT_APP_NESTJS_URL}/user/me`, {
+					withCredentials: true,
+				})
+				.then(result => {
+					setMe({
+						name: result.data.name,
+						id: result.data.id,
+						password: result.data.password,
+						email: result.data.email,
+						major: result.data.major,
+						studentId: result.data.studentId,
+						profileImageId: result.data.profileImageId || null,
+						clubs: result.data.clubs || null,
+					});
+				})
+				.catch(() => {
+					setMe(null);
 				});
-			})
-			.catch(() => {
-				removeCookie('access-token', { path: '/' });
-				setMe(null);
-			});
-	}, [me]);
+		}
+	}, []);
 
 	return <AuthContext.Provider value={{ me, setMe }}>{children}</AuthContext.Provider>;
 };

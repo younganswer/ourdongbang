@@ -31,6 +31,7 @@ export const ProfileContentStyle = css({
 	gridRow: '2',
 	display: 'grid',
 	gridTemplateRows: '238px 60px 1fr',
+	gridRowGap: '0.5rem',
 
 	'> *:nth-child(3)': {
 		marginTop: '1rem',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AuditPageStyle } from './index.style';
 import { ShowBalance } from './ShowBalance/ShowBalance';
+
 const AuditPage = () => {
 	return (
 		<div className={AuditPageStyle}>

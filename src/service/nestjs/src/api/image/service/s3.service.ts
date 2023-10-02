@@ -10,14 +10,14 @@ export class S3Service {
 
 	constructor(private readonly configService: ConfigService) {
 		this.s3 = new S3({
-			region: this.configService.get('S3_BUCKET'),
+			region: this.configService.get('S3_REGION'),
 			credentials: {
 				accessKeyId: this.configService.get('S3_ACCESS_KEY_ID'),
 				secretAccessKey: this.configService.get('S3_SECRET_ACCESS_KEY'),
 			},
 		});
 		this.s3Client = new S3Client({
-			region: this.configService.get('S3_BUCKET'),
+			region: this.configService.get('S3_REGION'),
 			credentials: {
 				accessKeyId: this.configService.get('S3_ACCESS_KEY_ID'),
 				secretAccessKey: this.configService.get('S3_SECRET_ACCESS_KEY'),
