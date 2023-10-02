@@ -6,9 +6,11 @@ import axios from 'axios';
 import { EditProfileStyle } from './index.style';
 import { EditProfileInformation } from './information';
 import { EditProfileButton } from './button';
+import { toast } from 'react-toastify';
 
 const handleSubmit = async (
 	event: React.FormEvent<HTMLFormElement>,
+	newMe: Partial<Me>,
 	setMe: React.Dispatch<React.SetStateAction<Me | null>>,
 	file: null | File,
 	setFile: React.Dispatch<React.SetStateAction<null | File>>,
@@ -20,25 +22,35 @@ const handleSubmit = async (
 		setIsClicked(true);
 		if (file) {
 			const presignedData = await axios
-				.post(
-					`${process.env.REACT_APP_NESTJS_URL}/image/presigned`,
-					//{ contentTypes: file.type },
-					{ withCredentials: true },
-				)
+				.post(`${process.env.REACT_APP_NESTJS_URL}/image/presigned`, {}, { withCredentials: true })
+				.then(response => {
+					return response.data.presignedUrl;
+				})
 				.catch(error => {
+					console.error(error);
 					throw new Error(error.response.data.message);
 				});
 			const formData = new FormData();
 
-			for (const key in presignedData.data.presignedUrl.fields) {
-				formData.append(key, presignedData.data.presignedUrl.fields[key]);
+			for (const key in presignedData.fields) {
+				formData.append(key, presignedData.fields[key]);
 			}
 			formData.append('Content-Type', file.type);
 			formData.append('file', file);
-			axios.post(presignedData.data.presignedUrl.url, formData).catch(error => {
+			axios.post(presignedData.url, formData).catch(error => {
+				throw new Error(error);
+			});
+			newMe.profileImageId = presignedData.fields.key;
+		}
+		await axios
+			.patch(`${process.env.REACT_APP_NESTJS_URL}/user/me`, newMe, { withCredentials: true })
+			.then(response => {
+				setMe(response.data.me);
+				toast.success(response.data.message);
+			})
+			.catch(error => {
 				throw new Error(error.response.data.message);
 			});
-		}
 	} catch (error) {
 		console.error(error);
 	}
@@ -47,24 +59,27 @@ const handleSubmit = async (
 	setIsModalOpened(false);
 };
 
-export const EditProfile = (props: {
+const EditProfile = (props: {
 	me: Me;
 	setMe: React.Dispatch<React.SetStateAction<Me | null>>;
 	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const { me, setMe, setIsModalOpened } = props;
 	const [file, setFile] = useState<null | File>(null);
-	const [name, setName] = useState<string>(me.name);
-	const [studentId, setStudentId] = useState<null | string>(me.studentId);
+	const [newMe, setNewMe] = useState<Partial<Me>>({
+		name: me.name,
+		studentId: me.studentId,
+		email: me.email,
+		profileImageId: me.profileImageId,
+	});
 	const [isClicked, setIsClicked] = useState<boolean>(false);
-	const profileImageId = me.profileImageId?.toString() || null;
 
 	useEffect(() => {
 		document.body.style.cssText = `
 		    position: fixed; 
 		    top: -${window.scrollY}px;
 		    overflow-y: scroll;
-		    width: 99.15%;`;
+		    width: 100%;`;
 		return () => {
 			const scrollY = document.body.style.top;
 			document.body.style.cssText = '';
@@ -76,7 +91,7 @@ export const EditProfile = (props: {
 		<form
 			className={EditProfileStyle}
 			onSubmit={event => {
-				handleSubmit(event, setMe, file, setFile, setIsClicked, setIsModalOpened);
+				handleSubmit(event, newMe, setMe, file, setFile, setIsClicked, setIsModalOpened);
 			}}
 			onClick={event => {
 				event.stopPropagation();
@@ -85,17 +100,13 @@ export const EditProfile = (props: {
 			<div>
 				<EditProfileHeader setIsModalOpened={setIsModalOpened} />
 				<div>
-					<EditProfileImage profileImageId={profileImageId} file={file} setFile={setFile} />
-					<EditProfileInformation
-						name={name}
-						setName={setName}
-						studentId={studentId}
-						setStudentId={setStudentId}
-						email={me.email}
-					/>
+					<EditProfileImage file={file} setFile={setFile} newMe={newMe} />
+					<EditProfileInformation newMe={newMe} setNewMe={setNewMe} />
 				</div>
 				<EditProfileButton isClicked={isClicked} />
 			</div>
 		</form>
 	);
 };
+
+export default EditProfile;

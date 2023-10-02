@@ -2,6 +2,7 @@ import { ProfileImage } from 'components/ProfileImage.component';
 import React from 'react';
 import { useRef, useState } from 'react';
 import { EditProfileImageStyle } from './image.style';
+import { Me } from 'context/AuthContext';
 
 const handleChange = async (
 	event: React.ChangeEvent<HTMLInputElement>,
@@ -90,12 +91,14 @@ const PreviewImage = (props: { src: null | string }) => {
 };
 
 export const EditProfileImage = (props: {
-	profileImageId: string | null;
 	file: null | File;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
+	newMe: Partial<Me>;
 }) => {
-	const { profileImageId, file, setFile } = props;
-	const [src, setSrc] = useState<string | null>(profileImageId);
+	const { file, setFile, newMe } = props;
+	const [src, setSrc] = useState<string | null>(
+		`${process.env.REACT_APP_S3_BUCKET_URL}/` + newMe.profileImageId?.toString() || null,
+	);
 
 	return (
 		<div className={EditProfileImageStyle}>

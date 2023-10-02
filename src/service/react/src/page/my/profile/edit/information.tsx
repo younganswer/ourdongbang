@@ -1,65 +1,78 @@
 import React from 'react';
 import { EditProfileInformationStyle } from './information.style';
+import { Me } from 'context/AuthContext';
+
+const Header = () => {
+	return (
+		<div>
+			<span>개인 정보</span>
+		</div>
+	);
+};
+
+const Name = (props: {
+	newMe: Partial<Me>;
+	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
+}) => {
+	const { newMe, setNewMe } = props;
+
+	return (
+		<div>
+			<span>이름</span>
+			<input
+				type="text"
+				value={newMe.name}
+				onChange={event => {
+					setNewMe({ ...newMe, name: event.target.value });
+				}}
+			/>
+		</div>
+	);
+};
+
+const Email = (props: { newMe: Partial<Me> }) => {
+	const { email } = props.newMe;
+
+	return (
+		<div>
+			<span>이메일</span>
+			<span>{email}</span>
+		</div>
+	);
+};
+
+const StudentId = (props: {
+	newMe: Partial<Me>;
+	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
+}) => {
+	const { newMe, setNewMe } = props;
+
+	return (
+		<div>
+			<span>학번</span>
+			<input
+				type="text"
+				value={newMe?.studentId || ''}
+				onChange={event => {
+					setNewMe({ ...newMe, studentId: event.target.value });
+				}}
+			/>
+		</div>
+	);
+};
 
 export const EditProfileInformation = (props: {
-	name: string;
-	setName: React.Dispatch<React.SetStateAction<string>>;
-	studentId: null | string;
-	setStudentId: React.Dispatch<React.SetStateAction<null | string>>;
-	email: string;
+	newMe: Partial<Me>;
+	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
 }) => {
-	const { name, setName, setStudentId, email } = props;
-	const studentId = props.studentId || '';
-	const Header = () => {
-		return (
-			<div>
-				<span>개인 정보</span>
-			</div>
-		);
-	};
-	const Name = () => {
-		return (
-			<div>
-				<span>이름</span>
-				<input
-					type="text"
-					value={name}
-					onChange={e => {
-						setName(e.target.value);
-					}}
-				/>
-			</div>
-		);
-	};
-	const Email = () => {
-		return (
-			<div>
-				<span>이메일</span>
-				<span>{email}</span>
-			</div>
-		);
-	};
-	const StudentId = () => {
-		return (
-			<div>
-				<span>학번</span>
-				<input
-					type="text"
-					value={studentId}
-					onChange={e => {
-						setStudentId(e.target.value);
-					}}
-				/>
-			</div>
-		);
-	};
+	const { newMe, setNewMe } = props;
 
 	return (
 		<div className={EditProfileInformationStyle}>
 			<Header />
-			<Name />
-			<Email />
-			<StudentId />
+			<Name newMe={newMe} setNewMe={setNewMe} />
+			<Email newMe={newMe} />
+			<StudentId newMe={newMe} setNewMe={setNewMe} />
 		</div>
 	);
 };
