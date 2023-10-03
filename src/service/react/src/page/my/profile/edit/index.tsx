@@ -22,7 +22,11 @@ const handleSubmit = async (
 		setIsClicked(true);
 		if (file) {
 			const presignedData = await axios
-				.post(`${process.env.REACT_APP_NESTJS_URL}/image/presigned`, {}, { withCredentials: true })
+				.post(
+					`${process.env.REACT_APP_NESTJS_URL}/image/presigned/profile`,
+					{},
+					{ withCredentials: true },
+				)
 				.then(response => {
 					return response.data.presignedUrl;
 				})
@@ -40,7 +44,7 @@ const handleSubmit = async (
 			axios.post(presignedData.url, formData).catch(error => {
 				throw new Error(error);
 			});
-			newMe.profileImageId = presignedData.fields.key;
+			newMe.profileImageId = presignedData.fields.key.split('/')[2];
 		}
 		await axios
 			.patch(`${process.env.REACT_APP_NESTJS_URL}/user/me`, newMe, { withCredentials: true })
@@ -66,12 +70,7 @@ const EditProfile = (props: {
 }) => {
 	const { me, setMe, setIsModalOpened } = props;
 	const [file, setFile] = useState<null | File>(null);
-	const [newMe, setNewMe] = useState<Partial<Me>>({
-		name: me.name,
-		studentId: me.studentId,
-		email: me.email,
-		profileImageId: me.profileImageId,
-	});
+	const [newMe, setNewMe] = useState<Partial<Me>>({});
 	const [isClicked, setIsClicked] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -100,8 +99,8 @@ const EditProfile = (props: {
 			<div>
 				<EditProfileHeader setIsModalOpened={setIsModalOpened} />
 				<div>
-					<EditProfileImage newMe={newMe} setFile={setFile} />
-					<EditProfileInformation newMe={newMe} setNewMe={setNewMe} />
+					<EditProfileImage me={me} setFile={setFile} />
+					<EditProfileInformation me={me} newMe={newMe} setNewMe={setNewMe} />
 				</div>
 				<EditProfileButton isClicked={isClicked} />
 			</div>

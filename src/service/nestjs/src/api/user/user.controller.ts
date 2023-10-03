@@ -1,14 +1,19 @@
-import { Body, Controller, Get, HttpException, Patch, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, Patch, Req, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'common/auth/guard';
 import { User } from 'common/database/schema/user.schema';
 import { UserService } from './user.service';
-import { Response } from 'express';
+import { ImageService } from '../image/service/image.service';
+import { S3Service } from '../image/service/s3.service';
 
 @Controller('user')
 @ApiTags('user')
 export class UserController {
-	constructor(private readonly userService: UserService) {}
+	constructor(
+		private readonly userService: UserService,
+		private readonly imageService: ImageService,
+		private readonly s3Service: S3Service,
+	) {}
 
 	@Get('me')
 	@UseGuards(JwtAuthGuard)
@@ -24,11 +29,7 @@ export class UserController {
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Update my information' })
 	@ApiOkResponse({ description: 'Update my information successfully', type: User })
-	async updateMe(
-		@Body() updateData: Partial<User>,
-		@Req() req,
-		@Res({ passthrough: true }) response: Response,
-	) {
+	async updateMe(@Body() updateData: Partial<User>, @Req() req) {
 		try {
 			const me = await this.userService.updateMe(req.user._id, updateData);
 
@@ -36,10 +37,18 @@ export class UserController {
 				throw new HttpException('Bad Request', 400);
 			}
 
-			return response.status(200).json({
+			if (updateData.profileImageId) {
+				this.imageService.delete(req.user.profileImageId);
+				this.s3Service.delete([
+					'profile/raw/' + req.user.profileImageId,
+					'profile/w512/' + req.user.profileImageId,
+				]);
+			}
+
+			return {
 				message: 'Update my information successfully',
 				me,
-			});
+			};
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

@@ -13,20 +13,26 @@ export class ImageController {
 		private readonly s3Service: S3Service,
 	) {}
 
-	@Post('/presigned')
+	@Post('/presigned/:path')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get presigned url to upload image' })
 	@ApiResponse({ status: 200, description: 'Get presigned url to upload image' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
-	async getPresignedUrl(@Res({ passthrough: true }) response: Response) {
+	async getPresignedUrl(@Param('path') path: string) {
 		try {
-			const image = await this.imageService.createImage();
-			const presignedUrl = await this.s3Service.getPresignedUrl(image['_id'].toString());
+			if (!path || (path !== 'profile' && path !== 'receipt')) {
+				throw new HttpException('Bad Request', 400);
+			}
 
-			return response.status(200).json({
+			const image = await this.imageService.create();
+			const presignedUrl = await this.s3Service.getPresignedUrl(
+				path + '/raw/' + image._id.toString(),
+			);
+
+			return {
 				message: 'Get presigned url to upload image successfully',
 				presignedUrl,
-			});
+			};
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
@@ -38,10 +44,10 @@ export class ImageController {
 	@ApiOperation({ summary: 'Delete image' })
 	@ApiResponse({ status: 200, description: 'Delete image' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
-	async deleteImage(@Param('iid') imageId: string, @Res({ passthrough: true }) response: Response) {
+	async delete(@Param('iid') imageId: string, @Res({ passthrough: true }) response: Response) {
 		try {
-			this.imageService.deleteImage(imageId);
-			this.s3Service.deleteImage(imageId);
+			this.imageService.delete(imageId);
+			this.s3Service.delete([imageId]);
 
 			return response.status(200).json({
 				message: 'Delete image successfully',

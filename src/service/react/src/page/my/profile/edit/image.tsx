@@ -89,13 +89,13 @@ const PreviewImage = (props: { src: string | undefined }) => {
 };
 
 export const EditProfileImage = (props: {
-	newMe: Partial<Me>;
+	me: Me;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
 }) => {
-	const { newMe, setFile } = props;
+	const { me, setFile } = props;
 	const [src, setSrc] = useState<string | undefined>(
-		newMe.profileImageId
-			? `${process.env.REACT_APP_S3_BUCKET_URL}/${newMe.profileImageId}`
+		me.profileImageId
+			? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/raw/${me.profileImageId}`
 			: undefined,
 	);
 

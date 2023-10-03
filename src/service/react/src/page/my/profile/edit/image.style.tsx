@@ -25,11 +25,15 @@ export const EditProfileImageStyle = css({
 		marginTop: '1rem',
 		display: 'flex',
 
+		'> div': {
+			margin: 'auto',
+			width: 196,
+			height: 196,
+		},
 		'> svg': {
 			margin: 'auto',
-		},
-		'> img': {
-			margin: 'auto',
+			width: 196,
+			height: 196,
 		},
 	},
 });

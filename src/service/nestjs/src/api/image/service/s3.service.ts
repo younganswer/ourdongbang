@@ -42,11 +42,13 @@ export class S3Service {
 		}
 	}
 
-	async deleteImage(imageId: string) {
+	async delete(keys: string[]) {
 		try {
-			return this.s3.deleteObject({
+			return this.s3.deleteObjects({
 				Bucket: this.configService.get('S3_BUCKET'),
-				Key: imageId,
+				Delete: {
+					Objects: keys.map(key => ({ Key: key })),
+				},
 			});
 		} catch (error) {
 			console.error(error);
