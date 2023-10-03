@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request, render_template, Response, make_response
-import requests, os, uuid, time, json
+import requests, os, uuid, time, json, base64
 from werkzeug.utils import secure_filename
 from urllib.parse import quote
 
@@ -16,9 +16,9 @@ def remove_space(str):
 	return str.replace(" ", "")
 
 def load_image(imageId):
-	response = requests.get('https://cdn.econoi.com/news/photo/old/news/ND006/1988232117_fRmAurPs_562.jpg')
+	url = os.environ['S3_BUCKET_URL_PREFIX'] + '/' + imageId
+	response = requests.get(url)
 	if response.status_code == 200:
-		image = response.content
 		filename = os.path.join(app.config['UPLOAD_FOLDER'],'receipt_image.jpg')
 		with open(filename, 'wb') as f:
 			f.write(response.content)
@@ -31,25 +31,22 @@ def receipt_recognition(code):
 	if code == 404 or code == 500:
 		return code
 	path = os.path.join(app.config['UPLOAD_FOLDER'],'receipt_image.jpg')
-	files = [('file', open(path,'rb'))]
+	with open(path,'rb') as f:
+		file_data = f.read()
 	api_url = os.environ["CLOVA_API_URL"]
 	secret_key = os.environ["CLOVA_API_SECRET_KEY"]
 	request_json = {
-			"images": [{"format": "jpg", "name": "demo"}],
-			"requestId": str(uuid.uuid4()),
-			"version": "V2",
-			"timestamp": int(round(time.time() * 1000)),
-		}
-
-	payload = {"message": json.dumps(request_json).encode("UTF-8")}
-
-	headers = {
-		"X-OCR-SECRET": secret_key,
+		"images": [{"format": "jpeg", "name": "demo",'data': base64.b64encode(file_data).decode()}],
+		"requestId": str(uuid.uuid4()),
+		"version": "V2",
+		"timestamp": int(round(time.time() * 1000)),
 	}
 
-	response = requests.request(
-		"POST", api_url, headers=headers, data=payload, files=files
-	)
+	payload = json.dumps(request_json).encode("UTF-8")
+
+	headers = {"X-OCR-SECRET": secret_key,'Content-Type': 'application/json'}
+
+	response= requests.request("POST", api_url, headers=headers, data=payload)
 	Clova_result = response.json()
 	payment_info = Clova_result["images"][0]["receipt"]["result"]["paymentInfo"]
 	payment_date = payment_info["date"]["text"]  # 날짜
