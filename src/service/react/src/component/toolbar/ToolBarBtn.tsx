@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { toolBarBtn } from './ToolBarBtn.style';
+import { ToolBarBtnStyle } from './ToolBarBtn.style';
 
 interface ToolBarBtnProps {
 	to: string;
@@ -10,7 +10,7 @@ interface ToolBarBtnProps {
 const ToolBarBtn: React.FC<ToolBarBtnProps> = ({ to, label }) => {
 	return (
 		<Link to={to}>
-			<button className={toolBarBtn}>{label}</button>
+			<button className={ToolBarBtnStyle}>{label}</button>
 		</Link>
 	);
 };

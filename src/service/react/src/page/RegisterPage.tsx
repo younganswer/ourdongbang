@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, useContext } from 'react';
-import CustomInput from '../components/CustomInput';
+import CustomInput from '../component/CustomInput';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

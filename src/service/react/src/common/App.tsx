@@ -6,7 +6,7 @@ import LoginPage from 'page/LoginPage';
 import RegisterPage from 'page/RegisterPage';
 import AuditPage from 'page/Audit';
 import CalendarPage from 'page/CalendarPage';
-import ToolBar from 'components/ToolBar';
+import ToolBar from 'component/toolbar';
 import { ToastContainer } from 'react-toastify';
 import MyPage from 'page/my';
 

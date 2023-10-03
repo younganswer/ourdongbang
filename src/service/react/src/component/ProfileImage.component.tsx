@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+//import React, { useEffect } from 'react';
 
 export const ProfileImage = (props: {
-	src: string | null;
+	src: string | undefined;
 	width: number;
 	height: number;
 	isCircle: boolean | null;
 	className: string | null;
 }) => {
 	const { width, height } = props;
-	const src = props.src ? props.src : null;
+	const src = props.src ? props.src : undefined;
 	const isCircle = props.isCircle ? props.isCircle : true;
 	const className = props.className ? props.className : undefined;
-	const [hashedSrc, setHashedSrc] = React.useState<string | undefined>(undefined);
-	const [isError, setIsError] = React.useState<boolean>(false);
 
-	if (!src || isError) {
+	if (!src) {
 		return (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -29,13 +28,16 @@ export const ProfileImage = (props: {
 		);
 	}
 
+	const [hashedSrc, setHashedSrc] = useState<string | undefined>(src);
+	const [isError, setIsError] = useState<boolean>(false);
+
 	useEffect(() => {
 		let intervalId: NodeJS.Timer | undefined = undefined;
 
 		if (isError && !intervalId) {
 			intervalId = setInterval(() => {
 				setHashedSrc(`${src}#${Date.now()}`);
-			}, 1000);
+			}, 500);
 		} else if (!isError && intervalId) {
 			clearInterval(intervalId);
 		} else {

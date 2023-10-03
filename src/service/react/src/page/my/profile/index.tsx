@@ -9,11 +9,11 @@ import {
 	ProfileNameStyle,
 	ProfileStyle,
 } from './index.style';
-import { Modal } from 'components/modal';
+import { Modal } from 'component/modal';
 import EditProfile from './edit';
 import axios from 'axios';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { ProfileImage } from 'components/ProfileImage.component';
+import { ProfileImage } from 'component/ProfileImage.component';
 
 const Header = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const { setIsModalOpened } = props;
@@ -34,11 +34,14 @@ const Header = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<b
 
 const Body = (props: { me: Me }) => {
 	const { me } = props;
+	const src = me.profileImageId
+		? `${process.env.REACT_APP_S3_BUCKET_URL}/${me.profileImageId}`
+		: undefined;
 
 	return (
 		<div className={ProfileContentStyle}>
 			<ProfileImage
-				src={`${process.env.REACT_APP_S3_BUCKET_URL}/` + me.profileImageId?.toString() || null}
+				src={src}
 				width={218}
 				height={218}
 				isCircle={true}

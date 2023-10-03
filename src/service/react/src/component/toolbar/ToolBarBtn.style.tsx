@@ -10,33 +10,25 @@ export const fontFace = css`
 	}
 `;
 
-export const toolBarBtns = css({
+export const ToolBarBtnWrapperStyle = css({
 	display: 'flex',
+	height: '100%',
 	alignItems: 'center',
 	justifyContent: 'center',
-	height: '100%',
-
-	':alt': {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: '100%',
-		flexGrow: 1,
-		textAlign: 'center',
-		paddingRight: 30,
-	},
+	gap: 20,
 });
 
-export const toolBarBtn = css({
+export const ToolBarBtnStyle = css({
+	height: '100%',
+	margin: 0,
+	padding: '8px 12px',
 	fontFamily: 'HakgyoansimGaeulsopungB',
-	marginLeft: 20,
-	fontSize: 16,
+	fontSize: 20,
 	cursor: 'pointer',
 	backgroundColor: 'white',
 	color: 'black',
 	border: 'none',
 	borderRadius: 20,
-	padding: `10px 10px`,
 	transition: `background-color 0.3s, color 0.3s;`,
 
 	':hover': {
