@@ -7,7 +7,7 @@ import { Image } from 'common/database/schema';
 export class ImageService {
 	constructor(@InjectModel('Image') private readonly imageModel: Model<Image>) {}
 
-	async createImage() {
+	async create() {
 		try {
 			return await this.imageModel.create({});
 		} catch (error) {
@@ -16,7 +16,7 @@ export class ImageService {
 		}
 	}
 
-	async deleteImage(imageId: string) {
+	async delete(imageId: string) {
 		try {
 			return await this.imageModel.findByIdAndDelete(imageId);
 		} catch (error) {

@@ -33,6 +33,11 @@ export const ProfileContentStyle = css({
 	gridTemplateRows: '238px 60px 1fr',
 	gridRowGap: '0.5rem',
 
+	'> *:nth-child(1)': {
+		margin: '0 auto',
+		width: 218,
+		height: 218,
+	},
 	'> *:nth-child(3)': {
 		marginTop: '1rem',
 	},
@@ -58,7 +63,7 @@ export const ProfileNameStyle = css({
 export const ProfileInformationStyle = css({
 	display: 'flex',
 	justifyContent: 'space-between',
-	margin: '2rem 0',
+	margin: '1.5rem 0',
 	height: '30px',
 
 	'> span': {

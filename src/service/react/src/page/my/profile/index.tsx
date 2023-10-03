@@ -35,7 +35,7 @@ const Header = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<b
 const Body = (props: { me: Me }) => {
 	const { me } = props;
 	const src = me.profileImageId
-		? `${process.env.REACT_APP_S3_BUCKET_URL}/${me.profileImageId}`
+		? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/raw/${me.profileImageId}`
 		: undefined;
 
 	return (
@@ -49,8 +49,9 @@ const Body = (props: { me: Me }) => {
 			/>
 			<span className={ProfileNameStyle}>{me.name}</span>
 			<div>
-				<Information type="Email" value={me.email} />
+				{/*<Information type="이메일" value={me.email} />*/}
 				<Information type="학번" value={me.studentId} />
+				<Information type="전공" value={me.major} />
 			</div>
 		</div>
 	);

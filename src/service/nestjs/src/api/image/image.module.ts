@@ -9,5 +9,6 @@ import { S3Service } from './service/s3.service';
 	imports: [MongooseModule.forFeature([{ name: 'Image', schema: ImageSchema }])],
 	controllers: [ImageController],
 	providers: [ImageService, S3Service],
+	exports: [ImageService, S3Service],
 })
 export class ImageModule {}

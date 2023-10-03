@@ -16,12 +16,10 @@ export const EditProfileInformationStyle = css({
 		justifyContent: 'space-between',
 
 		'> span:nth-child(2)': {
-			width: '50%',
-			textAlign: 'right',
+			width: 'auto',
 		},
 
 		'> input:nth-child(2)': {
-			width: '48%',
 			textAlign: 'right',
 		},
 	},
