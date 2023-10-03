@@ -100,7 +100,7 @@ const EditProfile = (props: {
 			<div>
 				<EditProfileHeader setIsModalOpened={setIsModalOpened} />
 				<div>
-					<EditProfileImage file={file} setFile={setFile} newMe={newMe} />
+					<EditProfileImage newMe={newMe} setFile={setFile} />
 					<EditProfileInformation newMe={newMe} setNewMe={setNewMe} />
 				</div>
 				<EditProfileButton isClicked={isClicked} />

@@ -1,4 +1,4 @@
-import { ProfileImage } from 'components/ProfileImage.component';
+import { ProfileImage } from 'component/ProfileImage.component';
 import React from 'react';
 import { useRef, useState } from 'react';
 import { EditProfileImageStyle } from './image.style';
@@ -6,18 +6,16 @@ import { Me } from 'context/AuthContext';
 
 const handleChange = async (
 	event: React.ChangeEvent<HTMLInputElement>,
+	setSrc: React.Dispatch<React.SetStateAction<string | undefined>>,
 	setFile: React.Dispatch<React.SetStateAction<null | File>>,
-	setSrc: React.Dispatch<React.SetStateAction<string | null>>,
 ) => {
-	if (!event.target.files) {
+	if (!event.target.files || !event.target.files[0]) {
+		setFile(null);
 		return;
 	}
 
 	const file = event.target.files[0];
 
-	if (!file) {
-		setFile(null);
-	}
 	setFile(file);
 
 	try {
@@ -33,12 +31,12 @@ const handleChange = async (
 };
 
 const ImageSelector = (props: {
-	file: null | File;
+	src: string | undefined;
+	setSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
-	setSrc: React.Dispatch<React.SetStateAction<string | null>>;
 }) => {
-	const { file, setFile, setSrc } = props;
-	const spanText = !file ? '추가' : '수정';
+	const { setFile, src, setSrc } = props;
+	const spanText = !src ? '추가' : '수정';
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	return (
@@ -50,7 +48,7 @@ const ImageSelector = (props: {
 				onClick={event => {
 					event.stopPropagation();
 				}}
-				onChange={event => handleChange(event, setFile, setSrc)}
+				onChange={event => handleChange(event, setSrc, setFile)}
 			/>
 			<span
 				onClick={() => {
@@ -66,21 +64,21 @@ const ImageSelector = (props: {
 };
 
 const Header = (props: {
-	file: null | File;
+	src: string | undefined;
+	setSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
-	setSrc: React.Dispatch<React.SetStateAction<string | null>>;
 }) => {
-	const { file, setFile, setSrc } = props;
+	const { src, setSrc, setFile } = props;
 
 	return (
 		<div>
 			<span>프로필 사진</span>
-			<ImageSelector file={file} setFile={setFile} setSrc={setSrc} />
+			<ImageSelector src={src} setSrc={setSrc} setFile={setFile} />
 		</div>
 	);
 };
 
-const PreviewImage = (props: { src: null | string }) => {
+const PreviewImage = (props: { src: string | undefined }) => {
 	const { src } = props;
 
 	return (
@@ -91,18 +89,19 @@ const PreviewImage = (props: { src: null | string }) => {
 };
 
 export const EditProfileImage = (props: {
-	file: null | File;
-	setFile: React.Dispatch<React.SetStateAction<null | File>>;
 	newMe: Partial<Me>;
+	setFile: React.Dispatch<React.SetStateAction<null | File>>;
 }) => {
-	const { file, setFile, newMe } = props;
-	const [src, setSrc] = useState<string | null>(
-		`${process.env.REACT_APP_S3_BUCKET_URL}/` + newMe.profileImageId?.toString() || null,
+	const { newMe, setFile } = props;
+	const [src, setSrc] = useState<string | undefined>(
+		newMe.profileImageId
+			? `${process.env.REACT_APP_S3_BUCKET_URL}/${newMe.profileImageId}`
+			: undefined,
 	);
 
 	return (
 		<div className={EditProfileImageStyle}>
-			<Header file={file} setFile={setFile} setSrc={setSrc} />
+			<Header src={src} setSrc={setSrc} setFile={setFile} />
 			<PreviewImage src={src} />
 		</div>
 	);

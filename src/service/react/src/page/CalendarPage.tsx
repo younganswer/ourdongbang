@@ -1,5 +1,5 @@
 import React from 'react';
-import Calendar from 'components/Calendar';
+import Calendar from 'component/Calendar';
 import styled from 'styled-components';
 import { PageStyle } from './page.style';
 
