@@ -1,8 +1,6 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
-import mongoose, { Document, Types } from 'mongoose';
-import { User } from './user.schema';
+import { Document, Types } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { Member, MemberDocument, MemberSchema } from './member.schema';
 
 const schemaOptions: SchemaOptions = {
 	timestamps: true,

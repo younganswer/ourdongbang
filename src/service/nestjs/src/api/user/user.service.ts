@@ -15,4 +15,13 @@ export class UserService {
 			throw new HttpException(error.message, error.status);
 		}
 	}
+
+	async findByEmail(email: string): Promise<User> {
+		try {
+			return await this.userModel.findOne({ email });
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
 }

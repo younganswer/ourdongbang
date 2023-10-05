@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from 'common/App';
-// import reportWebVitals from "./reportWebVitals";
 import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from 'context/AuthContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 
 root.render(
 	<React.StrictMode>
 		<CookiesProvider>
 			<AuthProvider>
 				<BrowserRouter>
-					<App />
+					<GoogleOAuthProvider clientId={clientId}>
+						<App />
+					</GoogleOAuthProvider>
 				</BrowserRouter>
 			</AuthProvider>
 		</CookiesProvider>

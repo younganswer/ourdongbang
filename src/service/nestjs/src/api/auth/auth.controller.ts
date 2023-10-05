@@ -1,4 +1,4 @@
-import { Controller, Post, Res, Body, HttpException, Delete, Patch } from '@nestjs/common';
+import { Controller, Post, Res, Body, HttpException, Delete, Patch, Query } from '@nestjs/common';
 import {
 	ApiTags,
 	ApiOperation,
@@ -28,17 +28,19 @@ export class AuthController {
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	@ApiUnauthorizedResponse({ description: 'ID or password is incorrect' })
 	async login(
-		@Body() loginRequestDto: AuthDto.Request.Login,
+		@Query('social') social: string | undefined,
+		@Body() loginRequestDto: Partial<AuthDto.Request.Login>,
 		@Res({ passthrough: true }) response: Response,
 	): Promise<User> {
 		try {
-			const user = await this.loginService.login(loginRequestDto);
+			const user = await this.loginService.login(social, loginRequestDto);
 			const jwt = this.cookieService.createJwt<JwtPayload>({
 				_id: user['_id'],
 			});
 			const cookieOption = this.cookieService.getCookieOption();
 
 			response.cookie('access-token', jwt, cookieOption);
+
 			return user;
 		} catch (error) {
 			console.error(error);
@@ -62,6 +64,7 @@ export class AuthController {
 			const cookieOption = this.cookieService.getCookieOption();
 
 			response.cookie('access-token', jwt, cookieOption);
+
 			return user;
 		} catch (error) {
 			console.error(error);
@@ -78,7 +81,8 @@ export class AuthController {
 			const cookieOption = this.cookieService.getCookieOption();
 
 			response.clearCookie('access-token', cookieOption);
-			return response.json({ message: 'Logout successfully' });
+
+			return { message: 'Logout successfully' };
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
