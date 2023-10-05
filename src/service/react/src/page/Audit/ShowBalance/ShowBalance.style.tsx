@@ -8,11 +8,13 @@ export const ShowBalanceStyle = css({
 	flexShrink: 0,
 	backgroundColor: '#D9D9D9',
 	marginTop: 49,
-	//일단 구분선 만들었는데 불편하면 수정하시길 바람
-	border: '1px solid black',
-});
+	marginBottom: 49,
+	'> div:nth-child(1)': {
+		width: '45%',
+		textAlign: 'center',
 
-export const items = css({
-	width: '45%',
-	textAlign: 'center',
+		'> span': {
+			fontSize: '15px',
+		},
+	},
 });

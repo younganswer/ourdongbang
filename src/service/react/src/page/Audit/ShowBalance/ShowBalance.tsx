@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShowBalanceStyle, items } from './ShowBalance.style';
+import { ShowBalanceStyle } from './ShowBalance.style';
 
 interface ShowBalanceData {
 	totalBudget: number;
@@ -12,10 +12,10 @@ export const ShowBalance: React.FC<ShowBalanceData> = ({ totalBudget, balance })
 
 	return (
 		<div className={ShowBalanceStyle}>
-			<div className={items}>
+			<div>
 				<h2>전체회비 : {totalBudget}원</h2>
 			</div>
-			<div className={items}>
+			<div>
 				<h2>남은 공금 : {balance}원</h2>
 			</div>
 		</div>

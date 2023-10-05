@@ -10,6 +10,7 @@ import ToolBar from 'component/toolbar';
 import MyPage from 'page/my';
 import './font.css';
 import RegisterFormPage from 'page/auth/register/form';
+import ClubPage from 'page/club';
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/mypage" element={<MyPage />} />
+				<Route path="/main/club" element={<ClubPage />} />
 			</Routes>
 		</div>
 	);
