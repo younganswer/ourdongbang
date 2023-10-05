@@ -9,6 +9,7 @@ import CalendarPage from 'page/CalendarPage';
 import ToolBar from 'component/toolbar';
 import { ToastContainer } from 'react-toastify';
 import MyPage from 'page/my';
+import ClubPage from 'page/club';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/mypage" element={<MyPage />} />
+				<Route path="/main/club" element={<ClubPage />} />
 			</Routes>
 		</div>
 	);
