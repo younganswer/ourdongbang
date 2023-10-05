@@ -1,14 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import logo from "./logo.svg";
+import { ToastContainer } from 'react-toastify';
 import PreviewPage from 'page/PreviewPage';
-import LoginPage from 'page/LoginPage';
-import RegisterPage from 'page/RegisterPage';
+import LoginPage from 'page/auth/login';
+import RegisterPage from 'page/auth/register';
 import AuditPage from 'page/Audit';
 import CalendarPage from 'page/CalendarPage';
 import ToolBar from 'component/toolbar';
-import { ToastContainer } from 'react-toastify';
 import MyPage from 'page/my';
+import './font.css';
+import RegisterFormPage from 'page/auth/register/form';
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route path="/" element={<PreviewPage />} />
 				<Route path="/auth/login" element={<LoginPage />} />
 				<Route path="/auth/register" element={<RegisterPage />} />
+				<Route path="/auth/register/form" element={<RegisterFormPage />} />
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/mypage" element={<MyPage />} />

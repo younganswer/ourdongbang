@@ -16,7 +16,7 @@ async function bootstrap() {
 			transform: true,
 		}),
 	);
-		
+
 	app.enableCors({
 		origin: [configService.getOrThrow('REACT_URL')],
 		credentials: true,

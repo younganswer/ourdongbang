@@ -15,6 +15,24 @@ export class UserController {
 		private readonly s3Service: S3Service,
 	) {}
 
+	@Get(':email')
+	@ApiOperation({ summary: 'Get user information' })
+	@ApiOkResponse({ description: 'Get user information successfully', type: User })
+	async getUserByEmail(@Req() req): Promise<User> {
+		try {
+			const user = await this.userService.findByEmail(req.params.email);
+
+			if (!user) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			return user;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
 	@Get('me')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get my information' })

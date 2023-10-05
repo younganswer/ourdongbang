@@ -31,6 +31,7 @@ export class User {
 		type: String,
 		required: true,
 		unique: true,
+		index: true,
 	})
 	id: string;
 
@@ -55,6 +56,7 @@ export class User {
 		type: String,
 		required: true,
 		unique: true,
+		index: true,
 	})
 	email: string;
 
