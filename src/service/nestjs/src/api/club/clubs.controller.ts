@@ -36,7 +36,6 @@ import * as ClubDto from './dto/index';
 import { CreateMemberDTO } from './dto/request/createMember.dto';
 import { MemberService } from './service/member.service';
 
-@ApiTags('club API')
 @Controller('club')
 export class ClubsController {
 	constructor(
@@ -47,6 +46,7 @@ export class ClubsController {
 		private readonly memberService: MemberService,
 	) {}
 
+	@ApiTags('club API')
 	@Get()
 	@ApiOperation({ summary: 'request all club', description: '모든 동아리 정보 가져오기' })
 	@ApiResponse({ status: 200, description: 'get all club successfully', type: [Club] })
@@ -65,6 +65,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('club API')
 	@Get('search')
 	@ApiOperation({ summary: 'search club', description: '이름으로 동아리 검색' })
 	@ApiResponse({ status: 200, description: 'Search club successfully', type: [Club] })
@@ -83,6 +84,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('club API')
 	@Get(':id')
 	@ApiOperation({ summary: 'get one club', description: '요청 id에 해당하는 club data 가져오기' })
 	@ApiResponse({ status: 200, description: 'get one club data successfully', type: Club })
@@ -100,6 +102,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('club API')
 	@Post()
 	@ApiOperation({ summary: 'create a club', description: '동아리 생성' })
 	@ApiBody({ type: CreateClubDTO })
@@ -120,6 +123,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('club API')
 	@Delete(':id')
 	@ApiOperation({ summary: 'Delete a club', description: '동아리 삭제' })
 	@ApiResponse({ status: 200, description: '동아리 삭제에 성공하였습니다' })
@@ -139,6 +143,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('club API')
 	@Patch(':id')
 	@ApiOperation({ summary: 'Update a club', description: '동아리 정보 수정' })
 	@ApiResponse({ status: 200, description: '동아리 수정에 성공하였습니다' })
@@ -162,6 +167,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Schedule API')
 	@Get('/:cid/schedule')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get all schedule for the requested month' })
@@ -200,6 +206,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Schedule API')
 	@Get('/:cid/schedule/:sid')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get a schedule' })
@@ -233,6 +240,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Schedule API')
 	@Post('/:cid/schedule')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'create a schedule' })
@@ -267,6 +275,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Schedule API')
 	@Patch('/:cid/schedule/:sid')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Update a schedule' })
@@ -301,6 +310,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Schedule API')
 	@Delete('/:cid/schedule/:sid')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Delete a schedule' })
@@ -334,6 +344,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Audit API')
 	@Get('/:cid/audit')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get all audit' })
@@ -363,6 +374,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Audit API')
 	@Post('/:cid/audit')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Create an audit' })
@@ -397,6 +409,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Audit API')
 	@Get('/:cid/audit/:aid')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get an audit' })
@@ -430,6 +443,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Audit API')
 	@Patch('/:cid/audit/:aid')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Update an audit' })
@@ -464,6 +478,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Audit API')
 	@Delete('/:cid/audit/:aid')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Delete an audit' })
@@ -498,6 +513,7 @@ export class ClubsController {
 	}
 
 	// user가 따로 배열에 굳이 저장 해야 하는지 의문이라서 일단 뺌
+	@ApiTags('Review API')
 	@Post('/:cid/review')
 	@ApiOperation({ summary: 'create a review', description: 'review 생성' })
 	@ApiBody({ type: CreateReviewDTO })
@@ -530,6 +546,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Review API')
 	@Get('/:cid/review/')
 	@ApiOperation({ summary: 'get all review of club', description: 'review 가져오기' })
 	@ApiParam({ name: 'cid', description: 'Club ID' })
@@ -550,6 +567,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Review API')
 	@Patch('/review/:rid')
 	@ApiOperation({ summary: 'update a review', description: 'review 수정' })
 	@ApiBody({ type: CreateReviewDTO })
@@ -570,6 +588,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Review API')
 	@Delete('/:cid/review/:rid')
 	@ApiOperation({ summary: 'delete a review', description: 'review 삭제' })
 	@ApiParam({ name: 'cid', description: 'Club ID' })
@@ -597,6 +616,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Member API')
 	@Post('/:cid/member')
 	@ApiOperation({ summary: 'add a member', description: 'member 추가' })
 	@ApiParam({ name: 'cid', description: 'Club ID' })
@@ -628,6 +648,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Member API')
 	@Get('/:cid/member/')
 	@ApiOperation({ summary: 'get all member of club', description: 'member 가져오기' })
 	@ApiParam({ name: 'cid', description: 'Club ID' })
@@ -645,6 +666,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Member API')
 	@Get('/member/:mid')
 	@ApiOperation({ summary: 'get a member', description: 'member 가져오기' })
 	@ApiParam({ name: 'mid', description: 'Member ID' })
@@ -664,6 +686,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Member API')
 	@Patch('/member/:mid')
 	@ApiOperation({ summary: 'update a member', description: 'member 수정' })
 	@ApiBody({ type: CreateMemberDTO })
@@ -684,6 +707,7 @@ export class ClubsController {
 		}
 	}
 
+	@ApiTags('Member API')
 	@Delete(':cid/member/:mid')
 	@ApiOperation({ summary: 'delete a member', description: 'member 삭제' })
 	@ApiParam({ name: 'mid', description: 'Member ID' })
