@@ -24,10 +24,14 @@ const handleLogin = async (
 		}
 
 		await axios
-			.patch(`${process.env.REACT_APP_NESTJS_URL}/auth/login`, {
-				id,
-				password,
-			})
+			.patch(
+				`${process.env.REACT_APP_NESTJS_URL}/auth/login`,
+				{
+					id,
+					password,
+				},
+				{ withCredentials: true },
+			)
 			.then(response => {
 				setMe({
 					name: response.data.name,
@@ -40,7 +44,7 @@ const handleLogin = async (
 					clubs: response.data.clubs,
 				});
 				toast.success('로그인 완료');
-				navigate('/main/calendar');
+				navigate('/main/info');
 			})
 			.catch(error => {
 				console.error(error);
@@ -97,9 +101,13 @@ const LoginPage = () => {
 	useEffect(() => {
 		if (email) {
 			axios
-				.patch(`${process.env.REACT_APP_NESTJS_URL}/auth/login?social=google`, {
-					email,
-				})
+				.patch(
+					`${process.env.REACT_APP_NESTJS_URL}/auth/login?social=google`,
+					{
+						email,
+					},
+					{ withCredentials: true },
+				)
 				.then(response => {
 					setMe(response.data);
 					navigate('/main/info');
