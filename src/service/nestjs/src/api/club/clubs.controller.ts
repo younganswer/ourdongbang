@@ -86,16 +86,20 @@ export class ClubsController {
 
 	@ApiTags('club API')
 	@Get(':id')
-	@ApiOperation({ summary: 'get one club', description: '요청 id에 해당하는 club data 가져오기' })
+	@ApiOperation({
+		summary: 'Get a club by id',
+		description: '요청 id에 해당하는 club data 가져오기',
+	})
 	@ApiResponse({ status: 200, description: 'get one club data successfully', type: Club })
 	@ApiBadRequestResponse({ description: 'Bad request' })
-	@ApiNotFoundResponse({ description: 'not found' })
+	@ApiNotFoundResponse({ description: 'Not found' })
 	async findOne(@Param('id') clubId: string) {
 		try {
 			const club = await this.clubsService.findOne(clubId);
 			if (!club) {
 				throw new NotFoundException('Club not found');
 			}
+
 			return club;
 		} catch (error) {
 			throw new HttpException('Failed to find a club', HttpStatus.INTERNAL_SERVER_ERROR);
