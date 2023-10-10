@@ -1,11 +1,11 @@
 import React from 'react';
 import RuleTitle from './title';
-import { PageStyle } from 'page/page.style';
 import RuleContent from './ruleContent';
+import { RuleStyle } from './index.style';
 
 const Rule = () => {
 	return (
-		<div className={PageStyle}>
+		<div className={RuleStyle}>
 			<RuleTitle />
 			<RuleContent />
 		</div>
