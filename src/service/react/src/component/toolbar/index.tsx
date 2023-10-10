@@ -25,7 +25,7 @@ const Buttons = (props: { me: Me | null }) => {
 		<div className={ToolBarBtnWrapperStyle}>
 			{me ? (
 				<>
-					<ToolBarBtn to="/main/info" label="정보" />
+					<ToolBarBtn to="/main/club" label="정보" />
 					<ToolBarBtn to="/main/calendar" label="캘린더" />
 					<ToolBarBtn to="/main/audit" label="회계" />
 					<ToolBarBtn to="/main/mypage" label="마이페이지" />

@@ -1,9 +1,13 @@
 import React from 'react';
+import RuleTitle from './title';
+import { PageStyle } from 'page/page.style';
+import RuleContent from './ruleContent';
 
 const Rule = () => {
 	return (
-		<div>
-			<p>동아리 규칙 내용...</p>
+		<div className={PageStyle}>
+			<RuleTitle />
+			<RuleContent />
 		</div>
 	);
 };
