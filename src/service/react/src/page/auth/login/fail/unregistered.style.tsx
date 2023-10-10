@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
 
-export const RegisteredPageStyle = css(PageStyle, {
+export const UnRegisteredPageStyle = css(PageStyle, {
 	width: 1200,
 	height: 800,
 

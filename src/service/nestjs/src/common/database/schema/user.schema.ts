@@ -85,6 +85,28 @@ export class User {
 	studentId: string;
 
 	@ApiProperty({
+		example: '010-1234-5678',
+		type: String,
+		required: false,
+	})
+	@Prop({
+		type: String,
+		required: false,
+	})
+	phoneNumber: string;
+
+	@ApiProperty({
+		example: '@j_j.ahn',
+		type: String,
+		required: false,
+	})
+	@Prop({
+		type: String,
+		required: false,
+	})
+	sns: string;
+
+	@ApiProperty({
 		example: '49fafa4d2ca3602935816679',
 		type: Types.ObjectId,
 		required: false,

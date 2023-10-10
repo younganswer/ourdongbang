@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { EditProfileInformationStyle } from './information.style';
 import { Me } from 'context/AuthContext';
 
@@ -10,85 +10,30 @@ const Header = () => {
 	);
 };
 
-const Name = (props: {
-	me: Me;
-	newMe: Partial<Me>;
-	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
-	nameRef: React.RefObject<HTMLInputElement>;
+const Information = (props: {
+	label: string;
+	info: string;
+	setInfo:
+		| null
+		| React.Dispatch<React.SetStateAction<string>>
+		| React.Dispatch<React.SetStateAction<string | undefined>>;
 }) => {
-	const { me, newMe, setNewMe, nameRef } = props;
-	const name = newMe.name ? newMe.name : me.name;
+	const { label, info, setInfo } = props;
 
 	return (
 		<div>
-			<span>이름</span>
-			<input
-				type="text"
-				value={name}
-				ref={nameRef}
-				onChange={event => {
-					setNewMe({ ...newMe, name: event.target.value });
-				}}
-			/>
-		</div>
-	);
-};
-
-const Email = (props: { me: Me; emailRef: React.RefObject<HTMLSpanElement> }) => {
-	const { me, emailRef } = props;
-
-	return (
-		<div>
-			<span>이메일</span>
-			<span ref={emailRef}>{me.email}</span>
-		</div>
-	);
-};
-
-const StudentId = (props: {
-	me: Me;
-	newMe: Partial<Me>;
-	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
-	studentIdRef: React.RefObject<HTMLInputElement>;
-}) => {
-	const { me, newMe, setNewMe, studentIdRef } = props;
-	const studentId = newMe.studentId ? newMe.studentId : me.studentId ? me.studentId : '';
-
-	return (
-		<div>
-			<span>학번</span>
-			<input
-				type="text"
-				value={studentId}
-				ref={studentIdRef}
-				onChange={event => {
-					setNewMe({ ...newMe, studentId: event.target.value });
-				}}
-			/>
-		</div>
-	);
-};
-
-const Major = (props: {
-	me: Me;
-	newMe: Partial<Me>;
-	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
-	majorRef: React.RefObject<HTMLInputElement>;
-}) => {
-	const { me, newMe, setNewMe, majorRef } = props;
-	const major = newMe.major ? newMe.major : me.major ? me.major : '';
-
-	return (
-		<div>
-			<span>전공</span>
-			<input
-				type="text"
-				value={major}
-				ref={majorRef}
-				onChange={event => {
-					setNewMe({ ...newMe, major: event.target.value });
-				}}
-			/>
+			<span>{label}</span>
+			{setInfo ? (
+				<input
+					type="text"
+					value={info}
+					onChange={event => {
+						setInfo(event.target.value);
+					}}
+				/>
+			) : (
+				<span>{info}</span>
+			)}
 		</div>
 	);
 };
@@ -99,34 +44,62 @@ export const EditProfileInformation = (props: {
 	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
 }) => {
 	const { me, newMe, setNewMe } = props;
-	const nameRef = useRef<HTMLInputElement>(null);
-	const emailRef = useRef<HTMLSpanElement>(null);
-	const studentIdRef = useRef<HTMLInputElement>(null);
-	const majorRef = useRef<HTMLInputElement>(null);
+	const divRef = useRef<HTMLDivElement>(null);
+	const [name, setName] = useState<string>(me.name);
+	const email = me.email;
+	const univ = '국민대학교';
+	const club = '우동';
+	const [major, setMajor] = useState<string | undefined>(me.major);
+	const [studentId, setStudentId] = useState<string | undefined>(me.studentId);
+	const [phoneNumber, setPhoneNumber] = useState<string | undefined>(me.phoneNumber);
+	const [sns, setSns] = useState<string | undefined>(me.sns);
 
 	useEffect(() => {
-		const refs = [nameRef, emailRef, studentIdRef, majorRef];
-		let maxWidth = 0;
+		setNewMe({
+			...newMe,
+			name,
+			major,
+			studentId,
+			phoneNumber,
+			sns,
+		});
+		if (divRef.current) {
+			const elements = divRef.current.querySelectorAll('span:nth-child(2), input:nth-child(2)');
+			let spanMaxWidth = 0,
+				inputMaxWidth = 0;
 
-		refs.forEach(ref => {
-			if (ref.current) {
-				maxWidth = Math.max(maxWidth, ref.current.offsetWidth);
-			}
-		});
-		refs.forEach(ref => {
-			if (ref.current) {
-				ref.current.style.width = `${maxWidth}px`;
-			}
-		});
-	}, []);
+			elements.forEach(element => {
+				if (element instanceof HTMLSpanElement) {
+					spanMaxWidth = Math.max(spanMaxWidth, element.clientWidth);
+				} else if (element instanceof HTMLInputElement) {
+					inputMaxWidth = Math.max(inputMaxWidth, element.clientWidth);
+				} else {
+					throw new Error('Unexpected element');
+				}
+			});
+			elements.forEach(element => {
+				if (element instanceof HTMLInputElement) {
+					if (spanMaxWidth < inputMaxWidth) {
+						element.setAttribute('style', `width: ${inputMaxWidth}px`);
+					} else {
+						element.setAttribute('style', `width: ${spanMaxWidth - 4}px`);
+					}
+				}
+			});
+		}
+	}, [name, major, studentId, phoneNumber, sns]);
 
 	return (
-		<div className={EditProfileInformationStyle}>
+		<div className={EditProfileInformationStyle} ref={divRef}>
 			<Header />
-			<Name me={me} newMe={newMe} setNewMe={setNewMe} nameRef={nameRef} />
-			<Email me={me} emailRef={emailRef} />
-			<StudentId me={me} newMe={newMe} setNewMe={setNewMe} studentIdRef={studentIdRef} />
-			<Major me={me} newMe={newMe} setNewMe={setNewMe} majorRef={majorRef} />
+			<Information label="이름" info={name} setInfo={setName} />
+			<Information label="이메일" info={email} setInfo={null} />
+			<Information label="학교" info={univ} setInfo={null} />
+			<Information label="동아리" info={club} setInfo={null} />
+			<Information label="학과" info={major || ''} setInfo={setMajor} />
+			<Information label="학번" info={studentId || ''} setInfo={setStudentId} />
+			<Information label="전화번호" info={phoneNumber || ''} setInfo={setPhoneNumber} />
+			<Information label="SNS" info={sns || ''} setInfo={setSns} />
 		</div>
 	);
 };

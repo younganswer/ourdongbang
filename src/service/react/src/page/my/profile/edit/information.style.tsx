@@ -2,10 +2,12 @@ import { css } from '@emotion/css';
 
 export const EditProfileInformationStyle = css({
 	width: '90%',
-	margin: '4rem auto 0 auto',
+	margin: '0 auto',
+	gridRow: 4,
 
 	'> div:nth-child(1)': {
 		marginBottom: '2rem',
+		fontFamily: 'Pretendard-medium',
 	},
 
 	'> div:nth-child(n+2)': {
@@ -15,12 +17,12 @@ export const EditProfileInformationStyle = css({
 		display: 'flex',
 		justifyContent: 'space-between',
 
-		'> span:nth-child(2)': {
-			width: 'auto',
+		'> :nth-child(1)': {
+			fontFamily: 'Pretendard-regular',
 		},
-
-		'> input:nth-child(2)': {
+		'> :nth-child(2)': {
 			textAlign: 'right',
+			fontFamily: 'Pretendard-light',
 		},
 	},
 });

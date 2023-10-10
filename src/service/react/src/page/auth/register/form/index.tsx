@@ -65,6 +65,8 @@ const registerHandler = async (
 					email: response.data.email,
 					major: response.data.major,
 					studentId: response.data.studentId,
+					phoneNumber: undefined,
+					sns: undefined,
 					profileImageId: null,
 					clubs: null,
 				});

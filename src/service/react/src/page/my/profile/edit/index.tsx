@@ -46,6 +46,7 @@ const handleSubmit = async (
 			});
 			newMe.profileImageId = presignedData.fields.key.split('/')[2];
 		}
+		console.log(newMe);
 		await axios
 			.patch(`${process.env.REACT_APP_NESTJS_URL}/user/me`, newMe, { withCredentials: true })
 			.then(response => {

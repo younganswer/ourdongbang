@@ -1,5 +1,10 @@
 import React from 'react';
-import { ParticipateStyle, ParticipatedStyle, ParticipationStyle } from './index.style';
+import {
+	ParticipateStyle,
+	ParticipatedActivityStyle,
+	ParticipatedStyle,
+	ParticipationStyle,
+} from './index.style';
 import { Me } from 'context/AuthContext';
 
 const Participation = (props: { me: Me }) => {
@@ -31,7 +36,7 @@ const Activity = (props: { me: Me }) => {
 	const date = '09-30';
 
 	return (
-		<div>
+		<div className={ParticipatedActivityStyle}>
 			<div>{date}</div>
 			<div>참여 활동</div>
 			<div>활동 보기</div>
