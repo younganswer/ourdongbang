@@ -10,11 +10,11 @@ import ToolBar from 'component/toolbar';
 import MyPage from 'page/my';
 import './font.css';
 import RegisterFormPage from 'page/auth/register/form';
-import ClubPage from 'page/club';
+//import ClubPage from 'page/club';
 
 function App() {
 	return (
-		<div style={{ height: 1019, backgroundColor: '#D9D9D9' }}>
+		<div style={{ height: 1019, backgroundColor: '#EFEEEA' }}>
 			<ToastContainer />
 			<ToolBar />
 			<Routes>
@@ -22,10 +22,12 @@ function App() {
 				<Route path="/auth/login" element={<LoginPage />} />
 				<Route path="/auth/register" element={<RegisterPage />} />
 				<Route path="/auth/register/form" element={<RegisterFormPage />} />
+				<Route path="/main/info" element={<div>info page</div>} />
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
+				<Route path="/main/search" element={<div>search page</div>} />
 				<Route path="/main/mypage" element={<MyPage />} />
-				<Route path="/main/club" element={<ClubPage />} />
+				{/*<Route path="/main/club" element={<ClubPage />} />*/}
 			</Routes>
 		</div>
 	);
