@@ -1,9 +1,13 @@
 import React from 'react';
+import RuleTitle from './title';
+import RuleContent from './ruleContent';
+import { RuleStyle } from './index.style';
 
 const Rule = () => {
 	return (
-		<div>
-			<p>동아리 규칙 내용...</p>
+		<div className={RuleStyle}>
+			<RuleTitle />
+			<RuleContent />
 		</div>
 	);
 };
