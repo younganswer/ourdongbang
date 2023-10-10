@@ -18,14 +18,6 @@ export class CreateClubDTO {
 
 	@IsString()
 	@Trim()
-	@ApiProperty({ example: '술, 담배 X' })
-	rule: string;
-
-	@IsString()
-	@Trim()
 	@ApiProperty({ example: '#인싸' })
 	tags: string;
-
-	@Trim()
-	members: Member[];
 }

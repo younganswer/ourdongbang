@@ -20,8 +20,11 @@ export class Club {
 	description: string;
 
 	@ApiProperty({ description: '동아리 규칙', example: '담배, 술 X', required: false })
-	@Prop({ type: String })
-	rule: string;
+	@Prop({
+		type: [Types.ObjectId],
+		required: false,
+	})
+	rules: Types.ObjectId[];
 
 	@ApiProperty({
 		description: '동아리 태그 배열',
