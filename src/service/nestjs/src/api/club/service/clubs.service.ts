@@ -89,4 +89,21 @@ export class ClubsService {
 		club.members = club.members.filter(member => member.toString() !== memberId.toString());
 		return club.save();
 	}
+
+	async addRule(clubId: string | Types.ObjectId, ruleId: Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		club.rules.push(ruleId);
+		return club.save();
+	}
+
+	async getAllRules(clubId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		return club.rules;
+	}
+
+	async deleteRule(clubId: string | Types.ObjectId, ruleId: string | Types.ObjectId) {
+		const club = await this.clubModel.findById(clubId).exec();
+		club.rules = club.rules.filter(rule => rule.toString() !== ruleId.toString());
+		return club.save();
+	}
 }

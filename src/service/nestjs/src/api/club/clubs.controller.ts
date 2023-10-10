@@ -35,6 +35,8 @@ import { CreateReviewDTO } from './dto/request/createReview.dto';
 import * as ClubDto from './dto/index';
 import { CreateMemberDTO } from './dto/request/createMember.dto';
 import { MemberService } from './service/member.service';
+import { CreateRuleDTO } from './dto/request/createRule.dto';
+import { RuleService } from './service/rule.service';
 
 @Controller('club')
 export class ClubsController {
@@ -44,6 +46,7 @@ export class ClubsController {
 		private readonly auditService: AuditService,
 		private readonly reveiwSerice: ReviewsService,
 		private readonly memberService: MemberService,
+		private readonly ruleService: RuleService,
 	) {}
 
 	@ApiTags('club API')
@@ -727,6 +730,105 @@ export class ClubsController {
 			}
 
 			return deletedMember;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@ApiTags('Rule API')
+	@Post('/:cid/rule')
+	@ApiOperation({ summary: 'create a rule', description: 'rule 생성' })
+	@ApiBody({ type: CreateRuleDTO })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
+	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
+	async createRule(@Body() createRuleDTO: CreateRuleDTO, @Param('cid') clubId: string) {
+		try {
+			const rule = await this.ruleService.create(createRuleDTO);
+
+			if (!rule) {
+				throw new NotFoundException('Rule not found');
+			}
+
+			const ruleId: Types.ObjectId = rule['_id'];
+			const club = await this.clubsService.addRule(clubId, ruleId);
+
+			if (!club) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return rule;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@ApiTags('Rule API')
+	@Get('/:cid/rule/')
+	@ApiOperation({ summary: 'get all rule of club', description: 'club의 모든 rule 가져오기' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
+	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
+	async getAllRules(@Param('cid') clubId: string) {
+		try {
+			const ruleIds = await this.clubsService.getAllRules(clubId);
+
+			const rulePromises = ruleIds.map(rid => this.ruleService.getRuleById(rid));
+
+			const rules = await Promise.all(rulePromises);
+
+			return rules;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@ApiTags('Rule API')
+	@Patch('/rule/:rid')
+	@ApiOperation({ summary: 'update a rule', description: 'rule 수정' })
+	@ApiBody({ type: CreateRuleDTO })
+	@ApiParam({ name: 'rid', description: 'Rule ID' })
+	@ApiResponse({ status: 200, description: '수정 성공' })
+	async updateRule(@Param('rid') ruleId: string, @Body() updateData: Partial<CreateRuleDTO>) {
+		try {
+			const updatedRule = await this.ruleService.updateRule(ruleId, updateData);
+
+			if (!updatedRule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return updatedRule;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@ApiTags('Rule API')
+	@Delete('/:cid/rule/:rid')
+	@ApiOperation({ summary: 'delete a rule', description: 'rule 삭제' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiParam({ name: 'rid', description: 'Rule ID' })
+	@ApiResponse({ status: 200, description: '삭제 성공' })
+	async deleteRule(@Param('cid') clubId: string, @Param('rid') ruleId: string) {
+		try {
+			const ruleIds = await this.clubsService.getAllRules(clubId);
+
+			if (!ruleIds.includes(ruleId as unknown as Types.ObjectId)) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			await this.clubsService.deleteRule(clubId, ruleId);
+			const deletedRule = await this.ruleService.deleteRule(ruleId);
+
+			if (!deletedRule) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return deletedRule;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
