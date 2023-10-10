@@ -5,6 +5,12 @@ import { Me } from 'context/AuthContext';
 
 const ToolBarRouteBtn = (props: { to: string; label: string }) => {
 	const { to, label } = props;
+	const borderStyle =
+		to === '/auth/login'
+			? { borderLeft: 'none' }
+			: to === '/auth/register'
+			? { borderRight: 'none' }
+			: undefined;
 	const location = useLocation();
 	const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -19,7 +25,7 @@ const ToolBarRouteBtn = (props: { to: string; label: string }) => {
 	}, [location]);
 
 	return (
-		<div className={ToolBarRouteBtnStyle}>
+		<div className={ToolBarRouteBtnStyle} style={borderStyle}>
 			<Link to={to}>
 				<button ref={btnRef}>{label}</button>
 			</Link>
@@ -37,12 +43,6 @@ const ToolBarRouteBtns = (props: { me: Me | null }) => {
 				divRef.current.style.gridColumn = '3';
 			} else {
 				divRef.current.style.gridColumn = '5';
-
-				const loginBtnDiv = divRef.current.children[0] as HTMLDivElement;
-				const registerBtnDiv = divRef.current.children[1] as HTMLDivElement;
-
-				loginBtnDiv.style.borderLeft = 'none';
-				registerBtnDiv.style.borderRight = 'none';
 			}
 		}
 	}, [me]);

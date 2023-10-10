@@ -40,8 +40,10 @@ const handleLogin = async (
 					email: response.data.email,
 					major: response.data.major,
 					studentId: response.data.studentId,
-					profileImageId: response.data.profileImageId,
-					clubs: response.data.clubs,
+					phoneNumber: response.data.phoneNumber || null,
+					sns: response.data.sns || null,
+					profileImageId: response.data.profileImageId || null,
+					clubs: response.data.clubs || null,
 				});
 				toast.success('로그인 완료');
 				navigate('/main/info');

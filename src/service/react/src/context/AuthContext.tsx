@@ -15,8 +15,10 @@ export type Me = {
 	id: string;
 	password: string;
 	email: string;
-	major: string;
-	studentId: string;
+	major: string | undefined;
+	studentId: string | undefined;
+	phoneNumber: string | undefined;
+	sns: string | undefined;
 	profileImageId: Types.ObjectId | null;
 	clubs: Types.ObjectId[] | null;
 };
@@ -43,6 +45,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 						email: result.data.email,
 						major: result.data.major,
 						studentId: result.data.studentId,
+						phoneNumber: result.data.phoneNumber || null,
+						sns: result.data.sns || null,
 						profileImageId: result.data.profileImageId || null,
 						clubs: result.data.clubs || null,
 					});

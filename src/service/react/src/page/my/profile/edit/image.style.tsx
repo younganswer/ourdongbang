@@ -2,18 +2,23 @@ import { css } from '@emotion/css';
 
 export const EditProfileImageStyle = css({
 	gridRow: 2,
-	margin: '4rem auto 0 auto',
+	margin: '0 auto',
 	width: '90%',
 
 	'> div:nth-child(1)': {
 		display: 'flex',
 		justifyContent: 'space-between',
 
-		'> *:nth-child(2)': {
+		'> :nth-child(1)': {
+			fontFamily: 'Pretendard-regular',
+		},
+
+		'> :nth-child(2)': {
 			display: 'none',
 		},
 
-		'> *:nth-child(3)': {
+		'> :nth-child(3)': {
+			fontFamily: 'Pretendard-light',
 			color: '#0000FF',
 			':hover': {
 				cursor: 'pointer',
@@ -27,8 +32,6 @@ export const EditProfileImageStyle = css({
 
 		'> div': {
 			margin: 'auto',
-			width: 196,
-			height: 196,
 		},
 		'> svg': {
 			margin: 'auto',

@@ -1,11 +1,11 @@
 import { css } from '@emotion/css';
 
 export const EditProfileHeaderStyle = css({
-	gridRow: 1,
-	marginTop: '0.5rem',
+	gridRow: 2,
 	display: 'grid',
 	gridTemplateColumns: '50px 1fr 50px',
 	textAlign: 'center',
+	fontFamily: 'Pretendard-medium',
 
 	'> span': {
 		lineHeight: '50px',

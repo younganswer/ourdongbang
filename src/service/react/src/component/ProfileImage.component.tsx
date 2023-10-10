@@ -62,7 +62,7 @@ const AWSProfileImage = (props: {
 	}, [src, isError, setHashedSrc]);
 
 	return (
-		<div className={`${isCircle} ? ${ProfileImageStyle} : null`}>
+		<div className={`${isCircle} ? ${ProfileImageStyle} : null`} style={{ width, height }}>
 			<img
 				src={hashedSrc}
 				width={width}

@@ -35,23 +35,31 @@ const Header = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<b
 const Body = (props: { me: Me }) => {
 	const { me } = props;
 	const src = me.profileImageId
-		? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/raw/${me.profileImageId}`
+		? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${me.profileImageId}`
 		: undefined;
 
 	return (
 		<div className={ProfileContentStyle}>
 			<ProfileImage
 				src={src}
-				width={218}
-				height={218}
+				width={250}
+				height={250}
 				isCircle={true}
 				className={ProfileImageStyle}
 			/>
 			<span className={ProfileNameStyle}>{me.name}</span>
 			<div>
-				{/*<Information type="이메일" value={me.email} />*/}
+				<Information type="이메일" value={me.email} />
+				<Information type="학교" value={'국민대학교'} />
+				<Information type="동아리" value={'우동'} />
+				<Information type="학과" value={me.major} />
 				<Information type="학번" value={me.studentId} />
-				<Information type="전공" value={me.major} />
+				<Information type="전화번호" value={me.phoneNumber} />
+				<Information type="SNS" value={me.sns} />
+				<div>
+					<span>소개</span>
+					<span>{'안녕하세요 2023 신입부원 황영서입니다\n 잘 부탁드립니다!'}</span>
+				</div>
 			</div>
 		</div>
 	);
@@ -77,7 +85,6 @@ const Footer = (props: {
 	return (
 		<div className={ProfileFooterStyle}>
 			<span
-				style={{ float: 'right' }}
 				onClick={() => {
 					logout();
 				}}
@@ -88,7 +95,7 @@ const Footer = (props: {
 	);
 };
 
-const Information = (props: { type: string; value: string }) => {
+const Information = (props: { type: string; value: string | undefined }) => {
 	const { type, value } = props;
 
 	return (
