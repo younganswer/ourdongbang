@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { EditProfileInformationStyle } from './information.style';
 import { Me } from 'context/AuthContext';
+import { ClubContext } from 'context/ClubContext';
 
 const Header = () => {
 	return (
@@ -48,7 +49,7 @@ export const EditProfileInformation = (props: {
 	const [name, setName] = useState<string>(me.name);
 	const email = me.email;
 	const univ = '국민대학교';
-	const club = '우동';
+	const { club } = useContext(ClubContext);
 	const [major, setMajor] = useState<string | undefined>(me.major);
 	const [studentId, setStudentId] = useState<string | undefined>(me.studentId);
 	const [phoneNumber, setPhoneNumber] = useState<string | undefined>(me.phoneNumber);
@@ -95,7 +96,7 @@ export const EditProfileInformation = (props: {
 			<Information label="이름" info={name} setInfo={setName} />
 			<Information label="이메일" info={email} setInfo={null} />
 			<Information label="학교" info={univ} setInfo={null} />
-			<Information label="동아리" info={club} setInfo={null} />
+			<Information label="동아리" info={club?.name || ''} setInfo={null} />
 			<Information label="학과" info={major || ''} setInfo={setMajor} />
 			<Information label="학번" info={studentId || ''} setInfo={setStudentId} />
 			<Information label="전화번호" info={phoneNumber || ''} setInfo={setPhoneNumber} />

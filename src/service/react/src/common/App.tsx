@@ -13,9 +13,10 @@ import RegisterFormPage from '../page/auth/register/form';
 import SchedulerPage from '../page/SchedulerPage';
 // import ClubPage from '../page/club';
 
+
 function App() {
 	return (
-		<div style={{ height: 1019, backgroundColor: '#EFEEEA' }}>
+		<div style={{ backgroundColor: '#EFEEEA' }}>
 			<ToastContainer />
 			<ToolBar />
 			<Routes>
@@ -23,13 +24,12 @@ function App() {
 				<Route path="/auth/login" element={<LoginPage />} />
 				<Route path="/auth/register" element={<RegisterPage />} />
 				<Route path="/auth/register/form" element={<RegisterFormPage />} />
-				<Route path="/main/info" element={<div>info page</div>} />
+				<Route path="/main/info" element={<ClubPage />} />
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/calendar/scheduler" element={<SchedulerPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/search" element={<div>search page</div>} />
 				<Route path="/main/mypage" element={<MyPage />} />
-				{/*<Route path="/main/club" element={<ClubPage />} />*/}
 			</Routes>
 		</div>
 	);
