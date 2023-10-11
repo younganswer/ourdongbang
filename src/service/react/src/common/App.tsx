@@ -11,8 +11,7 @@ import MyPage from '../page/my';
 import './font.css';
 import RegisterFormPage from '../page/auth/register/form';
 import SchedulerPage from '../page/SchedulerPage';
-// import ClubPage from '../page/club';
-
+import ClubPage from '../page/club';
 
 function App() {
 	return (
