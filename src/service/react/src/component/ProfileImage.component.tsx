@@ -39,7 +39,7 @@ const AWSProfileImage = (props: {
 	className: string | null;
 }) => {
 	const { src, width, height } = props;
-	const isCircle = props.isCircle ? props.isCircle : true;
+	const isCircle = props.isCircle !== null ? props.isCircle : true;
 	const className = props.className ? props.className : undefined;
 	const [hashedSrc, setHashedSrc] = useState<string | undefined>(src);
 	const [isError, setIsError] = useState<boolean>(false);
@@ -62,7 +62,7 @@ const AWSProfileImage = (props: {
 	}, [src, isError, setHashedSrc]);
 
 	return (
-		<div className={`${isCircle} ? ${ProfileImageStyle} : null`} style={{ width, height }}>
+		<div className={isCircle ? ProfileImageStyle : undefined} style={{ width, height }}>
 			<img
 				src={hashedSrc}
 				width={width}

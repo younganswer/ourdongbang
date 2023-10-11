@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from 'common/App';
 import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from 'context/AuthContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import ContextProviders from 'context';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
@@ -12,13 +12,13 @@ const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 root.render(
 	<React.StrictMode>
 		<CookiesProvider>
-			<AuthProvider>
+			<ContextProviders>
 				<BrowserRouter>
 					<GoogleOAuthProvider clientId={clientId}>
 						<App />
 					</GoogleOAuthProvider>
 				</BrowserRouter>
-			</AuthProvider>
+			</ContextProviders>
 		</CookiesProvider>
 	</React.StrictMode>,
 );

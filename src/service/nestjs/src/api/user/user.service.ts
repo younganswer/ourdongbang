@@ -16,6 +16,15 @@ export class UserService {
 		}
 	}
 
+	async findByObjectId(_id: string): Promise<User> {
+		try {
+			return await this.userModel.findById(_id);
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
 	async findByEmail(email: string): Promise<User> {
 		try {
 			return await this.userModel.findOne({ email });
