@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 // import '@fullcalendar/core/main.css'; // FullCalendar CSS
+import { useNavigate } from 'react-router-dom';
 
 interface CalendarProps {
 	events: Event[];
@@ -15,9 +16,11 @@ interface Event {
 const Calendar: React.FC<CalendarProps> = ({ events }) => {
 	const calendarRef = useRef<FullCalendar>(null);
 
+	const navigate = useNavigate();
+
 	const handleAddEventClick = () => {
 		// TODO: 이벤트 추가 로직을 여기에 구현
-		console.log('일정 추가 버튼이 클릭되었습니다.');
+		navigate('/main/calendar/scheduler');
 	};
 
 	const customButtons = {
