@@ -55,6 +55,23 @@ export class UserController {
 		}
 	}
 
+	@Get('/_id/:_id')
+	@ApiOperation({ summary: 'Get user information' })
+	@ApiOkResponse({ description: 'Get user information successfully', type: User })
+	async getUserByObjectId(@Param('_id') _id: string): Promise<User> {
+		try {
+			const user = await this.userService.findByObjectId(_id);
+			if (!user) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			return user;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
 	@Get('email/:email')
 	@ApiOperation({ summary: 'Get user information' })
 	@ApiOkResponse({ description: 'Get user information successfully', type: User })

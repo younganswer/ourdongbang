@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Me } from 'context/AuthContext';
 import {
 	ProfileContentStyle,
@@ -14,6 +14,7 @@ import EditProfile from './edit';
 import axios from 'axios';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { ProfileImage } from 'component/ProfileImage.component';
+import { ClubContext } from 'context/ClubContext';
 
 const Header = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const { setIsModalOpened } = props;
@@ -34,6 +35,7 @@ const Header = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<b
 
 const Body = (props: { me: Me }) => {
 	const { me } = props;
+	const { club } = useContext(ClubContext);
 	const src = me.profileImageId
 		? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${me.profileImageId}`
 		: undefined;
@@ -51,7 +53,7 @@ const Body = (props: { me: Me }) => {
 			<div>
 				<Information type="이메일" value={me.email} />
 				<Information type="학교" value={'국민대학교'} />
-				<Information type="동아리" value={'우동'} />
+				<Information type="동아리" value={club?.name} />
 				<Information type="학과" value={me.major} />
 				<Information type="학번" value={me.studentId} />
 				<Information type="전화번호" value={me.phoneNumber} />
