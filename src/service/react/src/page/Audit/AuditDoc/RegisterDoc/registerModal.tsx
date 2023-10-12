@@ -1,6 +1,6 @@
 // import { on } from 'events';
 import React, { useState } from 'react';
-import { modalContentStyles } from './registerModal.style';
+import { registerModalStyle, registerModalTitleStyle } from './registerModal.style';
 import { Modal } from 'component/modal';
 import { RegisterHeader } from './registerHeader';
 import { CloseBtn } from './CloseBtn';
@@ -12,12 +12,19 @@ const RegisterRealReceipt = (props: {
 	const { setIsModalOpened, setModalPageNumber } = props;
 	return (
 		<div>
+			{/* 모달 밖 closeBtn */}
 			<div>
 				<CloseBtn setIsModalOpened={setIsModalOpened} />
 			</div>
-			<div className={modalContentStyles}>
+			{/* 실제 모달 내용 4개 section으로 나뉨 1) 지출등록 - Header, 2) 각 페이지 별 title과 step, 
+			3) 이미지 첨부 - ImageUpload component 박스, 4) '다음'버튼  */}
+			<div className={registerModalStyle}>
 				<RegisterHeader />
-				<h2>실물 영수증</h2>
+				<div className={registerModalTitleStyle}>
+					<span>영수증 등록</span>
+					<span>STEP 1/3</span>
+				</div>
+				{/* 이미지 업로드 박스 */}
 				<button onClick={() => setModalPageNumber(1)}>다음</button>
 			</div>
 		</div>
@@ -35,9 +42,12 @@ const RegisterCardSlip = (props: {
 			<div>
 				<CloseBtn setIsModalOpened={setIsModalOpened} />
 			</div>
-			<div className={modalContentStyles}>
+			<div className={registerModalStyle}>
 				<RegisterHeader />
-				<h2>카드 전표</h2>
+				<div className={registerModalTitleStyle}>
+					<span>카드 전표 등록</span>
+					<span>STEP 2/3</span>
+				</div>
 				<button onClick={() => setModalPageNumber(2)}>다음</button>
 			</div>
 		</div>
@@ -55,9 +65,12 @@ const RegisterAdditionalImage = (props: {
 			<div>
 				<CloseBtn setIsModalOpened={setIsModalOpened} />
 			</div>
-			<div className={modalContentStyles}>
+			<div className={registerModalStyle}>
 				<RegisterHeader />
-				<h2>첨부 사진</h2>
+				<div className={registerModalTitleStyle}>
+					<span>첨부 사진</span>
+					<span>STEP 3/3</span>
+				</div>
 				<button onClick={() => setModalPageNumber(3)}>다음</button>
 			</div>
 		</div>
@@ -74,9 +87,11 @@ const RegisterSumUp = (props: {
 			<div>
 				<CloseBtn setIsModalOpened={setIsModalOpened} />
 			</div>
-			<div className={modalContentStyles}>
+			<div className={registerModalStyle}>
 				<RegisterHeader />
-				<h2>요약본</h2>
+				<div>
+					<span>요약본</span>
+				</div>
 				<button onClick={() => setIsModalOpened(false)}>제출 완료</button>
 			</div>
 		</div>
@@ -129,7 +144,7 @@ const RegisterImage = (props: {
 		},
 	];
 
-	return <form className={modalContentStyles}>{modals[Page].content}</form>;
+	return <form className={registerModalStyle}>{modals[Page].content}</form>;
 };
 
 export default RegisterImage;

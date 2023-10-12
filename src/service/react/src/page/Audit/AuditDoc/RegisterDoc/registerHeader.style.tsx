@@ -1,9 +1,10 @@
 import { css } from '@emotion/css';
 
 export const registerHeaderStyles = css({
-	'> div': {
-		'> span': {
-			fontSize: '10px',
-		},
+	borderBottom: '1px solid black',
+	padding: '22px',
+	'> span': {
+		fontSize: '20px',
+		fontFamily: 'pretendard-regular',
 	},
 });
