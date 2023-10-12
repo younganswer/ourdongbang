@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const handleChange = async (
 	event: React.ChangeEvent<HTMLInputElement>,
@@ -60,57 +60,17 @@ const ImageSelector = (props: {
 	);
 };
 
-const Box = (props: {
-	title: string | undefined;
+export const Box = (props: {
 	src: string | undefined;
 	setSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
 }) => {
-	const { title, src, setSrc, setFile } = props;
+	const { src, setSrc, setFile } = props;
 
 	return (
 		<div>
-			<span>{title}</span>
 			<ImageSelector src={src} setSrc={setSrc} setFile={setFile} />
-		</div>
-	);
-};
-
-export const ReceiptImage = (props: {
-	setFile: React.Dispatch<React.SetStateAction<null | File>>;
-}) => {
-	const { setFile } = props;
-	const [src, setSrc] = useState<string | undefined>(undefined);
-
-	return (
-		<div>
-			<Box title="영수증" src={src} setSrc={setSrc} setFile={setFile} />
-		</div>
-	);
-};
-
-export const CardSlipImage = (props: {
-	setFile: React.Dispatch<React.SetStateAction<null | File>>;
-}) => {
-	const { setFile } = props;
-	const [src, setSrc] = useState<string | undefined>(undefined);
-
-	return (
-		<div>
-			<Box title="카드 전표" src={src} setSrc={setSrc} setFile={setFile} />
-		</div>
-	);
-};
-
-export const AdditionalImage = (props: {
-	setFile: React.Dispatch<React.SetStateAction<null | File>>;
-}) => {
-	const { setFile } = props;
-	const [src, setSrc] = useState<string | undefined>(undefined);
-
-	return (
-		<div>
-			<Box title="첨부 사진" src={src} setSrc={setSrc} setFile={setFile} />
+			<span>{'이미지 첨부'}</span>
 		</div>
 	);
 };
