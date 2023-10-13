@@ -61,8 +61,6 @@ const InfoPageMember = () => {
 	const { club, setClub } = useContext(ClubContext);
 	const { members, setMembers } = useContext(MemberContext);
 
-	console.log(club);
-	console.log(members);
 	// 부원 정보를 표시하기 위한 데이터 가져오기 또는 렌더링 로직 추가
 
 	return (
@@ -75,6 +73,7 @@ const InfoPageMember = () => {
 			{/* <p>부원 정보 내용...</p> */}
 		</div>
 	);
+	console.log(club);
 	console.log(setClub);
 	console.log(setMembers);
 };
