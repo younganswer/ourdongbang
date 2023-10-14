@@ -4,6 +4,7 @@ import Calendar from '../component/Calendar';
 import styled from 'styled-components';
 import { PageStyle } from './page.style';
 import NotificationCard from './NotificationCard';
+import BestParticipant from './best-participant';
 // import SchedulerPage from './SchedulerPage';
 
 const events = [
@@ -13,23 +14,25 @@ const events = [
 ];
 
 const Wrapper = styled.div`
-	display: flex;
-	flex-direction: row;
+	height: 789px;
+	display: grid;
+	grid-template-columns: 894px 282px;
+	gap: 24px;
 	align-items: center;
 `;
 
 const CalendarContainer = styled.div`
-	width: 894px;
-	height: 789px;
-	background-color: white;
-	padding: 20px;
+	height: 100%;
+	border: 1px solid black;
+	> div {
+		margin: 10px 10px auto 10px;
+	}
 `;
 
 const InfoContainer = styled.div`
-	display: flex;
-	width: 282px;
-	margin-left: 4px;
-	background-color: white;
+	display: grid;
+	grid-template-rows: 330px 437px;
+	gap: 22px;
 `;
 
 const CalendarPage: React.FC = () => {
@@ -40,7 +43,7 @@ const CalendarPage: React.FC = () => {
 					<Calendar events={events} />
 				</CalendarContainer>
 				<InfoContainer>
-					{/* 이달의 참여왕 여기 추가 */}
+					<BestParticipant />
 					<NotificationCard />
 				</InfoContainer>
 			</Wrapper>

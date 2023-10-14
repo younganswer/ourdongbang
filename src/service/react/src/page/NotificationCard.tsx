@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NotiContainer = styled.div`
-	width: 282px;
-	height: 437px;
-	margin-top: 22px;
+	border: 1px solid black;
 `;
 
 const Deadline = styled.div`
