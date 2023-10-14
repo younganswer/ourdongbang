@@ -2,6 +2,9 @@ import { css } from '@emotion/css';
 
 export const ToolBarTitleStyle = css({
 	gridColumn: 1,
+	height: 70,
+	display: 'flex',
+	alignItems: 'center',
 	gap: '0.7rem',
 
 	'> a': {
@@ -14,7 +17,6 @@ export const ToolBarTitleStyle = css({
 		fontSize: '20px',
 		fontWeight: '500',
 		lineHeight: '70px',
-		letterSpacing: '-0.458px',
 		textTransform: 'uppercase',
 	},
 
@@ -23,7 +25,6 @@ export const ToolBarTitleStyle = css({
 		fontSize: '20px',
 		fontWeight: '500',
 		lineHeight: '70px',
-		letterSpacing: '-0.458px',
 		textTransform: 'uppercase',
 	},
 });

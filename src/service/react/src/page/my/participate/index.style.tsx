@@ -52,32 +52,34 @@ export const ParticipatedStyle = css({
 	height: 613,
 	gridRow: '2',
 	display: 'grid',
-	gridTemplateRows: '36px 36px 36px 1fr',
+	gridTemplateRows: 'auto 1fr',
 	border: '1px solid black',
-
 	'> *': {
-		width: '90%',
-		margin: '0 auto 0 auto',
+		padding: '0 5%',
 	},
+	'> div:nth-child(1)': {
+		gridRow: '1',
+		height: 85,
+		display: 'flex',
+		alignItems: 'center',
+		borderBottom: '1px solid black',
+		gap: '0.7rem',
 
-	'> span': {
+		'> span': {
+			fontSize: '24px',
+			fontFamily: 'Pretendard-medium',
+		},
+	},
+	'> div:nth-child(2)': {
 		gridRow: '2',
-		fontSize: '24px',
-		fontFamily: 'Pretendard-medium',
-		lineHeight: '36px',
-		letterSpacing: '-0.528px',
-	},
-
-	'> div': {
-		gridRow: '4',
 	},
 });
 
 export const ParticipatedActivityStyle = css({
 	height: 84,
 	display: 'grid',
-	gridTemplateColumns: '84px 1fr 112px',
-	marginBottom: '37px',
+	gridTemplateColumns: '84px 1fr auto',
+	marginTop: '37px',
 	fontSize: '20px',
 	lineHeight: '84px',
 
@@ -94,15 +96,10 @@ export const ParticipatedActivityStyle = css({
 		margin: '0 2rem',
 	},
 
-	'> div:nth-child(3)': {
+	'> svg': {
 		gridColumn: '3',
-		height: '50px',
-		margin: '17px 0',
-		fontFamily: 'Pretendard-medium',
-		lineHeight: '50px',
-		textAlign: 'center',
-		border: '1px solid black',
-		backgroundColor: '#D9D9D9',
+		margin: 'auto 0',
+		padding: '0 10px',
 		':hover': {
 			cursor: 'pointer',
 		},

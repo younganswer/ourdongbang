@@ -2,8 +2,8 @@ import { css } from '@emotion/css';
 
 export const ClubBtnModalStyle = css({
 	position: 'absolute',
-	top: -12.5,
-	right: -17,
+	top: -12.2,
+	right: -17.5,
 	width: 0,
 	height: 70,
 	border: '1px solid black',
@@ -17,7 +17,7 @@ export const ClubBtnModalStyle = css({
 });
 
 export const ClubBtnModalBtnStyle = css({
-	width: '85%',
+	width: '88%',
 	height: 70,
 	margin: '0 auto',
 	display: 'grid',

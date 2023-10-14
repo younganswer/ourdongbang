@@ -6,6 +6,7 @@ import {
 	ParticipationStyle,
 } from './index.style';
 import { Me } from 'context/AuthContext';
+import { HandIcon, RightArrowIcon } from './icon';
 
 const Participation = (props: { me: Me }) => {
 	const { me } = props;
@@ -39,7 +40,7 @@ const Activity = (props: { me: Me }) => {
 		<div className={ParticipatedActivityStyle}>
 			<div>{date}</div>
 			<div>참여 활동</div>
-			<div>활동 보기</div>
+			<RightArrowIcon width={12} height={20} />
 		</div>
 	);
 	<>{me}</>;
@@ -50,7 +51,10 @@ const Participated = (props: { me: Me }) => {
 
 	return (
 		<div className={ParticipatedStyle}>
-			<span>참여 활동</span>
+			<div>
+				<HandIcon width={29} height={29} />
+				<span>참여 활동</span>
+			</div>
 			<div>
 				<Activity me={me} />
 				<Activity me={me} />

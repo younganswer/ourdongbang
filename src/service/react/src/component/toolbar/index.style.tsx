@@ -25,10 +25,5 @@ export const ToolBarStyle = css({
 		display: 'grid',
 		gridTemplateColumns: 'auto 2fr auto 1fr auto',
 		alignItems: 'center',
-
-		'> div': {
-			display: 'flex',
-			alignItems: 'center',
-		},
 	},
 });
