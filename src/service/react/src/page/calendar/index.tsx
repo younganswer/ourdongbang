@@ -1,11 +1,9 @@
 import React from 'react';
-// import { Routes, Route } from 'react-router-dom';
 import Calendar from '../../component/Calendar';
 import styled from 'styled-components';
 import { PageStyle } from '../page.style';
-import NotificationCard from '../NotificationCard';
-import BestParticipant from '../best-participant';
-// import SchedulerPage from './SchedulerPage';
+import NotificationCard from './NotificationCard';
+import BestParticipant from './best-participant';
 
 const events = [
 	{ title: '이벤트 1', date: '2023-09-23' },

@@ -10,7 +10,7 @@ import ToolBar from '../component/toolbar';
 import MyPage from '../page/my';
 import './font.css';
 import RegisterFormPage from '../page/auth/register/form';
-import SchedulerPage from '../page/calendar/schedule/SchedulerPage';
+import SchedulerPage from '../page/calendar/schedule';
 import ClubPage from '../page/club';
 
 function App() {
