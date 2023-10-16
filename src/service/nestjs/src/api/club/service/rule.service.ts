@@ -17,7 +17,7 @@ export class RuleService {
 		}
 	}
 
-	async getRuleById(ruleId: Types.ObjectId): Promise<Rule> {
+	async getRuleById(ruleId: Types.ObjectId | String): Promise<Rule> {
 		try {
 			return await this.ruleModel.findById(ruleId).exec();
 		} catch (error) {
