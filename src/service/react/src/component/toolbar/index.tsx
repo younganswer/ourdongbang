@@ -3,7 +3,7 @@ import { AuthContext } from 'context/AuthContext';
 import { ToolBarStyle } from './index.style';
 import ToolBarTitle from './title';
 import ToolBarRouteBtns from './route-btns';
-import ClubBtn from './club-btn';
+import ClubBtn from './club-btn/';
 
 const ToolBar = () => {
 	const { me } = useContext(AuthContext);

@@ -9,9 +9,9 @@ import CalendarPage from '../page/calendar';
 import ToolBar from '../component/toolbar';
 import MyPage from '../page/my';
 import './font.css';
-import RegisterFormPage from '../page/auth/register/form';
+import RegisterFormPage from 'page/auth/register/form';
+import InfoPage from 'page/Info';
 import SchedulerPage from '../page/calendar/schedule';
-import ClubPage from '../page/club';
 
 function App() {
 	return (
@@ -23,7 +23,7 @@ function App() {
 				<Route path="/auth/login" element={<LoginPage />} />
 				<Route path="/auth/register" element={<RegisterPage />} />
 				<Route path="/auth/register/form" element={<RegisterFormPage />} />
-				<Route path="/main/info" element={<ClubPage />} />
+				<Route path="/main/info" element={<InfoPage />} />
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/calendar/scheduler" element={<SchedulerPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
