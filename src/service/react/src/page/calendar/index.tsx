@@ -1,10 +1,10 @@
 import React from 'react';
 // import { Routes, Route } from 'react-router-dom';
-import Calendar from '../component/Calendar';
+import Calendar from '../../component/Calendar';
 import styled from 'styled-components';
-import { PageStyle } from './page.style';
-import NotificationCard from './NotificationCard';
-import BestParticipant from './best-participant';
+import { PageStyle } from '../page.style';
+import NotificationCard from '../NotificationCard';
+import BestParticipant from '../best-participant';
 // import SchedulerPage from './SchedulerPage';
 
 const events = [
