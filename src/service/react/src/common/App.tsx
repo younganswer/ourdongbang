@@ -5,12 +5,12 @@ import PreviewPage from '../page/PreviewPage';
 import LoginPage from '../page/auth/login';
 import RegisterPage from '../page/auth/register';
 import AuditPage from '../page/Audit';
-import CalendarPage from '../page/CalendarPage';
+import CalendarPage from '../page/calendar';
 import ToolBar from '../component/toolbar';
 import MyPage from '../page/my';
 import './font.css';
 import RegisterFormPage from '../page/auth/register/form';
-import SchedulerPage from '../page/SchedulerPage';
+import SchedulerPage from '../page/calendar/schedule/SchedulerPage';
 import ClubPage from '../page/club';
 
 function App() {
