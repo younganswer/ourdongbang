@@ -50,6 +50,15 @@ export const InfoPageMemberBodyStyle = css({
 				fontFamily: 'Pretendard-regular',
 			},
 		},
+		'> div:nth-child(2)': {
+			display: 'flex',
+			flexWrap: 'wrap',
+			gap: '22.46px',
+			overflowY: 'scroll',
+			'&::-webkit-scrollbar': {
+				display: 'none',
+			},
+		},
 	},
 	'> div:nth-child(1)': {
 		// manager

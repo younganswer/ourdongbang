@@ -8,6 +8,11 @@ import { ProfileImage } from 'component/ProfileImage.component';
 const MemberProfile = (props: { member: Member }) => {
 	const { member } = props;
 	const [userInfo, setUserInfo] = useState<Me | null>(null);
+	const src = userInfo
+		? userInfo.profileImageId
+			? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${userInfo.profileImageId}`
+			: undefined
+		: undefined;
 
 	useEffect(() => {
 		axios
@@ -33,13 +38,7 @@ const MemberProfile = (props: { member: Member }) => {
 	return (
 		<div className={MemberProfileStyle}>
 			<div>
-				<ProfileImage
-					src={`${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${userInfo?.profileImageId}`}
-					width={263}
-					height={253.5}
-					isCircle={false}
-					className={null}
-				/>
+				<ProfileImage src={src} width={263} height={253.5} isCircle={false} className={null} />
 			</div>
 			<div>
 				<span>{userInfo?.name}</span>

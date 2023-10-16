@@ -36,6 +36,7 @@ export const BestParticipantBodyStyle = css({
 		display: 'flex',
 		alignItems: 'center',
 		gap: '10px',
+		marginRight: '7px',
 		'> span': {
 			fontFamily: 'Pretendard-regular',
 			fontSize: '18px',
