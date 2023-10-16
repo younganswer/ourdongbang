@@ -5,9 +5,11 @@ import { RuleStyle } from './index.style';
 
 const Rule = () => {
 	return (
-		<div className={RuleStyle}>
+		<div>
 			<RuleTitle />
-			<RuleContent />
+			<div className={RuleStyle}>
+				<RuleContent />
+			</div>
 		</div>
 	);
 };

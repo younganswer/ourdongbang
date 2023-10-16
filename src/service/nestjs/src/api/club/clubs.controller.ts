@@ -766,6 +766,21 @@ export class ClubsController {
 	}
 
 	@ApiTags('Rule API')
+	@Get('/rule/:rid')
+	@ApiOperation({ summary: 'get a rule by id', description: 'rule 한개 가져오기' })
+	@ApiParam({ name: 'rid', description: 'Rule ID' })
+	@ApiResponse({ status: 201, description: '업로드에 성공하였습니다' })
+	@ApiResponse({ status: 404, description: '업로드에 실패하였습니다' })
+	async getRuleById(@Param('rid') ruleId: string) {
+		try {
+			return await this.ruleService.getRuleById(ruleId);
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@ApiTags('Rule API')
 	@Get('/:cid/rule/')
 	@ApiOperation({ summary: 'get all rule of club', description: 'club의 모든 rule 가져오기' })
 	@ApiParam({ name: 'cid', description: 'Club ID' })
