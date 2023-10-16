@@ -121,6 +121,8 @@ const RuleContent = () => {
 				// 가져온 데이터에서 룰 정보 추출
 				setClubId(responseClub.data[0]._id);
 				console.log(clubId);
+				console.log(clubId);
+
 				const responseRules = await axios.get(
 					`${process.env.REACT_APP_NESTJS_URL}/club/${responseClub.data[0]._id}/rule`,
 				);
