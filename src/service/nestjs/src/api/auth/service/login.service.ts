@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'common/database/schema/user.schema';
@@ -19,29 +19,31 @@ export class LoginService {
 			}
 			return await this.socialLogin(social, loginRequestDto);
 		} catch (error) {
-			throw new Error(error);
+			console.log(error);
+			throw error;
 		}
 	}
 
 	async commonLogin(loginRequestDto: Partial<AuthDto.Request.Login>): Promise<User> {
 		try {
 			if (!loginRequestDto.id || !loginRequestDto.password) {
-				throw new Error('ID or password is incorrect');
+				throw new HttpException('ID or password is incorrect', 401);
 			}
 
 			const user = await this.userModel.findOne({ id: loginRequestDto.id });
 			if (!user) {
-				throw new Error('ID or password is incorrect');
+				throw new HttpException('ID or password is incorrect', 401);
 			}
 
 			const isValid = await bcrypt.compare(loginRequestDto.password, user.password);
 			if (!isValid) {
-				throw new Error('ID or password is incorrect');
+				throw new HttpException('ID or password is incorrect', 401);
 			}
 
 			return user;
 		} catch (error) {
-			throw new Error(error);
+			console.error(error);
+			throw error;
 		}
 	}
 

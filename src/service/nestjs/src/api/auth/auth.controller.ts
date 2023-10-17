@@ -44,7 +44,7 @@ export class AuthController {
 			return user;
 		} catch (error) {
 			console.error(error);
-			throw new HttpException(error.message, error.status);
+			throw error;
 		}
 	}
 

@@ -60,6 +60,7 @@ export const GoogleLoginButton = (props: {
 				})
 				.catch(error => {
 					console.error(error);
+					alert(error.response.data.message);
 				});
 		},
 	});

@@ -10,7 +10,7 @@ import React, {
 import { AuthContext } from './AuthContext';
 import { Types } from 'mongoose';
 import axios from 'axios';
-import { setCookie } from 'component/cookie';
+import { removeCookie, setCookie } from 'component/cookie';
 
 export type Club = {
 	_id: Types.ObjectId;
@@ -60,9 +60,11 @@ export const ClubProvider = (props: { children: ReactNode }) => {
 					})
 					.catch(() => {
 						setClub(null);
+						removeCookie('clubId', { path: '/' });
 					});
 			} else {
 				setClub(null);
+				removeCookie('clubId', { path: '/' });
 			}
 		} else {
 			setClub(null);

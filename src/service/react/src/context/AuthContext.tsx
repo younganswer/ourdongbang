@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Types } from 'mongoose';
 import axios from 'axios';
-import { setCookie } from 'component/cookie';
+import { removeCookie, setCookie } from 'component/cookie';
 
 export const AuthContext = createContext<{
 	me: Me | null;
@@ -57,6 +57,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				})
 				.catch(() => {
 					setMe(null);
+					removeCookie('userId', { path: '/' });
 				});
 		}
 	}, []);

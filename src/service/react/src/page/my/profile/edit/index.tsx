@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Me } from 'context/AuthContext';
 import { EditProfileHeader } from './header';
 import { EditProfileImage } from './image';
@@ -32,7 +32,7 @@ const handleSubmit = async (
 				})
 				.catch(error => {
 					console.error(error);
-					throw new Error(error.response.data.message);
+					alert(error.response.data.message);
 				});
 			const formData = new FormData();
 
@@ -53,7 +53,8 @@ const handleSubmit = async (
 				toast.success(response.data.message);
 			})
 			.catch(error => {
-				throw new Error(error.response.data.message);
+				console.error(error);
+				alert(error.response.data.message);
 			});
 	} catch (error) {
 		console.error(error);
@@ -73,20 +74,6 @@ const EditProfile = (props: {
 	const [newMe, setNewMe] = useState<Partial<Me>>({});
 	const [isClicked, setIsClicked] = useState<boolean>(false);
 
-	useEffect(() => {
-		document.body.style.cssText = `
-		    position: fixed; 
-		    top: -${window.scrollY}px;
-		    overflow-y: scroll;
-		    width: 100%;`;
-		return () => {
-			const scrollY = document.body.style.top;
-
-			document.body.style.cssText = '';
-			window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-		};
-	}, []);
-
 	return (
 		<form
 			className={EditProfileStyle}
@@ -98,7 +85,7 @@ const EditProfile = (props: {
 			}}
 		>
 			<div>
-				<EditProfileHeader setIsModalOpened={setIsModalOpened} />
+				<EditProfileHeader />
 				<div>
 					<EditProfileImage me={me} setFile={setFile} />
 					<EditProfileInformation me={me} newMe={newMe} setNewMe={setNewMe} />
