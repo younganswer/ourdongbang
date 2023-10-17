@@ -104,20 +104,8 @@ const Footer = (props: { me: Me; setMe: Dispatch<SetStateAction<Me | null>> }) =
 	const changePassword = async () => {
 		axios
 			.patch(`${process.env.REACT_APP_NESTJS_URL}/user/me`, { withCredentials: true })
-			.then(reponse => {
-				setMe({
-					_id: reponse.data._id,
-					name: reponse.data.name,
-					id: reponse.data.id,
-					password: reponse.data.password,
-					email: reponse.data.email,
-					major: reponse.data.major,
-					studentId: reponse.data.studentId,
-					phoneNumber: reponse.data.phoneNumber || null,
-					sns: reponse.data.sns || null,
-					profileImageId: reponse.data.profileImageId || null,
-					clubs: reponse.data.clubs || null,
-				});
+			.then(response => {
+				setMe(response.data);
 			})
 			.catch(error => {
 				console.error(error);

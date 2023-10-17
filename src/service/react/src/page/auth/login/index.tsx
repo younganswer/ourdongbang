@@ -8,6 +8,7 @@ import { AuthContext, Me } from 'context/AuthContext';
 import { LoginPageCustomInputStyle, LoginPageFormStyle, LoginPageStyle } from './index.style';
 import { GoogleLoginButton } from 'component/google-login-button';
 import UnregisteredPage from './fail/unregistered';
+import { setCookie } from 'component/cookie';
 
 const handleLogin = async (
 	event: FormEvent,
@@ -33,21 +34,10 @@ const handleLogin = async (
 				{ withCredentials: true },
 			)
 			.then(response => {
-				setMe({
-					_id: response.data._id,
-					name: response.data.name,
-					id: response.data.id,
-					password: response.data.password,
-					email: response.data.email,
-					major: response.data.major,
-					studentId: response.data.studentId,
-					phoneNumber: response.data.phoneNumber || null,
-					sns: response.data.sns || null,
-					profileImageId: response.data.profileImageId || null,
-					clubs: response.data.clubs || null,
-				});
-				toast.success('로그인 완료');
+				setMe(response.data);
+				setCookie('userId', response.data._id, { path: '/' });
 				navigate('/main/info');
+				toast.success('로그인 완료');
 			})
 			.catch(error => {
 				console.error(error);
@@ -113,6 +103,7 @@ const LoginPage = () => {
 				)
 				.then(response => {
 					setMe(response.data);
+					setCookie('userId', response.data._id, { path: '/' });
 					navigate('/main/info');
 				})
 				.catch(error => {

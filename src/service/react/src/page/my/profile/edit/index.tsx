@@ -80,9 +80,6 @@ const EditProfile = (props: {
 			onSubmit={event => {
 				handleSubmit(event, newMe, setMe, file, setFile, setIsClicked, setIsModalOpened);
 			}}
-			onClick={event => {
-				event.stopPropagation();
-			}}
 		>
 			<div>
 				<EditProfileHeader />

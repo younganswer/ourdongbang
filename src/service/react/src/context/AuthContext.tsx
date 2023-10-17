@@ -39,21 +39,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				.get(`${process.env.REACT_APP_NESTJS_URL}/user/me`, {
 					withCredentials: true,
 				})
-				.then(result => {
-					setMe({
-						_id: result.data._id,
-						name: result.data.name,
-						id: result.data.id,
-						password: result.data.password,
-						email: result.data.email,
-						major: result.data.major,
-						studentId: result.data.studentId,
-						phoneNumber: result.data.phoneNumber || null,
-						sns: result.data.sns || null,
-						profileImageId: result.data.profileImageId || null,
-						clubs: result.data.clubs || null,
-					});
-					setCookie('userId', result.data._id, { path: '/' });
+				.then(response => {
+					setMe(response.data);
+					setCookie('userId', response.data._id, { path: '/' });
 				})
 				.catch(() => {
 					setMe(null);

@@ -209,12 +209,7 @@ const ProfileSetting = (props: {
 	const { me, setMe, setIsModalOpened } = props;
 
 	return (
-		<div
-			className={ProfileSettingStyle}
-			onClick={event => {
-				event.stopPropagation();
-			}}
-		>
+		<div className={ProfileSettingStyle}>
 			<Header />
 			<Body me={me} setMe={setMe} setIsModalOpened={setIsModalOpened} />
 		</div>

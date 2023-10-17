@@ -58,19 +58,7 @@ const registerHandler = async (
 				{ withCredentials: true },
 			)
 			.then(response => {
-				setMe({
-					_id: response.data._id,
-					name: response.data.name,
-					id: response.data.id,
-					password: response.data.password,
-					email: response.data.email,
-					major: response.data.major,
-					studentId: response.data.studentId,
-					phoneNumber: undefined,
-					sns: undefined,
-					profileImageId: null,
-					clubs: null,
-				});
+				setMe(response.data);
 				toast.success('회원가입을 해주셔서 감사합니다.');
 				navigate('/main/info'); // 일단 임시로 PreviewPage 경로로 설정, MainPage 생성 후 경로 변경 요망
 			})

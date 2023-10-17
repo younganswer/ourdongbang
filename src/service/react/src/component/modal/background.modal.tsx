@@ -21,7 +21,13 @@ export const ModalBackground = (props: {
 						}}
 					/>
 				</div>
-				{children}
+				<div
+					onClick={event => {
+						event.stopPropagation();
+					}}
+				>
+					{children}
+				</div>
 			</div>
 		</div>,
 		document.body,

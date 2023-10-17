@@ -45,9 +45,6 @@ const ImageSelector = (props: {
 				type="file"
 				ref={fileInputRef}
 				accept="image/*"
-				onClick={event => {
-					event.stopPropagation();
-				}}
 				onChange={event => handleChange(event, setSrc, setFile)}
 			/>
 			<span
