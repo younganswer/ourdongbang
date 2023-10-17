@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Types } from 'mongoose';
 import axios from 'axios';
+import { setCookie } from 'component/cookie';
 
 export const AuthContext = createContext<{
 	me: Me | null;
@@ -11,6 +12,7 @@ export const AuthContext = createContext<{
 });
 
 export type Me = {
+	_id: Types.ObjectId;
 	name: string;
 	id: string;
 	password: string;
@@ -39,6 +41,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				})
 				.then(result => {
 					setMe({
+						_id: result.data._id,
 						name: result.data.name,
 						id: result.data.id,
 						password: result.data.password,
@@ -50,6 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 						profileImageId: result.data.profileImageId || null,
 						clubs: result.data.clubs || null,
 					});
+					setCookie('userId', result.data._id, { path: '/' });
 				})
 				.catch(() => {
 					setMe(null);

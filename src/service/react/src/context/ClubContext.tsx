@@ -10,6 +10,7 @@ import React, {
 import { AuthContext } from './AuthContext';
 import { Types } from 'mongoose';
 import axios from 'axios';
+import { setCookie } from 'component/cookie';
 
 export type Club = {
 	_id: Types.ObjectId;
@@ -55,6 +56,7 @@ export const ClubProvider = (props: { children: ReactNode }) => {
 							audits: response.data.audits,
 							reviews: response.data.reviews,
 						});
+						setCookie('clubId', response.data._id, { path: '/' });
 					})
 					.catch(() => {
 						setClub(null);

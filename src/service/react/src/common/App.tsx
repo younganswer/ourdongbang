@@ -12,6 +12,8 @@ import './font.css';
 import RegisterFormPage from 'page/auth/register/form';
 import InfoPage from 'page/Info';
 import SchedulerPage from '../page/calendar/schedule';
+import PrivateRoute from 'component/route/private-route';
+import PublicRoute from 'component/route/public-route';
 
 function App() {
 	return (
@@ -20,15 +22,21 @@ function App() {
 			<ToolBar />
 			<Routes>
 				<Route path="/" element={<PreviewPage />} />
-				<Route path="/auth/login" element={<LoginPage />} />
-				<Route path="/auth/register" element={<RegisterPage />} />
-				<Route path="/auth/register/form" element={<RegisterFormPage />} />
-				<Route path="/main/info" element={<InfoPage />} />
-				<Route path="/main/calendar" element={<CalendarPage />} />
-				<Route path="/main/calendar/scheduler" element={<SchedulerPage />} />
-				<Route path="/main/audit" element={<AuditPage />} />
-				<Route path="/main/search" element={<div>search page</div>} />
-				<Route path="/main/mypage" element={<MyPage />} />
+				<Route path="/auth/login" element={<PublicRoute element={<LoginPage />} />} />
+				<Route path="/auth/register" element={<PublicRoute element={<RegisterPage />} />} />
+				<Route
+					path="/auth/register/form"
+					element={<PublicRoute element={<RegisterFormPage />} />}
+				/>
+				<Route path="/main/info" element={<PrivateRoute element={<InfoPage />} />} />
+				<Route path="/main/calendar" element={<PrivateRoute element={<CalendarPage />} />} />
+				<Route
+					path="/main/calendar/scheduler"
+					element={<PrivateRoute element={<SchedulerPage />} />}
+				/>
+				<Route path="/main/audit" element={<PrivateRoute element={<AuditPage />} />} />
+				<Route path="/main/search" element={<PrivateRoute element={<div>search page</div>} />} />
+				<Route path="/main/mypage" element={<PrivateRoute element={<MyPage />} />} />
 			</Routes>
 		</div>
 	);

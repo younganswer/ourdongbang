@@ -59,6 +59,7 @@ const registerHandler = async (
 			)
 			.then(response => {
 				setMe({
+					_id: response.data._id,
 					name: response.data.name,
 					id: response.data.id,
 					password: response.data.password,
