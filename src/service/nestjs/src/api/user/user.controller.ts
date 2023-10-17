@@ -1,10 +1,17 @@
 import { Body, Controller, Get, HttpException, Param, Patch, Req, UseGuards } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+	ApiBadRequestResponse,
+	ApiOkResponse,
+	ApiOperation,
+	ApiResponse,
+	ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from 'common/auth/guard';
 import { User } from 'common/database/schema/user.schema';
 import { UserService } from './user.service';
 import { ImageService } from '../image/service/image.service';
 import { S3Service } from '../image/service/s3.service';
+import * as bcrypt from 'bcrypt';
 
 @Controller('user')
 @ApiTags('user')
@@ -52,6 +59,38 @@ export class UserController {
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Patch('me/password')
+	@UseGuards(JwtAuthGuard)
+	@ApiResponse({ status: 200, description: 'Update my password successfully' })
+	@ApiBadRequestResponse({ description: 'Bad Request' })
+	async updateMyPassword(
+		@Body('password') password: string,
+		@Body('newPassword') newPassword: string,
+		@Req() req,
+	) {
+		try {
+			const user = await this.userService.findByObjectId(req.user._id);
+			if (!user) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			const isMatch = await bcrypt.compare(password, user.password);
+			if (!isMatch) {
+				throw new HttpException('Password is not correct', 401);
+			}
+
+			const me = await this.userService.updatePassword(req.user._id, newPassword);
+			if (!me) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			return me;
+		} catch (error) {
+			console.error(error);
+			throw error;
 		}
 	}
 

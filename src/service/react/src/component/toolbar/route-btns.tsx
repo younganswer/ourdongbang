@@ -22,7 +22,7 @@ const ToolBarRouteBtn = (props: { to: string; label: string }) => {
 				btnRef.current.style.fontFamily = 'Pretendard-regular';
 			}
 		}
-	}, [location]);
+	}, [location, to]);
 
 	return (
 		<div className={ToolBarRouteBtnStyle} style={borderStyle}>

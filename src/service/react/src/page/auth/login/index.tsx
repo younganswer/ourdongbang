@@ -51,7 +51,7 @@ const handleLogin = async (
 			})
 			.catch(error => {
 				console.error(error);
-				throw error;
+				alert(error.response.data.message);
 			});
 	} catch (err) {
 		console.error(err);

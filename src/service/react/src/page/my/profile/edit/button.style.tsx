@@ -8,7 +8,7 @@ export const EditProfileButtonStyle = css({
 	'> button': {
 		width: '100%',
 		padding: '3px 0',
-		fontFamily: 'Pretendard-regular',
+		fontFamily: 'Pretendard-medium',
 		':hover': {
 			cursor: 'pointer',
 		},

@@ -100,15 +100,9 @@ const RuleContent = () => {
 			content: inputContent, // 내용
 		};
 		// Axios를 사용하여 POST 요청을 보냅니다.
-		axios
-			.post(`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`, data)
-			.then(response => {
-				console.log('POST 요청 성공:', response.data);
-				closeModal();
-			})
-			.catch(error => {
-				console.error('POST 요청 실패:', error);
-			});
+		axios.post(`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`, data).then(() => {
+			closeModal();
+		});
 	};
 
 	useEffect(() => {
@@ -120,8 +114,6 @@ const RuleContent = () => {
 
 				// 가져온 데이터에서 룰 정보 추출
 				setClubId(responseClub.data[0]._id);
-				console.log(clubId);
-				console.log(clubId);
 
 				const responseRules = await axios.get(
 					`${process.env.REACT_APP_NESTJS_URL}/club/${responseClub.data[0]._id}/rule`,

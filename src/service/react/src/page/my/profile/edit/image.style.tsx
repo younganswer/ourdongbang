@@ -10,7 +10,7 @@ export const EditProfileImageStyle = css({
 		justifyContent: 'space-between',
 
 		'> :nth-child(1)': {
-			fontFamily: 'Pretendard-regular',
+			fontFamily: 'Pretendard-medium',
 		},
 
 		'> :nth-child(2)': {

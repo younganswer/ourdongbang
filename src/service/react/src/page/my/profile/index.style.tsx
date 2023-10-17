@@ -23,19 +23,22 @@ export const ProfileHeaderStyle = css({
 	alignItems: 'center',
 	borderBottom: '1px solid black',
 
-	'> span': {
-		fontSize: '24px',
-		fontFamily: 'Pretendard-bold',
+	'> div:nth-child(1)': {
+		display: 'flex',
+		alignItems: 'center',
+		gap: '16px',
+		'> span': {
+			fontSize: '24px',
+			fontFamily: 'Pretendard-bold',
+		},
 	},
-	'> div': {
+	'> div:nth-child(2)': {
 		display: 'flex',
 		alignItems: 'center',
 		gap: '8px',
-
 		'&:hover': {
 			cursor: 'pointer',
 		},
-
 		'> span': {
 			fontSize: '18px',
 			fontFamily: 'Pretendard-regular',
@@ -111,18 +114,14 @@ export const ProfileInformationStyle = css({
 
 export const ProfileFooterStyle = css({
 	gridRow: '2',
-	width: '90%',
-	margin: '0 auto',
+	width: '86%',
+	margin: '0 7%',
 	display: 'flex',
 	justifyContent: 'flex-end',
-	alignItems: 'center',
 
-	'> span': {
-		height: '30px',
-		fontSize: '20px',
-		fontFamily: 'Pretendard-regular',
-		lineHeight: '30px',
-		':hover': {
+	'> svg': {
+		marginBottom: 'auto',
+		'&:hover': {
 			cursor: 'pointer',
 		},
 	},

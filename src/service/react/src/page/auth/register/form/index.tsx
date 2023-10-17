@@ -76,7 +76,7 @@ const registerHandler = async (
 			})
 			.catch(error => {
 				console.error(error);
-				throw error;
+				alert(error.response.data.message);
 			});
 	} catch (err: unknown) {
 		if (err instanceof Error) {
