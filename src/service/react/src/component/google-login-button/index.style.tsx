@@ -4,7 +4,6 @@ export const GoogleLoginStyle = css({
 	fontFamily: 'Roboto-Medium',
 	backgroundColor: '#FFFFFF',
 	display: 'flex',
-	margin: '0 auto 0 auto',
 	border: '1px solid #000000',
 	borderRadius: '5px',
 	cursor: 'pointer',

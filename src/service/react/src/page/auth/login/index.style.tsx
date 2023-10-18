@@ -2,66 +2,50 @@ import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
 
 export const LoginPageStyle = css(PageStyle, {
+	width: 400,
+	height: 800,
+	margin: '0 auto',
 	display: 'flex',
-	justifyContent: 'center',
-	backgroundColor: 'white',
+	alignItems: 'center',
 
 	'> div': {
-		width: 400,
-		height: 800,
-		margin: '1rem auto 0 auto',
+		width: '100%',
 		display: 'grid',
-		gridTemplateRows: '1fr 100px 100px 100px 100px 1fr',
-		rowGap: '2rem',
+		gridTemplateRows: 'repeat(5, auto)',
+		rowGap: '3.5rem',
 
-		'> h3': {
-			gridRow: 2,
-			margin: 0,
-			fontSize: '32px',
-			lineHeight: '100px',
-			textAlign: 'center',
+		'> *': {
+			margin: '0 auto',
+		},
+
+		'> span:nth-child(1)': {
+			gridRow: 1,
+			fontSize: 32,
+			fontFamily: 'Pretendard-medium',
 		},
 
 		'> div:nth-child(3)': {
-			borderTop: '1px solid #D9D9D9',
-			width: '100%',
-			height: '100%',
-			gridRow: 4,
-			display: 'flex',
-			'> div': {
-				marginTop: 'auto',
-			},
-		},
-
-		'> div:nth-child(4)': {
-			gridRow: 5,
-			paddingTop: '4rem',
 			display: 'flex',
 			justifyContent: 'center',
+			alignItems: 'center',
 			gap: '1rem',
-
-			'> *': {
-				height: 36,
-				lineHeight: '36px',
-			},
-
-			'> a': {
-				color: 'black',
-				textDecoration: 'none',
-				' > span': {
-					textDecoration: 'underline',
-					textUnderlinePosition: 'under',
-					cursor: 'pointer',
-				},
+			'> span': {
+				gridRow: 3,
+				color: '#A7A7A7',
+				fontSize: 16,
+				fontFamily: 'Pretendard-medium',
 			},
 		},
 	},
 });
 
 export const LoginPageFormStyle = css({
-	gridRow: 3,
+	gridRow: 2,
+	width: '100%',
+	height: 100,
 	display: 'grid',
 	gridTemplateColumns: '2fr 1fr',
+	columnGap: '1rem',
 
 	'> div': {
 		display: 'grid',
@@ -70,13 +54,11 @@ export const LoginPageFormStyle = css({
 	},
 
 	'> button': {
-		width: '100%',
-		height: '100%',
 		borderRadius: 5,
 		border: '1px solid #D9D9D9',
 		backgroundColor: '#D9D9D9',
-		fontSize: '18px',
-
+		fontSize: 20,
+		fontFamily: 'Pretendard-medium',
 		':hover': {
 			backgroundColor: '#BFBFBF',
 		},
@@ -87,14 +69,40 @@ export const LoginPageFormStyle = css({
 });
 
 export const LoginPageCustomInputStyle = css({
-	width: '90%',
-
 	'> input': {
-		width: '89%',
+		width: '86%',
 		height: '100%',
 		borderRadius: 5,
 		border: '1px solid #D9D9D9',
-		padding: '0 1.2rem',
-		fontSize: '16px',
+		padding: '0 7%',
+		fontSize: 16,
+		fontFamily: 'Pretendard-regular',
+	},
+});
+
+export const LoginPageGoogleLoginStyle = css({
+	gridRow: 4,
+});
+
+export const LoginPageFooterStyle = css({
+	gridRow: 5,
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	gap: '1rem',
+
+	'> *': {
+		height: 36,
+		lineHeight: '36px',
+	},
+
+	'> a': {
+		color: 'black',
+		textDecoration: 'none',
+		'> span': {
+			textDecoration: 'underline',
+			textUnderlinePosition: 'under',
+			cursor: 'pointer',
+		},
 	},
 });
