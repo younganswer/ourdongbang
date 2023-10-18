@@ -26,61 +26,8 @@ export const ProfileSettingBodyStyle = css({
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
-});
 
-export const ProfileSettingBeforeAuthorizedStyle = css({
-	width: '80%',
-	display: 'grid',
-	gridTemplateRows: 'repeat(3, auto)',
-	rowGap: 36,
-
-	'> span:nth-child(1)': {
-		fontSize: 24,
-		fontFamily: 'Pretendard-semibold',
-	},
-	'> span:nth-child(2)': {
-		fontSize: 20,
-		fontFamily: 'Pretendard-regular',
-	},
-	'> form': {
-		'> *': {
-			fontSize: 20,
-			fontFamily: 'Pretendard-regular',
-		},
-		'> input': {
-			marginRight: 5,
-		},
-	},
-});
-
-export const ProfileSettingAfterAuthorizedStyle = css({
-	width: '80%',
-	'> form': {
-		display: 'grid',
-		gridTemplateRows: 'repeat(5, auto)',
-		rowGap: 20,
-		'> div': {
-			display: 'flex',
-			justifyContent: 'space-between',
-			alignItems: 'center',
-
-			'> span:nth-child(1)': {
-				fontSize: 18,
-				fontFamily: 'Pretendard-medium',
-			},
-			'> span:nth-child(2)': {
-				fontSize: 16,
-				fontFamily: 'Pretendard-regular',
-			},
-			'> input:nth-child(2)': {
-				textAlign: 'right',
-				fontSize: 16,
-				fontFamily: 'Pretendard-regular',
-			},
-		},
-		'> button': {
-			fontSize: 16,
-			fontFamily: 'Pretendard-medium',
-		},
+	'> div': {
+		width: '75%',
 	},
 });
