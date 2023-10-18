@@ -1,20 +1,27 @@
-import React, { useState, FormEvent, useContext, useEffect } from 'react';
+import React, { useState, FormEvent, useContext, useEffect, Dispatch, SetStateAction } from 'react';
 import CustomInput from '../../../component/input';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, NavigateFunction, Link, useSearchParams } from 'react-router-dom';
 import { AuthContext, Me } from 'context/AuthContext';
-import { LoginPageCustomInputStyle, LoginPageFormStyle, LoginPageStyle } from './index.style';
+import {
+	LoginPageCustomInputStyle,
+	LoginPageFooterStyle,
+	LoginPageFormStyle,
+	LoginPageGoogleLoginStyle,
+	LoginPageStyle,
+} from './index.style';
 import { GoogleLoginButton } from 'component/google-login-button';
 import UnregisteredPage from './fail/unregistered';
 import { setCookie } from 'component/cookie';
+import { DivideLineIcon } from './icon';
 
 const handleLogin = async (
 	event: FormEvent,
 	id: string | undefined,
 	password: string | undefined,
-	setMe: React.Dispatch<React.SetStateAction<Me | null>>,
+	setMe: Dispatch<SetStateAction<Me | null>>,
 	navigate: NavigateFunction,
 ) => {
 	try {
@@ -50,7 +57,7 @@ const handleLogin = async (
 };
 
 const LoginForm = (props: {
-	setMe: React.Dispatch<React.SetStateAction<Me | null>>;
+	setMe: Dispatch<SetStateAction<Me | null>>;
 	navigate: NavigateFunction;
 }) => {
 	const { setMe, navigate } = props;
@@ -83,10 +90,11 @@ const LoginForm = (props: {
 	);
 };
 
-const LoginPage = () => {
-	const [searchParams] = useSearchParams();
-	const { setMe } = useContext(AuthContext);
-	const navigate = useNavigate();
+const GoogleLogin = (props: {
+	setMe: Dispatch<SetStateAction<Me | null>>;
+	navigate: NavigateFunction;
+}) => {
+	const { setMe, navigate } = props;
 	const [, setName] = useState<string | undefined>(undefined);
 	const [, setHd] = useState<string | undefined>(undefined);
 	const [email, setEmail] = useState<string | undefined>(undefined);
@@ -113,6 +121,36 @@ const LoginPage = () => {
 		}
 	}, [email]);
 
+	return (
+		<div className={LoginPageGoogleLoginStyle}>
+			<GoogleLoginButton
+				text={undefined}
+				width={'300px'}
+				height={'50px'}
+				setName={setName}
+				setHd={setHd}
+				setEmail={setEmail}
+			/>
+		</div>
+	);
+};
+
+const Footer = () => {
+	return (
+		<div className={LoginPageFooterStyle}>
+			<span>아직 우리동방에 가입하지 않으셨나요?</span>
+			<Link to={'/auth/register'}>
+				<span>가입하기</span>
+			</Link>
+		</div>
+	);
+};
+
+const LoginPage = () => {
+	const [searchParams] = useSearchParams();
+	const { setMe } = useContext(AuthContext);
+	const navigate = useNavigate();
+
 	if (searchParams.get('fail') === 'unregistered') {
 		return <UnregisteredPage />;
 	}
@@ -120,24 +158,15 @@ const LoginPage = () => {
 	return (
 		<div className={LoginPageStyle}>
 			<div>
-				<h3>로그인</h3>
+				<span>로그인</span>
 				<LoginForm setMe={setMe} navigate={navigate} />
 				<div>
-					<GoogleLoginButton
-						text={undefined}
-						width={'300px'}
-						height={'50px'}
-						setName={setName}
-						setHd={setHd}
-						setEmail={setEmail}
-					/>
+					<DivideLineIcon width={170} height={2} />
+					<span>또는</span>
+					<DivideLineIcon width={170} height={2} />
 				</div>
-				<div>
-					<span>아직 우리동방에 가입하지 않으셨나요?</span>
-					<Link to={'/auth/register'}>
-						<span>가입하기</span>
-					</Link>
-				</div>
+				<GoogleLogin setMe={setMe} navigate={navigate} />
+				<Footer />
 			</div>
 		</div>
 	);
