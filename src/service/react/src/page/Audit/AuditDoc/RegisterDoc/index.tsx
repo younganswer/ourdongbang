@@ -13,7 +13,8 @@ const Addbutton = (props: { setIsModalOpened: React.Dispatch<React.SetStateActio
 					setIsModalOpened(true);
 				}}
 			>
-				+
+				<span>회계 내역 추가하기</span>
+				<span>+</span>
 			</button>
 		</div>
 	);
