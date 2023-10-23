@@ -1,7 +1,6 @@
 import { css } from '@emotion/css';
 
 export const EditProfileButtonStyle = css({
-	gridRow: 4,
 	width: '90%',
 	margin: '0 auto',
 

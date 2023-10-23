@@ -1,21 +1,18 @@
 import { css } from '@emotion/css';
 
 export const EditProfileStyle = css({
-	width: 408,
-	height: 789,
+	width: 430,
+	height: 700,
 	borderRadius: '10px',
 
 	'> div': {
-		height: '100%',
+		padding: '5% 0',
 		display: 'grid',
-		gridTemplateRows: '0.5rem 50px 1fr auto 1rem',
-
+		gridTemplateRows: 'auto 1fr auto',
+		rowGap: '5%',
 		'> div:nth-child(2)': {
-			gridRow: 3,
-			margin: '0 auto',
-			width: '90%',
-			display: 'grid',
-			gridTemplateRows: '1fr auto 1fr auto 1fr',
+			height: 538,
+			overflowY: 'scroll',
 		},
 	},
 });

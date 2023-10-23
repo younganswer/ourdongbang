@@ -2,14 +2,13 @@ import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
 
 export const LoginPageStyle = css(PageStyle, {
-	width: 400,
 	height: 800,
-	margin: '0 auto',
 	display: 'flex',
+	justifyContent: 'center',
 	alignItems: 'center',
 
 	'> div': {
-		width: '100%',
+		width: 400,
 		display: 'grid',
 		gridTemplateRows: 'repeat(5, auto)',
 		rowGap: '3.5rem',
@@ -90,11 +89,7 @@ export const LoginPageFooterStyle = css({
 	justifyContent: 'center',
 	alignItems: 'center',
 	gap: '1rem',
-
-	'> *': {
-		height: 36,
-		lineHeight: '36px',
-	},
+	fontFamily: 'Pretendard-regular',
 
 	'> a': {
 		color: 'black',
