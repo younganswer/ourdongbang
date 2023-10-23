@@ -2,62 +2,55 @@ import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
 
 export const RegisterPageStyle = css(PageStyle, {
+	height: 800,
 	display: 'flex',
 	justifyContent: 'center',
-	backgroundColor: 'white',
+	alignItems: 'center',
 
 	'> div': {
 		width: 400,
-		height: 800,
-		margin: '1rem auto 0 auto',
 		display: 'grid',
-		gridTemplateRows: '1fr 100px 150px 100px 1fr',
-		rowGap: '2rem',
-
-		'> h3': {
-			gridRow: 2,
-			margin: 0,
-			fontSize: '32px',
-			lineHeight: '100px',
-			textAlign: 'center',
-		},
-
-		'> div:nth-child(3)': {
-			gridRow: 4,
-			display: 'flex',
-			justifyContent: 'center',
-			gap: '1rem',
-
-			'> *': {
-				height: 36,
-				lineHeight: '36px',
-			},
-
-			'> a': {
-				color: 'black',
-				textDecoration: 'none',
-				' > span': {
-					textDecoration: 'underline',
-					textUnderlinePosition: 'under',
-					cursor: 'pointer',
-				},
-			},
-		},
+		gridTemplateRows: 'repeat(3, auto)',
+		rowGap: '6rem',
 	},
 });
 
+export const RegisterPageHeaderStyle = css({
+	margin: '0 auto',
+	fontSize: 40,
+	fontFamily: 'Pretendard-medium',
+});
+
 export const GoogleRegisterStyle = css({
-	gridRow: 3,
 	borderBottom: '1px solid #D9D9D9',
 	display: 'flex',
 	justifyContent: 'center',
+	paddingBottom: '4rem',
 
 	'> div': {
-		margin: 'auto 0 auto 0',
+		margin: 'auto 0',
 	},
 
 	'> span': {
 		fontSize: '24px',
 		lineHeight: '100px',
+	},
+});
+
+export const RegisterPageFooterStyle = css({
+	display: 'flex',
+	justifyContent: 'center',
+	gap: '1rem',
+	fontSize: 20,
+	fontFamily: 'Pretendard-regular',
+
+	'> a': {
+		color: 'black',
+		textDecoration: 'none',
+		' > span': {
+			textDecoration: 'underline',
+			textUnderlinePosition: 'under',
+			cursor: 'pointer',
+		},
 	},
 });

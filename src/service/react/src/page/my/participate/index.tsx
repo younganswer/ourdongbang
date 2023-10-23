@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+	ParticipateHeaderStyle,
 	ParticipateStyle,
 	ParticipatedActivityStyle,
 	ParticipatedStyle,
@@ -7,6 +8,15 @@ import {
 } from './index.style';
 import { Me } from 'context/AuthContext';
 import { HandIcon, RightArrowIcon } from './icon';
+
+const Header = () => {
+	return (
+		<div className={ParticipateHeaderStyle}>
+			<HandIcon width={29} height={29} />
+			<span>참여 활동</span>
+		</div>
+	);
+};
 
 const Participation = (props: { me: Me }) => {
 	const { me } = props;
@@ -51,15 +61,13 @@ const Participated = (props: { me: Me }) => {
 
 	return (
 		<div className={ParticipatedStyle}>
-			<div>
-				<HandIcon width={29} height={29} />
-				<span>참여 활동</span>
-			</div>
-			<div>
-				<Activity me={me} />
-				<Activity me={me} />
-				<Activity me={me} />
-			</div>
+			<Activity me={me} />
+			<Activity me={me} />
+			<Activity me={me} />
+			<Activity me={me} />
+			<Activity me={me} />
+			<Activity me={me} />
+			<Activity me={me} />
 		</div>
 	);
 };
@@ -69,8 +77,11 @@ export const Participate = (props: { me: Me }) => {
 
 	return (
 		<div className={ParticipateStyle}>
-			<Participation me={me} />
-			<Participated me={me} />
+			<Header />
+			<div>
+				<Participation me={me} />
+				<Participated me={me} />
+			</div>
 		</div>
 	);
 };

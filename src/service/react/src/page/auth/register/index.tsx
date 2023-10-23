@@ -1,10 +1,34 @@
 import React, { useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { RegisterPageStyle, GoogleRegisterStyle } from './index.style';
+import {
+	RegisterPageStyle,
+	GoogleRegisterStyle,
+	RegisterPageHeaderStyle,
+	RegisterPageFooterStyle,
+} from './index.style';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { GoogleLoginButton } from 'component/google-login-button';
 import axios from 'axios';
 import RegisteredPage from './fail/registered';
+
+const Header = () => {
+	return (
+		<div className={RegisterPageHeaderStyle}>
+			<span>회원가입</span>
+		</div>
+	);
+};
+
+const Footer = () => {
+	return (
+		<div className={RegisterPageFooterStyle}>
+			<span>이미 회원이시라면</span>
+			<Link to={'/auth/login'}>
+				<span>로그인 하기</span>
+			</Link>
+		</div>
+	);
+};
 
 const RegisterPage = () => {
 	const [searchParams] = useSearchParams();
@@ -33,7 +57,7 @@ const RegisterPage = () => {
 	return (
 		<div className={RegisterPageStyle}>
 			<div>
-				<h3>회원가입</h3>
+				<Header />
 				<div className={GoogleRegisterStyle}>
 					<GoogleLoginButton
 						text="Google 계정으로 가입하기"
@@ -44,12 +68,7 @@ const RegisterPage = () => {
 						setEmail={setEmail}
 					/>
 				</div>
-				<div>
-					<span>이미 회원이시라면</span>
-					<Link to={'/auth/login'}>
-						<span>로그인 하기</span>
-					</Link>
-				</div>
+				<Footer />
 			</div>
 		</div>
 	);

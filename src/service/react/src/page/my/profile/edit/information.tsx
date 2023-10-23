@@ -1,7 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
 import { EditProfileInformationStyle } from './information.style';
 import { Me } from 'context/AuthContext';
 import { ClubContext } from 'context/ClubContext';
+import {
+	ClubIcon,
+	EmailIcon,
+	InstagramIcon,
+	MajorIcon,
+	PhoneNumberIcon,
+	SchoolIcon,
+	StudentIdIcon,
+} from '../icon';
 
 const Header = () => {
 	return (
@@ -12,19 +21,32 @@ const Header = () => {
 };
 
 const Information = (props: {
+	icon: JSX.Element;
 	label: string;
 	info: string;
-	setInfo:
-		| null
-		| React.Dispatch<React.SetStateAction<string>>
-		| React.Dispatch<React.SetStateAction<string | undefined>>;
+	setInfo: null | Dispatch<SetStateAction<string>> | Dispatch<SetStateAction<string | undefined>>;
 }) => {
-	const { label, info, setInfo } = props;
+	const { icon, label, info, setInfo } = props;
+	let inputForm = null;
 
-	return (
-		<div>
-			<span>{label}</span>
-			{setInfo ? (
+	if (setInfo) {
+		if (label === '소개') {
+			inputForm = (
+				<textarea
+					style={{
+						textAlign: 'left',
+						height: '33px',
+						resize: 'none',
+						fontFamily: 'Pretendard-regular',
+						fontSize: '14px',
+						whiteSpace: 'pre-wrap',
+						wordBreak: 'break-word',
+						overflowWrap: 'break-word',
+					}}
+				/>
+			);
+		} else {
+			inputForm = (
 				<input
 					type="text"
 					value={info}
@@ -32,9 +54,17 @@ const Information = (props: {
 						setInfo(event.target.value);
 					}}
 				/>
-			) : (
-				<span>{info}</span>
-			)}
+			);
+		}
+	} else {
+		inputForm = <span>{info}</span>;
+	}
+
+	return (
+		<div>
+			{icon}
+			<span>{label}</span>
+			{inputForm}
 		</div>
 	);
 };
@@ -42,7 +72,7 @@ const Information = (props: {
 export const EditProfileInformation = (props: {
 	me: Me;
 	newMe: Partial<Me>;
-	setNewMe: React.Dispatch<React.SetStateAction<Partial<Me>>>;
+	setNewMe: Dispatch<SetStateAction<Partial<Me>>>;
 }) => {
 	const { me, newMe, setNewMe } = props;
 	const divRef = useRef<HTMLDivElement>(null);
@@ -54,6 +84,7 @@ export const EditProfileInformation = (props: {
 	const [studentId, setStudentId] = useState<string | undefined>(me.studentId);
 	const [phoneNumber, setPhoneNumber] = useState<string | undefined>(me.phoneNumber);
 	const [sns, setSns] = useState<string | undefined>(me.sns);
+	//const [description, setDescription] = useState<string | undefined>(me.description);
 
 	useEffect(() => {
 		setNewMe({
@@ -64,43 +95,89 @@ export const EditProfileInformation = (props: {
 			phoneNumber,
 			sns,
 		});
-		if (divRef.current) {
-			const elements = divRef.current.querySelectorAll('span:nth-child(2), input:nth-child(2)');
-			let spanMaxWidth = 0,
-				inputMaxWidth = 0;
+		//if (divRef.current) {
+		//	const elements = divRef.current.querySelectorAll('span:nth-child(3), input:nth-child(3)');
+		//	let spanMaxWidth = 0,
+		//		inputMaxWidth = 0;
 
-			elements.forEach(element => {
-				if (element instanceof HTMLSpanElement) {
-					spanMaxWidth = Math.max(spanMaxWidth, element.clientWidth);
-				} else if (element instanceof HTMLInputElement) {
-					inputMaxWidth = Math.max(inputMaxWidth, element.clientWidth);
-				} else {
-					throw new Error('Unexpected element');
-				}
-			});
-			elements.forEach(element => {
-				if (element instanceof HTMLInputElement) {
-					if (spanMaxWidth < inputMaxWidth) {
-						element.setAttribute('style', `width: ${inputMaxWidth}px`);
-					} else {
-						element.setAttribute('style', `width: ${spanMaxWidth - 4}px`);
-					}
-				}
-			});
-		}
+		//	elements.forEach(element => {
+		//		if (element instanceof HTMLSpanElement) {
+		//			spanMaxWidth = Math.max(spanMaxWidth, element.clientWidth);
+		//		} else if (element instanceof HTMLInputElement) {
+		//			inputMaxWidth = Math.max(inputMaxWidth, element.clientWidth);
+		//		} else {
+		//			throw new Error('Unexpected element');
+		//		}
+		//	});
+		//	elements.forEach(element => {
+		//		if (element instanceof HTMLInputElement) {
+		//			if (spanMaxWidth < inputMaxWidth) {
+		//				element.setAttribute('style', `width: ${inputMaxWidth}px`);
+		//			} else {
+		//				element.setAttribute('style', `width: ${spanMaxWidth - 4}px`);
+		//			}
+		//		}
+		//	});
+		//}
 	}, [name, major, studentId, phoneNumber, sns]);
 
 	return (
 		<div className={EditProfileInformationStyle} ref={divRef}>
 			<Header />
-			<Information label="이름" info={name} setInfo={setName} />
-			<Information label="이메일" info={email} setInfo={null} />
-			<Information label="학교" info={univ} setInfo={null} />
-			<Information label="동아리" info={club?.name || ''} setInfo={null} />
-			<Information label="학과" info={major || ''} setInfo={setMajor} />
-			<Information label="학번" info={studentId || ''} setInfo={setStudentId} />
-			<Information label="전화번호" info={phoneNumber || ''} setInfo={setPhoneNumber} />
-			<Information label="SNS" info={sns || ''} setInfo={setSns} />
+			<Information
+				icon={<EmailIcon width={20} height={20} />}
+				label="이름"
+				info={name}
+				setInfo={setName}
+			/>
+			<Information
+				icon={<EmailIcon width={20} height={20} />}
+				label="이메일"
+				info={email}
+				setInfo={null}
+			/>
+			<Information
+				icon={<SchoolIcon width={20} height={20} />}
+				label="학교"
+				info={univ}
+				setInfo={null}
+			/>
+			<Information
+				icon={<ClubIcon width={20} height={20} />}
+				label="동아리"
+				info={club?.name || ''}
+				setInfo={null}
+			/>
+			<Information
+				icon={<MajorIcon width={20} height={20} />}
+				label="학과"
+				info={major || ''}
+				setInfo={setMajor}
+			/>
+			<Information
+				icon={<StudentIdIcon width={20} height={20} />}
+				label="학번"
+				info={studentId || ''}
+				setInfo={setStudentId}
+			/>
+			<Information
+				icon={<PhoneNumberIcon width={20} height={20} />}
+				label="전화번호"
+				info={phoneNumber || ''}
+				setInfo={setPhoneNumber}
+			/>
+			<Information
+				icon={<InstagramIcon width={20} height={20} />}
+				label="인스타그램"
+				info={sns || ''}
+				setInfo={setSns}
+			/>
+			<Information
+				icon={<InstagramIcon width={20} height={20} />}
+				label="소개"
+				info={sns || ''}
+				setInfo={setSns}
+			/>
 		</div>
 	);
 };
