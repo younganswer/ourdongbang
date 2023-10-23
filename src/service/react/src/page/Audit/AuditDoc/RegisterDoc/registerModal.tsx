@@ -3,77 +3,127 @@ import React, { useState } from 'react';
 import { registerModalStyle, registerModalTitleStyle } from './registerModal.style';
 import { Modal } from 'component/modal';
 import { RegisterHeader } from './registerHeader';
-import { CloseBtn } from './CloseBtn';
+import { SumupHeader } from './Sumup/sumupHeader';
+import axios from 'axios';
+
+const handleSubmit = async (
+	event: React.FormEvent<HTMLFormElement>,
+	file: null | File,
+	setModalPageNumber: React.Dispatch<React.SetStateAction<number>>,
+	ModalPageNumber: number,
+) => {
+	event.preventDefault();
+	// console.log('hi');
+	setModalPageNumber(ModalPageNumber + 1);
+	if (file) {
+		const presignedData = await axios
+			.post(
+				`${process.env.REACT_APP_NESTJS_URL}/image/presigned/audit`,
+				{},
+				{ withCredentials: true },
+			)
+			.then(response => {
+				return response.data.presignedUrl;
+			})
+			.catch(error => {
+				console.error(error);
+				alert(error.response.data.message);
+			});
+		const formData = new FormData();
+
+		for (const key in presignedData.fields) {
+			formData.append(key, presignedData.fields[key]);
+		}
+		formData.append('Content-Type', file.type);
+		formData.append('file', file);
+
+		axios.post(presignedData.url, formData).catch(error => {
+			throw new Error(error);
+		});
+		// ...
+	}
+	// ...
+};
 
 const RegisterRealReceipt = (props: {
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+	// setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 	setModalPageNumber: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-	const { setIsModalOpened, setModalPageNumber } = props;
+	// const { setIsModalOpened, setModalPageNumber } = props;
+	// const [file, setFile] = useState<File | null>(null);
+	const [file] = useState<File | null>(null);
+	const { setModalPageNumber } = props;
+
 	return (
-		<div>
-			{/* 모달 밖 closeBtn */}
-			<div>
-				<CloseBtn setIsModalOpened={setIsModalOpened} />
+		<form
+			className={registerModalStyle}
+			onSubmit={event => {
+				handleSubmit(event, file, setModalPageNumber, 0);
+			}}
+		>
+			<RegisterHeader />
+			<div className={registerModalTitleStyle}>
+				<span>영수증 등록</span>
+				<span>STEP 1/3</span>
 			</div>
-			{/* 실제 모달 내용 4개 section으로 나뉨 1) 지출등록 - Header, 2) 각 페이지 별 title과 step, 
-			3) 이미지 첨부 - ImageUpload component 박스, 4) '다음'버튼  */}
-			<div className={registerModalStyle}>
-				<RegisterHeader />
-				<div className={registerModalTitleStyle}>
-					<span>영수증 등록</span>
-					<span>STEP 1/3</span>
-				</div>
-				{/* 이미지 업로드 박스 */}
-				<button onClick={() => setModalPageNumber(1)}>다음</button>
-			</div>
-		</div>
+			{/* 이미지 업로드 박스 */}
+			{/* <input type="image" onChange={event => setFile(event.target.files![0])} /> */}
+
+			<button type="submit">다음</button>
+		</form>
 	);
 };
 
 const RegisterCardSlip = (props: {
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+	// setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 	setModalPageNumber: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-	const { setIsModalOpened, setModalPageNumber } = props;
+	const [file] = useState<File | null>(null);
+	const { setModalPageNumber } = props;
 
 	return (
-		<div>
-			<div>
-				<CloseBtn setIsModalOpened={setIsModalOpened} />
+		<form
+			className={registerModalStyle}
+			onSubmit={event => {
+				handleSubmit(event, file, setModalPageNumber, 1);
+			}}
+		>
+			<RegisterHeader />
+			<div className={registerModalTitleStyle}>
+				<span>카드 전표 등록</span>
+				<span>STEP 2/3</span>
 			</div>
-			<div className={registerModalStyle}>
-				<RegisterHeader />
-				<div className={registerModalTitleStyle}>
-					<span>카드 전표 등록</span>
-					<span>STEP 2/3</span>
-				</div>
-				<button onClick={() => setModalPageNumber(2)}>다음</button>
-			</div>
-		</div>
+			{/* 이미지 업로드 박스 */}
+			{/* <input type="image" onChange={event => setFile(event.target.files![0])} /> */}
+			<button type="submit">다음</button>
+		</form>
 	);
 };
 
 const RegisterAdditionalImage = (props: {
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+	// setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 	setModalPageNumber: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-	const { setIsModalOpened, setModalPageNumber } = props;
+	const [file] = useState<File | null>(null);
+	const { setModalPageNumber } = props;
 
 	return (
-		<div>
-			<div>
-				<CloseBtn setIsModalOpened={setIsModalOpened} />
+		<form
+			className={registerModalStyle}
+			onSubmit={event => {
+				handleSubmit(event, file, setModalPageNumber, 2);
+			}}
+		>
+			<RegisterHeader />
+			<div className={registerModalTitleStyle}>
+				<span>첨부 사진</span>
+				<span>STEP 3/3</span>
 			</div>
-			<div className={registerModalStyle}>
-				<RegisterHeader />
-				<div className={registerModalTitleStyle}>
-					<span>첨부 사진</span>
-					<span>STEP 3/3</span>
-				</div>
-				<button onClick={() => setModalPageNumber(3)}>다음</button>
-			</div>
-		</div>
+			{/* 이미지 업로드 박스 */}
+			{/* <input type="image" onChange={event => setFile(event.target.files![0])} /> */}
+
+			<button type="submit">다음</button>
+		</form>
 	);
 };
 
@@ -83,18 +133,40 @@ const RegisterSumUp = (props: {
 	const { setIsModalOpened } = props;
 
 	return (
-		<div>
+		<form
+			className={registerModalStyle}
+			// onSubmit={event => {
+			// 	handleSubmit(event, file, setModalPageNumber, 4);
+			// }}
+		>
+			<SumupHeader />
 			<div>
-				<CloseBtn setIsModalOpened={setIsModalOpened} />
+				<span>요약본</span>
 			</div>
-			<div className={registerModalStyle}>
-				<RegisterHeader />
-				<div>
-					<span>요약본</span>
-				</div>
-				<button onClick={() => setIsModalOpened(false)}>제출 완료</button>
-			</div>
-		</div>
+			{/* 요약본 이미지 */}
+
+			<button onClick={() => setIsModalOpened(false)}>등록하기</button>
+		</form>
+	);
+};
+
+const AuditRegisterPage = (props: {
+	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+	const [pageNumber, setPageNumber] = useState(0);
+	const { setIsModalOpened } = props;
+	return (
+		<>
+			{pageNumber === 0 ? (
+				<RegisterRealReceipt setModalPageNumber={setPageNumber} />
+			) : pageNumber === 1 ? (
+				<RegisterCardSlip setModalPageNumber={setPageNumber} />
+			) : pageNumber === 2 ? (
+				<RegisterAdditionalImage setModalPageNumber={setPageNumber} />
+			) : pageNumber === 3 ? (
+				<RegisterSumUp setIsModalOpened={setIsModalOpened} />
+			) : null}
+		</>
 	);
 };
 
@@ -102,49 +174,12 @@ const RegisterImage = (props: {
 	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const { setIsModalOpened } = props;
-	const [, setModalOpened] = useState(true);
 
-	const [Page, setPage] = useState(0);
-
-	const modals = [
-		{
-			content: (
-				<Modal setIsModalOpened={setModalOpened}>
-					<RegisterRealReceipt setIsModalOpened={setIsModalOpened} setModalPageNumber={setPage} />
-				</Modal>
-			),
-			next: 1,
-		},
-		{
-			content: (
-				<Modal setIsModalOpened={setModalOpened}>
-					<RegisterCardSlip setIsModalOpened={setIsModalOpened} setModalPageNumber={setPage} />
-				</Modal>
-			),
-			next: 2,
-		},
-		{
-			content: (
-				<Modal setIsModalOpened={setModalOpened}>
-					<RegisterAdditionalImage
-						setIsModalOpened={setIsModalOpened}
-						setModalPageNumber={setPage}
-					/>
-				</Modal>
-			),
-			next: 3,
-		},
-		{
-			content: (
-				<Modal setIsModalOpened={setModalOpened}>
-					<RegisterSumUp setIsModalOpened={setIsModalOpened} />
-				</Modal>
-			),
-			next: 4,
-		},
-	];
-
-	return <form className={registerModalStyle}>{modals[Page].content}</form>;
+	return (
+		<Modal setIsModalOpened={setIsModalOpened}>
+			<AuditRegisterPage setIsModalOpened={setIsModalOpened} />
+		</Modal>
+	);
 };
 
 export default RegisterImage;

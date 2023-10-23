@@ -1,3 +1,4 @@
+import { AuditImage } from 'component/RegisterAuditImage.component';
 import React from 'react';
 import { useRef } from 'react';
 
@@ -60,7 +61,17 @@ const ImageSelector = (props: {
 	);
 };
 
-export const Box = (props: {
+const PreviewImage = (props: { src: string | undefined }) => {
+	const { src } = props;
+
+	return (
+		<div>
+			<AuditImage src={src} width={196} height={196} isRectangle={true} className={null} />
+		</div>
+	);
+};
+
+const Box = (props: {
 	src: string | undefined;
 	setSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
@@ -74,3 +85,39 @@ export const Box = (props: {
 		</div>
 	);
 };
+
+export const RegisterAuditImage = (props: {
+	setFile: React.Dispatch<React.SetStateAction<null | File>>;
+}) => {
+	const { setFile } = props;
+	// 수정 요망.
+	const [src, setSrc] = React.useState<string | undefined>(undefined);
+
+	return (
+		<div>
+			<Box src={src} setSrc={setSrc} setFile={setFile} />
+			<PreviewImage src={src} />
+		</div>
+	);
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// export const EditProfileImage = (props: {
+// 	me: Me;
+// 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
+// }) => {
+// 	const { me, setFile } = props;
+// 	const [src, setSrc] = useState<string | undefined>(
+// 		me.profileImageId
+// 			? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/raw/${me.profileImageId}`
+// 			: undefined,
+// 	);
+
+// 	return (
+// 		<div className={EditProfileImageStyle}>
+// 			<Header src={src} setSrc={setSrc} setFile={setFile} />
+// 			<PreviewImage src={src} />
+// 		</div>
+// 	);
+// };

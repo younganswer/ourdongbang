@@ -34,7 +34,7 @@ function App() {
 					path="/main/calendar/scheduler"
 					element={<PrivateRoute element={<SchedulerPage />} />}
 				/>
-				<Route path="/main/audit" element={<PrivateRoute element={<AuditPage />} />} />
+				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/search" element={<PrivateRoute element={<div>search page</div>} />} />
 				<Route path="/main/mypage" element={<PrivateRoute element={<MyPage />} />} />
 			</Routes>

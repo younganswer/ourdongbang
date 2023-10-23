@@ -8,13 +8,15 @@ export const registerModalStyle = css({
 	textAlign: 'center',
 	borderRadius: '20px',
 	fontcolor: 'black',
-	fontFamily: 'Pretendard-Regular',
+	fontFamily: 'pretendard-regular',
 	'> button': {
 		width: '327px',
 		height: '49px',
 		backgroundColor: '#FFFFFF',
 		border: '1px solid #000000',
 		marginTop: '30px',
+		fontSize: '15px',
+		fontFamily: 'pretendard-Bold',
 	},
 });
 
@@ -26,12 +28,12 @@ export const registerModalTitleStyle = css({
 	'> span: nth-child(1)': {
 		fontSize: '20px',
 		position: 'absolute',
-		left: '45%',
-		right: '45%',
+		// left: '45%',
+		// right: '45%',
 	},
 	'> span: nth-child(2)': {
 		fontSize: '15px',
 		position: 'absolute',
-		left: '58%',
+		left: '70%',
 	},
 });

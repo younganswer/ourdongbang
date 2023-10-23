@@ -10,7 +10,12 @@ export const ModalBackground = (props: {
 	const { setIsModalOpened, children } = props;
 
 	return createPortal(
-		<div className={ModalBackgroundStyle} onClick={() => setIsModalOpened(false)}>
+		<div
+			className={ModalBackgroundStyle}
+			onClick={() => {
+				setIsModalOpened(false);
+			}}
+		>
 			<div>
 				<div>
 					<CloseIcon
