@@ -11,9 +11,16 @@ const ShowBalance: React.FC<ShowBalanceData> = ({ totalBudget, balance }) => {
 	// 일단 입력값을 주어서 임의로 잔액 설정
 
 	return (
-		<span className={ShowBalanceStyle}>
-			<span>전체 공금 : {totalBudget}원</span> <span>남은 공금 : {balance}원</span>
-		</span>
+		<div className={ShowBalanceStyle}>
+			<div>
+				<span>전체 공금</span>
+				<span>{totalBudget}원</span>
+			</div>
+			<div>
+				<span>남은 공금</span>
+				<span>{balance}원</span>
+			</div>
+		</div>
 	);
 };
 
