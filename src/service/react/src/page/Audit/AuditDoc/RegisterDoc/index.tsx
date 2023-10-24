@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AuditRegisterButtonStyle } from './index.style';
+import { AuditRegisterButtonStyle, AuditRegisterStyle } from './index.style';
 import RegisterImage from './registerModal';
 
 const AuditRegisterButton = (props: {
@@ -8,18 +8,17 @@ const AuditRegisterButton = (props: {
 	const { setIsModalOpened } = props;
 
 	return (
-		<div className={AuditRegisterButtonStyle}>
-			<button
-				onClick={() => {
-					setIsModalOpened(true);
-				}}
-			>
-				<div>
-					<span>회계 내역 추가하기</span>
-					<span>+</span>
-				</div>
-			</button>
-		</div>
+		<button
+			className={AuditRegisterButtonStyle}
+			onClick={() => {
+				setIsModalOpened(true);
+			}}
+		>
+			<div>
+				<span>회계 내역 추가하기</span>
+				<span>+</span>
+			</div>
+		</button>
 	);
 };
 
@@ -28,7 +27,7 @@ const AuditRegister = () => {
 
 	return (
 		<>
-			<div className={undefined}>
+			<div className={AuditRegisterStyle}>
 				<AuditRegisterButton setIsModalOpened={setIsModalOpened}></AuditRegisterButton>
 			</div>
 			{isModalOpened ? <RegisterImage setIsModalOpened={setIsModalOpened} /> : null}

@@ -6,6 +6,7 @@ import {
 	AuditDocumentStyle,
 } from './index.style';
 import { DownArrowIcon, ExportIcon } from './icon';
+import AuditDocumentPreview from './Preview';
 
 const Header = () => {
 	return (
@@ -31,18 +32,16 @@ const Body = () => {
 			</div>
 			<div>
 				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
-				<AuditRegister />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
+				<AuditDocumentPreview />
 			</div>
 		</div>
 	);

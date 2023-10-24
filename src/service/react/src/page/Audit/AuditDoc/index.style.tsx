@@ -45,11 +45,10 @@ export const AuditDocumentHeaderStyle = css({
 });
 
 export const AuditDocumentBodyStyle = css({
-	margin: '36px 0',
+	margin: '36px',
 	display: 'grid',
 	gridTemplateRows: '24px 878px',
-	gap: 20.65,
-	padding: '0 36px',
+	gap: 20,
 
 	'> div:nth-child(1)': {
 		display: 'flex',
@@ -70,9 +69,18 @@ export const AuditDocumentBodyStyle = css({
 		},
 	},
 	'> div:nth-child(2)': {
-		display: 'flex',
-		flexWrap: 'wrap',
-		gap: 20.65,
+		display: 'grid',
+		gridTemplateColumns: 'repeat(auto-fill, minmax(263px, 1fr))',
+		gap: 19,
 		overflowY: 'scroll',
+
+		'> div': {
+			width: 264,
+			height: 325,
+			border: '1px solid black',
+			'&:hover': {
+				cursor: 'pointer',
+			},
+		},
 	},
 });
