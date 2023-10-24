@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { MemberProfileStyle } from './index.style';
 import { Member } from 'context/MemberContext';
 import axios from 'axios';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import { ProfileImage } from 'component/ProfileImage.component';
 
 const MemberProfile = (props: { member: Member }) => {
 	const { member } = props;
-	const [userInfo, setUserInfo] = useState<Me | null>(null);
+	const [userInfo, setUserInfo] = useState<User | null>(null);
 	const src = userInfo
 		? userInfo.profileImageId
 			? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${userInfo.profileImageId}`
@@ -16,7 +16,7 @@ const MemberProfile = (props: { member: Member }) => {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_NESTJS_URL}/user/_id/${member.userId}`, {
+			.get(`${process.env.REACT_APP_NESTJS_URL}/user/${member.userId}`, {
 				withCredentials: true,
 			})
 			.then(response => {

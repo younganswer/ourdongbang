@@ -35,7 +35,12 @@ export class MemberService {
 
 	async getMemberById(memberId: string | Types.ObjectId): Promise<Member> {
 		try {
-			return await this.memberModel.findById(memberId).exec();
+			const member = await this.memberModel.findById(memberId).exec();
+			if (!member) {
+				throw new HttpException('존재하지 않는 유저입니다.', HttpStatus.BAD_REQUEST);
+			}
+
+			return member;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
@@ -46,12 +51,12 @@ export class MemberService {
 		memberId: string | Types.ObjectId,
 		updateData: Partial<CreateMemberDTO>,
 	): Promise<Member | null> {
-		try {
-			return this.memberModel.findByIdAndUpdate(memberId, updateData, { new: true }).exec();
-		} catch (error) {
-			console.error(error);
-			throw new HttpException(error.message, error.status);
+		const member = this.memberModel.findByIdAndUpdate(memberId, updateData, { new: true }).exec();
+		if (!member) {
+			throw new HttpException('존재하지 않는 유저입니다.', 401);
 		}
+
+		return member;
 	}
 
 	async deleteMember(memberId: string | Types.ObjectId): Promise<Member> {

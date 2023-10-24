@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Me } from 'context/AuthContext';
+import React, { Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
+import { User } from 'context/AuthContext';
 import { EditProfileHeader } from './header';
 import { EditProfileImage } from './image';
 import axios from 'axios';
@@ -7,19 +7,21 @@ import { EditProfileStyle } from './index.style';
 import { EditProfileInformation } from './information';
 import { EditProfileButton } from './button';
 import { toast } from 'react-toastify';
+import { Member } from 'context/MemberContext';
+import { Club } from 'context/ClubContext';
 
 const handleSubmit = async (
-	event: React.FormEvent<HTMLFormElement>,
-	newMe: Partial<Me>,
-	setMe: React.Dispatch<React.SetStateAction<Me | null>>,
+	event: FormEvent<HTMLFormElement>,
 	file: null | File,
-	setFile: React.Dispatch<React.SetStateAction<null | File>>,
-	setIsClicked: React.Dispatch<React.SetStateAction<boolean>>,
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>,
+	newMe: Partial<User>,
+	setMe: Dispatch<SetStateAction<User | null>>,
+	myNewMemberProfile: Partial<Member>,
+	setMembers: Dispatch<SetStateAction<Member[] | null>>,
+	club: Club,
+	setIsModalOpened: Dispatch<SetStateAction<boolean>>,
 ) => {
 	try {
 		event.preventDefault();
-		setIsClicked(true);
 		if (file) {
 			const presignedData = await axios
 				.post(
@@ -46,7 +48,7 @@ const handleSubmit = async (
 			});
 			newMe.profileImageId = presignedData.fields.key.split('/')[2];
 		}
-		await axios
+		axios
 			.patch(`${process.env.REACT_APP_NESTJS_URL}/user/me`, newMe, { withCredentials: true })
 			.then(response => {
 				setMe(response.data.me);
@@ -56,36 +58,81 @@ const handleSubmit = async (
 				console.error(error);
 				alert(error.response.data.message);
 			});
+		axios
+			.patch(
+				`${process.env.REACT_APP_NESTJS_URL}/club/${club._id}/member/${myNewMemberProfile._id}`,
+				myNewMemberProfile,
+				{
+					withCredentials: true,
+				},
+			)
+			.then(response => {
+				setMembers(response.data.members);
+				toast.success(response.data.message);
+			})
+			.catch(error => {
+				console.error(error);
+				alert(error.response.data.message);
+			});
 	} catch (error) {
 		console.error(error);
 	}
-	setFile(null);
-	setIsClicked(false);
 	setIsModalOpened(false);
 };
 
 const EditProfile = (props: {
-	me: Me;
-	setMe: React.Dispatch<React.SetStateAction<Me | null>>;
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
+	members: Member[];
+	setMembers: Dispatch<SetStateAction<Member[] | null>>;
+	club: Club;
+	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
 }) => {
-	const { me, setMe, setIsModalOpened } = props;
+	const { me, setMe, members, setMembers, club, setIsModalOpened } = props;
 	const [file, setFile] = useState<null | File>(null);
-	const [newMe, setNewMe] = useState<Partial<Me>>({});
+	const [newMe, setNewMe] = useState<Partial<User>>({});
+	const [myNewMemberProfile, setMyNewMemberProfile] = useState<Partial<Member>>({});
 	const [isClicked, setIsClicked] = useState<boolean>(false);
+
+	useEffect(() => {
+		setNewMe({
+			...me,
+		});
+		setMyNewMemberProfile({
+			...members.find(member => member.userId === me._id),
+		});
+	}, [me, members]);
 
 	return (
 		<form
 			className={EditProfileStyle}
 			onSubmit={event => {
-				handleSubmit(event, newMe, setMe, file, setFile, setIsClicked, setIsModalOpened);
+				setIsClicked(true);
+				handleSubmit(
+					event,
+					file,
+					newMe,
+					setMe,
+					myNewMemberProfile,
+					setMembers,
+					club,
+					setIsModalOpened,
+				);
 			}}
 		>
 			<div>
 				<EditProfileHeader />
 				<div>
 					<EditProfileImage me={me} setFile={setFile} />
-					<EditProfileInformation me={me} newMe={newMe} setNewMe={setNewMe} />
+					<EditProfileInformation
+						me={me}
+						newMe={newMe}
+						setNewMe={setNewMe}
+						members={members}
+						myNewMemberProfile={myNewMemberProfile}
+						setMyNewMemberProfile={setMyNewMemberProfile}
+						club={club}
+					/>
 				</div>
 				<EditProfileButton isClicked={isClicked} />
 			</div>

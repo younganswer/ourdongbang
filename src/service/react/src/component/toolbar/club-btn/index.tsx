@@ -3,11 +3,11 @@ import { ClubBtnStyle } from './index.style';
 import { Club, ClubContext } from 'context/ClubContext';
 import ClubBtnModal from './switch';
 import { RefObject } from '@fullcalendar/core/preact';
-import { AuthContext, Me } from 'context/AuthContext';
+import { AuthContext, User } from 'context/AuthContext';
 
 //const handleClick = () => {};
 
-const slideModal = (divRef: RefObject<HTMLDivElement>, isClicked: boolean, me: Me | null) => {
+const slideModal = (divRef: RefObject<HTMLDivElement>, isClicked: boolean, me: User | null) => {
 	const height = (me?.clubs?.length || 0) * 70 + 70 + 'px';
 
 	if (divRef.current) {

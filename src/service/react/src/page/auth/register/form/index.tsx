@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import axios from 'axios';
-import { AuthContext, Me } from 'context/AuthContext';
+import { AuthContext, User } from 'context/AuthContext';
 import { FormEvent, useContext, useState } from 'react';
 import { NavigateFunction, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -20,7 +20,7 @@ const registerHandler = async (
 	email: string | undefined,
 	major: string | undefined,
 	studentId: string | undefined,
-	setMe: React.Dispatch<React.SetStateAction<Me | null>>,
+	setMe: Dispatch<SetStateAction<User | null>>,
 	navigate: NavigateFunction,
 ) => {
 	const majorList: string[] = [

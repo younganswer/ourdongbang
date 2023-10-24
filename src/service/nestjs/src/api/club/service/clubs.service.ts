@@ -17,8 +17,13 @@ export class ClubsService {
 		return await this.clubModel.find().exec();
 	}
 
-	async findOne(id: string): Promise<Club> {
-		return this.clubModel.findOne({ _id: id }).exec();
+	async findClubById(id: Types.ObjectId | string): Promise<Club> {
+		const club = await this.clubModel.findById(id).exec();
+		if (!club) {
+			throw new Error('존재하지 않는 클럽입니다.');
+		}
+
+		return club;
 	}
 
 	async searchByName(name: string): Promise<Club[]> {

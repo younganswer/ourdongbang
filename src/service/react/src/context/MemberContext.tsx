@@ -17,6 +17,7 @@ export type Member = {
 	userId: Types.ObjectId;
 	role: string;
 	participation: number;
+	introduction: string;
 };
 
 export const MemberContext = createContext<{

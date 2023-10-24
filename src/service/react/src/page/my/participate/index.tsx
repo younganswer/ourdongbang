@@ -6,7 +6,7 @@ import {
 	ParticipatedStyle,
 	ParticipationStyle,
 } from './index.style';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import { HandIcon, RightArrowIcon } from './icon';
 
 const Header = () => {
@@ -18,7 +18,7 @@ const Header = () => {
 	);
 };
 
-const Participation = (props: { me: Me }) => {
+const Participation = (props: { me: User }) => {
 	const { me } = props;
 	const ratio = 0.65;
 	const message = ['요즘 너무 바쁜거 같아요..', '평균 보다 더 많이 참여했어요!'];
@@ -42,7 +42,7 @@ const Participation = (props: { me: Me }) => {
 	<>{me}</>;
 };
 
-const Activity = (props: { me: Me }) => {
+const Activity = (props: { me: User }) => {
 	const { me } = props;
 	const date = '09-30';
 
@@ -56,7 +56,7 @@ const Activity = (props: { me: Me }) => {
 	<>{me}</>;
 };
 
-const Participated = (props: { me: Me }) => {
+const Participated = (props: { me: User }) => {
 	const { me } = props;
 
 	return (
@@ -72,7 +72,7 @@ const Participated = (props: { me: Me }) => {
 	);
 };
 
-export const Participate = (props: { me: Me }) => {
+export const Participate = (props: { me: User }) => {
 	const { me } = props;
 
 	return (

@@ -1,4 +1,14 @@
-import { Body, Controller, Get, HttpException, Param, Patch, Req, UseGuards } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Get,
+	HttpException,
+	Param,
+	Patch,
+	Post,
+	Req,
+	UseGuards,
+} from '@nestjs/common';
 import {
 	ApiBadRequestResponse,
 	ApiOkResponse,
@@ -62,6 +72,23 @@ export class UserController {
 		}
 	}
 
+	@Get('/:_id')
+	@ApiOperation({ summary: 'Get user information' })
+	@ApiOkResponse({ description: 'Get user information successfully', type: User })
+	async getUserByObjectId(@Param('_id') _id: string): Promise<User> {
+		try {
+			const user = await this.userService.findByObjectId(_id);
+			if (!user) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			return user;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
 	@Patch('me/password')
 	@UseGuards(JwtAuthGuard)
 	@ApiResponse({ status: 200, description: 'Update my password successfully' })
@@ -94,27 +121,10 @@ export class UserController {
 		}
 	}
 
-	@Get('/_id/:_id')
+	@Post('email')
 	@ApiOperation({ summary: 'Get user information' })
 	@ApiOkResponse({ description: 'Get user information successfully', type: User })
-	async getUserByObjectId(@Param('_id') _id: string): Promise<User> {
-		try {
-			const user = await this.userService.findByObjectId(_id);
-			if (!user) {
-				throw new HttpException('Bad Request', 400);
-			}
-
-			return user;
-		} catch (error) {
-			console.error(error);
-			throw new HttpException(error.message, error.status);
-		}
-	}
-
-	@Get('email/:email')
-	@ApiOperation({ summary: 'Get user information' })
-	@ApiOkResponse({ description: 'Get user information successfully', type: User })
-	async getUserByEmail(@Param('email') email: string): Promise<User> {
+	async getUserByEmail(@Body('email') email: string): Promise<User> {
 		try {
 			const user = await this.userService.findByEmail(email);
 			if (!user) {

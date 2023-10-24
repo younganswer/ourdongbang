@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { ProfileSettingBeforeAuthorizedStyle } from './before-authorized.style';
 
 const ProfileSettingBeforeAuthorized = (props: {
-	me: Me;
+	me: User;
 	setAuthorized: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { me, setAuthorized } = props;

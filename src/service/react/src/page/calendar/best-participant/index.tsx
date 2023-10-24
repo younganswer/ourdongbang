@@ -8,7 +8,7 @@ import { AwardIcon, CrownIcon } from './icon';
 import { Member, MemberContext } from 'context/MemberContext';
 import { ProfileImage } from 'component/ProfileImage.component';
 import axios from 'axios';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 
 const Header = () => {
 	return (
@@ -31,11 +31,11 @@ const Body = (props: { members: Member[] | null }) => {
 		}
 	});
 	const bestParticipant = sortedMembers?.[0];
-	const [bestParticipantProfile, setBestParticipantProfile] = useState<Me | null>(null);
+	const [bestParticipantProfile, setBestParticipantProfile] = useState<User | null>(null);
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_NESTJS_URL}/user/_id/${bestParticipant?.userId}`, {
+			.get(`${process.env.REACT_APP_NESTJS_URL}/user/${bestParticipant?.userId}`, {
 				withCredentials: true,
 			})
 			.then(response => {

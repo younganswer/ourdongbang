@@ -96,9 +96,9 @@ export class ClubsController {
 	@ApiResponse({ status: 200, description: 'get one club data successfully', type: Club })
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	@ApiNotFoundResponse({ description: 'Not found' })
-	async findOne(@Param('id') clubId: string) {
+	async findClubById(@Param('id') clubId: string) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new NotFoundException('Club not found');
 			}
@@ -189,7 +189,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -225,7 +225,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -259,7 +259,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -295,7 +295,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -329,7 +329,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -359,7 +359,7 @@ export class ClubsController {
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	async getAllAudit(@Param('cid') clubId: string, @Res({ passthrough: true }) response: Response) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -393,7 +393,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -428,7 +428,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -463,7 +463,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -497,7 +497,7 @@ export class ClubsController {
 		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new HttpException('Club is not found', 404);
 			}
@@ -635,7 +635,7 @@ export class ClubsController {
 	) {
 		try {
 			const member = await this.memberService.create(createMemberDTO);
-			let club = await this.clubsService.findOne(clubId);
+			let club = await this.clubsService.findClubById(clubId);
 
 			if (!member) {
 				throw new NotFoundException('member not found');
@@ -662,7 +662,7 @@ export class ClubsController {
 	@ApiResponse({ status: 200, description: '가져오기 성공' })
 	async getAllMembers(@Param('cid') clubId: string) {
 		try {
-			const club = await this.clubsService.findOne(clubId);
+			const club = await this.clubsService.findClubById(clubId);
 			const memberIds = club.members;
 			const members = await Promise.all(await this.memberService.findAll(memberIds));
 
@@ -674,40 +674,19 @@ export class ClubsController {
 	}
 
 	@ApiTags('Member API')
-	@Get('/member/:mid')
-	@ApiOperation({ summary: 'get a member', description: 'member 가져오기' })
+	@Get('/:cid/member/:mid')
+	@ApiOperation({ summary: 'Get a member of the club', description: 'Member 가져오기' })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
 	@ApiParam({ name: 'mid', description: 'Member ID' })
 	@ApiResponse({ status: 200, description: '가져오기 성공' })
-	async getMember(@Param('mid') memberId: string) {
+	async getMember(@Param('cid') clubId: string, @Param('mid') memberId: string) {
 		try {
-			const member = await this.memberService.getMemberById(memberId);
-
-			if (!member) {
-				throw new NotFoundException('member not found');
-			}
-
-			return member;
-		} catch (error) {
-			console.error(error);
-			throw new HttpException(error.message, error.status);
-		}
-	}
-
-	@ApiTags('Member API')
-	@Patch('/member/:mid')
-	@ApiOperation({ summary: 'update a member', description: 'member 수정' })
-	@ApiBody({ type: CreateMemberDTO })
-	@ApiParam({ name: 'mid', description: 'Member ID' })
-	@ApiResponse({ status: 200, description: '수정 성공' })
-	async updateMember(@Param('mid') memberId: string, @Body() updateData: Partial<CreateMemberDTO>) {
-		try {
-			const updatedMember = await this.memberService.updateMember(memberId, updateData);
-
-			if (!updatedMember) {
+			const club = await this.clubsService.findClubById(clubId);
+			if (club.members.indexOf(memberId as unknown as Types.ObjectId) === -1) {
 				throw new HttpException('Bad request', 400);
 			}
 
-			return updatedMember;
+			return await this.memberService.getMemberById(memberId);
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
@@ -715,7 +694,32 @@ export class ClubsController {
 	}
 
 	@ApiTags('Member API')
-	@Delete(':cid/member/:mid')
+	@Patch('/:cid/member/:mid')
+	@ApiOperation({ summary: 'Update a member of the club', description: 'Member 수정' })
+	@ApiBody({ type: CreateMemberDTO })
+	@ApiParam({ name: 'cid', description: 'Club ID' })
+	@ApiParam({ name: 'mid', description: 'Member ID' })
+	@ApiResponse({ status: 200, description: '수정 성공' })
+	async updateMember(
+		@Param('cid') clubId: string,
+		@Param('mid') memberId: string,
+		@Body() updateData: Partial<CreateMemberDTO>,
+	) {
+		try {
+			const club = await this.clubsService.findClubById(clubId);
+			if (club.members.indexOf(memberId as unknown as Types.ObjectId) === -1) {
+				throw new HttpException('Bad request', 400);
+			}
+
+			return await this.memberService.updateMember(memberId, updateData);
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@ApiTags('Member API')
+	@Delete('/:cid/member/:mid')
 	@ApiOperation({ summary: 'delete a member', description: 'member 삭제' })
 	@ApiParam({ name: 'mid', description: 'Member ID' })
 	@ApiParam({ name: 'cid', description: 'Club ID' })
