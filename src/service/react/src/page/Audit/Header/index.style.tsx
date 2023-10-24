@@ -2,7 +2,6 @@ import { css } from '@emotion/css';
 
 export const HeaderStyle = css({
 	borderBottom: '1px solid #000000',
-	borderTop: '5px solid #FFFFFF',
 	display: 'flex',
 	justifyContent: 'space-between',
 	'& > span: nth-child(1)': {
@@ -23,7 +22,6 @@ export const HeaderStyle = css({
 		margin: '10px 10px',
 		// border: '2px solid #000000',
 		// borderRadius: '30px',
-		backgroundColor: '#FFFFFF',
 		fontFamily: 'Pretendard-regular',
 		padding: '10px 20px',
 		'> span': {
@@ -33,10 +31,23 @@ export const HeaderStyle = css({
 });
 
 export const ShowBalanceStyle = css({
-	flexShrink: 0,
-	fontSize: '20px',
-	fontFamily: 'Pretendard-regular',
-	borderbottom: '3px solid #D9D9D9',
+	display: 'flex',
+	alignItems: 'center',
+	gap: '45px',
+
+	'> div': {
+		display: 'flex',
+		alignItems: 'center',
+		gap: '15px',
+		'> span:nth-child(1)': {
+			fontSize: '24px',
+			fontFamily: 'Pretendard-medium',
+		},
+		'> span:nth-child(2)': {
+			fontSize: '24px',
+			fontFamily: 'Pretendard-regular',
+		},
+	},
 });
 
 export const searchItem = css({});

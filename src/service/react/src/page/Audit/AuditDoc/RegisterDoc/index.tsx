@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { AddbuttonStyle } from './index.style';
+import { AddbuttonStyle, AuditRegisterDocStyle } from './index.style';
 import RegisterImage from './registerModal';
+import { DownArrowIcon } from '../icon';
 
 const Addbutton = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const { setIsModalOpened } = props;
 
 	return (
-		<div>
+		<div className={AddbuttonStyle}>
 			<button
-				className={AddbuttonStyle}
 				onClick={() => {
 					setIsModalOpened(true);
 				}}
 			>
-				<span>회계 내역 추가하기</span>
-				<span>+</span>
+				<div>
+					<span>회계 내역 추가하기</span>
+					<span>+</span>
+				</div>
 			</button>
 		</div>
 	);
@@ -25,8 +27,22 @@ const RegisterDoc = () => {
 
 	return (
 		<>
-			<div>
-				<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+			<div className={AuditRegisterDocStyle}>
+				<div>
+					<span>날짜별</span>
+					<DownArrowIcon width={22} height={12} />
+				</div>
+				<div>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
+				</div>
 			</div>
 			{isModalOpened ? <RegisterImage setIsModalOpened={setIsModalOpened} /> : null}
 		</>
