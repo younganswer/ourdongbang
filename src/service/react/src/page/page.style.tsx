@@ -5,3 +5,9 @@ export const PageStyle = css({
 	margin: '83px auto auto auto',
 	padding: '0 0 0 0',
 });
+
+export const A4PageStyle = css({
+	width: 514,
+	height: 726,
+	backgroundColor: '#FFFFFF',
+});
