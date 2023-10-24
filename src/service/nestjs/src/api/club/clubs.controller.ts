@@ -357,7 +357,7 @@ export class ClubsController {
 	@ApiOperation({ summary: 'Get all audit' })
 	@ApiResponse({ status: 200, description: 'Get all audit successfully' })
 	@ApiBadRequestResponse({ description: 'Bad request' })
-	async getAllAudit(@Param('cid') clubId: string, @Res({ passthrough: true }) response: Response) {
+	async getAllAudit(@Param('cid') clubId: string) {
 		try {
 			const club = await this.clubsService.findOne(clubId);
 			if (!club) {
@@ -374,7 +374,7 @@ export class ClubsController {
 				throw new HttpException('Bad request', 400);
 			}
 
-			return response.json({ message: 'Get all audit successfully', audits });
+			return audits;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

@@ -9,5 +9,4 @@ export const PageStyle = css({
 export const A4PageStyle = css({
 	width: 514,
 	height: 726,
-	backgroundColor: '#FFFFFF',
 });
