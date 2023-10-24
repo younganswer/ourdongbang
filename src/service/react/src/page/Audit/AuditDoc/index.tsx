@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import AuditRegister from './RegisterDoc';
 import {
 	AuditDocumentBodyStyle,
@@ -7,6 +7,7 @@ import {
 } from './index.style';
 import { DownArrowIcon, ExportIcon } from './icon';
 import AuditDocumentPreview from './Preview';
+import { Audit, AuditContext } from 'context/AuditContext';
 
 const Header = () => {
 	return (
@@ -23,7 +24,12 @@ const Header = () => {
 	);
 };
 
-const Body = () => {
+const Body = (props: {
+	audits: Audit[] | null;
+	setAudits: Dispatch<SetStateAction<Audit[] | null>>;
+}) => {
+	const { audits, setAudits } = props;
+
 	return (
 		<div className={AuditDocumentBodyStyle}>
 			<div>
@@ -32,26 +38,30 @@ const Body = () => {
 			</div>
 			<div>
 				<AuditRegister />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
-				<AuditDocumentPreview />
+				{audits?.map((audit, index) => {
+					return (
+						<AuditDocumentPreview
+							key={index}
+							index={index}
+							audit={audit}
+							audits={audits}
+							setAudits={setAudits}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);
+	console.log(audits, setAudits);
 };
 
 const AuditDocument = () => {
+	const { audits, setAudits } = useContext(AuditContext);
+
 	return (
 		<div className={AuditDocumentStyle}>
 			<Header />
-			<Body />
+			<Body audits={audits} setAudits={setAudits} />
 		</div>
 	);
 };

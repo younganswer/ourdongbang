@@ -26,11 +26,5 @@ export const ModalBackgroundStyle = css({
 				},
 			},
 		},
-		'> :nth-child(2)': {
-			'> :nth-child(1)': {
-				backgroundColor: '#EFEEEA',
-				boxShadow: '0 2px 3px 0 rgba(34, 36, 38, 0.15)',
-			},
-		},
 	},
 });
