@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { AddbuttonStyle, AuditRegisterDocStyle } from './index.style';
+import { AuditRegisterButtonStyle } from './index.style';
 import RegisterImage from './registerModal';
-import { DownArrowIcon } from '../icon';
 
-const Addbutton = (props: { setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const AuditRegisterButton = (props: {
+	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
 	const { setIsModalOpened } = props;
 
 	return (
-		<div className={AddbuttonStyle}>
+		<div className={AuditRegisterButtonStyle}>
 			<button
 				onClick={() => {
 					setIsModalOpened(true);
@@ -22,31 +23,17 @@ const Addbutton = (props: { setIsModalOpened: React.Dispatch<React.SetStateActio
 	);
 };
 
-const RegisterDoc = () => {
+const AuditRegister = () => {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 
 	return (
 		<>
-			<div className={AuditRegisterDocStyle}>
-				<div>
-					<span>날짜별</span>
-					<DownArrowIcon width={22} height={12} />
-				</div>
-				<div>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-					<Addbutton setIsModalOpened={setIsModalOpened}></Addbutton>
-				</div>
+			<div className={undefined}>
+				<AuditRegisterButton setIsModalOpened={setIsModalOpened}></AuditRegisterButton>
 			</div>
 			{isModalOpened ? <RegisterImage setIsModalOpened={setIsModalOpened} /> : null}
 		</>
 	);
 };
 
-export default RegisterDoc;
+export default AuditRegister;

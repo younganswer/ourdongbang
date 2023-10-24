@@ -1,11 +1,15 @@
 import React from 'react';
-import RegisterDoc from './RegisterDoc';
-import { AuditDocHeaderStyle, AuditDocStyle } from './index.style';
-import { ExportIcon } from './icon';
+import AuditRegister from './RegisterDoc';
+import {
+	AuditDocumentBodyStyle,
+	AuditDocumentHeaderStyle,
+	AuditDocumentStyle,
+} from './index.style';
+import { DownArrowIcon, ExportIcon } from './icon';
 
 const Header = () => {
 	return (
-		<div className={AuditDocHeaderStyle}>
+		<div className={AuditDocumentHeaderStyle}>
 			<span>회계 문서</span>
 			<div>
 				<span>|</span>
@@ -17,13 +21,40 @@ const Header = () => {
 		</div>
 	);
 };
-const AuditDoc = () => {
+
+const Body = () => {
 	return (
-		<div className={AuditDocStyle}>
-			<Header />
-			<RegisterDoc />
+		<div className={AuditDocumentBodyStyle}>
+			<div>
+				<span>날짜별</span>
+				<DownArrowIcon width={22} height={12} />
+			</div>
+			<div>
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+				<AuditRegister />
+			</div>
 		</div>
 	);
 };
 
-export default AuditDoc;
+const AuditDocument = () => {
+	return (
+		<div className={AuditDocumentStyle}>
+			<Header />
+			<Body />
+		</div>
+	);
+};
+
+export default AuditDocument;
