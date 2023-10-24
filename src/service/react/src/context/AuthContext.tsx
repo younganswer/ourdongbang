@@ -1,17 +1,26 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, {
+	createContext,
+	useState,
+	useEffect,
+	Dispatch,
+	SetStateAction,
+	ReactNode,
+	PropsWithChildren,
+	FC,
+} from 'react';
 import { Types } from 'mongoose';
-import axios from 'axios';
 import { removeCookie, setCookie } from 'component/cookie';
+import axios from 'axios';
 
 export const AuthContext = createContext<{
-	me: Me | null;
-	setMe: React.Dispatch<React.SetStateAction<Me | null>>;
+	me: User | null;
+	setMe: Dispatch<SetStateAction<User | null>>;
 }>({
 	me: null,
 	setMe: () => {},
 });
 
-export type Me = {
+export type User = {
 	_id: Types.ObjectId;
 	name: string;
 	id: string;
@@ -26,12 +35,12 @@ export type Me = {
 };
 
 interface AuthProviderProps
-	extends React.PropsWithChildren<{
-		children: React.ReactNode;
+	extends PropsWithChildren<{
+		children: ReactNode;
 	}> {}
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	const [me, setMe] = useState<Me | null>(null);
+export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+	const [me, setMe] = useState<User | null>(null);
 
 	useEffect(() => {
 		if (!me) {

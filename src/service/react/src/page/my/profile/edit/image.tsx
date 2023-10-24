@@ -2,7 +2,7 @@ import { ProfileImage } from 'component/ProfileImage.component';
 import React from 'react';
 import { useRef, useState } from 'react';
 import { EditProfileImageStyle } from './image.style';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 
 const handleChange = async (
 	event: React.ChangeEvent<HTMLInputElement>,
@@ -86,10 +86,14 @@ const PreviewImage = (props: { src: string | undefined }) => {
 };
 
 export const EditProfileImage = (props: {
-	me: Me;
+	me: User;
 	setFile: React.Dispatch<React.SetStateAction<null | File>>;
 }) => {
 	const { me, setFile } = props;
+	if (!me) {
+		return null;
+	}
+
 	const [src, setSrc] = useState<string | undefined>(
 		me.profileImageId
 			? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/raw/${me.profileImageId}`

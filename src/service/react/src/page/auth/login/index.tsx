@@ -1,10 +1,9 @@
 import React, { useState, FormEvent, useContext, useEffect, Dispatch, SetStateAction } from 'react';
 import CustomInput from '../../../component/input';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, NavigateFunction, Link, useSearchParams } from 'react-router-dom';
-import { AuthContext, Me } from 'context/AuthContext';
+import { AuthContext, User } from 'context/AuthContext';
 import {
 	LoginPageCustomInputStyle,
 	LoginPageFooterStyle,
@@ -16,12 +15,13 @@ import { GoogleLoginButton } from 'component/google-login-button';
 import UnregisteredPage from './fail/unregistered';
 import { setCookie } from 'component/cookie';
 import { DivideLineIcon } from './icon';
+import axios from 'axios';
 
 const handleLogin = async (
 	event: FormEvent,
 	id: string | undefined,
 	password: string | undefined,
-	setMe: Dispatch<SetStateAction<Me | null>>,
+	setMe: Dispatch<SetStateAction<User | null>>,
 	navigate: NavigateFunction,
 ) => {
 	try {
@@ -57,7 +57,7 @@ const handleLogin = async (
 };
 
 const LoginForm = (props: {
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	navigate: NavigateFunction;
 }) => {
 	const { setMe, navigate } = props;
@@ -91,7 +91,7 @@ const LoginForm = (props: {
 };
 
 const GoogleLogin = (props: {
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	navigate: NavigateFunction;
 }) => {
 	const { setMe, navigate } = props;

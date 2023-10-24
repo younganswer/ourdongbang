@@ -40,7 +40,7 @@ const RegisterPage = () => {
 	useEffect(() => {
 		if (email) {
 			axios
-				.get(`${process.env.REACT_APP_NESTJS_URL}/user/email/${email}`)
+				.post(`${process.env.REACT_APP_NESTJS_URL}/user/email`, { email })
 				.then(() => {
 					navigate('/auth/register?fail=registered');
 				})

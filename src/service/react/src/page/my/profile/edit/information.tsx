@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { EditProfileInformationStyle } from './information.style';
-import { Me } from 'context/AuthContext';
-import { ClubContext } from 'context/ClubContext';
+import { User } from 'context/AuthContext';
+import { Club } from 'context/ClubContext';
 import {
 	ClubIcon,
 	EmailIcon,
@@ -11,6 +11,7 @@ import {
 	SchoolIcon,
 	StudentIdIcon,
 } from '../icon';
+import { Member } from 'context/MemberContext';
 
 const Header = () => {
 	return (
@@ -33,9 +34,13 @@ const Information = (props: {
 		if (label === '소개') {
 			inputForm = (
 				<textarea
+					value={info}
+					onChange={event => {
+						setInfo(event.target.value);
+					}}
 					style={{
 						textAlign: 'left',
-						height: '33px',
+						height: '32px',
 						resize: 'none',
 						fontFamily: 'Pretendard-regular',
 						fontSize: '14px',
@@ -70,21 +75,26 @@ const Information = (props: {
 };
 
 export const EditProfileInformation = (props: {
-	me: Me;
-	newMe: Partial<Me>;
-	setNewMe: Dispatch<SetStateAction<Partial<Me>>>;
+	me: User;
+	newMe: Partial<User>;
+	setNewMe: Dispatch<SetStateAction<Partial<User>>>;
+	members: Member[];
+	myNewMemberProfile: Partial<Member>;
+	setMyNewMemberProfile: Dispatch<SetStateAction<Partial<Member>>>;
+	club: Club;
 }) => {
-	const { me, newMe, setNewMe } = props;
+	const { me, newMe, setNewMe, members, myNewMemberProfile, setMyNewMemberProfile, club } = props;
 	const divRef = useRef<HTMLDivElement>(null);
 	const [name, setName] = useState<string>(me.name);
 	const email = me.email;
 	const univ = '국민대학교';
-	const { club } = useContext(ClubContext);
 	const [major, setMajor] = useState<string | undefined>(me.major);
 	const [studentId, setStudentId] = useState<string | undefined>(me.studentId);
 	const [phoneNumber, setPhoneNumber] = useState<string | undefined>(me.phoneNumber);
 	const [sns, setSns] = useState<string | undefined>(me.sns);
-	//const [description, setDescription] = useState<string | undefined>(me.description);
+	const [introduction, setIntroduction] = useState<string | undefined>(
+		members.find(member => member.userId === me._id)?.introduction,
+	);
 
 	useEffect(() => {
 		setNewMe({
@@ -120,6 +130,13 @@ export const EditProfileInformation = (props: {
 		//	});
 		//}
 	}, [name, major, studentId, phoneNumber, sns]);
+
+	useEffect(() => {
+		setMyNewMemberProfile({
+			...myNewMemberProfile,
+			introduction,
+		});
+	}, [introduction]);
 
 	return (
 		<div className={EditProfileInformationStyle} ref={divRef}>
@@ -175,8 +192,8 @@ export const EditProfileInformation = (props: {
 			<Information
 				icon={<InstagramIcon width={20} height={20} />}
 				label="소개"
-				info={sns || ''}
-				setInfo={setSns}
+				info={introduction || ''}
+				setInfo={setIntroduction}
 			/>
 		</div>
 	);

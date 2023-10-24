@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import {
 	ProfileBodyStyle,
 	ProfileFooterStyle,
@@ -11,7 +11,7 @@ import { Modal } from 'component/modal';
 import EditProfile from './edit';
 import axios from 'axios';
 import { ProfileImage } from 'component/ProfileImage.component';
-import { ClubContext } from 'context/ClubContext';
+import { Club, ClubContext } from 'context/ClubContext';
 import {
 	ClubIcon,
 	EditIcon,
@@ -25,9 +25,16 @@ import {
 	StudentIdIcon,
 } from './icon';
 import ProfileSetting from './setting';
+import { Member } from 'context/MemberContext';
 
-const Header = (props: { me: Me; setMe: Dispatch<SetStateAction<Me | null>> }) => {
-	const { me, setMe } = props;
+const Header = (props: {
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
+	members: Member[];
+	setMembers: Dispatch<SetStateAction<Member[] | null>>;
+	club: Club;
+}) => {
+	const { me, setMe, members, setMembers, club } = props;
 	const [isModalOpened, setIsModalOpened] = useState(false);
 
 	return (
@@ -46,19 +53,26 @@ const Header = (props: { me: Me; setMe: Dispatch<SetStateAction<Me | null>> }) =
 			</div>
 			{isModalOpened ? (
 				<Modal setIsModalOpened={setIsModalOpened}>
-					<EditProfile me={me} setMe={setMe} setIsModalOpened={setIsModalOpened} />
+					<EditProfile
+						me={me}
+						setMe={setMe}
+						members={members}
+						setMembers={setMembers}
+						club={club}
+						setIsModalOpened={setIsModalOpened}
+					/>
 				</Modal>
 			) : null}
 		</div>
 	);
 };
 
-const Body = (props: { me: Me }) => {
-	const { me } = props;
-	const { club } = useContext(ClubContext);
+const Body = (props: { me: User; members: Member[] | null; club: Club }) => {
+	const { me, members, club } = props;
 	const src = me.profileImageId
 		? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${me.profileImageId}`
 		: undefined;
+	const myMemberProfile = members?.find(member => member.userId === me._id);
 
 	return (
 		<div className={ProfileBodyStyle}>
@@ -66,7 +80,7 @@ const Body = (props: { me: Me }) => {
 				<ProfileImage src={src} width={128} height={128} isCircle={true} className={null} />
 				<div>
 					<span>{me.name}</span>
-					<span>{'안녕하세요 2023 신입부원 황영서입니다\n 잘 부탁드립니다!'}</span>
+					<span>{myMemberProfile?.introduction}</span>
 				</div>
 			</div>
 			<div>
@@ -98,7 +112,12 @@ const Body = (props: { me: Me }) => {
 	);
 };
 
-const Footer = (props: { me: Me; setMe: Dispatch<SetStateAction<Me | null>> }) => {
+const Footer = (props: {
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
+	members: Member[];
+	setMembers: Dispatch<SetStateAction<Member[] | null>>;
+}) => {
 	const { me, setMe } = props;
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const changePassword = async () => {
@@ -161,16 +180,25 @@ const Information = (props: {
 	);
 };
 
-const Profile = (props: { me: Me; setMe: Dispatch<SetStateAction<Me | null>> }) => {
-	const { me, setMe } = props;
+const Profile = (props: {
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
+	members: Member[];
+	setMembers: Dispatch<SetStateAction<Member[] | null>>;
+}) => {
+	const { me, setMe, members, setMembers } = props;
+	const { club } = useContext(ClubContext);
+	if (!club) {
+		return null;
+	}
 
 	return (
 		<>
 			<div className={ProfileStyle}>
-				<Header me={me} setMe={setMe} />
+				<Header me={me} setMe={setMe} members={members} setMembers={setMembers} club={club} />
 				<div>
-					<Body me={me} />
-					<Footer me={me} setMe={setMe} />
+					<Body me={me} members={members} club={club} />
+					<Footer me={me} setMe={setMe} members={members} setMembers={setMembers} />
 				</div>
 			</div>
 		</>

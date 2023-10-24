@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import { ProfileSettingAfterAuthorizedStyle } from './index.style';
 import ProfileSettingEdit from './edit';
 
 const ProfileSettingAfterAuthorized = (props: {
-	me: Me;
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { me, setMe, setIsModalOpened } = props;

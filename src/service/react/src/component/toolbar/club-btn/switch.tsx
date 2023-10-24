@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ClubBtnModalBtnStyle, ClubBtnModalStyle } from './switch.style';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import { Club } from 'context/ClubContext';
 import { Types } from 'mongoose';
 import axios from 'axios';
@@ -56,7 +56,7 @@ const ClubBtnModalBtn = (props: { clubId: Types.ObjectId | undefined; onClick: (
 };
 
 const ClubBtnModal = (props: {
-	me: Me | null;
+	me: User | null;
 	club: Club | null;
 	setClub: Dispatch<SetStateAction<Club | null>>;
 	isClicked: boolean;

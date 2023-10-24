@@ -1,4 +1,4 @@
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import {
 	ProfileSettingBodyStyle,
@@ -19,8 +19,8 @@ const Header = () => {
 };
 
 const Body = (props: {
-	me: Me;
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { me, setMe, setIsModalOpened } = props;
@@ -42,8 +42,8 @@ const Body = (props: {
 };
 
 const ProfileSetting = (props: {
-	me: Me;
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { me, setMe, setIsModalOpened } = props;

@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ProfileSettingEditCompletedStyle, ProfileSettingEditStyle } from './edit.style';
 import { DoneIcon } from './icon';
 
 const EditForm = (props: {
-	me: Me;
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	setEditCompleted: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { me, setMe, setEditCompleted } = props;
@@ -46,7 +46,6 @@ const EditForm = (props: {
 				{ withCredentials: true },
 			)
 			.then(response => {
-				console.log(response);
 				setMe({
 					...me,
 					password: response.data.password,
@@ -127,8 +126,8 @@ const EditCompleted = (props: { setIsModalOpened: Dispatch<SetStateAction<boolea
 };
 
 const ProfileSettingEdit = (props: {
-	me: Me;
-	setMe: Dispatch<SetStateAction<Me | null>>;
+	me: User;
+	setMe: Dispatch<SetStateAction<User | null>>;
 	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { me, setMe, setIsModalOpened } = props;

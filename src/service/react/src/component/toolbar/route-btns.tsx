@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { ToolBarRouteBtnStyle, ToolBarRouteBtnsStyle } from './route-btns.style';
 import { Link, useLocation } from 'react-router-dom';
-import { Me } from 'context/AuthContext';
+import { User } from 'context/AuthContext';
 
 const ToolBarRouteBtn = (props: { to: string; label: string }) => {
 	const { to, label } = props;
@@ -33,7 +33,7 @@ const ToolBarRouteBtn = (props: { to: string; label: string }) => {
 	);
 };
 
-const ToolBarRouteBtns = (props: { me: Me | null }) => {
+const ToolBarRouteBtns = (props: { me: User | null }) => {
 	const { me } = props;
 	const divRef = useRef<HTMLDivElement>(null);
 
