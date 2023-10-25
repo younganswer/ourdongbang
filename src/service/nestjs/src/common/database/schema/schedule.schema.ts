@@ -44,6 +44,7 @@ export class Schedule {
 	@Prop({
 		type: [Types.ObjectId],
 		ref: 'users',
+		required: false,
 	})
 	attendees: Types.ObjectId[];
 }

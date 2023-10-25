@@ -10,6 +10,7 @@ export const MemberProfileStyle = css({
 	'> div:nth-child(1)': {
 		backgroundColor: '#D9D9D9',
 		borderBottom: '1px solid black',
+		overflow: 'hidden',
 	},
 
 	'> div:nth-child(2)': {

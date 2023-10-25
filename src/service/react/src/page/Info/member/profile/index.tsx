@@ -39,7 +39,7 @@ const MemberProfile = (props: { member: Member }) => {
 	return (
 		<div className={MemberProfileStyle}>
 			<div>
-				<ProfileImage src={src} width={263} height={253.5} isCircle={false} className={null} />
+				<ProfileImage src={src} width={263} height={255} isCircle={false} className={null} />
 			</div>
 			<div>
 				<span>{userInfo?.name}</span>

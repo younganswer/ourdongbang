@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 export const ProfileSettingStyle = css({
 	width: 477,
 	height: 350,
+	backgroundColor: '#EFEEEA',
 	display: 'grid',
 	gridTemplateRows: '85px 1fr',
 	border: '1px solid black',

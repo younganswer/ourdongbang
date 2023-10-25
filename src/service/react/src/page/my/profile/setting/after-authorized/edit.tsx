@@ -25,6 +25,10 @@ const EditForm = (props: {
 		setEditCompleted: Dispatch<SetStateAction<boolean>>,
 	) => {
 		event.preventDefault();
+		if (!currentPassword || !newPassword || !newPasswordCheck) {
+			alert('모든 항목을 입력해주세요.');
+			return;
+		}
 		if (newPassword !== newPasswordCheck) {
 			alert('새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.');
 			setCurrentPassword('');
@@ -32,6 +36,7 @@ const EditForm = (props: {
 			setNewPasswordCheck('');
 			return;
 		}
+		console.log(currentPassword, newPassword, newPasswordCheck);
 		if (currentPassword === newPassword) {
 			alert('현재 비밀번호와 새 비밀번호가 일치합니다.');
 			setCurrentPassword('');

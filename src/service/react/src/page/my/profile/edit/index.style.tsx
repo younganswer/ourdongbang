@@ -13,7 +13,7 @@ export const EditProfileStyle = css({
 		rowGap: '5%',
 		'> div:nth-child(2)': {
 			height: 538,
-			overflowY: 'scroll',
+			overflowY: 'auto',
 		},
 	},
 });

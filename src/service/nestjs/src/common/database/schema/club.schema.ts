@@ -11,7 +11,8 @@ export class Club {
 	@ApiProperty({ description: '동아리 이름', example: '윙크', uniqueItems: true })
 	@Prop({
 		type: String,
-		required: true,
+		unique: true,
+		index: true,
 	})
 	name: string;
 
@@ -38,6 +39,7 @@ export class Club {
 	@Prop({
 		type: [Types.ObjectId], // Member를 사용하면 에러남;; 지원하지 않는 mongoose schema?
 		required: false,
+		ref: 'members',
 	})
 	members: Types.ObjectId[];
 
@@ -67,4 +69,5 @@ export class Club {
 }
 
 export type ClubDocument = Club & Document;
+
 export const ClubSchema = SchemaFactory.createForClass(Club);

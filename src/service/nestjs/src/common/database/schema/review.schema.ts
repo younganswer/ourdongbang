@@ -11,6 +11,7 @@ const schemaOptions: SchemaOptions = {
 @Schema(schemaOptions)
 export class Review {
 	// club에서만 review_id 를 참조하면 되나? 굳이 review에서 club 참조?
+	// -> 흠 일단 club에서만 해보는걸로
 
 	// @Prop({
 	// 	type: String,
@@ -53,4 +54,5 @@ export class Review {
 }
 
 export type ReviewDocument = Review & Document;
+
 export const ReviewSchema = SchemaFactory.createForClass(Review);

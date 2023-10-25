@@ -16,10 +16,13 @@ export const SearchPageHeaderStyle = css({
 
 export const SearchPageHeaderBookmarkStyle = css({
 	cursor: 'pointer',
-	'> span': {
-		fontSize: 16,
-		fontFamily: 'Pretendard-regular',
+	'> svg': {
 		marginLeft: 8,
+	},
+	'> span': {
+		fontSize: 20,
+		fontFamily: 'Pretendard-regular',
+		marginLeft: 12,
 	},
 });
 
