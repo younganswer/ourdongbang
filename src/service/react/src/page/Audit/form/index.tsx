@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useRef, useState } from 'react';
 import { AuditFormStyle } from './index.style';
 import { ClubContext } from 'context/ClubContext';
 import AuditFormHeader from './header';
@@ -13,6 +13,7 @@ const AuditForm = (props: {
 }) => {
 	const { index, newAudit, setNewAudit } = props;
 	const [isEditting, setIsEditting] = useState(false);
+	const printRef = useRef<HTMLDivElement>(null);
 	const { club } = useContext(ClubContext);
 	if (!club) {
 		return null;
@@ -20,7 +21,7 @@ const AuditForm = (props: {
 
 	return (
 		<div className={AuditFormStyle}>
-			<div>
+			<div className="print" ref={printRef}>
 				<div>
 					<AuditFormHeader
 						index={index}
@@ -32,7 +33,7 @@ const AuditForm = (props: {
 					<AuditFormBody newAudit={newAudit} setNewAudit={setNewAudit} isEditting={isEditting} />
 				</div>
 			</div>
-			<AuditFormFooter setIsEditting={setIsEditting} />
+			<AuditFormFooter setIsEditting={setIsEditting} printRef={printRef} />
 		</div>
 	);
 };

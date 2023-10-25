@@ -2,6 +2,7 @@ import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
 
 export const RegisterPageStyle = css(PageStyle, {
+	margin: '0 auto',
 	height: 800,
 	display: 'flex',
 	justifyContent: 'center',

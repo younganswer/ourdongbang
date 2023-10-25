@@ -23,6 +23,7 @@ export const AuditFormStyle = css(A4PageStyle, {
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: 'white',
+
 		'> div:nth-child(1)': {
 			width: '92%',
 			height: '90%',

@@ -4,6 +4,7 @@ export const EditProfileStyle = css({
 	width: 430,
 	height: 700,
 	borderRadius: '10px',
+	backgroundColor: '#EFEEEA',
 
 	'> div': {
 		padding: '5% 0',

@@ -31,14 +31,12 @@ export const AuditDocumentHeaderStyle = css({
 			display: 'flex',
 			alignItems: 'center',
 			gap: 10,
+			'&:hover': {
+				cursor: 'pointer',
+			},
 			'> span': {
 				fontSize: 20,
 				fontFamily: 'Pretendard-regular',
-			},
-			'> svg': {
-				'&:hover': {
-					cursor: 'pointer',
-				},
 			},
 		},
 	},

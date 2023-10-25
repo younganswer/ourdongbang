@@ -37,15 +37,9 @@ const AuditFormBodyAmount = (props: {
 							}}
 						/>
 					) : newAudit.isExpense ? (
-						<input type="radio" name="amount" checked />
+						<input type="radio" name="amount" checked readOnly />
 					) : (
-						<input
-							type="radio"
-							name="amount"
-							onClick={event => {
-								event.preventDefault();
-							}}
-						/>
+						<input type="radio" name="amount" readOnly />
 					)}
 				</div>
 				<div>
@@ -59,15 +53,9 @@ const AuditFormBodyAmount = (props: {
 							}}
 						/>
 					) : newAudit.isExpense ? (
-						<input
-							type="radio"
-							name="amount"
-							onClick={event => {
-								event.preventDefault();
-							}}
-						/>
+						<input type="radio" name="amount" readOnly />
 					) : (
-						<input type="radio" name="amount" checked />
+						<input type="radio" name="amount" checked readOnly />
 					)}
 				</div>
 			</div>

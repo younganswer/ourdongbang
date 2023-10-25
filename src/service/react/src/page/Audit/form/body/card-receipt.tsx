@@ -15,24 +15,7 @@ const AuditFormBodyCardReceipt = (props: {
 				<span>카 드 전 표</span>
 			</div>
 			<div>
-				{/* upload image when is editting */}
-				{isEditting ? (
-					<input
-						type="file"
-						onChange={event => {
-							if (event.target.files) {
-								//const file = event.target.files[0];
-								//const reader = new FileReader();
-								//reader.readAsDataURL(file);
-								//reader.onloadend = () => {
-								//	setNewAudit({ ...newAudit, receipt: reader.result as string });
-								//};
-							}
-						}}
-					/>
-				) : (
-					<img src={newAudit.cardReceipt?.toString() || ''} alt="card-receipt" />
-				)}
+				<img src={newAudit.cardReceipt?.toString() || ''} alt="card-receipt" />
 			</div>
 		</div>
 	);

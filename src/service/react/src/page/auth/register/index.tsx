@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import {
 	RegisterPageStyle,
@@ -10,6 +10,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { GoogleLoginButton } from 'component/google-login-button';
 import axios from 'axios';
 import RegisteredPage from './fail/registered';
+import { RegisterContext } from 'context/RegisterContext';
 
 const Header = () => {
 	return (
@@ -32,9 +33,10 @@ const Footer = () => {
 
 const RegisterPage = () => {
 	const [searchParams] = useSearchParams();
-	const [name, setName] = React.useState<string | undefined>(undefined);
-	const [, setHd] = React.useState<string | undefined>(undefined);
-	const [email, setEmail] = React.useState<string | undefined>(undefined);
+	const [name, setName] = useState<string | undefined>(undefined);
+	const [, setHd] = useState<string | undefined>(undefined);
+	const [email, setEmail] = useState<string | undefined>(undefined);
+	const { setRegisterInfo } = useContext(RegisterContext);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -42,10 +44,12 @@ const RegisterPage = () => {
 			axios
 				.post(`${process.env.REACT_APP_NESTJS_URL}/user/email`, { email })
 				.then(() => {
+					setRegisterInfo(null);
 					navigate('/auth/register?fail=registered');
 				})
 				.catch(() => {
-					navigate(`/auth/register/form?name=${name}&email=${email}`);
+					setRegisterInfo({ name, email });
+					navigate('/auth/register/form');
 				});
 		}
 	}, [email]);

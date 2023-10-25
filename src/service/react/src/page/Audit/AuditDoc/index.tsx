@@ -15,7 +15,11 @@ const Header = () => {
 			<span>회계 문서</span>
 			<div>
 				<span>|</span>
-				<div>
+				<div
+					onClick={() => {
+						console.log('export');
+					}}
+				>
 					<span>회계 장부 내보내기</span>
 					<ExportIcon width={24} height={24} />
 				</div>
