@@ -122,7 +122,6 @@ const EditCompleted = (props: { setIsModalOpened: Dispatch<SetStateAction<boolea
 			<p>비밀번호가 수정되었습니다.</p>
 		</div>
 	);
-	setIsModalOpened(false);
 };
 
 const ProfileSettingEdit = (props: {

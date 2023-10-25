@@ -4,9 +4,14 @@ import { ExportIcon } from 'page/Audit/AuditDoc/icon';
 import { EditIcon } from 'page/my/profile/icon';
 import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { AuditFormFooterStyle } from './index.style';
+import { RefObject } from '@fullcalendar/core/preact';
+import ReactToPrint from 'react-to-print';
 
-const AuditFormFooter = (props: { setIsEditting: Dispatch<SetStateAction<boolean>> }) => {
-	const { setIsEditting } = props;
+const AuditFormFooter = (props: {
+	setIsEditting: Dispatch<SetStateAction<boolean>>;
+	printRef: RefObject<HTMLDivElement>;
+}) => {
+	const { setIsEditting, printRef } = props;
 	const { me } = useContext(AuthContext);
 	const { members } = useContext(MemberContext);
 
@@ -26,10 +31,15 @@ const AuditFormFooter = (props: { setIsEditting: Dispatch<SetStateAction<boolean
 					<EditIcon width={16} height={16} />
 				</div>
 			) : null}
-			<div>
-				<span>내보내기</span>
-				<ExportIcon width={22} height={22} />
-			</div>
+			<ReactToPrint
+				trigger={() => (
+					<div>
+						<span>내보내기</span>
+						<ExportIcon width={22} height={22} />
+					</div>
+				)}
+				content={() => printRef.current}
+			/>
 		</div>
 	);
 };
