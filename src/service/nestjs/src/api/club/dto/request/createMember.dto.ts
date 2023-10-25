@@ -16,5 +16,5 @@ export class CreateMemberDTO {
 
 	@IsNotEmpty()
 	@ApiProperty({ description: 'user 참여도', example: 0, default: 0 })
-	participation: Number;
+	participation: number;
 }

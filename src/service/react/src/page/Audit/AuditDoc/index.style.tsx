@@ -73,7 +73,7 @@ export const AuditDocumentBodyStyle = css({
 		overflowY: 'scroll',
 
 		'> div': {
-			width: 264,
+			width: '100%',
 			height: 325,
 			border: '1px solid black',
 			'&:hover': {

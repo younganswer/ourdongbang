@@ -14,6 +14,7 @@ import InfoPage from 'page/Info';
 import SchedulerPage from '../page/calendar/schedule';
 import PrivateRoute from 'component/route/private-route';
 import PublicRoute from 'component/route/public-route';
+import SearchPage from 'page/search';
 
 function App() {
 	return (
@@ -35,7 +36,7 @@ function App() {
 					element={<PrivateRoute element={<SchedulerPage />} />}
 				/>
 				<Route path="/main/audit" element={<AuditPage />} />
-				<Route path="/main/search" element={<PrivateRoute element={<div>search page</div>} />} />
+				<Route path="/main/search" element={<PrivateRoute element={<SearchPage />} />} />
 				<Route path="/main/mypage" element={<PrivateRoute element={<MyPage />} />} />
 			</Routes>
 		</div>

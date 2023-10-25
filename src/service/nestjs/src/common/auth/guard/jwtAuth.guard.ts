@@ -1,7 +1,14 @@
 import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-type Everything = string | number | boolean | null | undefined | Record<string, unknown> | Everything[];
+type Everything =
+	| string
+	| number
+	| boolean
+	| null
+	| undefined
+	| Record<string, unknown>
+	| Everything[];
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt-auth') {

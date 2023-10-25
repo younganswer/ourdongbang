@@ -17,7 +17,7 @@ export class Club {
 
 	@ApiProperty({ description: '동아리 소개글', example: '우리 동아리 짱짱!!', required: false })
 	@Prop({ type: String })
-	description: string;
+	introduction: string;
 
 	@ApiProperty({ description: '동아리 규칙', example: '담배, 술 X', required: false })
 	@Prop({
