@@ -26,7 +26,7 @@ export class ReviewsService {
 		}
 	}
 
-	async deleteReview(reviewId: String | Types.ObjectId): Promise<Review> {
+	async deleteReview(reviewId: string | Types.ObjectId): Promise<Review> {
 		try {
 			const deletedReview = await this.reviewModel.findByIdAndRemove({ _id: reviewId }).exec();
 			return deletedReview;

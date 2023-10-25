@@ -15,7 +15,7 @@ import { removeCookie, setCookie } from 'component/cookie';
 export type Club = {
 	_id: Types.ObjectId;
 	name: string;
-	description: string | undefined;
+	introduction: string | undefined;
 	rules: string | undefined;
 	tags: string[];
 	members: Types.ObjectId[];
@@ -48,7 +48,7 @@ export const ClubProvider = (props: { children: ReactNode }) => {
 						setClub({
 							_id: response.data._id,
 							name: response.data.name,
-							description: response.data.description,
+							introduction: response.data.introduction,
 							rules: response.data.rules,
 							tags: response.data.tags,
 							members: response.data.members,

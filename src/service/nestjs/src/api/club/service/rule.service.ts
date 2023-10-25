@@ -17,7 +17,7 @@ export class RuleService {
 		}
 	}
 
-	async getRuleById(ruleId: Types.ObjectId | String): Promise<Rule> {
+	async getRuleById(ruleId: Types.ObjectId | string): Promise<Rule> {
 		try {
 			return await this.ruleModel.findById(ruleId).exec();
 		} catch (error) {
@@ -26,7 +26,7 @@ export class RuleService {
 		}
 	}
 
-	async deleteRule(ruleId: String | Types.ObjectId): Promise<Rule> {
+	async deleteRule(ruleId: string | Types.ObjectId): Promise<Rule> {
 		try {
 			const deletedReview = await this.ruleModel.findByIdAndRemove({ _id: ruleId }).exec();
 			return deletedReview;
