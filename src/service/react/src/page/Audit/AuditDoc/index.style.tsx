@@ -70,7 +70,7 @@ export const AuditDocumentBodyStyle = css({
 		display: 'grid',
 		gridTemplateColumns: 'repeat(auto-fill, minmax(263px, 1fr))',
 		gap: 19,
-		overflowY: 'scroll',
+		overflowY: 'auto',
 
 		'> div': {
 			width: '100%',

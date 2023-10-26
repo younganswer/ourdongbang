@@ -13,23 +13,19 @@ export class User {
 	@ApiProperty({
 		example: '장정안',
 		type: String,
-		required: true,
 	})
 	@Prop({
 		type: String,
-		required: true,
 	})
 	name: string;
 
 	@ApiProperty({
 		example: 'jhanks1221',
 		type: String,
-		required: true,
 		uniqueItems: true,
 	})
 	@Prop({
 		type: String,
-		required: true,
 		unique: true,
 		index: true,
 	})
@@ -38,23 +34,19 @@ export class User {
 	@ApiProperty({
 		example: 'P@ssw0rd!',
 		type: String,
-		required: true,
 	})
 	@Prop({
 		type: String,
-		required: true,
 	})
 	password: string;
 
 	@ApiProperty({
 		example: 'inetty@kookmin.ac.kr',
 		type: String,
-		required: true,
 		uniqueItems: true,
 	})
 	@Prop({
 		type: String,
-		required: true,
 		unique: true,
 		index: true,
 	})

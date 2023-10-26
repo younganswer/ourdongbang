@@ -6,12 +6,14 @@ const schemaOptions: SchemaOptions = {
 	timestamps: true,
 	collection: 'members',
 };
+
 @Schema(schemaOptions)
 export class Member {
 	@Prop({
 		type: Types.ObjectId,
 		ref: 'users',
 		// unique: true, 동일한 사용자가 여러 동아리 멤버로 참여할 수 있음
+		unique: false,
 	})
 	@ApiProperty({ description: 'user 정보' })
 	userId: Types.ObjectId;

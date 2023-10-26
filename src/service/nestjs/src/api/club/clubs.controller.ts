@@ -98,6 +98,7 @@ export class ClubsController {
 	@ApiNotFoundResponse({ description: 'Not found' })
 	async findClubById(@Param('id') clubId: string) {
 		try {
+			console.log(clubId);
 			const club = await this.clubsService.findClubById(clubId);
 			if (!club) {
 				throw new NotFoundException('Club not found');
