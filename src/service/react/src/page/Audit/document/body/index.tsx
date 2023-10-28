@@ -7,7 +7,7 @@ import AuditDocumentBodyAmount from './amount';
 import AuditDocumentBodyBalance from './balance';
 import AuditDocumentBodyRemark from './remark';
 import AuditDocumentBodyReceipt from './receipt';
-import AuditDocumentBodyCardReceipt from './card-receipt';
+import AuditDocumentBodyCardSlip from './card-slip';
 import AuditDocumentBodyAttachment from './attachment';
 
 const AuditDocumentBody = (props: {
@@ -26,7 +26,7 @@ const AuditDocumentBody = (props: {
 	remark: string;
 	setRemark: Dispatch<SetStateAction<string>>;
 	receipt: string;
-	cardReceipt: string;
+	cardSlip: string;
 	attachment: string;
 	isEditting: boolean;
 }) => {
@@ -46,7 +46,7 @@ const AuditDocumentBody = (props: {
 		remark,
 		setRemark,
 		receipt,
-		cardReceipt,
+		cardSlip,
 		attachment,
 		isEditting,
 	} = props;
@@ -79,7 +79,7 @@ const AuditDocumentBody = (props: {
 			<AuditDocumentBodyRemark remark={remark} setRemark={setRemark} isEditting={isEditting} />
 			<div>
 				<AuditDocumentBodyReceipt receipt={receipt} />
-				<AuditDocumentBodyCardReceipt cardReceipt={cardReceipt} />
+				<AuditDocumentBodyCardSlip cardSlip={cardSlip} />
 			</div>
 			<AuditDocumentBodyAttachment attachment={attachment} />
 		</div>

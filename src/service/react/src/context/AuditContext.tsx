@@ -24,7 +24,7 @@ export type Audit = {
 	balance: string;
 	remark: string;
 	receipt: Types.ObjectId;
-	cardReceipt: Types.ObjectId;
+	cardSlip: Types.ObjectId;
 	attachment: Types.ObjectId;
 };
 

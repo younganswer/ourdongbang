@@ -30,7 +30,7 @@ const handleSubmit = async (
 					{ withCredentials: true },
 				)
 				.then(response => {
-					return response.data.presignedUrl;
+					return response.data;
 				})
 				.catch(error => {
 					console.error(error);

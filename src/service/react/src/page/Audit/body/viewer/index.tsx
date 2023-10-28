@@ -3,7 +3,7 @@ import { AuditDocumentViewerStyle } from './index.style';
 import { ClubContext } from 'context/ClubContext';
 import { Audit } from 'context/AuditContext';
 import AuditDocumentViewerFooter from './footer';
-import AuditDocument from 'page/Audit/document';
+import AuditDocument from 'page/audit/document';
 
 const AuditDocumentViewer = (props: {
 	index: number;
@@ -84,7 +84,7 @@ const AuditDocumentViewer = (props: {
 				remark={remark}
 				setRemark={setRemark}
 				receipt={newAudit.receipt?.toString() || ''}
-				cardReceipt={newAudit.cardReceipt?.toString() || ''}
+				cardSlip={newAudit.cardSlip?.toString() || ''}
 				attachment={newAudit.attachment?.toString() || ''}
 				isEditting={isEditting}
 			/>

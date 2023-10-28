@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction, useContext } from 'react';
-import AuditRegister from './RegisterDoc';
+import AuditRegisterButton from './register/button';
 import {
 	AuditDocumentBodyStyle,
 	AuditDocumentHeaderStyle,
 	AuditDocumentStyle,
 } from './index.style';
 import { DownArrowIcon, ExportIcon } from './icon';
-import AuditDocumentPreview from './Preview';
+import AuditDocumentPreview from './preview';
 import { Audit, AuditContext } from 'context/AuditContext';
 
 const Header = () => {
@@ -41,7 +41,7 @@ const Body = (props: {
 				<DownArrowIcon width={22} height={12} />
 			</div>
 			<div>
-				<AuditRegister />
+				<AuditRegisterButton />
 				{audits?.map((audit, index) => {
 					return (
 						<AuditDocumentPreview
@@ -59,7 +59,7 @@ const Body = (props: {
 	console.log(audits, setAudits);
 };
 
-const AuditDocuments = () => {
+const AuditDocumentBody = () => {
 	const { audits, setAudits } = useContext(AuditContext);
 
 	return (
@@ -70,4 +70,4 @@ const AuditDocuments = () => {
 	);
 };
 
-export default AuditDocuments;
+export default AuditDocumentBody;

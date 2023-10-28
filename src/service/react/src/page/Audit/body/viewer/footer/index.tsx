@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { AuthContext } from 'context/AuthContext';
 import { MemberContext } from 'context/MemberContext';
-import { ExportIcon } from 'page/Audit/AuditDoc/icon';
+import { ExportIcon } from 'page/audit/body/icon';
 import { EditIcon } from 'page/my/profile/icon';
 import { AuditDocumentViewerFooterStyle } from './index.style';
 import ReactToPrint from 'react-to-print';

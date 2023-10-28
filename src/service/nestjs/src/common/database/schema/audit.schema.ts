@@ -79,7 +79,7 @@ export class Audit {
 		unique: true,
 	})
 	@ApiProperty({ description: '카드 전표', example: '84j2c1c0c9b0f3a8c8e3n0b0' })
-	cardReceipt: Types.ObjectId;
+	cardSlip: Types.ObjectId;
 
 	@Prop({
 		type: Types.ObjectId,

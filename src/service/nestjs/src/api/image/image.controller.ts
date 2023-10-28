@@ -20,7 +20,8 @@ export class ImageController {
 	@ApiBadRequestResponse({ description: 'Bad request' })
 	async getPresignedUrl(@Param('path') path: string) {
 		try {
-			if (!path || (path !== 'profile' && path !== 'receipt')) {
+			const validPath = ['profile', 'receipt', 'card-slip', 'attachment'];
+			if (!path || !validPath.includes(path)) {
 				throw new HttpException('Bad Request', 400);
 			}
 
@@ -29,10 +30,7 @@ export class ImageController {
 				path + '/raw/' + image._id.toString(),
 			);
 
-			return {
-				message: 'Get presigned url to upload image successfully',
-				presignedUrl,
-			};
+			return presignedUrl;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

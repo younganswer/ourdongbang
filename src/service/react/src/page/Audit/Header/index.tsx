@@ -24,7 +24,7 @@ const ShowBalance: React.FC<ShowBalanceData> = ({ totalBudget, balance }) => {
 	);
 };
 
-const Header: React.FC = () => {
+const AuditDocumentHeader = () => {
 	return (
 		<div className={HeaderStyle}>
 			<span>회계</span>
@@ -33,4 +33,4 @@ const Header: React.FC = () => {
 	);
 };
 
-export default Header;
+export default AuditDocumentHeader;
