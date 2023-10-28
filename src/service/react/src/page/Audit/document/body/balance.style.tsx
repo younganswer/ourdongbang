@@ -1,9 +1,8 @@
 import { css } from '@emotion/css';
 
-export const AuditFormBodyRemarkStyle = css({
+export const AuditDocumentBodyBalanceStyle = css({
 	display: 'grid',
-	gridTemplateColumns: '1fr 10fr',
-	borderBottom: '1px solid black',
+	gridTemplateColumns: '1fr 3.4fr',
 
 	'> div': {
 		display: 'flex',
@@ -19,24 +18,15 @@ export const AuditFormBodyRemarkStyle = css({
 		},
 	},
 	'> div:nth-child(2)': {
-		padding: '0 3%',
-		'> textarea': {
+		padding: '0 8%',
+		'> input': {
+			width: '100%',
 			fontSize: 10,
 			fontFamily: 'Pretendard-regular',
-			width: '100%',
-			height: '85%',
-			border: 'none',
-			resize: 'none',
-			':focus': {
-				outline: 'none',
-			},
 		},
 		'> span': {
 			fontSize: 10,
 			fontFamily: 'Pretendard-regular',
-			whiteSpace: 'pre-wrap',
-			wordBreak: 'break-word',
-			overflowWrap: 'break-word',
 		},
 	},
 });

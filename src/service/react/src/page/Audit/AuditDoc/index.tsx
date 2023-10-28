@@ -59,7 +59,7 @@ const Body = (props: {
 	console.log(audits, setAudits);
 };
 
-const AuditDocument = () => {
+const AuditDocuments = () => {
 	const { audits, setAudits } = useContext(AuditContext);
 
 	return (
@@ -70,4 +70,4 @@ const AuditDocument = () => {
 	);
 };
 
-export default AuditDocument;
+export default AuditDocuments;
