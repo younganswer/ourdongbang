@@ -5,7 +5,7 @@ import {
 	AuditDocumentPreviewTitleStyle,
 } from './index.style';
 import { Modal } from 'component/modal';
-import AuditForm from 'page/Audit/form';
+import AuditDocumentViewer from '../viewer';
 import { Audit } from 'context/AuditContext';
 import { Types } from 'mongoose';
 
@@ -31,12 +31,13 @@ const AuditDocumentPreview = (props: {
 	const { index, audit, audits, setAudits } = props;
 	const [newAudit, setNewAudit] = useState<Audit>(audit);
 	const [isModalOpened, setIsModalOpened] = useState(false);
+	const [isEditting, setIsEditting] = useState(false);
 
 	useEffect(() => {
-		if (!isModalOpened) {
+		if (!isModalOpened || !isEditting) {
 			//
 		}
-	}, [isModalOpened]);
+	}, [isModalOpened, isEditting]);
 
 	return (
 		<>
@@ -46,7 +47,13 @@ const AuditDocumentPreview = (props: {
 			</div>
 			{isModalOpened && (
 				<Modal setIsModalOpened={setIsModalOpened}>
-					<AuditForm index={index} newAudit={newAudit} setNewAudit={setNewAudit} />
+					<AuditDocumentViewer
+						index={index}
+						newAudit={newAudit}
+						setNewAudit={setNewAudit}
+						isEditting={isEditting}
+						setIsEditting={setIsEditting}
+					/>
 				</Modal>
 			)}
 		</>

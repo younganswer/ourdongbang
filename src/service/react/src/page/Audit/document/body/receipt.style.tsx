@@ -1,8 +1,9 @@
 import { css } from '@emotion/css';
 
-export const AuditFormBodyAttachmentStyle = css({
+export const AuditDocumentBodyReceiptStyle = css({
 	display: 'grid',
 	gridTemplateRows: '1fr 6fr',
+	borderRight: '1px solid black',
 
 	'> div': {
 		display: 'flex',

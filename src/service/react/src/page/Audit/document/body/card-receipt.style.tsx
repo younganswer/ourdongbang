@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const AuditFormBodyCardReceiptStyle = css({
+export const AuditDocumentBodyCardReceiptStyle = css({
 	display: 'grid',
 	gridTemplateRows: '1fr 6fr',
 

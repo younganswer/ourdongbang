@@ -1,9 +1,9 @@
 import { css } from '@emotion/css';
 
-export const AuditFormBodyDateStyle = css({
+export const AuditDocumentBodyTitleStyle = css({
 	display: 'grid',
-	gridTemplateColumns: '1.01fr 5.6fr',
-	borderRight: '1px solid black',
+	gridTemplateColumns: '1fr 10fr',
+	borderBottom: '1px solid black',
 
 	'> div': {
 		display: 'flex',
@@ -19,7 +19,7 @@ export const AuditFormBodyDateStyle = css({
 		},
 	},
 	'> div:nth-child(2)': {
-		padding: '0 5.5%',
+		padding: '0 3%',
 		'> input': {
 			width: '100%',
 			fontSize: 10,

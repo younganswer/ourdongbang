@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const AuditFormFooterStyle = css({
+export const AuditDocumentViewerFooterStyle = css({
 	backgroundColor: 'transparent',
 	display: 'flex',
 	justifyContent: 'flex-end',

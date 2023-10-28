@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const AuditFormBodyStyle = css({
+export const AuditDocumentBodyStyle = css({
 	display: 'grid',
 	gridTemplateRows: '1fr 1fr 1fr 5fr 5fr 5fr',
 	border: '1px solid black',
