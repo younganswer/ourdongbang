@@ -4,17 +4,19 @@ import { ToastContainer } from 'react-toastify';
 import PreviewPage from '../page/PreviewPage';
 import LoginPage from '../page/auth/login';
 import RegisterPage from '../page/auth/register';
-import AuditPage from '../page/audit';
-import CalendarPage from '../page/calendar';
+import AuditPage from '../page/Audit';
+// import CalendarPage from '../page/calendar';
 import ToolBar from '../component/toolbar';
 import MyPage from '../page/my';
 import './font.css';
 import RegisterFormPage from 'page/auth/register/form';
 import InfoPage from 'page/Info';
-import SchedulerPage from '../page/calendar/schedule';
+// import SchedulerPage from '../page/calendar/schedule';
 import PrivateRoute from 'component/route/private-route';
 import PublicRoute from 'component/route/public-route';
 import SearchPage from 'page/search';
+import CalendarPage from 'page/calendar copy';
+import SchedulerPage from 'page/calendar copy/schedule';
 
 function App() {
 	return (
@@ -30,11 +32,8 @@ function App() {
 					element={<PublicRoute element={<RegisterFormPage />} />}
 				/>
 				<Route path="/main/info" element={<PrivateRoute element={<InfoPage />} />} />
-				<Route path="/main/calendar" element={<PrivateRoute element={<CalendarPage />} />} />
-				<Route
-					path="/main/calendar/scheduler"
-					element={<PrivateRoute element={<SchedulerPage />} />}
-				/>
+				<Route path="/main/calendar" element={<CalendarPage />} />
+				<Route path="/main/calendar/scheduler" element={<SchedulerPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/search" element={<PrivateRoute element={<SearchPage />} />} />
 				<Route path="/main/mypage" element={<PrivateRoute element={<MyPage />} />} />
