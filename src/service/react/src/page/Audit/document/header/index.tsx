@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { AuditFormHeaderMetaStyle, AuditFormHeaderStyle } from './index.style';
 
 const MetaData = (props: {
@@ -10,6 +10,7 @@ const MetaData = (props: {
 	isEditting: boolean;
 }) => {
 	const { clubName, auditor, setAuditor, created, setCreated, isEditting } = props;
+	const [currentCreated, setCurrentCreated] = useState<string>(created);
 
 	return (
 		<div className={AuditFormHeaderMetaStyle}>
@@ -42,15 +43,29 @@ const MetaData = (props: {
 						{isEditting ? (
 							<input
 								type="text"
-								value={created.split('-')[0]}
+								value={currentCreated.split('-')[0]}
 								onChange={event =>
 									setCreated(
-										event.target.value + '-' + created.split('-')[1] + '-' + created.split('-')[2],
+										event.target.value +
+											'-' +
+											currentCreated.split('-')[1] +
+											'-' +
+											currentCreated.split('-')[2],
 									)
 								}
+								onBlur={() => {
+									const regex = /^\d{4}$/;
+
+									if (!regex.test(currentCreated.split('-')[0])) {
+										alert('날짜는 yyyy-mm-dd 형식으로 입력해주세요.');
+										setCurrentCreated(created);
+										return;
+									}
+									setCreated(currentCreated);
+								}}
 							/>
 						) : (
-							<span>{created.split('-')[0]}</span>
+							<span>{currentCreated.split('-')[0]}</span>
 						)}
 						<span>년</span>
 					</div>
@@ -58,15 +73,29 @@ const MetaData = (props: {
 						{isEditting ? (
 							<input
 								type="text"
-								value={created.split('-')[1]}
+								value={currentCreated.split('-')[1]}
 								onChange={event =>
 									setCreated(
-										created.split('-')[0] + '-' + event.target.value + '-' + created.split('-')[2],
+										currentCreated.split('-')[0] +
+											'-' +
+											event.target.value +
+											'-' +
+											currentCreated.split('-')[2],
 									)
 								}
+								onBlur={() => {
+									const regex = /^\d{2}$/;
+
+									if (!regex.test(currentCreated.split('-')[1])) {
+										alert('날짜는 yyyy-mm-dd 형식으로 입력해주세요.');
+										setCurrentCreated(created);
+										return;
+									}
+									setCreated(currentCreated);
+								}}
 							/>
 						) : (
-							<span>{created.split('-')[1]}</span>
+							<span>{currentCreated.split('-')[1]}</span>
 						)}
 						<span>월</span>
 					</div>
@@ -74,15 +103,29 @@ const MetaData = (props: {
 						{isEditting ? (
 							<input
 								type="text"
-								value={created.split('-')[2]}
+								value={currentCreated.split('-')[2]}
 								onChange={event =>
 									setCreated(
-										created.split('-')[0] + '-' + created.split('-')[1] + '-' + event.target.value,
+										currentCreated.split('-')[0] +
+											'-' +
+											currentCreated.split('-')[1] +
+											'-' +
+											event.target.value,
 									)
 								}
+								onBlur={() => {
+									const regex = /^\d{2}$/;
+
+									if (!regex.test(currentCreated.split('-')[2])) {
+										alert('날짜는 yyyy-mm-dd 형식으로 입력해주세요.');
+										setCurrentCreated(created);
+										return;
+									}
+									setCreated(currentCreated);
+								}}
 							/>
 						) : (
-							<span>{created.split('-')[2]}</span>
+							<span>{currentCreated.split('-')[2]}</span>
 						)}
 						<span>일</span>
 					</div>

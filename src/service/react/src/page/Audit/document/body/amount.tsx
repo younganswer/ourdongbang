@@ -1,16 +1,15 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { AuditDocumentBodyAmountStyle } from './amount.style';
 
 const AuditDocumentBodyAmount = (props: {
-	amount: number;
-	setAmount: Dispatch<SetStateAction<number>>;
+	amount: string;
+	setAmount: Dispatch<SetStateAction<string>>;
 	isExpense: boolean;
 	setIsExpense: Dispatch<SetStateAction<boolean>>;
 	isEditting: boolean;
 }) => {
 	const { amount, setAmount, isEditting, isExpense, setIsExpense } = props;
-
-	console.log(isExpense);
+	const [currentAmount, setCurrentAmount] = useState<string>(amount);
 
 	return (
 		<div className={AuditDocumentBodyAmountStyle}>
@@ -21,8 +20,20 @@ const AuditDocumentBodyAmount = (props: {
 				{isEditting ? (
 					<input
 						type="text"
-						value={amount}
-						onChange={event => setAmount(parseInt(event.target.value))}
+						value={currentAmount}
+						onChange={event => {
+							setCurrentAmount(event.target.value);
+						}}
+						onBlur={() => {
+							const regex = /\D/;
+
+							if (regex.test(currentAmount)) {
+								alert('숫자만 입력해주세요.');
+								setCurrentAmount(amount);
+								return;
+							}
+							setAmount(currentAmount);
+						}}
 					/>
 				) : (
 					<span>{amount}</span>

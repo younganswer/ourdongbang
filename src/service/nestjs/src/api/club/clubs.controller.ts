@@ -461,7 +461,6 @@ export class ClubsController {
 		@Param('cid') clubId: string,
 		@Param('aid') auditId: string,
 		@Body() updateData: Partial<ClubDto.Request.CreateAuditDto>,
-		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
 			const club = await this.clubsService.findClubById(clubId);
@@ -479,7 +478,7 @@ export class ClubsController {
 				throw new HttpException('Bad request', 400);
 			}
 
-			return response.json({ message: 'Update an audit successfully', updatedAudit });
+			return updatedAudit;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
