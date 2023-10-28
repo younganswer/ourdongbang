@@ -5,6 +5,9 @@ import { Modal } from 'component/modal';
 import { RegisterHeader } from './registerHeader';
 import { SumupHeader } from './Sumup/sumupHeader';
 import axios from 'axios';
+import UploadForm from './UploadForm';
+
+// import UploadForm from './UploadForm';
 
 const handleSubmit = async (
 	event: React.FormEvent<HTMLFormElement>,
@@ -51,26 +54,23 @@ const RegisterRealReceipt = (props: {
 }) => {
 	// const { setIsModalOpened, setModalPageNumber } = props;
 	// const [file, setFile] = useState<File | null>(null);
-	const [file] = useState<File | null>(null);
+	const [file, setFile] = useState<File | null>(null);
 	const { setModalPageNumber } = props;
+	const [src, setSrc] = useState<string | undefined>(undefined);
 
 	return (
-		<form
-			className={registerModalStyle}
-			onSubmit={event => {
-				handleSubmit(event, file, setModalPageNumber, 0);
-			}}
-		>
+		<div className={registerModalStyle}>
 			<RegisterHeader />
-			<div className={registerModalTitleStyle}>
-				<span>영수증 등록</span>
-				<span>STEP 1/3</span>
-			</div>
-			{/* 이미지 업로드 박스 */}
-			{/* <input type="image" onChange={event => setFile(event.target.files![0])} /> */}
-
-			<button type="submit">다음</button>
-		</form>
+			<UploadForm
+				src={src}
+				setSrc={setSrc}
+				file={file}
+				setFile={setFile}
+				handleSubmit={event => handleSubmit(event, file, setModalPageNumber, 0)}
+				title={'영수증 등록'}
+				subTitle={'1/3 STEP'}
+			/>
+		</div>
 	);
 };
 
