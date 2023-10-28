@@ -19,9 +19,9 @@ export type Audit = {
 	title: string;
 	date: string;
 	franchise: string;
-	amount: number;
+	amount: string;
 	isExpense: boolean;
-	balance: number;
+	balance: string;
 	remark: string;
 	receipt: Types.ObjectId;
 	cardReceipt: Types.ObjectId;

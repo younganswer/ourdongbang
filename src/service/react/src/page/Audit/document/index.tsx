@@ -16,12 +16,12 @@ const AuditDocument = (props: {
 	setDate: Dispatch<SetStateAction<string>>;
 	franchise: string;
 	setFranchise: Dispatch<SetStateAction<string>>;
-	amount: number;
-	setAmount: Dispatch<SetStateAction<number>>;
+	amount: string;
+	setAmount: Dispatch<SetStateAction<string>>;
 	isExpense: boolean;
 	setIsExpense: Dispatch<SetStateAction<boolean>>;
-	balance: number;
-	setBalance: Dispatch<SetStateAction<number>>;
+	balance: string;
+	setBalance: Dispatch<SetStateAction<string>>;
 	remark: string;
 	setRemark: Dispatch<SetStateAction<string>>;
 	receipt: string;
