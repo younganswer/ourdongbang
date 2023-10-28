@@ -1,8 +1,9 @@
 import React from 'react';
 import { AuditDocumentBodyReceiptStyle } from './receipt.style';
 
-const AuditDocumentBodyReceipt = (props: { receipt: string }) => {
-	const { receipt } = props;
+const AuditDocumentBodyReceipt = (props: { receiptId: string }) => {
+	const { receiptId } = props;
+	const src = `${process.env.REACT_APP_S3_BUCKET_URL}/receipt/w512/${receiptId}` || '';
 
 	return (
 		<div className={AuditDocumentBodyReceiptStyle}>
@@ -10,7 +11,7 @@ const AuditDocumentBodyReceipt = (props: { receipt: string }) => {
 				<span>영 수 증</span>
 			</div>
 			<div>
-				<img src={receipt?.toString() || ''} alt="receipt" />
+				<img src={src} alt="receiptId" />
 			</div>
 		</div>
 	);

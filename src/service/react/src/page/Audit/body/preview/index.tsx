@@ -7,15 +7,17 @@ import {
 import { Modal } from 'component/modal';
 import AuditDocumentViewer from '../viewer';
 import { Audit } from 'context/AuditContext';
-import { Types } from 'mongoose';
 import axios from 'axios';
 import { ClubContext } from 'context/ClubContext';
 
-const AuditDocumentPreviewImage = (props: { imageId: Types.ObjectId }) => {
-	const { imageId } = props;
+const AuditDocumentPreviewImage = (props: { src: string }) => {
+	const { src } = props;
 
-	return <div className={AuditDocumentPreviewImageStyle}>이미지</div>;
-	console.log(imageId);
+	return (
+		<div className={AuditDocumentPreviewImageStyle}>
+			<img src={src} />
+		</div>
+	);
 };
 
 const AuditDocumentPreviewTitle = (props: { title: string }) => {
@@ -35,6 +37,11 @@ const AuditDocumentPreview = (props: {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const [isEditting, setIsEditting] = useState(false);
 	const { club } = useContext(ClubContext);
+	const src = (
+		audit.attachmentId
+			? `${process.env.REACT_APP_S3_BUCKET_URL}/attachment/w512/${audit.attachmentId}`
+			: `${process.env.REACT_APP_S3_BUCKET_URL}/receipt/w512/${audit.receiptId}`
+	) as string;
 
 	useEffect(() => {
 		if (!isModalOpened || !isEditting) {
@@ -74,7 +81,7 @@ const AuditDocumentPreview = (props: {
 	return (
 		<>
 			<div className={AuditDocumentPreviewStyle} onClick={() => setIsModalOpened(true)}>
-				<AuditDocumentPreviewImage imageId={audit.attachment || audit.receipt} />
+				<AuditDocumentPreviewImage src={src} />
 				<AuditDocumentPreviewTitle title={audit.title} />
 			</div>
 			{isModalOpened && (

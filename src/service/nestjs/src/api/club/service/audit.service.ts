@@ -10,7 +10,15 @@ export class AuditService {
 
 	async getAllAudits(auditIds: string[] | Types.ObjectId[]) {
 		try {
-			return await this.auditModel.find({ _id: { $in: auditIds } }).exec();
+			// reverse order by string date
+			const audits = await this.auditModel.find({ _id: { $in: auditIds } }).exec();
+
+			return audits.sort((a, b) => {
+				const dateA = new Date(a.date);
+				const dateB = new Date(b.date);
+
+				return dateB.getTime() - dateA.getTime();
+			});
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

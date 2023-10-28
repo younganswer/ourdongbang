@@ -83,9 +83,9 @@ const AuditDocumentViewer = (props: {
 				setBalance={setBalance}
 				remark={remark}
 				setRemark={setRemark}
-				receipt={newAudit.receipt?.toString() || ''}
-				cardSlip={newAudit.cardSlip?.toString() || ''}
-				attachment={newAudit.attachment?.toString() || ''}
+				receiptId={newAudit.receiptId?.toString() || ''}
+				cardSlipId={newAudit.cardSlipId?.toString() || ''}
+				attachmentId={newAudit.attachmentId?.toString() || ''}
 				isEditting={isEditting}
 			/>
 			<AuditDocumentViewerFooter

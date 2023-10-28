@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 import { registerDecorator, ValidationOptions } from 'class-validator';
 import * as dayjs from 'dayjs';
@@ -29,8 +29,18 @@ function IsOnlyDate(validationOptions?: ValidationOptions) {
 export class CreateAuditDto {
 	@IsString()
 	@IsNotEmpty()
-	@ApiProperty({ description: '가맹점', example: '소한마리 정릉점' })
-	franchise: string;
+	@ApiProperty({ description: '작성자', example: '윤현승' })
+	auditor: string;
+
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty({ description: '작성일자', example: '2023-10-29' })
+	created: string;
+
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty({ description: '제목', example: '알파 프로젝트 회식' })
+	title: string;
 
 	@IsOnlyDate()
 	@IsNotEmpty()
@@ -39,16 +49,41 @@ export class CreateAuditDto {
 
 	@IsString()
 	@IsNotEmpty()
-	@ApiProperty({ description: '작성자', example: '윤현승' })
-	auditor: string;
+	@ApiProperty({ description: '가맹점', example: '소한마리 정릉점' })
+	franchise: string;
 
 	@IsNumber()
 	@IsNotEmpty()
-	@ApiProperty({ description: '결제금액', example: 50000 })
-	cost: number;
+	@ApiProperty({ description: '금액', example: 200000 })
+	amount: number;
 
-	@IsString({ each: true })
+	@IsBoolean()
 	@IsNotEmpty()
-	@ApiProperty({ description: 'user 정보' })
-	images: Types.ObjectId[];
+	@ApiProperty({ description: '지출: true, 수입: false', example: true })
+	isExpense: boolean;
+
+	@IsNumber()
+	@IsNotEmpty()
+	@ApiProperty({ description: '잔액', example: 800000 })
+	balance: number;
+
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty({ description: '비고', example: '냉면 3000원 할인' })
+	remark: string;
+
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty({ description: '영수증 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
+	receiptId: Types.ObjectId;
+
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty({ description: '카드 전표 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
+	cardSlipId: Types.ObjectId;
+
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty({ description: '첨부 사진 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
+	attachmentId: Types.ObjectId;
 }
