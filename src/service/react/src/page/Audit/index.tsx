@@ -1,13 +1,13 @@
 import React from 'react';
 import { AuditPageStyle } from './index.style';
-import Header from './Header';
-import AuditDocuments from './AuditDoc';
+import AuditDocumentHeader from './header';
+import AuditDocumentBody from './body';
 
 const AuditPage = () => {
 	return (
 		<div className={AuditPageStyle}>
-			<Header />
-			<AuditDocuments />
+			<AuditDocumentHeader />
+			<AuditDocumentBody />
 		</div>
 	);
 };

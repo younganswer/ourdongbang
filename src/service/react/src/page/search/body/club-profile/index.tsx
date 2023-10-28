@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SearchBoxBodyClubProfileStyle } from './index.style';
-import { DownArrowIcon } from 'page/Audit/AuditDoc/icon';
 import axios from 'axios';
 import { Club } from 'context/ClubContext';
 import { BookmarkIcon } from 'page/search/header/icon';
+import { DownArrowIcon } from 'page/audit/body/icon';
 
 const Header = () => {
 	return (

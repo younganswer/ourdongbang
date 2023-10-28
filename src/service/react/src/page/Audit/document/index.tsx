@@ -25,7 +25,7 @@ const AuditDocument = (props: {
 	remark: string;
 	setRemark: Dispatch<SetStateAction<string>>;
 	receipt: string;
-	cardReceipt: string;
+	cardSlip: string;
 	attachment: string;
 	isEditting: boolean;
 }) => {
@@ -51,7 +51,7 @@ const AuditDocument = (props: {
 		remark,
 		setRemark,
 		receipt,
-		cardReceipt,
+		cardSlip,
 		attachment,
 		isEditting,
 	} = props;
@@ -84,7 +84,7 @@ const AuditDocument = (props: {
 					remark={remark}
 					setRemark={setRemark}
 					receipt={receipt}
-					cardReceipt={cardReceipt}
+					cardSlip={cardSlip}
 					attachment={attachment}
 					isEditting={isEditting}
 				/>
