@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderStyle, ShowBalanceStyle } from './index.style';
+import { ShowBalanceStyle, HeaderStyle } from './index.style';
 
 interface ShowBalanceData {
 	totalBudget: number;
