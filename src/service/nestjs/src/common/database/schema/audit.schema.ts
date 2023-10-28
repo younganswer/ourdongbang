@@ -71,7 +71,7 @@ export class Audit {
 		unique: true,
 	})
 	@ApiProperty({ description: '영수증', example: '60f1c1c0c9b0f3a8c0b0b0b0' })
-	receipt: Types.ObjectId;
+	receiptId: Types.ObjectId;
 
 	@Prop({
 		type: Types.ObjectId,
@@ -79,7 +79,7 @@ export class Audit {
 		unique: true,
 	})
 	@ApiProperty({ description: '카드 전표', example: '84j2c1c0c9b0f3a8c8e3n0b0' })
-	cardSlip: Types.ObjectId;
+	cardSlipId: Types.ObjectId;
 
 	@Prop({
 		type: Types.ObjectId,
@@ -88,7 +88,7 @@ export class Audit {
 		required: false,
 	})
 	@ApiProperty({ description: '첨부 사진', example: '38n5c1c0c9b0f8v7r8e3n0b0' })
-	attachment: Types.ObjectId;
+	attachmentId: Types.ObjectId;
 }
 
 export type AuditDocument = Audit & Document;

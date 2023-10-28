@@ -14,6 +14,12 @@ export const AuditDocumentPreviewImageStyle = css({
 	justifyContent: 'center',
 	alignItems: 'center',
 	backgroundColor: '#D9D9D9',
+
+	'> img': {
+		width: 267,
+		height: 255,
+		objectFit: 'cover',
+	},
 });
 
 export const AuditDocumentPreviewTitleStyle = css({

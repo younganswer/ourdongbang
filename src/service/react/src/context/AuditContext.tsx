@@ -23,9 +23,9 @@ export type Audit = {
 	isExpense: boolean;
 	balance: string;
 	remark: string;
-	receipt: Types.ObjectId;
-	cardSlip: Types.ObjectId;
-	attachment: Types.ObjectId;
+	receiptId: Types.ObjectId;
+	cardSlipId: Types.ObjectId;
+	attachmentId: Types.ObjectId;
 };
 
 export const AuditContext = createContext<{
@@ -49,6 +49,7 @@ export const AuditProvider = (props: { children: ReactNode }) => {
 					withCredentials: true,
 				})
 				.then(response => {
+					console.log(response.data);
 					setAudits(response.data);
 				})
 				.catch(() => {

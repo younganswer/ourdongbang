@@ -1,8 +1,9 @@
 import React from 'react';
 import { AuditDocumentBodyCardSlipStyle } from './card-slip.style';
 
-const AuditDocumentBodyCardSlip = (props: { cardSlip: string }) => {
-	const { cardSlip } = props;
+const AuditDocumentBodyCardSlip = (props: { cardSlipId: string }) => {
+	const { cardSlipId } = props;
+	const src = `${process.env.REACT_APP_S3_BUCKET_URL}/card-slip/w512/${cardSlipId}` || '';
 
 	return (
 		<div className={AuditDocumentBodyCardSlipStyle}>
@@ -10,7 +11,7 @@ const AuditDocumentBodyCardSlip = (props: { cardSlip: string }) => {
 				<span>카 드 전 표</span>
 			</div>
 			<div>
-				<img src={cardSlip?.toString() || ''} alt="card-receipt" />
+				<img src={src} alt="card-receipt" />
 			</div>
 		</div>
 	);

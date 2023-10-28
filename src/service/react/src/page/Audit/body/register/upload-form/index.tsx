@@ -16,7 +16,6 @@ const AuditRegisterUploadForm = (props: {
 		setSrc: Dispatch<SetStateAction<string | undefined>>,
 	) => {
 		if (!event.target.files || !event.target.files[0]) {
-			setFile(null);
 			return;
 		}
 
