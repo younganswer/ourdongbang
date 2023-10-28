@@ -3,7 +3,7 @@ import { AuditDocumentViewerStyle } from './index.style';
 import { ClubContext } from 'context/ClubContext';
 import { Audit } from 'context/AuditContext';
 import AuditDocumentViewerFooter from './footer';
-import AuditDocument from 'page/audit/document';
+import AuditDocument from 'page/Audit/document';
 
 const AuditDocumentViewer = (props: {
 	index: number;

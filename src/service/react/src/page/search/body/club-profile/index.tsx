@@ -3,7 +3,7 @@ import { SearchBoxBodyClubProfileStyle } from './index.style';
 import axios from 'axios';
 import { Club } from 'context/ClubContext';
 import { BookmarkIcon } from 'page/search/header/icon';
-import { DownArrowIcon } from 'page/audit/body/icon';
+import { DownArrowIcon } from 'page/Audit/body/icon';
 
 const Header = () => {
 	return (
