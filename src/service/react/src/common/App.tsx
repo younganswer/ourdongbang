@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import PreviewPage from '../page/PreviewPage';
 import LoginPage from '../page/auth/login';
 import RegisterPage from '../page/auth/register';
-import AuditPage from '../page/audit';
+import AuditPage from '../page/Audit';
 // import CalendarPage from '../page/calendar';
 import ToolBar from '../component/toolbar';
 import MyPage from '../page/my';
