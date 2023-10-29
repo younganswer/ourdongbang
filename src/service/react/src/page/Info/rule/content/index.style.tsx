@@ -2,25 +2,34 @@ import { css } from '@emotion/css';
 
 export const RuleContentStyle = css({
 	display: 'grid',
-	gridTemplateRows: '1fr ',
+	gridTemplateRows: '1fr',
 	gridTemplateColumns: '1fr 1fr 1fr',
 	borderTop: '1px solid #535766',
 });
 
 export const RuleContentContainer = css({
-	marginTop: '75.49px',
-	marginLeft: '35px',
-	marginRight: '35px',
+	width: '100%',
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center',
+
+	'> div:nth-child(1)': {
+		height: '30px',
+		display: 'flex',
+		alignSelf: 'flex-end',
+	},
+	'> div:nth-child(2)': {
+		height: '579px',
+		overflowY: 'auto',
+	},
 });
 
 export const RuleContentButtonStyle = css({
 	border: 'none',
 	background: 'none',
-	fontWeight: 'bold',
 	transition: 'background-color 0.3s',
 	fontSize: 14.91,
-	marginLeft: '1030px',
-	marginBottom: '10px',
 
 	cursor: 'pointer', // 마우스 커서 모양 설정 (옵션)
 	'&:hover': {
@@ -31,7 +40,7 @@ export const RuleContentButtonStyle = css({
 
 export const RuleModalStyle = css({
 	display: 'grid',
-	gridTemplateRows: '1fr ',
+	gridTemplateRows: '1fr',
 	gridTemplateColumns: '1fr',
 });
 
