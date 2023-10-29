@@ -31,7 +31,7 @@ function App() {
 					path="/auth/register/form"
 					element={<PublicRoute element={<RegisterFormPage />} />}
 				/>
-				<Route path="/main/info" element={<PrivateRoute element={<InfoPage />} />} />
+				<Route path="/main/info" element={<InfoPage />} />
 				<Route path="/main/calendar" element={<CalendarPage />} />
 				<Route path="/main/calendar/scheduler" element={<SchedulerPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
