@@ -15,8 +15,8 @@ import InfoPage from 'page/Info';
 import PrivateRoute from 'component/route/private-route';
 import PublicRoute from 'component/route/public-route';
 import SearchPage from 'page/search';
-import CalendarPage from 'page/calendar copy';
-import SchedulerPage from 'page/calendar copy/schedule';
+import CalendarPage from 'page/calendar';
+import SchedulerPage from 'page/calendar/schedule';
 
 function App() {
 	return (

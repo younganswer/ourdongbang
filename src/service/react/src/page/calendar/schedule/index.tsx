@@ -1,17 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { PageStyle } from '../../page.style';
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
+// import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import DateRangePicker from './Daterange';
 
 const SchedulerPage: React.FC = () => {
 	return (
-		<div className={PageStyle}>
-			<Wrapper></Wrapper>
+		<div>
+			<DateRangePicker />
 		</div>
 	);
 };

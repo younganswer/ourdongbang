@@ -2,7 +2,7 @@ import React from 'react';
 import Calendar from '../../component/Calendar';
 import styled from 'styled-components';
 import { PageStyle } from '../page.style';
-import NotificationCard from './NotificationCard';
+import NotificationCard from './Notification';
 import BestParticipant from './best-participant';
 
 const events = [
