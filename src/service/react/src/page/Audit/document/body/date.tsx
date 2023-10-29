@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { AuditDocumentBodyDateStyle } from './date.style';
 
 const AuditDocumentBodyDate = (props: {
@@ -7,7 +7,6 @@ const AuditDocumentBodyDate = (props: {
 	isEditting: boolean;
 }) => {
 	const { date, setDate, isEditting } = props;
-	const [currentDate, setCurrentDate] = useState<string>(date);
 
 	return (
 		<div className={AuditDocumentBodyDateStyle}>
@@ -17,20 +16,12 @@ const AuditDocumentBodyDate = (props: {
 			<div>
 				{isEditting ? (
 					<input
-						type="text"
-						value={currentDate}
+						type="date"
+						value={date}
 						onChange={event => {
-							setCurrentDate(event.target.value);
-						}}
-						onBlur={() => {
-							const regex = /^\d{4}-\d{2}-\d{2}$/;
+							const parsedDate = new Date(event.target.value).toISOString().split('T')[0];
 
-							if (!regex.test(currentDate)) {
-								alert('날짜는 yyyy-mm-dd 형식으로 입력해주세요.');
-								setCurrentDate(date);
-								return;
-							}
-							setDate(currentDate);
+							setDate(parsedDate);
 						}}
 					/>
 				) : (

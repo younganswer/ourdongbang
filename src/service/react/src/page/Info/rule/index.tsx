@@ -1,17 +1,17 @@
 import React from 'react';
-import RuleTitle from './title';
-import RuleContent from './ruleContent';
-import { RuleStyle } from './index.style';
+import InfoPageRuleTitle from './title';
+import InfoPageRuleContent from './content';
+import { InfoPageRuleStyle } from './index.style';
 
-const Rule = () => {
+const InfoPageRule = () => {
 	return (
-		<div>
-			<div className={RuleStyle}>
-				<RuleTitle />
-				<RuleContent />
+		<div className={InfoPageRuleStyle}>
+			<div>
+				<InfoPageRuleTitle />
+				<InfoPageRuleContent />
 			</div>
 		</div>
 	);
 };
 
-export default Rule;
+export default InfoPageRule;
