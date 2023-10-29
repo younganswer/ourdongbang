@@ -391,7 +391,6 @@ export class ClubsController {
 	async createAudit(
 		@Param('cid') clubId: string,
 		@Body() createAuditDto: ClubDto.Request.CreateAuditDto,
-		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
 			const club = await this.clubsService.findClubById(clubId);
@@ -410,7 +409,7 @@ export class ClubsController {
 				throw new HttpException('Bad request', 400);
 			}
 
-			return response.json({ message: 'Audit created successfully' });
+			return audit;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

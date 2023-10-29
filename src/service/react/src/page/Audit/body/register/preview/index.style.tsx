@@ -68,10 +68,12 @@ export const AuditRegisterPreviewStyle = css({
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
+						overflow: 'hidden',
 						'> img': {
 							width: '90%',
-							height: '90%',
+							height: 155,
 							objectFit: 'cover',
+							objectPosition: 'center',
 							border: '1.5px solid black',
 						},
 					},

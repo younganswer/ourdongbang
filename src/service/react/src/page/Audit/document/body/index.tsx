@@ -25,9 +25,9 @@ const AuditDocumentBody = (props: {
 	setBalance: Dispatch<SetStateAction<string>>;
 	remark: string;
 	setRemark: Dispatch<SetStateAction<string>>;
-	receipt: string;
-	cardSlip: string;
-	attachment: string;
+	receiptId: string;
+	cardSlipId: string;
+	attachmentId: string;
 	isEditting: boolean;
 }) => {
 	const {
@@ -45,9 +45,9 @@ const AuditDocumentBody = (props: {
 		setBalance,
 		remark,
 		setRemark,
-		receipt,
-		cardSlip,
-		attachment,
+		receiptId,
+		cardSlipId,
+		attachmentId,
 		isEditting,
 	} = props;
 
@@ -78,10 +78,10 @@ const AuditDocumentBody = (props: {
 			</div>
 			<AuditDocumentBodyRemark remark={remark} setRemark={setRemark} isEditting={isEditting} />
 			<div>
-				<AuditDocumentBodyReceipt receipt={receipt} />
-				<AuditDocumentBodyCardSlip cardSlip={cardSlip} />
+				<AuditDocumentBodyReceipt receiptId={receiptId} />
+				<AuditDocumentBodyCardSlip cardSlipId={cardSlipId} />
 			</div>
-			<AuditDocumentBodyAttachment attachment={attachment} />
+			<AuditDocumentBodyAttachment attachmentId={attachmentId} />
 		</div>
 	);
 };
