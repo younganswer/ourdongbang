@@ -1,12 +1,25 @@
 import React from 'react';
-// import DatePicker from 'react-datepicker';
+import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
-import DateRangePicker from './Daterange';
+import { PageStyle } from 'page/page.style';
+import ScheduleHeader from './Header';
+import ScheduleBody from './Body';
+
+const Wrapper = styled.div`
+	height: 1479px;
+	width: 1200px;
+	gap: 24px;
+	align-items: center;
+	border: 1px solid black;
+`;
 
 const SchedulerPage: React.FC = () => {
 	return (
-		<div>
-			<DateRangePicker />
+		<div className={PageStyle}>
+			<Wrapper>
+				<ScheduleHeader />
+				<ScheduleBody />
+			</Wrapper>
 		</div>
 	);
 };
