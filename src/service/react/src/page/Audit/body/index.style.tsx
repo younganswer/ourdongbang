@@ -11,7 +11,7 @@ export const AuditDocumentHeaderStyle = css({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
-	padding: '0 30px',
+	padding: '0 40px',
 	borderBottom: '1px solid #000000',
 
 	'> span:nth-child(1)': {
@@ -52,6 +52,7 @@ export const AuditDocumentBodyStyle = css({
 		display: 'flex',
 		justifyContent: 'flex-end',
 		alignItems: 'center',
+		padding: '0 5px',
 		gap: 20,
 		'> span': {
 			fontSize: 20,

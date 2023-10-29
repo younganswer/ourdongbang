@@ -53,14 +53,12 @@ export const InfoPageMemberBodyStyle = css({
 		},
 		'> div:nth-child(2)': {
 			display: 'grid',
-			gridTemplateColumns: 'repeat(auto-fill, 263px)',
-			gap: 38.5,
+			gridTemplateColumns: 'repeat(auto-fill, minmax(263px, 1fr))',
+			gap: 29,
 			overflowY: 'auto',
+
 			'&::-webkit-scrollbar': {
 				display: 'none',
-			},
-			'> div': {
-				width: '100%',
 			},
 		},
 	},
