@@ -6,5 +6,5 @@ export const RuleStyle = css({
 	height: '760px',
 	margin: '0 auto',
 	marginTop: '51px',
-	overflow: 'hidden',
+	overflow: 'scroll',
 });
