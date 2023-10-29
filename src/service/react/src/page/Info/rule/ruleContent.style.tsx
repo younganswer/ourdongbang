@@ -19,7 +19,7 @@ export const RuleContentButtonStyle = css({
 	fontWeight: 'bold',
 	transition: 'background-color 0.3s',
 	fontSize: 14.91,
-	marginLeft: '1050px',
+	marginLeft: '1030px',
 	marginBottom: '10px',
 
 	cursor: 'pointer', // 마우스 커서 모양 설정 (옵션)
