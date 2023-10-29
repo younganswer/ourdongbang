@@ -4,6 +4,7 @@ import RulePost from './rulePost';
 import {
 	InputContentStyle,
 	InputTitleStyle,
+	ModalContentStyle,
 	RuleContentButtonStyle,
 	RuleContentContainer,
 	RuleContentStyle,
@@ -13,8 +14,8 @@ import { Modal } from 'component/modal';
 
 interface ModalContentProps {
 	inputTitle: string;
-	handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	inputContent: string;
+	handleInputChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+	inputContent: string[];
 	handleSubmit: () => void;
 	closeModal: () => void;
 }
@@ -24,23 +25,9 @@ const ModalContent: React.FC<ModalContentProps> = ({
 	handleInputChange,
 	inputContent,
 	handleSubmit,
-	closeModal,
 }) => {
-	useEffect(() => {
-		document.body.style.cssText = `
-		    position: fixed; 
-		    top: -${window.scrollY}px;
-		    overflow-y: scroll;
-		    width: 100%;`;
-		return () => {
-			const scrollY = document.body.style.top;
-			document.body.style.cssText = '';
-			window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-		};
-	}, []);
-
 	return (
-		<div>
+		<div className={ModalContentStyle}>
 			<div>
 				<input
 					className={InputTitleStyle}
@@ -55,7 +42,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
 				<input
 					className={InputContentStyle}
 					type="text"
-					name="content "
+					name="content"
 					value={inputContent}
 					onChange={handleInputChange}
 					placeholder="내용"
@@ -63,7 +50,6 @@ const ModalContent: React.FC<ModalContentProps> = ({
 			</div>
 			<div>
 				<button onClick={handleSubmit}>생성하기</button>
-				<button onClick={closeModal}>닫기</button>
 			</div>
 		</div>
 	);
@@ -73,24 +59,35 @@ const RuleContent = () => {
 	const [rules, setRules] = useState<RuleType[]>([]); // RuleType은 실제 룰 객체의 타입으로 대체해야 합니다.
 	const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 	const [inputTitle, setInputTitle] = useState('');
-	const [inputContent, setInputContent] = useState('');
+	const [inputContent, setInputContent] = useState<string[]>([]);
 	const [clubId, setClubId] = useState('');
 
 	const openModal = () => {
 		setIsModalOpened(true); // 모달 열기
+		setInputTitle(''); // 제목 초기화
+		setInputContent([]); // 내용 초기화
 	};
 
 	const closeModal = () => {
 		setIsModalOpened(false); // 모달 닫기
 	};
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
 		if (name === 'title') {
 			setInputTitle(value);
 		} else if (name === 'content') {
-			setInputContent(value);
+			setInputContent([value]); // content를 배열로 업데이트
 		}
+	};
+
+	const fetchRules = () => {
+		// Axios를 사용하여 규칙 목록을 다시 가져옵니다.
+		axios.get(`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`).then(response => {
+			const fetchedRules = response.data;
+			// 상태(State)에 새로운 규칙 정보 저장
+			setRules(fetchedRules);
+		});
 	};
 
 	const handleSubmit = () => {
@@ -101,7 +98,8 @@ const RuleContent = () => {
 		};
 		// Axios를 사용하여 POST 요청을 보냅니다.
 		axios.post(`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`, data).then(() => {
-			closeModal();
+			fetchRules(); // 규칙 목록을 다시 가져옵니다.
+			closeModal(); // 모달을 닫습니다.
 		});
 	};
 

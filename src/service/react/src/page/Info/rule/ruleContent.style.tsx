@@ -38,9 +38,22 @@ export const RuleModalStyle = css({
 export const InputTitleStyle = css({
 	width: '300px',
 	height: '40px',
+	marginTop: '40px',
+	marginBottom: '30px',
 });
 
 export const InputContentStyle = css({
 	width: '300px',
-	height: '80px',
+	height: '200px',
+	marginBottom: '30px',
+});
+
+export const ModalContentStyle = css({
+	backgroundColor: '#EFEEEA',
+	width: '500px',
+	height: '400px',
+	borderRadius: '10px',
+	display: 'flex',
+	flexFlow: 'column',
+	alignItems: 'center',
 });

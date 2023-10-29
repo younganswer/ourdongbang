@@ -6,8 +6,8 @@ import { RuleStyle } from './index.style';
 const Rule = () => {
 	return (
 		<div>
-			<RuleTitle />
 			<div className={RuleStyle}>
+				<RuleTitle />
 				<RuleContent />
 			</div>
 		</div>
