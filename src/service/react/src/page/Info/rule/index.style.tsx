@@ -6,5 +6,5 @@ export const RuleStyle = css({
 	height: '760px',
 	margin: '0 auto',
 	marginTop: '51px',
-	overflow: 'scroll',
+	overflowY: 'scroll', // overflowY 속성을 사용하여 세로 스크롤바만 표시
 });

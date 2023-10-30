@@ -9,3 +9,9 @@ export const RulePostStyle = css({
 export const RulePostContentStyle = css({
 	borderTop: '2px solid black',
 });
+
+export const PostTitleStyle = css({
+	display: 'flex',
+	justifyContent: 'space-between',
+	alignItems: 'center',
+});
