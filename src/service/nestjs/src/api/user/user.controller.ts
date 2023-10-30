@@ -64,7 +64,7 @@ export class UserController {
 			if (!me) {
 				throw new HttpException('Bad Request', 400);
 			}
-			
+
 			return me;
 		} catch (error) {
 			console.error(error);

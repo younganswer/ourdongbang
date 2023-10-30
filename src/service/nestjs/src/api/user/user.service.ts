@@ -52,11 +52,7 @@ export class UserService {
 
 	async setProfileImage(userId: Types.ObjectId, profileImageId: Types.ObjectId): Promise<User> {
 		try {
-			return await this.userModel.findByIdAndUpdate(
-				userId,
-				{ profileImageId },
-				{ new: true },
-			);
+			return await this.userModel.findByIdAndUpdate(userId, { profileImageId }, { new: true });
 		} catch (error) {
 			console.error(error);
 			throw error;
