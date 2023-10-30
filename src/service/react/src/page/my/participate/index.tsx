@@ -50,7 +50,13 @@ const Activity = (props: { me: User }) => {
 		<div className={ParticipatedActivityStyle}>
 			<div>{date}</div>
 			<div>참여 활동</div>
-			<RightArrowIcon width={12} height={20} />
+			<RightArrowIcon
+				width={12}
+				height={20}
+				onClick={() => {
+					alert('업데이트 예정입니다!');
+				}}
+			/>
 		</div>
 	);
 	<>{me}</>;

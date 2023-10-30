@@ -148,7 +148,7 @@ const AuditDocumentHeader = (props: {
 
 	return (
 		<div className={AuditFormHeaderStyle}>
-			{index ? <span>[ {index + 1} ]</span> : <span></span>}
+			{index !== null ? <span>[ {index + 1} ]</span> : <span></span>}
 			<span>{`( ${clubName} )`} 회계 내역</span>
 			<MetaData
 				clubName={clubName}

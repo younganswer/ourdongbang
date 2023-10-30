@@ -2,9 +2,13 @@ import { css } from '@emotion/css';
 
 export const RuleContentStyle = css({
 	display: 'grid',
-	gridTemplateRows: '1fr',
-	gridTemplateColumns: '1fr 1fr 1fr',
-	borderTop: '1px solid #535766',
+	gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+	padding: '20px',
+	gap: '20px',
+
+	'> div': {
+		width: '100%',
+	},
 });
 
 export const RuleContentContainer = css({
@@ -16,12 +20,14 @@ export const RuleContentContainer = css({
 	justifyContent: 'center',
 
 	'> div:nth-child(1)': {
-		height: '30px',
+		width: '100%',
+		height: '40px',
 		display: 'flex',
-		alignSelf: 'flex-end',
+		justifyContent: 'flex-end',
+		borderBottom: '1px solid #000',
 	},
 	'> div:nth-child(2)': {
-		height: '579px',
+		height: '569px',
 		overflowY: 'auto',
 	},
 });
@@ -30,7 +36,8 @@ export const RuleContentButtonStyle = css({
 	border: 'none',
 	background: 'none',
 	transition: 'background-color 0.3s',
-	fontSize: 14.91,
+	fontSize: 18,
+	fontFamily: 'Pretendard-regular',
 
 	cursor: 'pointer', // 마우스 커서 모양 설정 (옵션)
 	'&:hover': {
@@ -46,24 +53,58 @@ export const RuleModalStyle = css({
 });
 
 export const InputTitleStyle = css({
-	width: '300px',
 	height: '40px',
-	marginTop: '40px',
-	marginBottom: '30px',
+	padding: '0 20px',
 });
 
 export const InputContentStyle = css({
-	width: '300px',
 	height: '200px',
-	marginBottom: '30px',
+	padding: '20px',
+	resize: 'none',
+	overflowY: 'auto',
 });
 
 export const ModalContentStyle = css({
 	backgroundColor: '#EFEEEA',
-	width: '500px',
-	height: '400px',
+	width: '700px',
+	height: '550px',
 	borderRadius: '10px',
 	display: 'flex',
-	flexFlow: 'column',
+	flexDirection: 'column',
+	justifyContent: 'center',
 	alignItems: 'center',
+	gap: '2rem',
+
+	'> div': {
+		width: '80%',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+
+		'input, textarea': {
+			width: '100%',
+			border: '1px solid #000',
+			borderRadius: '5px',
+			fontSize: 16,
+			fontFamily: 'Pretendard-regular',
+		},
+	},
+
+	'> div:nth-child(3)': {
+		button: {
+			width: '100%',
+			height: '40px',
+			borderRadius: '5px',
+			fontSize: 16,
+			fontFamily: 'Pretendard-regular',
+			backgroundColor: 'white',
+			cursor: 'pointer',
+			'&:hover': {
+				backgroundColor: '#E5E5E5',
+			},
+			'&:active': {
+				backgroundColor: '#D9D9D9',
+			},
+		},
+	},
 });

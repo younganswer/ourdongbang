@@ -10,7 +10,7 @@ export const AuditDocumentBodyAttachmentStyle = css({
 		alignItems: 'center',
 	},
 	'> div:nth-child(1)': {
-		borderBottom: '1px solid black',
+		borderBottom: '2px solid black',
 		backgroundColor: '#F2F2F2',
 		'> span': {
 			fontSize: 10,
@@ -22,7 +22,7 @@ export const AuditDocumentBodyAttachmentStyle = css({
 			width: '455px',
 			height: '125px',
 			objectFit: 'cover',
-			border: '1px solid black',
+			border: '2px solid black',
 		},
 	},
 });

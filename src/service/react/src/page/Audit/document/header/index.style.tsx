@@ -19,8 +19,8 @@ export const AuditFormHeaderStyle = css({
 export const AuditFormHeaderMetaStyle = css({
 	display: 'grid',
 	gridTemplateRows: '1fr 1fr 1fr',
-	borderLeft: '1px solid black',
-	borderRight: '1px solid black',
+	borderLeft: '2px solid black',
+	borderRight: '2px solid black',
 
 	input: {
 		textAlign: 'center',
@@ -32,7 +32,7 @@ export const AuditFormHeaderMetaStyle = css({
 		gridTemplateColumns: '1fr 2fr',
 		fontSize: 8,
 		fontFamily: 'Pretendard-regular',
-		borderTop: '1px solid black',
+		borderTop: '2px solid black',
 
 		'> div': {
 			display: 'flex',
@@ -40,7 +40,7 @@ export const AuditFormHeaderMetaStyle = css({
 			alignItems: 'center',
 		},
 		'> div:nth-child(1)': {
-			borderRight: '1px solid black',
+			borderRight: '2px solid black',
 		},
 		'> div:nth-child(2)': {
 			input: {

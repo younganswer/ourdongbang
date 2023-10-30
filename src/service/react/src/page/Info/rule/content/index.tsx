@@ -39,9 +39,8 @@ const ModalContent: React.FC<ModalContentProps> = ({
 				/>
 			</div>
 			<div>
-				<input
+				<textarea
 					className={InputContentStyle}
-					type="text"
 					name="content"
 					value={inputContent}
 					onChange={handleInputChange}

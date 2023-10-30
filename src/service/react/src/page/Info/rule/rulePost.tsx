@@ -9,17 +9,14 @@ interface RulePostProps {
 
 const RulePost: React.FC<RulePostProps> = ({ rule }) => {
 	const handleEditButtonClick = () => {
-		console.log('버튼 클릭됨');
+		alert('업데이트 예정입니다!');
 	};
 
 	return (
 		<div className={RulePostStyle}>
 			<div className={PostTitleStyle}>
-				<h2 style={{ marginLeft: '20px' }}>{rule.title}</h2>
-				<EditBtnImg
-					style={{ marginTop: '5px', marginRight: '20px', cursor: 'pointer' }}
-					onClick={handleEditButtonClick}
-				/>
+				<span>{rule.title}</span>
+				<EditBtnImg onClick={handleEditButtonClick} />
 			</div>
 			<div className={RulePostContentStyle}>
 				<ul>

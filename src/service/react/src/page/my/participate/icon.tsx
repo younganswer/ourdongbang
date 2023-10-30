@@ -19,8 +19,8 @@ export const HandIcon = (props: { width: number; height: number }) => {
 	);
 };
 
-export const RightArrowIcon = (props: { width: number; height: number }) => {
-	const { width, height } = props;
+export const RightArrowIcon = (props: { width: number; height: number; onClick: () => void }) => {
+	const { width, height, onClick } = props;
 
 	return (
 		<svg
@@ -29,6 +29,7 @@ export const RightArrowIcon = (props: { width: number; height: number }) => {
 			height={height}
 			viewBox={`0 0 ${width} ${height}`}
 			fill="none"
+			onClick={onClick}
 		>
 			<path d="M1 19L10 10L0.999999 1" stroke="black" strokeWidth="2" />
 		</svg>

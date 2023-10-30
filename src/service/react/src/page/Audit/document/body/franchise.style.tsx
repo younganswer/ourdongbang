@@ -9,7 +9,7 @@ export const AuditDocumentBodyFranchiseStyle = css({
 		alignItems: 'center',
 	},
 	'> div:nth-child(1)': {
-		borderRight: '1px solid black',
+		borderRight: '2px solid black',
 		justifyContent: 'center',
 		backgroundColor: '#F2F2F2',
 		'> span': {

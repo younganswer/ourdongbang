@@ -15,6 +15,31 @@ const resizeBeforeGetContent = (content: HTMLElement | null) => {
 		content.style.display = 'grid';
 		content.style.gridTemplateRows = '1fr 12fr';
 
+		// get all images to leaf node
+		const images: HTMLImageElement[] = [];
+		const pushImage = (node: HTMLElement) => {
+			if (node.children.length === 0) {
+				if (node.tagName === 'IMG') {
+					images.push(node as HTMLImageElement);
+				}
+			} else {
+				for (let i = 0; i < node.children.length; i++) {
+					pushImage(node.children[i] as HTMLElement);
+				}
+			}
+		};
+		pushImage(content);
+		for (let i = 0; i < 2; i++) {
+			images[i].style.width = '95mm';
+			images[i].style.height = '55mm';
+			images[i].style.border = '2px solid black';
+		}
+		if (images.length === 3) {
+			images[2].style.width = '190mm';
+			images[2].style.height = '55mm';
+			images[2].style.border = '2px solid black';
+		}
+
 		// set all child to leaf node fontsize plus 4px
 		const setFontSize = (node: HTMLElement) => {
 			if (node.children.length === 0) {

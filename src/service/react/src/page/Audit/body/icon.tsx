@@ -19,8 +19,12 @@ export const ExportIcon = (props: { width: number | string; height: number | str
 	);
 };
 
-export const DownArrowIcon = (props: { width: number | string; height: number | string }) => {
-	const { width, height } = props;
+export const DownArrowIcon = (props: {
+	width: number | string;
+	height: number | string;
+	onClick?: () => void;
+}) => {
+	const { width, height, onClick } = props;
 
 	return (
 		<svg
@@ -29,6 +33,7 @@ export const DownArrowIcon = (props: { width: number | string; height: number | 
 			height={height}
 			viewBox="0 0 22 12"
 			fill="none"
+			onClick={onClick}
 		>
 			<path
 				d="M1 1.09387L9.58579 9.67966C10.3668 10.4607 11.6332 10.4607 12.4142 9.67966L21 1.09387"

@@ -11,7 +11,7 @@ const AuditDocumentBodyCardSlip = (props: { cardSlipId: string }) => {
 				<span>카 드 전 표</span>
 			</div>
 			<div>
-				<img src={src} alt="card-receipt" />
+				<img src={src} alt="card-slip" />
 			</div>
 		</div>
 	);

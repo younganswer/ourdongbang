@@ -47,6 +47,10 @@ const AuditDocumentPreview = (props: {
 		if (!isModalOpened || !isEditting) {
 			setIsEditting(false);
 
+			if (audit === newAudit) {
+				return;
+			}
+
 			const parsedAudit = {
 				...newAudit,
 				amount: parseInt(newAudit.amount),

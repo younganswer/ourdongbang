@@ -20,7 +20,13 @@ const Header = () => {
 						console.log('export');
 					}}
 				>
-					<span>회계 장부 내보내기</span>
+					<span
+						onClick={() => {
+							alert('업데이트 예정입니다!');
+						}}
+					>
+						회계 장부 내보내기
+					</span>
 					<ExportIcon width={24} height={24} />
 				</div>
 			</div>
@@ -38,7 +44,13 @@ const Body = (props: {
 		<div className={AuditDocumentBodyStyle}>
 			<div>
 				<span>날짜별</span>
-				<DownArrowIcon width={22} height={12} />
+				<DownArrowIcon
+					width={22}
+					height={12}
+					onClick={() => {
+						alert('업데이트 예정입니다!');
+					}}
+				/>
 			</div>
 			<div>
 				<AuditRegisterButton />
