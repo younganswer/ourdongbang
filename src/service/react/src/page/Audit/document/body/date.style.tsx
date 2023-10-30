@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 
 export const AuditDocumentBodyDateStyle = css({
 	display: 'grid',
-	gridTemplateColumns: '1.01fr 5.6fr',
+	gridTemplateColumns: '1fr 5.6fr',
 	borderRight: '1px solid black',
 
 	'> div': {

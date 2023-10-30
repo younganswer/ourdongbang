@@ -14,7 +14,7 @@ export const AuditDocumentStyle = css({
 		display: 'grid',
 		gridTemplateRows: '1fr 12fr',
 
-		'input[type=text]': {
+		'input[type=text], input[type=date]': {
 			backgroundColor: 'transparent',
 			border: 'none',
 			padding: 0,

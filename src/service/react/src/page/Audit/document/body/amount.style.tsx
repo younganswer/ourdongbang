@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 
 export const AuditDocumentBodyAmountStyle = css({
 	display: 'grid',
-	gridTemplateColumns: '1.01fr 3.6fr 2fr',
+	gridTemplateColumns: '1fr 3.6fr 2fr',
 	borderRight: '1px solid black',
 
 	'> div': {

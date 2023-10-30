@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import RulePost from './rulePost';
+import RulePost from '../rulePost';
 import {
 	InputContentStyle,
 	InputTitleStyle,
@@ -8,7 +8,7 @@ import {
 	RuleContentButtonStyle,
 	RuleContentContainer,
 	RuleContentStyle,
-} from './ruleContent.style';
+} from './index.style';
 import RuleType from 'common/App.Types';
 import { Modal } from 'component/modal';
 
@@ -55,7 +55,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
 	);
 };
 
-const RuleContent = () => {
+const InfoPageRuleContent = () => {
 	const [rules, setRules] = useState<RuleType[]>([]); // RuleType은 실제 룰 객체의 타입으로 대체해야 합니다.
 	const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 	const [inputTitle, setInputTitle] = useState('');
@@ -85,7 +85,7 @@ const RuleContent = () => {
 		// Axios를 사용하여 규칙 목록을 다시 가져옵니다.
 		axios.get(`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`).then(response => {
 			const fetchedRules = response.data;
-			// 상태(State)에 새로운 규칙 정보 저장
+
 			setRules(fetchedRules);
 		});
 	};
@@ -131,10 +131,19 @@ const RuleContent = () => {
 	}, []);
 
 	return (
-		<div className={RuleContentContainer}>
-			<button className={RuleContentButtonStyle} onClick={openModal}>
-				항목추가 +
-			</button>{' '}
+		<>
+			<div className={RuleContentContainer}>
+				<div>
+					<button className={RuleContentButtonStyle} onClick={openModal}>
+						항목추가 +
+					</button>
+				</div>
+				<div className={RuleContentStyle}>
+					{!rules || rules.length === 0
+						? null
+						: rules.map((rule, index) => <RulePost key={index} rule={rule} />)}
+				</div>
+			</div>
 			{isModalOpened && (
 				<Modal setIsModalOpened={setIsModalOpened}>
 					<ModalContent
@@ -146,13 +155,8 @@ const RuleContent = () => {
 					/>
 				</Modal>
 			)}
-			<div className={RuleContentStyle}>
-				{rules.map((rule, index) => (
-					<RulePost key={index} rule={rule} />
-				))}
-			</div>
-		</div>
+		</>
 	);
 };
 
-export default RuleContent;
+export default InfoPageRuleContent;

@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
 
 export const InfoPageMemberStyle = css({
+	width: '100%',
 	display: 'grid',
 	gridTemplateRows: 'auto 1fr',
 	border: '1px solid black',
@@ -52,14 +53,12 @@ export const InfoPageMemberBodyStyle = css({
 		},
 		'> div:nth-child(2)': {
 			display: 'grid',
-			gridTemplateColumns: 'repeat(auto-fill, 263px)',
-			gap: 38.5,
+			gridTemplateColumns: 'repeat(auto-fill, minmax(263px, 1fr))',
+			gap: 29,
 			overflowY: 'auto',
+
 			'&::-webkit-scrollbar': {
 				display: 'none',
-			},
-			'> div': {
-				width: '100%',
 			},
 		},
 	},
