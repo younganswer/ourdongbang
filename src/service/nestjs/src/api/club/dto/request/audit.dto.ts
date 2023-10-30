@@ -67,23 +67,17 @@ export class CreateAuditDto {
 	@ApiProperty({ description: '잔액', example: 800000 })
 	balance: number;
 
-	@IsString()
-	@IsNotEmpty()
-	@ApiProperty({ description: '비고', example: '냉면 3000원 할인' })
-	remark: string;
-
-	@IsString()
 	@IsNotEmpty()
 	@ApiProperty({ description: '영수증 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
 	receiptId: Types.ObjectId;
 
-	@IsString()
-	@IsNotEmpty()
+	//@IsNotEmpty()
 	@ApiProperty({ description: '카드 전표 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
 	cardSlipId: Types.ObjectId;
 
-	@IsString()
-	@IsNotEmpty()
 	@ApiProperty({ description: '첨부 사진 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
 	attachmentId: Types.ObjectId;
+
+	@ApiProperty({ description: '비고', example: '냉면 3000원 할인' })
+	remark: string;
 }

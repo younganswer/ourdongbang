@@ -26,7 +26,7 @@ const AuditDocument = (props: {
 	setRemark: Dispatch<SetStateAction<string>>;
 	receiptId: string;
 	cardSlipId: string;
-	attachmentId: string;
+	attachmentId: string | undefined;
 	isEditting: boolean;
 }) => {
 	const {

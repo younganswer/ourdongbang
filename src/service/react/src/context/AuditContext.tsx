@@ -49,7 +49,6 @@ export const AuditProvider = (props: { children: ReactNode }) => {
 					withCredentials: true,
 				})
 				.then(response => {
-					console.log(response.data);
 					setAudits(response.data);
 				})
 				.catch(() => {

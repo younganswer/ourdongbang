@@ -391,6 +391,7 @@ export class ClubsController {
 	async createAudit(
 		@Param('cid') clubId: string,
 		@Body() createAuditDto: ClubDto.Request.CreateAuditDto,
+		@Res({ passthrough: true }) response: Response,
 	) {
 		try {
 			const club = await this.clubsService.findClubById(clubId);
@@ -404,12 +405,17 @@ export class ClubsController {
 			}
 
 			const auditId: Types.ObjectId = audit['_id'];
-			const updatedClub = await this.clubsService.addAudit(clubId, auditId);
+			const amount = audit.amount;
+			const isExpense = audit.isExpense;
+			const updatedClub = await this.clubsService.addAudit(clubId, auditId, amount, isExpense);
 			if (!updatedClub) {
 				throw new HttpException('Bad request', 400);
 			}
 
-			return audit;
+			return response.json({
+				club: updatedClub,
+				audit,
+			});
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

@@ -59,13 +59,6 @@ export class Audit {
 	balance: number;
 
 	@Prop({
-		type: String,
-		required: false,
-	})
-	@ApiProperty({ description: '비고', example: '우동 회식' })
-	remark: string;
-
-	@Prop({
 		type: Types.ObjectId,
 		ref: 'images',
 		unique: true,
@@ -89,6 +82,13 @@ export class Audit {
 	})
 	@ApiProperty({ description: '첨부 사진', example: '38n5c1c0c9b0f8v7r8e3n0b0' })
 	attachmentId: Types.ObjectId;
+
+	@Prop({
+		type: String,
+		required: false,
+	})
+	@ApiProperty({ description: '비고', example: '우동 회식' })
+	remark: string;
 }
 
 export type AuditDocument = Audit & Document;

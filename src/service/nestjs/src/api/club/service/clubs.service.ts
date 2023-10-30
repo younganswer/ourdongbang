@@ -58,10 +58,16 @@ export class ClubsService {
 		return club.audits;
 	}
 
-	async addAudit(cludId: string | Types.ObjectId, auditId: Types.ObjectId) {
+	async addAudit(
+		cludId: string | Types.ObjectId,
+		auditId: Types.ObjectId,
+		amount: number,
+		isExpense: boolean,
+	) {
 		const club = await this.clubModel.findById(cludId).exec();
 
 		club.audits.push(auditId);
+		club.balance += isExpense ? -amount : amount;
 		return club.save();
 	}
 
@@ -85,7 +91,7 @@ export class ClubsService {
 
 	async addMember(clubId: string | Types.ObjectId, memberId: Types.ObjectId) {
 		const club = await this.clubModel.findById(clubId).exec();
-		
+
 		club.members.push(memberId);
 		return club.save();
 	}

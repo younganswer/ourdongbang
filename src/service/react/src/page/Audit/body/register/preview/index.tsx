@@ -2,19 +2,20 @@ import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { AuditRegisterPreviewStyle } from './index.style';
 import { Modal } from 'component/modal';
 import axios from 'axios';
-import { ClubContext } from 'context/ClubContext';
+import { Club, ClubContext } from 'context/ClubContext';
 import { Types } from 'mongoose';
 import { AuthContext } from 'context/AuthContext';
 import { Audit, AuditContext } from 'context/AuditContext';
 
 const handleSubmit = (
-	auditor: string | undefined,
-	clubId: Types.ObjectId | undefined,
+	auditor: string,
+	clubId: Types.ObjectId,
+	setClub: Dispatch<SetStateAction<Club | null>>,
 	title: string | undefined,
 	franchise: string | undefined,
 	date: string | undefined,
 	amount: string | undefined,
-	//balance: string,
+	balance: number,
 	receiptId: string | undefined,
 	cardSlipId: string | undefined,
 	attachmentId: string | undefined,
@@ -23,10 +24,16 @@ const handleSubmit = (
 	setAudits: Dispatch<SetStateAction<Audit[] | null>>,
 	setIsModalOpened: Dispatch<SetStateAction<boolean>>,
 ) => {
-	if (!title || !franchise || !date || !amount || !receiptId || !cardSlipId || !attachmentId) {
+	// 부스 체험 용 validation
+	if (!title || !franchise || !date || !amount || !receiptId) {
 		alert('모든 항목을 입력해주세요.');
 		return;
 	}
+	// 원본
+	//if (!title || !franchise || !date || !amount || !receiptId || !cardSlipId) {
+	//	alert('모든 항목을 입력해주세요.');
+	//	return;
+	//}
 
 	const created = new Date().toISOString().slice(0, 10);
 
@@ -37,11 +44,11 @@ const handleSubmit = (
 				auditor,
 				created,
 				title,
-				franchise,
 				date,
+				franchise,
 				amount: parseInt(amount),
 				isExpense: true,
-				balance: 800000,
+				balance: balance - parseInt(amount),
 				receiptId,
 				cardSlipId,
 				attachmentId,
@@ -50,7 +57,8 @@ const handleSubmit = (
 			{ withCredentials: true },
 		)
 		.then(response => {
-			setAudits([...audits!, response.data]);
+			setClub(response.data.club);
+			setAudits([...audits!, response.data.audit]);
 		})
 		.catch(error => {
 			console.error(error);
@@ -100,8 +108,12 @@ const AuditRegisterPreview = (props: {
 	} = props;
 	const [previewModalIsOpened, setPreviewModalIsOpened] = useState<boolean>(false);
 	const { me } = useContext(AuthContext);
-	const { club } = useContext(ClubContext);
+	const { club, setClub } = useContext(ClubContext);
 	const { audits, setAudits } = useContext(AuditContext);
+
+	if (!me || !club) {
+		return null;
+	}
 
 	return (
 		<>
@@ -194,13 +206,14 @@ const AuditRegisterPreview = (props: {
 						<button
 							onClick={() => {
 								handleSubmit(
-									me?.name,
-									club?._id,
+									me.name,
+									club._id,
+									setClub,
 									title,
 									franchise,
 									date,
 									amount,
-									//audits[0].balance,
+									club?.balance,
 									receiptId,
 									cardSlipId,
 									attachmentId,

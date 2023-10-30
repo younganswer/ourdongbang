@@ -11,12 +11,19 @@ const handleSubmit = async (
 ) => {
 	event.preventDefault();
 
+	// 원본
+	//if (!file) {
+	//	alert('파일을 선택해주세요.');
+	//	return;
+	//}
+
+	setPageIndex(pageIndex + 1);
+
+	// 부스 체험 용 validation
 	if (!file) {
-		alert('파일을 선택해주세요.');
 		return;
 	}
 
-	setPageIndex(pageIndex + 1);
 	const presignedData = await axios
 		.post(
 			`${process.env.REACT_APP_NESTJS_URL}/image/presigned/card-slip`,
