@@ -26,7 +26,6 @@ const AuditRegister = (props: {
 		<AuditRegisterReceipt
 			key={0}
 			className={AuditRegisterBodyStyle}
-			setTitle={setTitle}
 			setFranchise={setFranchise}
 			setDate={setDate}
 			setAmount={setAmount}

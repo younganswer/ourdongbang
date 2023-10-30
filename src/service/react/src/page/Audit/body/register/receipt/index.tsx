@@ -5,7 +5,6 @@ import axios from 'axios';
 const handleSubmit = async (
 	event: FormEvent<HTMLFormElement>,
 	file: File | null,
-	setTitle: Dispatch<SetStateAction<string | undefined>>,
 	setFranchise: Dispatch<SetStateAction<string | undefined>>,
 	setDate: Dispatch<SetStateAction<string | undefined>>,
 	setAmount: Dispatch<SetStateAction<string | undefined>>,
@@ -47,27 +46,25 @@ const handleSubmit = async (
 	});
 
 	setId(presignedData.fields.key.split('/')[2]);
-	//axios
-	//	.post(
-	//		`${process.env.REACT_APP_NESTJS_URL}/receipt`,
-	//		{ key: presignedData.fields.key },
-	//		{ withCredentials: true },
-	//	)
-	//	.then(response => {
-	//		setTitle(response.data.title);
-	//		setFranchise(response.data.franchise);
-	//		setDate(response.data.date);
-	//		setAmount(response.data.amount);
-	//	})
-	//	.catch(error => {
-	//		console.error(error);
-	//		alert(error.response.data.message);
-	//	});
+	axios
+		.post(
+			`${process.env.REACT_APP_NESTJS_URL}/receipt`,
+			{ imageId: presignedData.fields.key.split('/')[2] },
+			{ withCredentials: true },
+		)
+		.then(response => {
+			setDate(response.data.date);
+			setAmount(response.data.amount);
+			setFranchise(response.data.franchise);
+		})
+		.catch(error => {
+			console.error(error);
+			alert(error.response.data.message);
+		});
 };
 
 const AuditRegisterReceipt = (props: {
 	className: string;
-	setTitle: Dispatch<SetStateAction<string | undefined>>;
 	setFranchise: Dispatch<SetStateAction<string | undefined>>;
 	setDate: Dispatch<SetStateAction<string | undefined>>;
 	setAmount: Dispatch<SetStateAction<string | undefined>>;
@@ -79,7 +76,6 @@ const AuditRegisterReceipt = (props: {
 }) => {
 	const {
 		className,
-		setTitle,
 		setFranchise,
 		setDate,
 		setAmount,
@@ -98,7 +94,6 @@ const AuditRegisterReceipt = (props: {
 					handleSubmit(
 						event,
 						file,
-						setTitle,
 						setFranchise,
 						setDate,
 						setAmount,

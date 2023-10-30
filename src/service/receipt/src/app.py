@@ -4,6 +4,7 @@ import requests, os, uuid, time, json, base64
 from werkzeug.utils import secure_filename
 from urllib.parse import quote
 import tempfile
+import time
 
 app = Flask(__name__)
 
@@ -13,10 +14,14 @@ def remove_space(str):
 def load_image(imageId):
 	url = os.environ['S3_BUCKET_PREFIX_URL'] + '/' + imageId
 	
+	timeout = time.time() + 60*5
 	response = requests.get(url)
-	if response.status_code != 200:
-		print("Failed to download the image")
-		return make_response(response.data, response.status_code)
+	while response.status_code != 200:
+		time.sleep(0.5)
+		response = requests.get(url)
+		if timeout < time.time():
+			print("Failed to download the image")
+			return make_response(response.data, response.status_code)
 
 	temp_dir = tempfile.mkdtemp(dir=os.environ['TMPDIR'], prefix='receipt_')
 	temp_file = tempfile.mktemp(dir=temp_dir, suffix='.jpg')
@@ -70,11 +75,14 @@ def receipt_recognition(temp_file):
 		]["value"]
 	)  # 금액
 
+	# 23/10/19 to 2023-10-19
+	payment_date = payment_date.split("/")
+	payment_date = "20" + payment_date[0] + "-" + payment_date[1] + "-" + payment_date[2]
+
 	parsed_data = {
-		"dateOfPayment": payment_date,
-		"timeOfPayment": payment_time,
-		"storeName": store_name,
-		"price": total_price,
+		"date": payment_date,
+		"franchise": store_name,
+		"amount": total_price,
 	}
 	
 	return make_response(json.dumps(parsed_data), 200)

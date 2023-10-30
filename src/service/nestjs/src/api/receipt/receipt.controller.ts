@@ -27,7 +27,7 @@ export class receiptController {
 			return await lastValueFrom(
 				this.httpService.post('http://receipt:5000/receipt', formData, axiosRequestConfig).pipe(
 					map(response => {
-						response?.data;
+						return response?.data;
 					}),
 					catchError(error => {
 						throw new HttpException(error.message, error.status);
