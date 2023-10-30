@@ -51,6 +51,20 @@ export class Club {
 	})
 	schedules: Types.ObjectId[];
 
+	@ApiProperty({ description: '전체 공금', required: false })
+	@Prop({
+		type: Number,
+		required: false,
+	})
+	totalBudget: number;
+
+	@ApiProperty({ description: '현재 공금', required: false })
+	@Prop({
+		type: Number,
+		required: false,
+	})
+	balance: number;
+
 	@ApiProperty({ description: '동아리 회계 문서', required: false })
 	@Prop({
 		type: [Types.ObjectId],

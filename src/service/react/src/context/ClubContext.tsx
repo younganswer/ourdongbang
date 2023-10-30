@@ -22,6 +22,8 @@ export type Club = {
 	schedules: Types.ObjectId[];
 	audits: Types.ObjectId[];
 	reviews: Types.ObjectId[];
+	totalBudget: number;
+	balance: number;
 };
 
 export const ClubContext = createContext<{
@@ -55,6 +57,8 @@ export const ClubProvider = (props: { children: ReactNode }) => {
 							schedules: response.data.schedules,
 							audits: response.data.audits,
 							reviews: response.data.reviews,
+							totalBudget: response.data.totalBudget,
+							balance: response.data.balance,
 						});
 						setCookie('clubId', response.data._id, { path: '/' });
 					})

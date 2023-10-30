@@ -51,8 +51,7 @@ const handleSubmit = async (
 		axios
 			.patch(`${process.env.REACT_APP_NESTJS_URL}/user/me`, newMe, { withCredentials: true })
 			.then(response => {
-				setMe(response.data.me);
-				toast.success(response.data.message);
+				setMe(response.data);
 			})
 			.catch(error => {
 				console.error(error);

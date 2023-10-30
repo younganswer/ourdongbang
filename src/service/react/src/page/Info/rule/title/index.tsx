@@ -6,6 +6,7 @@ const InfoPageRuleTitle = () => {
 	return (
 		<div className={InfoPageRuleTitleStyle}>
 			<InfoPageTitleIcon width={209} height={60} />
+			<span>공 지</span>
 		</div>
 	);
 };

@@ -5,11 +5,4 @@ export const InfoPageRuleStyle = css({
 	width: '100%',
 	height: '760px',
 	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-
-	'> div': {
-		width: '90%',
-		height: '80%',
-	},
 });

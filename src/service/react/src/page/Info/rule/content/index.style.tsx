@@ -8,8 +8,9 @@ export const RuleContentStyle = css({
 });
 
 export const RuleContentContainer = css({
-	width: '100%',
-	height: '100%',
+	width: '90%',
+	height: '80%',
+	margin: 'auto',
 	display: 'flex',
 	flexDirection: 'column',
 	justifyContent: 'center',

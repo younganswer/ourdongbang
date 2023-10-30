@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ShowBalanceStyle, HeaderStyle } from './index.style';
+import { ClubContext } from 'context/ClubContext';
 
-interface ShowBalanceData {
-	totalBudget: number;
-	balance: number;
-}
-
-const ShowBalance: React.FC<ShowBalanceData> = ({ totalBudget, balance }) => {
+const ShowBalance = (props: { totalBudget: number; balance: number }) => {
 	// totalBudget(총 예산[회비]), balance (잔액)은 현준이 API와 연동 후 변경되도록 할 예정 -> 수정 필요
 	// 일단 입력값을 주어서 임의로 잔액 설정
+	const { totalBudget, balance } = props;
 
 	return (
 		<div className={ShowBalanceStyle}>
@@ -25,10 +22,16 @@ const ShowBalance: React.FC<ShowBalanceData> = ({ totalBudget, balance }) => {
 };
 
 const AuditDocumentHeader = () => {
+	const { club } = useContext(ClubContext);
+
+	if (!club) {
+		return null;
+	}
+
 	return (
 		<div className={HeaderStyle}>
 			<span>회계</span>
-			<ShowBalance totalBudget={100000} balance={50000} />
+			<ShowBalance totalBudget={club.totalBudget} balance={club.balance} />
 		</div>
 	);
 };

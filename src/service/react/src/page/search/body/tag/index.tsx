@@ -13,8 +13,8 @@ const Tag = (props: { tag: string }) => {
 				onMouseEnter={() => {
 					if (labelRef.current) {
 						inputRef.current?.checked === true
-							? (labelRef.current.style.backgroundColor = 'transparent')
-							: (labelRef.current.style.backgroundColor = '#F5F5F5');
+							? (labelRef.current.style.backgroundColor = '#F8F8F8')
+							: (labelRef.current.style.backgroundColor = '#F8F8F8');
 					}
 				}}
 				onMouseLeave={() => {

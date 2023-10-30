@@ -48,13 +48,11 @@ export class UserController {
 	@ApiOkResponse({ description: 'Update my information successfully', type: User })
 	async updateMe(@Body() updateData: Partial<User>, @Req() req) {
 		try {
-			const me = await this.userService.updateMe(req.user._id, updateData);
-
-			if (!me) {
-				throw new HttpException('Bad Request', 400);
-			}
-
 			if (updateData.profileImageId) {
+				const profileImageId = updateData.profileImageId;
+				const me = await this.userService.setProfileImage(req.user._id, profileImageId);
+
+				delete updateData.profileImageId;
 				this.imageService.delete(req.user.profileImageId);
 				this.s3Service.delete([
 					'profile/raw/' + req.user.profileImageId,
@@ -62,10 +60,12 @@ export class UserController {
 				]);
 			}
 
-			return {
-				message: 'Update my information successfully',
-				me,
-			};
+			const me = await this.userService.updateMe(req.user._id, updateData);
+			if (!me) {
+				throw new HttpException('Bad Request', 400);
+			}
+			
+			return me;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);

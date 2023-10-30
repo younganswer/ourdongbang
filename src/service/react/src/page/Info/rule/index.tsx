@@ -6,10 +6,8 @@ import { InfoPageRuleStyle } from './index.style';
 const InfoPageRule = () => {
 	return (
 		<div className={InfoPageRuleStyle}>
-			<div>
-				<InfoPageRuleTitle />
-				<InfoPageRuleContent />
-			</div>
+			<InfoPageRuleTitle />
+			<InfoPageRuleContent />
 		</div>
 	);
 };

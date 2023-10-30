@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from 'common/database/schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -44,6 +44,19 @@ export class UserService {
 	async findByEmail(email: string): Promise<User> {
 		try {
 			return await this.userModel.findOne({ email });
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	}
+
+	async setProfileImage(userId: Types.ObjectId, profileImageId: Types.ObjectId): Promise<User> {
+		try {
+			return await this.userModel.findByIdAndUpdate(
+				userId,
+				{ profileImageId },
+				{ new: true },
+			);
 		} catch (error) {
 			console.error(error);
 			throw error;
