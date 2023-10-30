@@ -15,6 +15,9 @@ export const BackAndInputTitleContainer = css({
 		backgroundColor: 'transparent',
 		border: 'none',
 		fontSize: '20px',
+		':focus': {
+			outline: 'none',
+		},
 	},
 	padding: '20px',
 });
@@ -27,11 +30,15 @@ export const ScheduleRegisterButtonStyle = css({
 	gap: '10px',
 	'> button': {
 		color: '#000',
-		fontFamily: 'Pretendard',
+		fontFamily: 'Pretendard-regular',
 		fontSize: '20px',
 		fontWeight: 500,
 		lineHeight: '150%',
 		letterSpacing: '-0.44px',
 		border: 'none',
+		':hover': {
+			cursor: 'pointer',
+			color: 'gray',
+		},
 	},
 });

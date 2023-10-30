@@ -102,7 +102,8 @@ export const DateTitleStyle = css({
 	alignItems: 'center',
 	paddingTop: '40px',
 	paddingBottom: '70px',
-	'> div': {
+
+	'> div: nth-child(1)': {
 		display: 'flex',
 		alignItems: 'center',
 		padding: '15px',
@@ -110,10 +111,10 @@ export const DateTitleStyle = css({
 		fontFamily: 'Pretendard-bold',
 		marginBottom: '45px',
 	},
-	'> span': {
+	'> div: nth-child(2)': {
 		padding: '15px',
 		fontFamily: 'Pretendard-bold',
-		fontsize: '20px',
+		fontSize: '20px',
 	},
 });
 

@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { DateContainerStyle, DateTitleStyle, datePickerStyle } from './Daterange.style';
+import { DateContainerStyle, datePickerStyle } from './Daterange.style';
 import { ko } from 'date-fns/locale';
 import { CalendarIcon } from './icon';
-
-export const DateTitle = () => {
-	return (
-		<div className={DateTitleStyle}>
-			<div>
-				<CalendarIcon height={25} width={25} />
-				<span>기간</span>
-			</div>
-			<span>달력에서 선택해주세요.</span>
-		</div>
-	);
-};
+import { TitleContainer } from './TitleContainer';
 
 const DateRangePicker: React.FC = () => {
 	const [startDate, setStartDate] = useState<Date | null>(null);
@@ -24,7 +13,11 @@ const DateRangePicker: React.FC = () => {
 	return (
 		<div className={DateContainerStyle}>
 			<>
-				<DateTitle />
+				<TitleContainer
+					titleIcon={<CalendarIcon height={25} width={25} />}
+					title="기간"
+					subtitle="달력에서 선택해주세요"
+				/>
 			</>
 			<div className={datePickerStyle}>
 				<DatePicker
