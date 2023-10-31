@@ -48,7 +48,7 @@ export class MemberService {
 	}
 
 	async updateMember(
-		memberId: string | Types.ObjectId,
+		memberId: Types.ObjectId,
 		updateData: Partial<CreateMemberDTO>,
 	): Promise<Member | null> {
 		const member = this.memberModel.findByIdAndUpdate(memberId, updateData, { new: true }).exec();

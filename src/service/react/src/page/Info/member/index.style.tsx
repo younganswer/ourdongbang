@@ -26,6 +26,7 @@ export const InfoPageMemberBodyStyle = css({
 	gridRow: 2,
 	display: 'grid',
 	gridTemplateRows: 'auto auto',
+	marginBottom: '2rem',
 
 	'> div': {
 		margin: '0 30px',

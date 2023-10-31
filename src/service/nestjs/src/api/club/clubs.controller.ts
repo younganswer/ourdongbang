@@ -716,7 +716,9 @@ export class ClubsController {
 				throw new HttpException('Bad request', 400);
 			}
 
-			return await this.memberService.updateMember(memberId, updateData);
+			const mid: Types.ObjectId = memberId as unknown as Types.ObjectId;
+
+			return await this.memberService.updateMember(mid, updateData);
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
