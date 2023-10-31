@@ -228,7 +228,8 @@ const AuditRegisterPreview = (props: {
 						</button>
 						<button
 							onClick={() => {
-								setPreviewModalIsOpened(true);
+								alert('업데이트 예정입니다!');
+								//setPreviewModalIsOpened(true);
 							}}
 						>
 							<span>미리보기</span>

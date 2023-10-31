@@ -7,6 +7,7 @@ export const SearchPageBodyStyle = css({
 
 	'> div': {
 		width: '94%',
+		marginBottom: '2rem',
 		'> div': {
 			padding: '0 2%',
 		},

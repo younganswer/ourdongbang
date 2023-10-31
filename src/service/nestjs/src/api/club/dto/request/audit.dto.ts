@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 import { registerDecorator, ValidationOptions } from 'class-validator';
 import * as dayjs from 'dayjs';
@@ -72,12 +72,18 @@ export class CreateAuditDto {
 	receiptId: Types.ObjectId;
 
 	//@IsNotEmpty()
+	@IsOptional()
+	@IsString()
 	@ApiProperty({ description: '카드 전표 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
 	cardSlipId: Types.ObjectId;
 
+	@IsOptional()
+	@IsString()
 	@ApiProperty({ description: '첨부 사진 ID', example: '5f9e9d0f4b9a3e1e4c7b6a9d' })
 	attachmentId: Types.ObjectId;
 
+	@IsOptional()
+	@IsString()
 	@ApiProperty({ description: '비고', example: '냉면 3000원 할인' })
 	remark: string;
 }

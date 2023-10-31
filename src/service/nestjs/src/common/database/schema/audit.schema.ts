@@ -78,14 +78,12 @@ export class Audit {
 		type: Types.ObjectId,
 		ref: 'images',
 		unique: true,
-		required: false,
 	})
 	@ApiProperty({ description: '첨부 사진', example: '38n5c1c0c9b0f8v7r8e3n0b0' })
 	attachmentId: Types.ObjectId;
 
 	@Prop({
 		type: String,
-		required: false,
 	})
 	@ApiProperty({ description: '비고', example: '우동 회식' })
 	remark: string;
