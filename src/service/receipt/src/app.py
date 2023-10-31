@@ -63,21 +63,40 @@ def receipt_recognition(temp_file):
 	response = response.json()
 	print(response)
 
-	payment_info = response["images"][0]["receipt"]["result"]["paymentInfo"]
-	payment_date = payment_info["date"]["text"]  # 날짜
-	payment_time = remove_space(payment_info["time"]["text"])  # 시간
-	store_name = remove_space(
-		response["images"][0]["receipt"]["result"]["storeInfo"]["name"]["text"]
-	)  # 상호명
-	total_price = remove_space(
-		response["images"][0]["receipt"]["result"]["totalPrice"]["price"][
-			"formatted"
-		]["value"]
-	)  # 금액
+	response = response["images"][0]["receipt"]["result"]
+
+	payment_date, payment_time = None, None
+	try:
+		payment_date = response["paymentInfo"]["date"]["text"]  # 날짜
+		payment_time = remove_space(response["paymentInfo"]["time"]["text"])  # 시간
+	except:
+		pass
+
+	store_name = None
+	try:
+		store_name = remove_space(response["storeInfo"]["name"]["text"])  # 상호명
+	except:
+		pass
+	
+	total_price = None
+	try:
+		total_price = remove_space(response["totalPrice"]["price"]["formatted"]["value"])  # 금액
+	except:
+		pass
 
 	# 23/10/19 to 2023-10-19
-	payment_date = payment_date.split("/")
-	payment_date = "20" + payment_date[0] + "-" + payment_date[1] + "-" + payment_date[2]
+	if (payment_date):
+		delimeters = ["/", ".", "-", " "]
+		for i in range(len(payment_date)):
+			if payment_date[i] in delimeters:
+				payment_date = payment_date[:i] + "-" + payment_date[i+1:]
+		payment_date = payment_date.split("-")
+		if (len(payment_date) != 3):
+			payment_date = None
+		elif (len(payment_date[0]) == 2):
+			payment_date = "20" + payment_date[0] + "-" + payment_date[1] + "-" + payment_date[2]
+		elif (len(payment_date[0]) == 4):
+			payment_date = payment_date[0] + "-" + payment_date[1] + "-" + payment_date[2]			
 
 	parsed_data = {
 		"date": payment_date,
