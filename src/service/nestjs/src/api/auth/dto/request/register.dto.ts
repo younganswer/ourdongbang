@@ -1,6 +1,6 @@
 import { Trim } from '@miaooo/class-transformer-trim';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumberString, IsString, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class Register {
 	@IsString()
@@ -29,15 +29,4 @@ export class Register {
 	@Trim()
 	@ApiProperty({ example: 'inetty@kookmin.ac.kr', required: false, uniqueItems: true })
 	email: string;
-
-	@IsString()
-	@Trim()
-	@ApiProperty({ example: '소프트웨어융합학부', required: false })
-	major: string;
-
-	@IsNumberString()
-	@Length(8, 8)
-	@Trim()
-	@ApiProperty({ example: '20191658', required: false, uniqueItems: true })
-	studentId: string;
 }

@@ -14,8 +14,16 @@ export const RulePostContentStyle = css({
 	width: '100%',
 	height: '300px',
 
-	fontSize: 16,
-	fontFamily: 'Pretendard-regular',
+	'> ul': {
+		'> li': {
+			margin: '10px 0',
+			fontSize: 16,
+			fontFamily: 'Pretendard-regular',
+			whiteSpace: 'pre-wrap',
+			wordBreak: 'break-word',
+			overflowWrap: 'break-word',
+		},
+	},
 });
 
 export const PostTitleStyle = css({

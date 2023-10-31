@@ -84,7 +84,6 @@ def receipt_recognition(temp_file):
 	except:
 		pass
 
-	# 23/10/19 to 2023-10-19
 	if (payment_date):
 		delimeters = ["/", ".", "-", " "]
 		for i in range(len(payment_date)):
