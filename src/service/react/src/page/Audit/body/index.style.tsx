@@ -53,7 +53,7 @@ export const AuditDocumentBodyStyle = css({
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 		padding: '0 5px',
-		gap: 20,
+		gap: 21,
 		'> span': {
 			fontSize: 20,
 			fontFamily: 'Pretendard-regular',
@@ -68,17 +68,21 @@ export const AuditDocumentBodyStyle = css({
 		},
 	},
 	'> div:nth-child(2)': {
-		display: 'grid',
-		gridTemplateColumns: 'repeat(auto-fill, minmax(263px, 1fr))',
-		gap: 19,
 		overflowY: 'auto',
 
 		'> div': {
-			width: '100%',
-			height: 325,
-			border: '1px solid black',
-			'&:hover': {
-				cursor: 'pointer',
+			width: '99%',
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(259px, 1fr))',
+			gap: 20,
+
+			'> div': {
+				width: '100%',
+				height: 325,
+				border: '1px solid black',
+				'&:hover': {
+					cursor: 'pointer',
+				},
 			},
 		},
 	},

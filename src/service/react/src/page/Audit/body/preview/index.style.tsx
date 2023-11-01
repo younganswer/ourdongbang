@@ -24,7 +24,7 @@ export const AuditDocumentPreviewImageStyle = css({
 	backgroundColor: '#D9D9D9',
 
 	'> img': {
-		width: 267,
+		width: '100%',
 		height: 255,
 		objectFit: 'cover',
 	},

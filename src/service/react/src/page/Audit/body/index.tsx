@@ -53,18 +53,20 @@ const Body = (props: {
 				/>
 			</div>
 			<div>
-				<AuditRegisterButton />
-				{audits?.map((audit, index) => {
-					return (
-						<AuditDocumentPreview
-							key={index}
-							index={index}
-							audit={audit}
-							audits={audits}
-							setAudits={setAudits}
-						/>
-					);
-				})}
+				<div>
+					<AuditRegisterButton />
+					{audits?.map((audit, index) => {
+						return (
+							<AuditDocumentPreview
+								key={index}
+								index={index}
+								audit={audit}
+								audits={audits}
+								setAudits={setAudits}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);
