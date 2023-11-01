@@ -37,7 +37,12 @@ const MemberProfile = (props: { member: Member }) => {
 	}, []);
 
 	return (
-		<div className={MemberProfileStyle}>
+		<div
+			className={MemberProfileStyle}
+			onClick={() => {
+				alert('업데이트 예정입니다!');
+			}}
+		>
 			<div>
 				<ProfileImage src={src} width={263} height={255} isCircle={false} className={null} />
 			</div>

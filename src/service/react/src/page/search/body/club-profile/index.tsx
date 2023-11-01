@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SearchBoxBodyClubProfileStyle } from './index.style';
+import { SearchBoxBodyClubProfileStyle, SearchPageClubProfileStyle } from './index.style';
 import axios from 'axios';
 import { Club } from 'context/ClubContext';
 import { BookmarkIcon } from 'page/search/header/icon';
@@ -18,7 +18,12 @@ const ClubProfile = (props: { club: Club }) => {
 	const { club } = props;
 
 	return (
-		<div>
+		<div
+			className={SearchPageClubProfileStyle}
+			onClick={() => {
+				alert('업데이트 예정입니다!');
+			}}
+		>
 			<div></div>
 			<div>
 				<div>

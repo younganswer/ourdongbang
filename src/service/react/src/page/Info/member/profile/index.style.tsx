@@ -6,6 +6,14 @@ export const MemberProfileStyle = css({
 	gridTemplateRows: '255px 69px',
 	border: '1px solid black',
 	overflow: 'hidden',
+	cursor: 'pointer',
+
+	'&:hover': {
+		outline: '5px auto -webkit-focus-ring-color',
+	},
+	'&:active': {
+		outline: 'none',
+	},
 
 	'> div:nth-child(1)': {
 		backgroundColor: '#D9D9D9',

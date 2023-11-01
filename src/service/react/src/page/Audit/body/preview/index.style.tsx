@@ -5,6 +5,14 @@ export const AuditDocumentPreviewStyle = css({
 	height: '100%',
 	display: 'grid',
 	gridTemplateRows: 'auto auto',
+	cursor: 'pointer',
+
+	'&:hover': {
+		outline: '5px auto -webkit-focus-ring-color',
+	},
+	'&:active': {
+		outline: 'none',
+	},
 });
 
 export const AuditDocumentPreviewImageStyle = css({

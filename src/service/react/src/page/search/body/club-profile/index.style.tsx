@@ -26,42 +26,50 @@ export const SearchBoxBodyClubProfileStyle = css({
 		display: 'grid',
 		gridTemplateColumns: 'repeat(auto-fill, minmax(228px, 1fr))',
 		gap: 50,
+	},
+});
 
-		'> div': {
-			width: '100%',
-			height: 332,
-			display: 'grid',
-			gridTemplateRows: '228px auto',
-			border: '1px solid black',
+export const SearchPageClubProfileStyle = css({
+	width: '100%',
+	height: 332,
+	display: 'grid',
+	gridTemplateRows: '228px auto',
+	border: '1px solid black',
+	cursor: 'pointer',
 
-			'> div:nth-child(1)': {
-				backgroundColor: '#D9D9D9',
-				borderBottom: '1px solid black',
+	'&:hover': {
+		outline: '5px auto -webkit-focus-ring-color',
+	},
+	'&:active': {
+		outline: 'none',
+	},
+
+	'> div:nth-child(1)': {
+		backgroundColor: '#D9D9D9',
+		borderBottom: '1px solid black',
+	},
+
+	'> div:nth-child(2)': {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		gap: 10,
+		'> *': {
+			width: '80%',
+		},
+		'> div:nth-child(1)': {
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			'> span': {
+				fontSize: 20,
+				fontFamily: 'Pretendard-medium',
 			},
-
-			'> div:nth-child(2)': {
-				display: 'flex',
-				flexDirection: 'column',
-				justifyContent: 'center',
-				alignItems: 'center',
-				gap: 10,
-				'> *': {
-					width: '80%',
-				},
-				'> div:nth-child(1)': {
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					'> span': {
-						fontSize: 20,
-						fontFamily: 'Pretendard-medium',
-					},
-				},
-				'> span': {
-					fontSize: 16,
-					fontFamily: 'Pretendard-regular',
-				},
-			},
+		},
+		'> span': {
+			fontSize: 16,
+			fontFamily: 'Pretendard-regular',
 		},
 	},
 });
