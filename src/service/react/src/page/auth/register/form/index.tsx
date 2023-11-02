@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, FormEvent, useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext, User } from 'context/AuthContext';
-import { FormEvent, useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -11,11 +10,15 @@ import {
 } from './index.style';
 import CustomInput from 'component/input';
 import { RegisterContext, RegisterInfo } from 'context/RegisterContext';
+import RegisterFormPagePasswordInput from './password';
+import RegisterFormPageIdInput from './id';
+import RegisterFormPagePasswordCheckInput from './password-check';
 
 const registerHandler = async (
 	event: FormEvent,
 	name: string | undefined,
 	id: string | undefined,
+	isDuplicatedId: boolean,
 	password: string | undefined,
 	passwordCheck: string | undefined,
 	email: string | undefined,
@@ -25,13 +28,23 @@ const registerHandler = async (
 	try {
 		event.preventDefault();
 
-		// if (username.length) < 1 throw new Error ('이름 길이가 짧습니다')
-		// if (userEmail) - 어떻게 처리해줄지 생각나면 수정 요망
-		// if (!id || id.length < 4) throw new Error('회원ID가 너무 짧습니다. 4글자 이상으로 해주세요.');
-		// if (!password || password.length < 6)
-		//	throw new Error('비밀번호가 너무 짧습니다. 6자 이상으로 입력해주세요');
-		// if (!passwordCheck || password != passwordCheck)
-		//	throw new Error('비밀번호가 다릅니다. 다시 확인해주세요');
+		if (!name || !id || !password || !passwordCheck) {
+			alert('모든 항목을 입력해주세요');
+			return;
+		}
+		if (isDuplicatedId) {
+			alert('다른 아이디로 가입해주세요');
+			return;
+		}
+		if (password.length < 8) {
+			alert('비밀번호를 8자 이상으로 설정해주세요');
+			return;
+		}
+		if (password !== passwordCheck) {
+			alert('비밀번호 확인이 일치하지 않습니다');
+			return;
+		}
+
 		await axios
 			.post(
 				`${process.env.REACT_APP_NESTJS_URL}/auth/register`,
@@ -64,6 +77,7 @@ const RegisterForm = (props: { registerInfo: RegisterInfo }) => {
 	const email = registerInfo.email;
 	const [name, setName] = useState<string | undefined>(registerInfo.name);
 	const [id, setId] = useState<string | undefined>('');
+	const [isDuplicatedId, setIsDuplicatedId] = useState<boolean>(false);
 	const [password, setPassword] = useState<string | undefined>('');
 	const [passwordCheck, setPasswordCheck] = useState<string | undefined>('');
 	const navigate = useNavigate();
@@ -73,7 +87,17 @@ const RegisterForm = (props: { registerInfo: RegisterInfo }) => {
 		<form
 			className={RegisterFormStyle}
 			onSubmit={event =>
-				registerHandler(event, name, id, password, passwordCheck, email, setMe, navigate)
+				registerHandler(
+					event,
+					name,
+					id,
+					isDuplicatedId,
+					password,
+					passwordCheck,
+					email,
+					setMe,
+					navigate,
+				)
 			}
 		>
 			<div>
@@ -82,28 +106,14 @@ const RegisterForm = (props: { registerInfo: RegisterInfo }) => {
 					label="이름"
 					value={name}
 					setValue={setName}
-					customInputStyle={RegisterPageCustomInputStyle}
+					className={RegisterPageCustomInputStyle}
 				/>
-				<CustomInput
-					type="text"
-					label="아이디"
-					value={id}
-					setValue={setId}
-					customInputStyle={RegisterPageCustomInputStyle}
-				/>
-				<CustomInput
-					type="password"
-					label="비밀번호"
-					value={password}
-					setValue={setPassword}
-					customInputStyle={RegisterPageCustomInputStyle}
-				/>
-				<CustomInput
-					type="password"
-					label="비밀번호 확인"
-					value={passwordCheck}
-					setValue={setPasswordCheck}
-					customInputStyle={RegisterPageCustomInputStyle}
+				<RegisterFormPageIdInput id={id} setId={setId} setIsDuplicatedId={setIsDuplicatedId} />
+				<RegisterFormPagePasswordInput password={password} setPassword={setPassword} />
+				<RegisterFormPagePasswordCheckInput
+					password={password}
+					passwordCheck={passwordCheck}
+					setPasswordCheck={setPasswordCheck}
 				/>
 				<div>
 					<span>{email}</span>

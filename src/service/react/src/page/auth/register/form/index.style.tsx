@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
+
 export const RegisterFormPageStyle = css(PageStyle, {
 	margin: '0 auto',
 	width: 1000,
@@ -24,33 +25,35 @@ export const RegisterFormPageStyle = css(PageStyle, {
 
 export const RegisterFormStyle = css({
 	width: '100%',
-	height: 'auto',
 
 	'> div': {
+		width: '100%',
 		display: 'grid',
-		gridTemplateRows: 'repeat(6, 1fr)',
+		gridTemplateRows: 'repeat(6, auto)',
 		rowGap: '1rem',
 
 		'> div': {
+			width: '100%',
 			display: 'flex',
 			alignItems: 'center',
-			width: '100%',
-			height: '40px',
 		},
-
-		'>div > span': {
-			marginLeft: '1.5rem',
-			fontSize: 16,
-			fontFamily: 'Pretendard-regular',
+		'> div:nth-child(5)': {
+			height: '40px',
+			'> span': {
+				marginLeft: '0.5rem',
+				fontSize: 16,
+				fontFamily: 'Pretendard-regular',
+			},
 		},
 
 		'> button': {
 			width: '100%',
-			height: '100%',
+			height: '60px',
 			borderRadius: 5,
-			border: '1px solid #D9D9D9',
-			backgroundColor: '#D9D9D9',
-			fontSize: '16px',
+			border: '1px solid black',
+			backgroundColor: 'white',
+			fontSize: '20px',
+			fontFamily: 'Pretendard-medium',
 
 			':hover': {
 				backgroundColor: '#BFBFBF',
@@ -63,15 +66,21 @@ export const RegisterFormStyle = css({
 });
 
 export const RegisterPageCustomInputStyle = css({
-	width: '352px',
+	width: '100%',
+	height: '40px',
 
 	'> input': {
+		width: '100%',
+		height: '100%',
 		fontSize: 16,
 		fontFamily: 'Pretendard-regular',
-		width: '352px',
-		height: '100%',
-		borderRadius: 5,
-		border: '1px solid #D9D9D9',
-		padding: '0 1.5rem',
+		border: 'none',
+		borderBottom: '1px solid black',
+		backgroundColor: 'transparent',
+		textIndent: '0.5rem',
+		padding: 0,
+		'&:focus': {
+			outline: 'none',
+		},
 	},
 });
