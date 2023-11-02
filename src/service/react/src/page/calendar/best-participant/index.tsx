@@ -35,9 +35,15 @@ const Body = (props: { members: Member[] | null }) => {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_NESTJS_URL}/user/${bestParticipant?.userId}`, {
-				withCredentials: true,
-			})
+			.post(
+				`${process.env.REACT_APP_NESTJS_URL}/user`,
+				{
+					_id: bestParticipant?.userId,
+				},
+				{
+					withCredentials: true,
+				},
+			)
 			.then(response => {
 				setBestParticipantProfile(response.data);
 			})

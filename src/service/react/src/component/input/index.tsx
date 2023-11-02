@@ -1,8 +1,9 @@
-import React, { ChangeEvent } from 'react';
+import { RefObject } from '@fullcalendar/core/preact';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 const handleInputChange = (
 	event: ChangeEvent<HTMLInputElement>,
-	setValue: React.Dispatch<React.SetStateAction<string | undefined>>,
+	setValue: Dispatch<SetStateAction<string | undefined>>,
 ) => {
 	setValue(event.target.value);
 };
@@ -11,19 +12,38 @@ const CustomInput = (props: {
 	type: string | undefined;
 	label: string | undefined;
 	value: string | undefined;
-	setValue: React.Dispatch<React.SetStateAction<string | undefined>>;
-	customInputStyle: string | undefined;
+	setValue: Dispatch<SetStateAction<string | undefined>>;
+	inputRef?: RefObject<HTMLInputElement> | undefined;
+	className?: string | undefined;
+	onChange?: (
+		event: ChangeEvent<HTMLInputElement>,
+		setValue: Dispatch<SetStateAction<string | undefined>>,
+	) => void;
+	onFocus?: () => void;
+	onBlur?: () => void;
 }) => {
-	const { label, value, setValue, customInputStyle } = props;
+	const {
+		label,
+		value,
+		setValue,
+		inputRef = undefined,
+		className = undefined,
+		onChange = handleInputChange,
+		onFocus = undefined,
+		onBlur = undefined,
+	} = props;
 	const type = props.type || 'text';
 
 	return (
-		<div className={customInputStyle}>
+		<div className={className}>
 			<input
+				ref={inputRef}
 				type={type}
 				placeholder={label}
 				value={value}
-				onChange={event => handleInputChange(event, setValue)}
+				onChange={event => onChange(event, setValue)}
+				onFocus={onFocus}
+				onBlur={onBlur}
 			/>
 		</div>
 	);
