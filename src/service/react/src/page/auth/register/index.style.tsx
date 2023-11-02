@@ -18,8 +18,8 @@ export const RegisterPageStyle = css(PageStyle, {
 
 export const RegisterPageHeaderStyle = css({
 	margin: '0 auto',
-	fontSize: 40,
-	fontFamily: 'Pretendard-medium',
+	fontSize: 36,
+	fontFamily: 'Pretendard-bold',
 });
 
 export const GoogleRegisterStyle = css({
