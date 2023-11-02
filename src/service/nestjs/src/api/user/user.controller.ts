@@ -1,14 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	HttpException,
-	Param,
-	Patch,
-	Post,
-	Req,
-	UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpException, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import {
 	ApiBadRequestResponse,
 	ApiOkResponse,
@@ -32,6 +22,49 @@ export class UserController {
 		private readonly s3Service: S3Service,
 	) {}
 
+	@Post()
+	@ApiOperation({ summary: 'Get user exists' })
+	@ApiOkResponse({ description: 'User exists', type: User })
+	async getUser(@Body('id') id: string, @Body('email') email: string) {
+		try {
+			if (!id && !email) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			if (id) {
+				const user = await this.userService.findById(id);
+				if (!user) {
+					throw new HttpException('Bad Request', 400);
+				}
+
+				return `User with id: ${id} exist`;
+			}
+
+			const user = await this.userService.findByEmail(email);
+			if (!user) {
+				throw new HttpException('Bad Request', 400);
+			}
+
+			return `User with email: ${email} exist`;
+		} catch (error) {
+			console.error(error);
+			throw new HttpException(error.message, error.status);
+		}
+	}
+
+	@Get(':_id')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Get user information' })
+	@ApiOkResponse({ description: 'Get user information successfully', type: User })
+	async getUserByObjectId(@Body('_id') _id: string): Promise<User> {
+		const user = await this.userService.findByObjectId(_id);
+		if (!user) {
+			throw new HttpException('Bad Request', 400);
+		}
+
+		return user;
+	}
+
 	@Get('me')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get my information' })
@@ -49,9 +82,7 @@ export class UserController {
 	async updateMe(@Body() updateData: Partial<User>, @Req() req) {
 		try {
 			if (updateData.profileImageId) {
-				const profileImageId = updateData.profileImageId;
-				const me = await this.userService.setProfileImage(req.user._id, profileImageId);
-
+				await this.userService.setProfileImage(req.user._id, updateData.profileImageId);
 				delete updateData.profileImageId;
 				this.imageService.delete(req.user.profileImageId);
 				this.s3Service.delete([
@@ -66,23 +97,6 @@ export class UserController {
 			}
 
 			return me;
-		} catch (error) {
-			console.error(error);
-			throw new HttpException(error.message, error.status);
-		}
-	}
-
-	@Get('/:_id')
-	@ApiOperation({ summary: 'Get user information' })
-	@ApiOkResponse({ description: 'Get user information successfully', type: User })
-	async getUserByObjectId(@Param('_id') _id: string): Promise<User> {
-		try {
-			const user = await this.userService.findByObjectId(_id);
-			if (!user) {
-				throw new HttpException('Bad Request', 400);
-			}
-
-			return user;
 		} catch (error) {
 			console.error(error);
 			throw new HttpException(error.message, error.status);
@@ -118,23 +132,6 @@ export class UserController {
 		} catch (error) {
 			console.error(error);
 			throw error;
-		}
-	}
-
-	@Post('email')
-	@ApiOperation({ summary: 'Get user information' })
-	@ApiOkResponse({ description: 'Get user information successfully', type: User })
-	async getUserByEmail(@Body('email') email: string): Promise<User> {
-		try {
-			const user = await this.userService.findByEmail(email);
-			if (!user) {
-				throw new HttpException('Bad Request', 400);
-			}
-
-			return user;
-		} catch (error) {
-			console.error(error);
-			throw new HttpException(error.message, error.status);
 		}
 	}
 }

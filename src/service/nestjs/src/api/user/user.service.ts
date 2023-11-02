@@ -41,6 +41,15 @@ export class UserService {
 		}
 	}
 
+	async findById(id: string): Promise<User> {
+		try {
+			return await this.userModel.findOne({ id });
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	}
+
 	async findByEmail(email: string): Promise<User> {
 		try {
 			return await this.userModel.findOne({ email });

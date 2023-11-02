@@ -16,9 +16,15 @@ const MemberProfile = (props: { member: Member }) => {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_NESTJS_URL}/user/${member.userId}`, {
-				withCredentials: true,
-			})
+			.post(
+				`${process.env.REACT_APP_NESTJS_URL}/user`,
+				{
+					_id: member.userId,
+				},
+				{
+					withCredentials: true,
+				},
+			)
 			.then(response => {
 				setUserInfo({
 					_id: response.data._id,

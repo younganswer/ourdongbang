@@ -21,7 +21,7 @@ export const LoginPageStyle = css(PageStyle, {
 		'> span:nth-child(1)': {
 			gridRow: 1,
 			fontSize: 32,
-			fontFamily: 'Pretendard-medium',
+			fontFamily: 'Pretendard-bold',
 		},
 
 		'> div:nth-child(3)': {
@@ -55,8 +55,8 @@ export const LoginPageFormStyle = css({
 
 	'> button': {
 		borderRadius: 5,
-		border: '1px solid #D9D9D9',
-		backgroundColor: '#D9D9D9',
+		border: '1px solid black',
+		backgroundColor: 'white',
 		fontSize: 20,
 		fontFamily: 'Pretendard-medium',
 		':hover': {
@@ -69,14 +69,18 @@ export const LoginPageFormStyle = css({
 });
 
 export const LoginPageCustomInputStyle = css({
+	width: '100%',
+
 	'> input': {
-		width: '86%',
+		width: '100%',
 		height: '100%',
-		borderRadius: 5,
-		border: '1px solid #D9D9D9',
-		padding: '0 7%',
+		border: 'none',
+		borderBottom: '1px solid black',
 		fontSize: 16,
 		fontFamily: 'Pretendard-regular',
+		backgroundColor: 'transparent',
+		textIndent: '0.5rem',
+		padding: 0,
 	},
 });
 

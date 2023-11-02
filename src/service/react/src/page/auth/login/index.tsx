@@ -75,14 +75,14 @@ const LoginForm = (props: {
 					label="ID"
 					value={id}
 					setValue={setId}
-					customInputStyle={LoginPageCustomInputStyle}
+					className={LoginPageCustomInputStyle}
 				/>
 				<CustomInput
 					type="password"
 					label="비밀번호"
 					value={password}
 					setValue={setPassword}
-					customInputStyle={LoginPageCustomInputStyle}
+					className={LoginPageCustomInputStyle}
 				/>
 			</div>
 			<button type="submit">로그인</button>
