@@ -131,17 +131,6 @@ const Footer = (props: {
 				alert(error.response.data.message);
 			});
 	};
-	//const logout = async () => {
-	//	await axios
-	//		.delete(`${process.env.REACT_APP_NESTJS_URL}/auth/signout`, { withCredentials: true })
-	//		.then(() => {
-	//			setMe(null);
-	//			navigate('/');
-	//		})
-	//		.catch(error => {
-	//			alert(error.response.data.message);
-	//		});
-	//};
 
 	return (
 		<div className={ProfileFooterStyle}>

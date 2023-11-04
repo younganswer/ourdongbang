@@ -19,9 +19,7 @@ const RegisterFormPageIdInput = (props: {
 		event.preventDefault();
 
 		axios
-			.post(`${process.env.REACT_APP_NESTJS_URL}/user`, {
-				id,
-			})
+			.post(`${process.env.REACT_APP_NESTJS_URL}/user`, { id })
 			.then(() => {
 				setIsDuplicatedId(true);
 				if (duplicateCheckSpanRef.current) {
@@ -34,7 +32,7 @@ const RegisterFormPageIdInput = (props: {
 				setIsDuplicatedId(false);
 				if (duplicateCheckSpanRef.current) {
 					duplicateCheckSpanRef.current.style.display = 'block';
-					duplicateCheckSpanRef.current.style.color = '#5EC33D';
+					duplicateCheckSpanRef.current.style.color = '#36E136';
 					duplicateCheckSpanRef.current.innerText = '사용 가능한 아이디 입니다';
 				}
 			});

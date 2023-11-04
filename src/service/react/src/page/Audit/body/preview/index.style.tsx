@@ -4,7 +4,7 @@ export const AuditDocumentPreviewStyle = css({
 	width: '100%',
 	height: '100%',
 	display: 'grid',
-	gridTemplateRows: 'auto auto',
+	gridTemplateRows: '3fr 1fr',
 	cursor: 'pointer',
 
 	'&:hover': {
@@ -16,7 +16,7 @@ export const AuditDocumentPreviewStyle = css({
 });
 
 export const AuditDocumentPreviewImageStyle = css({
-	height: 255,
+	height: '100%',
 	borderBottom: '1px solid black',
 	display: 'flex',
 	justifyContent: 'center',
@@ -25,7 +25,7 @@ export const AuditDocumentPreviewImageStyle = css({
 
 	'> img': {
 		width: '100%',
-		height: 255,
+		height: '100%',
 		objectFit: 'cover',
 	},
 });

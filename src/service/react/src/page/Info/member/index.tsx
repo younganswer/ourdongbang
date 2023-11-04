@@ -1,4 +1,3 @@
-import { ClubContext } from 'context/ClubContext';
 import React, { Dispatch, SetStateAction, useContext } from 'react';
 import {
 	InfoPageMemberBodyStyle,
@@ -7,7 +6,6 @@ import {
 } from './index.style';
 import { Member, MemberContext } from 'context/MemberContext';
 import MemberProfile from './profile';
-// import { AuthContext } from 'context/AuthContext';
 
 const Header = () => {
 	return (
@@ -58,10 +56,7 @@ const Body = (props: {
 };
 
 const InfoPageMember = () => {
-	const { club, setClub } = useContext(ClubContext);
 	const { members, setMembers } = useContext(MemberContext);
-
-	// 부원 정보를 표시하기 위한 데이터 가져오기 또는 렌더링 로직 추가
 
 	return (
 		<div className={InfoPageMemberStyle}>
@@ -69,13 +64,8 @@ const InfoPageMember = () => {
 				<Header />
 				<Body members={members} setMembers={setMembers} />
 			</div>
-			{/* 부원 정보를 JSX로 표시합니다. */}
-			{/* <p>부원 정보 내용...</p> */}
 		</div>
 	);
-	console.log(club);
-	console.log(setClub);
-	console.log(setMembers);
 };
 
 export default InfoPageMember;

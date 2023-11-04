@@ -1,4 +1,14 @@
-import { Body, Controller, Get, HttpException, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Get,
+	HttpException,
+	Param,
+	Patch,
+	Post,
+	Req,
+	UseGuards,
+} from '@nestjs/common';
 import {
 	ApiBadRequestResponse,
 	ApiOkResponse,
@@ -52,25 +62,25 @@ export class UserController {
 		}
 	}
 
-	@Get(':_id')
-	@UseGuards(JwtAuthGuard)
-	@ApiOperation({ summary: 'Get user information' })
-	@ApiOkResponse({ description: 'Get user information successfully', type: User })
-	async getUserByObjectId(@Body('_id') _id: string): Promise<User> {
-		const user = await this.userService.findByObjectId(_id);
-		if (!user) {
-			throw new HttpException('Bad Request', 400);
-		}
-
-		return user;
-	}
-
 	@Get('me')
 	@UseGuards(JwtAuthGuard)
 	@ApiOperation({ summary: 'Get my information' })
 	@ApiOkResponse({ description: 'Get my information successfully', type: User })
 	async me(@Req() req): Promise<User> {
 		const user = req.user;
+
+		return user;
+	}
+
+	@Get(':_id')
+	@UseGuards(JwtAuthGuard)
+	@ApiOperation({ summary: 'Get user information' })
+	@ApiOkResponse({ description: 'Get user information successfully', type: User })
+	async getUserByObjectId(@Param('_id') _id: string): Promise<User> {
+		const user = await this.userService.findByObjectId(_id);
+		if (!user) {
+			throw new HttpException('Bad Request', 400);
+		}
 
 		return user;
 	}

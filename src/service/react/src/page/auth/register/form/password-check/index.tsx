@@ -2,6 +2,7 @@ import CustomInput from 'component/input';
 import React, { Dispatch, SetStateAction, useRef } from 'react';
 import { RegisterPageCustomInputStyle } from '../index.style';
 import { RegisterFormPagePasswordCheckInputStyle } from './index.style';
+import { ConfirmedIcon, UnconfirmedIcon } from './icon.style';
 
 const RegisterFormPagePasswordCheckInput = (props: {
 	password: string | undefined;
@@ -9,28 +10,29 @@ const RegisterFormPagePasswordCheckInput = (props: {
 	setPasswordCheck: Dispatch<SetStateAction<string | undefined>>;
 }) => {
 	const { password, passwordCheck, setPasswordCheck } = props;
-	const spanRef = useRef<HTMLSpanElement>(null);
+	const divRef = useRef<HTMLDivElement>(null);
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 		setValue: Dispatch<SetStateAction<string | undefined>>,
 	) => {
 		setValue(event.target.value);
 
-		if (spanRef.current) {
+		if (divRef.current) {
+			const confirmed = divRef.current.children[1] as SVGElement;
+			const unconfirmed = divRef.current.children[2] as SVGElement;
+
 			if (event.target.value !== password) {
-				spanRef.current.style.display = 'block';
-				spanRef.current.style.color = 'red';
-				spanRef.current.innerText = 'X';
+				confirmed.style.display = 'none';
+				unconfirmed.style.display = 'block';
 			} else {
-				spanRef.current.style.display = 'block';
-				spanRef.current.style.color = '#5EC33D';
-				spanRef.current.innerText = 'O';
+				confirmed.style.display = 'block';
+				unconfirmed.style.display = 'none';
 			}
 		}
 	};
 
 	return (
-		<div className={RegisterFormPagePasswordCheckInputStyle}>
+		<div ref={divRef} className={RegisterFormPagePasswordCheckInputStyle}>
 			<CustomInput
 				type="password"
 				label="비밀번호 확인"
@@ -39,7 +41,8 @@ const RegisterFormPagePasswordCheckInput = (props: {
 				onChange={handleChange}
 				className={RegisterPageCustomInputStyle}
 			/>
-			<span ref={spanRef}></span>
+			<ConfirmedIcon width={25} height={25} />
+			<UnconfirmedIcon width={25} height={25} />
 		</div>
 	);
 };

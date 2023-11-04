@@ -54,16 +54,18 @@ export const InfoPageMemberBodyStyle = css({
 		},
 		'> div:nth-child(2)': {
 			display: 'grid',
-			gridTemplateColumns: 'repeat(auto-fill, minmax(263px, 1fr))',
-			gap: 29,
+			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			gap: 20,
 			overflowY: 'auto',
 		},
 	},
+
 	'> div:nth-child(1)': {
 		// manager
 		paddingBottom: '30px',
 		borderBottom: '1px solid black',
 	},
+
 	'> div:nth-child(2)': {
 		// member
 	},

@@ -17,15 +17,9 @@ const SelectParticipants = (props: { member: Member }) => {
 
 	useEffect(() => {
 		axios
-			.post(
-				`${process.env.REACT_APP_NESTJS_URL}/user`,
-				{
-					_id: member.userId,
-				},
-				{
-					withCredentials: true,
-				},
-			)
+			.get(`${process.env.REACT_APP_NESTJS_URL}/user/${member.userId}`, {
+				withCredentials: true,
+			})
 			.then(response => {
 				setUserInfo({
 					_id: response.data._id,

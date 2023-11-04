@@ -1,9 +1,9 @@
 import { css } from '@emotion/css';
 
 export const MemberProfileStyle = css({
-	height: 324,
+	height: '280px',
 	display: 'grid',
-	gridTemplateRows: '255px 69px',
+	gridTemplateRows: '3fr 1fr',
 	border: '1px solid black',
 	overflow: 'hidden',
 	cursor: 'pointer',
@@ -19,6 +19,11 @@ export const MemberProfileStyle = css({
 		backgroundColor: '#D9D9D9',
 		borderBottom: '1px solid black',
 		overflow: 'hidden',
+
+		'> img': {
+			width: '100%',
+			height: '100%',
+		},
 	},
 
 	'> div:nth-child(2)': {

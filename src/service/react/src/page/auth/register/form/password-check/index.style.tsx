@@ -10,8 +10,8 @@ export const RegisterFormPagePasswordCheckInputStyle = css({
 			border: 'none',
 		},
 	},
-	'> span': {
-		fontSize: '16px',
-		fontFamily: 'Pretendard-regular',
+	'> svg': {
+		justifySelf: 'flex-end',
+		display: 'none',
 	},
 });

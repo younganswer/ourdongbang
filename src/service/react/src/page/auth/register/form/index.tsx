@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, FormEvent, useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext, User } from 'context/AuthContext';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
 	RegisterFormPageStyle,
@@ -13,6 +13,7 @@ import { RegisterContext, RegisterInfo } from 'context/RegisterContext';
 import RegisterFormPagePasswordInput from './password';
 import RegisterFormPageIdInput from './id';
 import RegisterFormPagePasswordCheckInput from './password-check';
+import RegisterFormPageDone from './done';
 
 const registerHandler = async (
 	event: FormEvent,
@@ -23,7 +24,7 @@ const registerHandler = async (
 	passwordCheck: string | undefined,
 	email: string | undefined,
 	setMe: Dispatch<SetStateAction<User | null>>,
-	navigate: NavigateFunction,
+	setIsRegistered: Dispatch<SetStateAction<boolean>>,
 ) => {
 	try {
 		event.preventDefault();
@@ -58,8 +59,7 @@ const registerHandler = async (
 			)
 			.then(response => {
 				setMe(response.data);
-				toast.success('회원가입이 완료되었습니다');
-				navigate('/main/info');
+				setIsRegistered(true);
 			})
 			.catch(error => {
 				console.error(error);
@@ -72,15 +72,17 @@ const registerHandler = async (
 	}
 };
 
-const RegisterForm = (props: { registerInfo: RegisterInfo }) => {
-	const { registerInfo } = props;
+const RegisterForm = (props: {
+	registerInfo: RegisterInfo;
+	setIsRegistered: Dispatch<SetStateAction<boolean>>;
+}) => {
+	const { registerInfo, setIsRegistered } = props;
 	const email = registerInfo.email;
 	const [name, setName] = useState<string | undefined>(registerInfo.name);
 	const [id, setId] = useState<string | undefined>('');
 	const [isDuplicatedId, setIsDuplicatedId] = useState<boolean>(false);
 	const [password, setPassword] = useState<string | undefined>('');
 	const [passwordCheck, setPasswordCheck] = useState<string | undefined>('');
-	const navigate = useNavigate();
 	const { setMe } = useContext(AuthContext);
 
 	return (
@@ -96,7 +98,7 @@ const RegisterForm = (props: { registerInfo: RegisterInfo }) => {
 					passwordCheck,
 					email,
 					setMe,
-					navigate,
+					setIsRegistered,
 				)
 			}
 		>
@@ -130,6 +132,7 @@ const RegisterFormPage = () => {
 	const { registerInfo } = useContext(RegisterContext);
 	const navigate = useNavigate();
 	const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+	const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (!registerInfo) {
@@ -153,10 +156,12 @@ const RegisterFormPage = () => {
 
 	return (
 		<div className={RegisterFormPageStyle}>
-			{registerInfo ? (
+			{isRegistered ? (
+				<RegisterFormPageDone />
+			) : registerInfo ? (
 				<div>
 					<span>회원가입</span>
-					<RegisterForm registerInfo={registerInfo} />
+					<RegisterForm registerInfo={registerInfo} setIsRegistered={setIsRegistered} />
 				</div>
 			) : null}
 		</div>
