@@ -9,6 +9,11 @@ export const datePickerStyle = css`
 		border-top: 1px solid black;
 	}
 
+	.react-datepicker__navigation {
+		margin-left: 20px; /* 왼쪽 여백을 줄임 */
+		margin-right: 20px; /* 오른쪽 여백을 줄임 */
+	}
+
 	.react-datepicker__month-container {
 		width: 352px;
 		/* 최대 높이 설정 */
