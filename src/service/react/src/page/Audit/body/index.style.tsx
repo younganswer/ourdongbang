@@ -1,13 +1,13 @@
 import { css } from '@emotion/css';
 
-export const AuditDocumentStyle = css({
+export const AuditPageBodyStyle = css({
 	border: '1px solid black',
 	height: 1100,
 	display: 'grid',
 	gridTemplateRows: '105px auto',
 });
 
-export const AuditDocumentHeaderStyle = css({
+export const AuditPageBodyHeaderStyle = css({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
@@ -42,7 +42,7 @@ export const AuditDocumentHeaderStyle = css({
 	},
 });
 
-export const AuditDocumentBodyStyle = css({
+export const AuditPageBodyBodyStyle = css({
 	margin: '36px',
 	display: 'grid',
 	gridTemplateRows: '24px 878px',
@@ -73,12 +73,12 @@ export const AuditDocumentBodyStyle = css({
 		'> div': {
 			width: '99%',
 			display: 'grid',
-			gridTemplateColumns: 'repeat(auto-fill, minmax(259px, 1fr))',
-			gap: 20,
+			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			gap: 16,
 
 			'> div': {
 				width: '100%',
-				height: 325,
+				height: 280,
 				border: '1px solid black',
 				'&:hover': {
 					cursor: 'pointer',

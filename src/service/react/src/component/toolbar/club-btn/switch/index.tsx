@@ -1,9 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { ClubBtnModalBtnStyle, ClubBtnModalStyle } from './switch.style';
+import { ClubBtnModalBtnStyle, ClubBtnModalStyle } from './index.style';
 import { User } from 'context/AuthContext';
 import { Club } from 'context/ClubContext';
 import { Types } from 'mongoose';
 import axios from 'axios';
+import LogoutButton from './logout';
 
 const switchClub = (
 	clubId: Types.ObjectId | undefined,
@@ -38,19 +39,14 @@ const ClubBtnModalBtn = (props: { clubId: Types.ObjectId | undefined; onClick: (
 		}
 	}, [clubId]);
 
-	if (!clubId) {
-		return (
-			<div className={ClubBtnModalBtnStyle} onClick={onClick}>
-				<span>동아리 생성하기</span>
-				<span>+</span>
-			</div>
-		);
-	}
-
 	return (
 		<div className={ClubBtnModalBtnStyle} onClick={onClick}>
-			<span>{club?.name}</span>
-			<div></div>
+			<div>
+				<span>{club?.name}</span>
+			</div>
+			<div>
+				<div></div>
+			</div>
 		</div>
 	);
 };
@@ -87,13 +83,12 @@ const ClubBtnModal = (props: {
 					/>
 				);
 			})}
-			<ClubBtnModalBtn
-				clubId={undefined}
-				onClick={() => {
-					// TODO: create club
-					console.log('create club');
-				}}
-			/>
+			<div>
+				<div>
+					<span>동아리 추가 +</span>
+				</div>
+				<LogoutButton setIsClicked={setIsClicked} />
+			</div>
 		</div>
 	);
 	console.log(me, club, setClub, isClicked, setIsClicked);

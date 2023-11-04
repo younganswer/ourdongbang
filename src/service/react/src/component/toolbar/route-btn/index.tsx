@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { ToolBarRouteBtnStyle, ToolBarRouteBtnsStyle } from './route-btns.style';
+import { ToolBarRouteBtnStyle, ToolBarRouteBtnsStyle } from './index.style';
 import { Link, useLocation } from 'react-router-dom';
 import { User } from 'context/AuthContext';
 

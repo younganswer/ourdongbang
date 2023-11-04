@@ -1,53 +1,39 @@
 import { css } from '@emotion/css';
 
-export const HeaderStyle = css({
-	borderBottom: '1px solid #000000',
+export const AuditPageHeaderStyle = css({
 	display: 'flex',
 	justifyContent: 'space-between',
-	'& > span: nth-child(1)': {
-		fontSize: '20px',
-		fontWeight: 'bold',
-		color: 'white',
-		margin: '10px 10px',
-		border: '2px solid #000000',
-		borderRadius: '30px',
-		backgroundColor: '#000000',
-		fontFamily: 'Pretendard-regular',
-		padding: '10px 20px',
-	},
-	'& > span: nth-child(2)': {
-		fontSize: '20px',
-		fontWeight: 'bold',
-		color: '#000000',
-		margin: '10px 10px',
-		// border: '2px solid #000000',
-		// borderRadius: '30px',
-		fontFamily: 'Pretendard-regular',
-		padding: '10px 20px',
-		'> span': {
-			marginRight: '20px',
-		},
-	},
-});
-
-export const ShowBalanceStyle = css({
-	display: 'flex',
 	alignItems: 'center',
-	gap: '45px',
+	borderBottom: '1px solid #000000',
 
 	'> div': {
 		display: 'flex',
+		justifyContent: 'center',
 		alignItems: 'center',
-		gap: '15px',
-		'> span:nth-child(1)': {
-			fontSize: '24px',
+		gap: '20px',
+		margin: '10px 0',
+	},
+	'> div:nth-child(1)': {
+		'> span': {
+			fontSize: 28,
 			fontFamily: 'Pretendard-medium',
 		},
-		'> span:nth-child(2)': {
-			fontSize: '24px',
-			fontFamily: 'Pretendard-regular',
+	},
+	'> div:nth-child(2)': {
+		'> div': {
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			gap: '10px',
+
+			'> span:nth-child(1)': {
+				fontSize: 22,
+				fontFamily: 'Pretendard-medium',
+			},
+			'> span:nth-child(2)': {
+				fontSize: 22,
+				fontFamily: 'Pretendard-regular',
+			},
 		},
 	},
 });
-
-export const searchItem = css({});

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from 'context/AuthContext';
 import { ToolBarStyle } from './index.style';
 import ToolBarTitle from './title';
-import ToolBarRouteBtns from './route-btns';
+import ToolBarRouteBtns from './route-btn';
 import ClubBtn from './club-btn/';
 
 const ToolBar = () => {

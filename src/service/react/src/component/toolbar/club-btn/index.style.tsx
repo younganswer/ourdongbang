@@ -16,4 +16,7 @@ export const ClubBtnStyle = css({
 			cursor: 'pointer',
 		},
 	},
+	'> div:nth-child(2)': {
+		opacity: 0,
+	},
 });

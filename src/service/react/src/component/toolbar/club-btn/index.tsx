@@ -5,8 +5,6 @@ import ClubBtnModal from './switch';
 import { RefObject } from '@fullcalendar/core/preact';
 import { AuthContext, User } from 'context/AuthContext';
 
-//const handleClick = () => {};
-
 const slideModal = (divRef: RefObject<HTMLDivElement>, isClicked: boolean, me: User | null) => {
 	const height = (me?.clubs?.length || 0) * 70 + 70 + 'px';
 
@@ -38,7 +36,6 @@ const slideModal = (divRef: RefObject<HTMLDivElement>, isClicked: boolean, me: U
 const Profile = (props: { club: Club | null; setIsClicked: Dispatch<SetStateAction<boolean>> }) => {
 	const { club, setIsClicked } = props;
 
-	// set profile image at null
 	return (
 		<div
 			onClick={() => {

@@ -3,7 +3,6 @@ import { MemberProfileStyle } from './index.style';
 import { Member } from 'context/MemberContext';
 import axios from 'axios';
 import { User } from 'context/AuthContext';
-import { ProfileImage } from 'component/ProfileImage.component';
 
 const MemberProfile = (props: { member: Member }) => {
 	const { member } = props;
@@ -16,15 +15,9 @@ const MemberProfile = (props: { member: Member }) => {
 
 	useEffect(() => {
 		axios
-			.post(
-				`${process.env.REACT_APP_NESTJS_URL}/user`,
-				{
-					_id: member.userId,
-				},
-				{
-					withCredentials: true,
-				},
-			)
+			.get(`${process.env.REACT_APP_NESTJS_URL}/user/${member.userId}`, {
+				withCredentials: true,
+			})
 			.then(response => {
 				setUserInfo({
 					_id: response.data._id,
@@ -50,7 +43,7 @@ const MemberProfile = (props: { member: Member }) => {
 			}}
 		>
 			<div>
-				<ProfileImage src={src} width={263} height={255} isCircle={false} className={null} />
+				<img src={src} alt="profile" />
 			</div>
 			<div>
 				<span>{userInfo?.name}</span>
