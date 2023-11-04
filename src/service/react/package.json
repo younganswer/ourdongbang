@@ -5,6 +5,7 @@
 	"type": "module",
 	"dependencies": {
 		"@emotion/css": "^11.11.2",
+		"@emotion/react": "^11.11.1",
 		"@fullcalendar/core": "^6.1.9",
 		"@fullcalendar/daygrid": "^6.1.9",
 		"@fullcalendar/react": "^6.1.9",
