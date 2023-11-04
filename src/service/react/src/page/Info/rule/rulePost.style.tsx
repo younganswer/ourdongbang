@@ -39,7 +39,14 @@ export const PostTitleStyle = css({
 		fontSize: '22px',
 		fontFamily: 'Pretendard-regular',
 	},
-	'> svg': {
-		cursor: 'pointer',
+	'> div': {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		gap: '10px',
+
+		'> svg': {
+			cursor: 'pointer',
+		},
 	},
 });

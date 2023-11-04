@@ -13,38 +13,38 @@ import RuleType from 'common/App.Types';
 import { Modal } from 'component/modal';
 
 interface ModalContentProps {
-	inputTitle: string;
+	inputTitle: string | undefined;
+	inputContent: string | undefined;
 	handleInputChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-	inputContent: string[];
 	handleSubmit: () => void;
 	closeModal: () => void;
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({
 	inputTitle,
-	handleInputChange,
 	inputContent,
+	handleInputChange,
 	handleSubmit,
 }) => {
 	return (
 		<div className={ModalContentStyle}>
 			<div>
 				<input
-					className={InputTitleStyle}
 					type="text"
 					name="title"
+					placeholder="제목"
 					value={inputTitle}
 					onChange={handleInputChange}
-					placeholder="제목"
+					className={InputTitleStyle}
 				/>
 			</div>
 			<div>
 				<textarea
-					className={InputContentStyle}
 					name="content"
+					placeholder="내용"
 					value={inputContent}
 					onChange={handleInputChange}
-					placeholder="내용"
+					className={InputContentStyle}
 				/>
 			</div>
 			<div>
@@ -57,26 +57,25 @@ const ModalContent: React.FC<ModalContentProps> = ({
 const InfoPageRuleContent = () => {
 	const [rules, setRules] = useState<RuleType[]>([]); // RuleType은 실제 룰 객체의 타입으로 대체해야 합니다.
 	const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-	const [inputTitle, setInputTitle] = useState('');
-	const [inputContent, setInputContent] = useState<string[]>([]);
+	const [inputTitle, setInputTitle] = useState<string | undefined>(undefined);
+	const [inputContent, setInputContent] = useState<string | undefined>(undefined);
 	const [clubId, setClubId] = useState('');
 
 	const openModal = () => {
 		setIsModalOpened(true); // 모달 열기
-		setInputTitle(''); // 제목 초기화
-		setInputContent([]); // 내용 초기화
 	};
 
 	const closeModal = () => {
 		setIsModalOpened(false); // 모달 닫기
 	};
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		const { name, value } = e.target;
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = event.target;
+
 		if (name === 'title') {
 			setInputTitle(value);
 		} else if (name === 'content') {
-			setInputContent([value]); // content를 배열로 업데이트
+			setInputContent(value);
 		}
 	};
 
@@ -90,16 +89,29 @@ const InfoPageRuleContent = () => {
 	};
 
 	const handleSubmit = () => {
-		// 생성할 데이터 객체를 준비합니다.
-		const data = {
-			title: inputTitle, // 제목
-			content: inputContent, // 내용
-		};
-		// Axios를 사용하여 POST 요청을 보냅니다.
-		axios.post(`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`, data).then(() => {
-			fetchRules(); // 규칙 목록을 다시 가져옵니다.
-			closeModal(); // 모달을 닫습니다.
-		});
+		const values = inputContent?.split('\n');
+
+		for (let i = 0; i < values!.length; i++) {
+			values![i] = values![i].trim();
+			if (values![i].length === 0) {
+				values!.splice(i, 1);
+				i--;
+			}
+		}
+
+		axios
+			.post(
+				`${process.env.REACT_APP_NESTJS_URL}/club/${clubId}/rule`,
+				{
+					title: inputTitle,
+					content: values,
+				},
+				{ withCredentials: true },
+			)
+			.then(() => {
+				fetchRules(); // 규칙 목록을 다시 가져옵니다.
+				closeModal(); // 모달을 닫습니다.
+			});
 	};
 
 	useEffect(() => {
@@ -147,8 +159,8 @@ const InfoPageRuleContent = () => {
 				<Modal setIsModalOpened={setIsModalOpened}>
 					<ModalContent
 						inputTitle={inputTitle}
-						handleInputChange={handleInputChange}
 						inputContent={inputContent}
+						handleInputChange={handleInputChange}
 						handleSubmit={handleSubmit}
 						closeModal={closeModal}
 					/>
