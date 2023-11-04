@@ -5,6 +5,7 @@ import { PageStyle } from 'page/page.style';
 import ScheduleHeader from './Header';
 import ScheduleBody from './Body';
 import { ClubContext } from 'context/ClubContext';
+import { Types } from 'mongoose';
 
 import axios from 'axios';
 const Wrapper = styled.div`
@@ -19,11 +20,12 @@ const SchedulerPage: React.FC = () => {
 	// 최상위 부모 컴포넌트에서 관리하는데 일단은 모든 컴포넌트 만들어지면 하기..
 
 	const [title, setTitle] = React.useState<string>('');
-	const [startDate, setStartDate] = React.useState<Date>(new Date());
-	const [endDate, setEndDate] = React.useState<Date>(new Date());
+	// const [startDate, setStartDate] = React.useState<Date>(new Date());
+	const [startDate, setStartDate] = React.useState<Date | null>(new Date());
+	const [endDate, setEndDate] = React.useState<Date | null>(new Date());
 	const [description, setDescription] = React.useState<string>('');
 	const [feeAmount, setFeeAmount] = React.useState<number>(0);
-	const [attendances, setAttendances] = React.useState<string[]>([]);
+	const [attendances, setAttendances] = React.useState<Types.ObjectId[]>([]);
 	console.log(setStartDate, setEndDate, setDescription, setFeeAmount, setAttendances);
 
 	const { club } = useContext(ClubContext);
@@ -54,7 +56,13 @@ const SchedulerPage: React.FC = () => {
 		<div className={PageStyle}>
 			<Wrapper>
 				<ScheduleHeader setTitle={setTitle} onRegister={handleRegister} />
-				<ScheduleBody />
+				<ScheduleBody
+					setStartDate={setStartDate}
+					setEndDate={setEndDate}
+					setAttendances={setAttendances}
+					setDescription={setDescription}
+					setFeeAmount={setFeeAmount}
+				/>
 			</Wrapper>
 		</div>
 	);
