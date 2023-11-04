@@ -1,30 +1,10 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
-import {
-	AuditDocumentPreviewImageStyle,
-	AuditDocumentPreviewStyle,
-	AuditDocumentPreviewTitleStyle,
-} from './index.style';
+import AuditDocumentPreviewStyle from './index.style';
 import { Modal } from 'component/modal';
 import AuditDocumentViewer from '../viewer';
 import { Audit } from 'context/AuditContext';
 import axios from 'axios';
 import { ClubContext } from 'context/ClubContext';
-
-const AuditDocumentPreviewImage = (props: { src: string }) => {
-	const { src } = props;
-
-	return (
-		<div className={AuditDocumentPreviewImageStyle}>
-			<img src={src} />
-		</div>
-	);
-};
-
-const AuditDocumentPreviewTitle = (props: { title: string }) => {
-	const { title } = props;
-
-	return <div className={AuditDocumentPreviewTitleStyle}>{title}</div>;
-};
 
 const AuditDocumentPreview = (props: {
 	index: number;
@@ -85,8 +65,10 @@ const AuditDocumentPreview = (props: {
 	return (
 		<>
 			<div className={AuditDocumentPreviewStyle} onClick={() => setIsModalOpened(true)}>
-				<AuditDocumentPreviewImage src={src} />
-				<AuditDocumentPreviewTitle title={audit.title} />
+				<div>
+					<img src={src} />
+				</div>
+				<div>{audit.title}</div>
 			</div>
 			{isModalOpened && (
 				<Modal setIsModalOpened={setIsModalOpened}>

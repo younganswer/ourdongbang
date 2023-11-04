@@ -1,6 +1,29 @@
 import { css } from '@emotion/css';
 
-export const MemberProfileStyle = css({
+const MemberProfileImageStyle = css({
+	backgroundColor: '#D9D9D9',
+	borderBottom: '1px solid black',
+	overflow: 'hidden',
+
+	'> img': {
+		width: '100%',
+		height: '100%',
+	},
+});
+
+const MemberProfileDescriptionStyle = css({
+	display: 'flex',
+	alignItems: 'center',
+	padding: '0 20px',
+	gap: 6,
+
+	'> span': {
+		fontSize: 16,
+		fontFamily: 'Pretendard-regular',
+	},
+});
+
+const MemberProfileStyle = css({
 	height: '249px',
 	display: 'grid',
 	gridTemplateRows: '3fr 1fr',
@@ -15,27 +38,8 @@ export const MemberProfileStyle = css({
 		outline: 'none',
 	},
 
-	'> div:nth-child(1)': {
-		backgroundColor: '#D9D9D9',
-		borderBottom: '1px solid black',
-		overflow: 'hidden',
-
-		'> img': {
-			width: '100%',
-			height: '100%',
-		},
-	},
-
-	'> div:nth-child(2)': {
-		gridRow: 2,
-		display: 'flex',
-		alignItems: 'center',
-		padding: '0 20px',
-		gap: 10,
-
-		'> span': {
-			fontSize: '18px',
-			fontFamily: 'Pretendard-regular',
-		},
-	},
+	'> div:nth-child(1)': MemberProfileImageStyle,
+	'> div:nth-child(2)': MemberProfileDescriptionStyle,
 });
+
+export default MemberProfileStyle;

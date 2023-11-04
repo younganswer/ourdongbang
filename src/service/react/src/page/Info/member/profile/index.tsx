@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { MemberProfileStyle } from './index.style';
+import MemberProfileStyle from './index.style';
 import { Member } from 'context/MemberContext';
 import axios from 'axios';
 import { User } from 'context/AuthContext';
+import MemberProfileModal from './modal';
+import { Modal } from 'component/modal';
 
 const MemberProfile = (props: { member: Member }) => {
 	const { member } = props;
@@ -12,6 +14,7 @@ const MemberProfile = (props: { member: Member }) => {
 			? `${process.env.REACT_APP_S3_BUCKET_URL}/profile/w512/${userInfo.profileImageId}`
 			: undefined
 		: undefined;
+	const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
 	useEffect(() => {
 		axios
@@ -36,21 +39,28 @@ const MemberProfile = (props: { member: Member }) => {
 	}, []);
 
 	return (
-		<div
-			className={MemberProfileStyle}
-			onClick={() => {
-				alert('업데이트 예정입니다!');
-			}}
-		>
-			<div>
-				<img src={src} alt="profile" />
+		<>
+			<div
+				className={MemberProfileStyle}
+				onClick={() => {
+					setIsModalOpened(true);
+				}}
+			>
+				<div>
+					<img src={src} alt="profile" />
+				</div>
+				<div>
+					<span>{userInfo?.name}</span>
+					<span>|</span>
+					<span>{member.role}</span>
+				</div>
 			</div>
-			<div>
-				<span>{userInfo?.name}</span>
-				<span>|</span>
-				<span>{member.role}</span>
-			</div>
-		</div>
+			{isModalOpened && (
+				<Modal setIsModalOpened={setIsModalOpened}>
+					<MemberProfileModal userInfo={userInfo} introduction={member.introduction} />
+				</Modal>
+			)}
+		</>
 	);
 };
 

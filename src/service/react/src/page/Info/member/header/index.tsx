@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef } from 'react';
 import { CloseIcon, MemberIcon, OpenIcon } from './icon';
-import { InfoPageMemberHeaderStyle } from './index.style';
+import InfoPageMemberHeaderStyle from './index.style';
 
 const InfoPageMemberHeader = (props: {
 	isOpened: boolean;

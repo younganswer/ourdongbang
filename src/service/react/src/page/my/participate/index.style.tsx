@@ -1,23 +1,6 @@
 import { css } from '@emotion/css';
 
-export const ParticipateStyle = css({
-	display: 'grid',
-	gridTemplateRows: '85px auto',
-	border: '1px solid black',
-
-	'> div:nth-child(1)': {
-		padding: '0 5%',
-	},
-
-	'> div:nth-child(2)': {
-		display: 'grid',
-		gridTemplateRows: '68px 533px',
-		padding: '5% 5%',
-		gap: '5%',
-	},
-});
-
-export const ParticipateHeaderStyle = css({
+const HeaderStyle = css({
 	height: 85,
 	display: 'flex',
 	alignItems: 'center',
@@ -25,10 +8,10 @@ export const ParticipateHeaderStyle = css({
 	gap: '0.7rem',
 	fontFamily: 'Pretendard-medium',
 	fontSize: '24px',
-	paddingLeft: '5%',
+	padding: '0 5%',
 });
 
-export const ParticipationStyle = css({
+const ParticipationStyle = css({
 	'> div:nth-child(1)': {
 		display: 'flex',
 		gap: '1rem',
@@ -51,11 +34,7 @@ export const ParticipationStyle = css({
 	},
 });
 
-export const ParticipatedStyle = css({
-	overflowY: 'scroll',
-});
-
-export const ParticipatedActivityStyle = css({
+const ParticipatedActivityStyle = css({
 	height: 84,
 	display: 'grid',
 	gridTemplateColumns: '84px 1fr auto',
@@ -85,3 +64,30 @@ export const ParticipatedActivityStyle = css({
 		},
 	},
 });
+
+const ParticipatedStyle = css({
+	overflowY: 'scroll',
+	'> div': {
+		width: '99%',
+		'> div': ParticipatedActivityStyle,
+	},
+});
+
+const MypageParticipateStyle = css({
+	display: 'grid',
+	gridTemplateRows: '85px auto',
+	border: '1px solid black',
+
+	'> div:nth-child(1)': HeaderStyle,
+	'> div:nth-child(2)': {
+		display: 'grid',
+		gridTemplateRows: '68px 533px',
+		padding: '5% 5%',
+		gap: '5%',
+
+		'> div:nth-child(1)': ParticipationStyle,
+		'> div:nth-child(2)': ParticipatedStyle,
+	},
+});
+
+export default MypageParticipateStyle;

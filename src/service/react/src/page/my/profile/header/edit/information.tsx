@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 're
 import { EditProfileInformationStyle } from './information.style';
 import { User } from 'context/AuthContext';
 import { Club } from 'context/ClubContext';
+import { Member } from 'context/MemberContext';
 import {
 	ClubIcon,
 	EmailIcon,
@@ -10,8 +11,7 @@ import {
 	PhoneNumberIcon,
 	SchoolIcon,
 	StudentIdIcon,
-} from '../icon';
-import { Member } from 'context/MemberContext';
+} from '../../body/icon';
 
 const Header = () => {
 	return (

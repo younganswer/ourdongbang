@@ -1,17 +1,13 @@
 import { User } from 'context/AuthContext';
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import {
-	ProfileSettingBodyStyle,
-	ProfileSettingHeaderStyle,
-	ProfileSettingStyle,
-} from './index.style';
-import { SettingIcon } from '../icon';
+import ProfileSettingStyle from './index.style';
 import ProfileSettingAfterAuthorized from './after-authorized';
 import ProfileSettingBeforeAuthorized from './before-authorized';
+import { SettingIcon } from '../icon';
 
 const Header = () => {
 	return (
-		<div className={ProfileSettingHeaderStyle}>
+		<div>
 			<SettingIcon width={35} height={35} onClick={undefined} />
 			<span>설정</span>
 		</div>
@@ -31,7 +27,7 @@ const Body = (props: {
 	}
 
 	return (
-		<div className={ProfileSettingBodyStyle}>
+		<div>
 			{authorized ? (
 				<ProfileSettingAfterAuthorized me={me} setMe={setMe} setIsModalOpened={setIsModalOpened} />
 			) : (
@@ -41,7 +37,7 @@ const Body = (props: {
 	);
 };
 
-const ProfileSetting = (props: {
+const MyPageProfileSetting = (props: {
 	me: User;
 	setMe: Dispatch<SetStateAction<User | null>>;
 	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
@@ -56,4 +52,4 @@ const ProfileSetting = (props: {
 	);
 };
 
-export default ProfileSetting;
+export default MyPageProfileSetting;

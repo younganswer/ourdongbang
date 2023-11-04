@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const AuditDocumentViewerFooterStyle = css({
+const AuditDocumentViewerFooterStyle = css({
 	backgroundColor: 'transparent',
 	display: 'flex',
 	justifyContent: 'flex-end',
@@ -28,3 +28,5 @@ export const AuditDocumentViewerFooterStyle = css({
 		gap: 2,
 	},
 });
+
+export default AuditDocumentViewerFooterStyle;

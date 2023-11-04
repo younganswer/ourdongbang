@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
-import { AuditDocumentViewerStyle } from './index.style';
+import AuditDocumentViewerStyle from './index.style';
 import { ClubContext } from 'context/ClubContext';
 import { Audit } from 'context/AuditContext';
 import AuditDocumentViewerFooter from './footer';

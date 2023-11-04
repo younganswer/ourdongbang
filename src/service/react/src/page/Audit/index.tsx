@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuditPageStyle } from './index.style';
+import AuditPageStyle from './index.style';
 import AuditPageHeader from './Header';
 import AuditPageBody from './body';
 import { ClubContext } from 'context/ClubContext';
