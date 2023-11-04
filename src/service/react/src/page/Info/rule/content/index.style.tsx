@@ -83,10 +83,19 @@ export const ModalContentStyle = css({
 
 		'input, textarea': {
 			width: '100%',
-			border: '1px solid #000',
-			borderRadius: '5px',
 			fontSize: 16,
 			fontFamily: 'Pretendard-regular',
+			backgroundColor: 'transparent',
+			'&:focus': {
+				outline: 'none',
+			},
+		},
+		'> input': {
+			border: 'none',
+			borderBottom: '2px solid black',
+		},
+		'> textarea': {
+			border: '2px solid black',
 		},
 	},
 

@@ -1,19 +1,8 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react';
-import {
-	InfoPageMemberBodyStyle,
-	InfoPageMemberHeaderStyle,
-	InfoPageMemberStyle,
-} from './index.style';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { InfoPageMemberBodyStyle, InfoPageMemberStyle } from './index.style';
 import { Member, MemberContext } from 'context/MemberContext';
 import MemberProfile from './profile';
-
-const Header = () => {
-	return (
-		<div className={InfoPageMemberHeaderStyle}>
-			<span>{'< 부원 >'}</span>
-		</div>
-	);
-};
+import InfoPageMemberHeader from './header';
 
 const Body = (props: {
 	members: Member[] | null;
@@ -57,12 +46,13 @@ const Body = (props: {
 
 const InfoPageMember = () => {
 	const { members, setMembers } = useContext(MemberContext);
+	const [isOpened, setIsOpened] = useState(false);
 
 	return (
 		<div className={InfoPageMemberStyle}>
 			<div>
-				<Header />
-				<Body members={members} setMembers={setMembers} />
+				<InfoPageMemberHeader isOpened={isOpened} setIsOpened={setIsOpened} />
+				{isOpened && <Body members={members} setMembers={setMembers} />}
 			</div>
 		</div>
 	);

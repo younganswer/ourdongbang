@@ -7,21 +7,6 @@ export const InfoPageMemberStyle = css({
 	border: '1px solid black',
 });
 
-export const InfoPageMemberHeaderStyle = css({
-	gridRow: 1,
-	width: 'auto',
-	height: '100px',
-	display: 'flex',
-	alignItems: 'center',
-	padding: '0 30px',
-	borderBottom: '1px solid black',
-
-	'> span': {
-		fontSize: '30px',
-		fontFamily: 'Pretendard-medium',
-	},
-});
-
 export const InfoPageMemberBodyStyle = css({
 	gridRow: 2,
 	display: 'grid',
@@ -29,15 +14,18 @@ export const InfoPageMemberBodyStyle = css({
 	marginBottom: '2rem',
 
 	'> div': {
-		margin: '0 30px',
+		margin: '0 50px',
 		display: 'grid',
 		gridTemplateRows: '100px auto',
 
+		'> div': {
+			width: '95%',
+		},
+
 		'> div:nth-child(1)': {
-			display: 'flex',
 			height: '50px',
-			margin: '17px 0 33px 0',
-			padding: '0 30px',
+			display: 'flex',
+			margin: '17px auto 33px auto',
 			justifyContent: 'space-between',
 
 			'> span': {
@@ -52,9 +40,11 @@ export const InfoPageMemberBodyStyle = css({
 				fontFamily: 'Pretendard-regular',
 			},
 		},
+
 		'> div:nth-child(2)': {
 			display: 'grid',
-			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			margin: '0 auto',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
 			gap: 20,
 			overflowY: 'auto',
 		},

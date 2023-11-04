@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 
 export const MemberProfileStyle = css({
-	height: '280px',
+	height: '249px',
 	display: 'grid',
 	gridTemplateRows: '3fr 1fr',
 	border: '1px solid black',
