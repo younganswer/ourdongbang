@@ -23,9 +23,16 @@ export const EditProfileInformationStyle = css({
 		'> :nth-child(2)': {
 			fontFamily: 'Pretendard-regular',
 		},
+		'> input:nth-child(3)': {
+			border: 'none',
+			borderBottom: '1px solid black',
+			backgroundColor: 'transparent',
+			'&:focus': {
+				outline: 'none',
+			},
+		},
 		'> :nth-child(3)': {
-			textAlign: 'right',
-			fontFamily: 'Pretendard-light',
+			fontFamily: 'Pretendard-regular',
 		},
 	},
 });

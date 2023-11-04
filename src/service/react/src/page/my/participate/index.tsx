@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-	ParticipateHeaderStyle,
-	ParticipateStyle,
-	ParticipatedActivityStyle,
-	ParticipatedStyle,
-	ParticipationStyle,
-} from './index.style';
+import MyPageParticipateStyle from './index.style';
 import { User } from 'context/AuthContext';
 import { HandIcon, RightArrowIcon } from './icon';
 
 const Header = () => {
 	return (
-		<div className={ParticipateHeaderStyle}>
+		<div>
 			<HandIcon width={29} height={29} />
 			<span>참여 활동</span>
 		</div>
@@ -29,7 +23,7 @@ const Participation = (props: { me: User }) => {
 	};
 
 	return (
-		<div className={ParticipationStyle}>
+		<div>
 			<div>
 				<span>참여도 {ratio * 100}%</span>
 				<span>{0.5 < ratio ? message[1] : message[0]}</span>
@@ -47,7 +41,7 @@ const Activity = (props: { me: User }) => {
 	const date = '09-30';
 
 	return (
-		<div className={ParticipatedActivityStyle}>
+		<div>
 			<div>{date}</div>
 			<div>참여 활동</div>
 			<RightArrowIcon
@@ -66,23 +60,25 @@ const Participated = (props: { me: User }) => {
 	const { me } = props;
 
 	return (
-		<div className={ParticipatedStyle}>
-			<Activity me={me} />
-			<Activity me={me} />
-			<Activity me={me} />
-			<Activity me={me} />
-			<Activity me={me} />
-			<Activity me={me} />
-			<Activity me={me} />
+		<div>
+			<div>
+				<Activity me={me} />
+				<Activity me={me} />
+				<Activity me={me} />
+				<Activity me={me} />
+				<Activity me={me} />
+				<Activity me={me} />
+				<Activity me={me} />
+			</div>
 		</div>
 	);
 };
 
-export const Participate = (props: { me: User }) => {
+const MyPageParticipate = (props: { me: User }) => {
 	const { me } = props;
 
 	return (
-		<div className={ParticipateStyle}>
+		<div className={MyPageParticipateStyle}>
 			<Header />
 			<div>
 				<Participation me={me} />
@@ -92,4 +88,4 @@ export const Participate = (props: { me: User }) => {
 	);
 };
 
-export default Participate;
+export default MyPageParticipate;

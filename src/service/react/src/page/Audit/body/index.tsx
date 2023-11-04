@@ -1,10 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext } from 'react';
 import AuditRegisterButton from './register/button';
-import {
-	AuditPageBodyBodyStyle,
-	AuditPageBodyHeaderStyle,
-	AuditPageBodyStyle,
-} from './index.style';
+import AuditPageBodyStyle from './index.style';
 import { DownArrowIcon, ExportIcon } from './icon';
 import AuditDocumentPreview from './preview';
 import { Audit, AuditContext } from 'context/AuditContext';
@@ -12,7 +8,7 @@ import { Club } from 'context/ClubContext';
 
 const Header = () => {
 	return (
-		<div className={AuditPageBodyHeaderStyle}>
+		<div>
 			<span>회계 문서</span>
 			<div>
 				<span>|</span>
@@ -42,7 +38,7 @@ const Body = (props: {
 	const { audits, setAudits } = props;
 
 	return (
-		<div className={AuditPageBodyBodyStyle}>
+		<div>
 			<div>
 				<span>날짜별</span>
 				<DownArrowIcon

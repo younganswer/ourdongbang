@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import Profile from './profile';
+import MyPageProfile from './profile';
 import { AuthContext } from 'context/AuthContext';
 import { MyPageStyle } from './index.style';
-import Participate from './participate';
+import MyPageParticipate from './participate';
 import { MemberContext } from 'context/MemberContext';
 
 const MyPage = () => {
@@ -14,8 +14,8 @@ const MyPage = () => {
 	}
 	return (
 		<div className={MyPageStyle}>
-			<Profile me={me} setMe={setMe} members={members} setMembers={setMembers} />
-			<Participate me={me} />
+			<MyPageProfile me={me} setMe={setMe} members={members} setMembers={setMembers} />
+			<MyPageParticipate me={me} />
 		</div>
 	);
 };

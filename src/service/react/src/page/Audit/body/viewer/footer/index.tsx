@@ -1,12 +1,11 @@
 import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { AuthContext } from 'context/AuthContext';
 import { MemberContext } from 'context/MemberContext';
-
 import { ExportIcon } from '../../icon';
-import { EditIcon } from 'page/my/profile/icon';
-import { AuditDocumentViewerFooterStyle } from './index.style';
+import AuditDocumentViewerFooterStyle from './index.style';
 import ReactToPrint from 'react-to-print';
 import { RefObject } from '@fullcalendar/core/preact';
+import { EditIcon } from 'page/my/profile/header/icon';
 
 const resizeBeforeGetContent = (content: HTMLElement | null) => {
 	if (content) {

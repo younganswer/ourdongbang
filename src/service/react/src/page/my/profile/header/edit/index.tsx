@@ -79,7 +79,7 @@ const handleSubmit = async (
 	setIsModalOpened(false);
 };
 
-const EditProfile = (props: {
+const MyProfileEditModal = (props: {
 	me: User;
 	setMe: Dispatch<SetStateAction<User | null>>;
 	members: Member[];
@@ -139,4 +139,4 @@ const EditProfile = (props: {
 	);
 };
 
-export default EditProfile;
+export default MyProfileEditModal;

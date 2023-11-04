@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const InfoPageMemberHeaderStyle = css({
+const InfoPageMemberHeaderStyle = css({
 	gridRow: 1,
 	width: 'auto',
 	height: '100px',
@@ -23,3 +23,5 @@ export const InfoPageMemberHeaderStyle = css({
 		cursor: 'pointer',
 	},
 });
+
+export default InfoPageMemberHeaderStyle;
