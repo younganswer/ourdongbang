@@ -65,7 +65,7 @@ const BodyDocumentsStyle = css({
 		width: '99%',
 		display: 'grid',
 		gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
-		gap: 16,
+		gap: 12,
 
 		'> div': {
 			width: '100%',
