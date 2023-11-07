@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const SearchBoxBodyTagStyle = css({
+const SearchPageBodyTagStyle = css({
 	height: 180,
 	display: 'flex',
 	justifyContent: 'space-between',
@@ -24,3 +24,5 @@ export const SearchBoxBodyTagStyle = css({
 		},
 	},
 });
+
+export default SearchPageBodyTagStyle;

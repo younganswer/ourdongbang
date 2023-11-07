@@ -1,14 +1,14 @@
 import React from 'react';
-import { SearchPageBodyStyle } from './index.style';
-import SearchBoxBodyTag from './tag';
-import SearchBoxBodyClubProfile from './club-profile';
+import SearchPageBodyStyle from './index.style';
+import SearchPageBodyTag from './tag';
+import SearchPageBodyClubProfile from './club-profile';
 
 const SearchPageBody = () => {
 	return (
 		<div className={SearchPageBodyStyle}>
 			<div>
-				<SearchBoxBodyTag />
-				<SearchBoxBodyClubProfile />
+				<SearchPageBodyTag />
+				<SearchPageBodyClubProfile />
 			</div>
 		</div>
 	);

@@ -4,8 +4,9 @@ export const BookmarkIcon = (props: {
 	width: number | string;
 	height: number | string;
 	marked: boolean;
+	onClick?: () => void;
 }) => {
-	const { width, height, marked } = props;
+	const { width, height, marked, onClick = undefined } = props;
 
 	return (
 		<>
@@ -16,6 +17,7 @@ export const BookmarkIcon = (props: {
 					height={height}
 					viewBox="0 0 17 23"
 					fill="none"
+					onClick={onClick}
 				>
 					<path d="M16 0.5H1V21.5L8.5 14.1957L16 21.5V0.5Z" fill="black" stroke="black" />
 				</svg>
@@ -26,6 +28,7 @@ export const BookmarkIcon = (props: {
 					height={height}
 					viewBox="0 0 12 17"
 					fill="none"
+					onClick={onClick}
 				>
 					<path d="M11 1H1V15L6 10.1304L11 15V1Z" stroke="black" />
 				</svg>

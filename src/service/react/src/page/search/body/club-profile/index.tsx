@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { SearchBoxBodyClubProfileStyle, SearchPageClubProfileStyle } from './index.style';
+import SearchPageBodyClubProfileStyle from './index.style';
 import axios from 'axios';
 import { Club } from 'context/ClubContext';
 import { BookmarkIcon } from 'page/search/header/icon';
 import { DownArrowIcon } from 'page/Audit/body/icon';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 	return (
@@ -14,14 +15,14 @@ const Header = () => {
 	);
 };
 
-const ClubProfile = (props: { club: Club }) => {
+const ClubProfileButton = (props: { club: Club }) => {
 	const { club } = props;
+	const navigate = useNavigate();
 
 	return (
 		<div
-			className={SearchPageClubProfileStyle}
 			onClick={() => {
-				alert('업데이트 예정입니다!');
+				navigate(`/main/search/${club._id}`);
 			}}
 		>
 			<div></div>
@@ -36,7 +37,7 @@ const ClubProfile = (props: { club: Club }) => {
 	);
 };
 
-const SearchBoxBodyClubProfile = () => {
+const SearchPageBodyClubProfile = () => {
 	const [clubs, setClubs] = useState<Club[] | null>(null);
 
 	useEffect(() => {
@@ -55,15 +56,17 @@ const SearchBoxBodyClubProfile = () => {
 	}
 
 	return (
-		<div className={SearchBoxBodyClubProfileStyle}>
+		<div className={SearchPageBodyClubProfileStyle}>
 			<Header />
 			<div>
-				{clubs?.map((club, index) => {
-					return <ClubProfile key={index} club={club} />;
-				})}
+				<div>
+					{clubs?.map((club, index) => {
+						return <ClubProfileButton key={index} club={club} />;
+					})}
+				</div>
 			</div>
 		</div>
 	);
 };
 
-export default SearchBoxBodyClubProfile;
+export default SearchPageBodyClubProfile;

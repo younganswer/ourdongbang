@@ -5,18 +5,17 @@ import PreviewPage from '../page/PreviewPage';
 import LoginPage from '../page/auth/login';
 import RegisterPage from '../page/auth/register';
 import AuditPage from '../page/Audit';
-// import CalendarPage from '../page/calendar';
 import ToolBar from '../component/toolbar';
 import MyPage from '../page/my';
 import './font.css';
 import RegisterFormPage from 'page/auth/register/form';
 import InfoPage from 'page/Info';
-// import SchedulerPage from '../page/calendar/schedule';
 import PrivateRoute from 'component/route/private-route';
 import PublicRoute from 'component/route/public-route';
 import SearchPage from 'page/search';
 import CalendarPage from 'page/calendar';
 import SchedulerPage from 'page/calendar/schedule';
+import SearchClubPage from 'page/search/club';
 
 function App() {
 	return (
@@ -36,6 +35,10 @@ function App() {
 				<Route path="/main/calendar/scheduler" element={<SchedulerPage />} />
 				<Route path="/main/audit" element={<AuditPage />} />
 				<Route path="/main/search" element={<PrivateRoute element={<SearchPage />} />} />
+				<Route
+					path="/main/search/:clubId"
+					element={<PrivateRoute element={<SearchClubPage />} />}
+				/>
 				<Route path="/main/mypage" element={<PrivateRoute element={<MyPage />} />} />
 			</Routes>
 		</div>
