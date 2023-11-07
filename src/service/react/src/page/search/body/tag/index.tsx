@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { SearchBoxBodyTagStyle } from './index.style';
+import SearchPageBodyTagStyle from './index.style';
 
 const Tag = (props: { tag: string }) => {
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -45,9 +45,9 @@ const Tag = (props: { tag: string }) => {
 	);
 };
 
-const SearchBoxBodyTag = () => {
+const SearchPageBodyTag = () => {
 	return (
-		<div className={SearchBoxBodyTagStyle}>
+		<div className={SearchPageBodyTagStyle}>
 			<Tag tag="전체" />
 			<Tag tag="공부" />
 			<Tag tag="음악" />
@@ -59,4 +59,4 @@ const SearchBoxBodyTag = () => {
 	);
 };
 
-export default SearchBoxBodyTag;
+export default SearchPageBodyTag;

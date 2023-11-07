@@ -35,8 +35,12 @@ export const SchoolIcon = (props: { width: number | string; height: number | str
 	);
 };
 
-export const MajorIcon = (props: { width: number | string; height: number | string }) => {
-	const { width, height } = props;
+export const MajorIcon = (props: {
+	width: number | string;
+	height: number | string;
+	onClick?: () => void;
+}) => {
+	const { width, height, onClick = undefined } = props;
 
 	return (
 		<svg
@@ -45,6 +49,7 @@ export const MajorIcon = (props: { width: number | string; height: number | stri
 			height={height}
 			viewBox="0 0 18 21"
 			fill="none"
+			onClick={onClick}
 		>
 			<rect x="0.5" y="0.5" width="17" height="20" stroke="black" />
 			<path d="M4 4H14" stroke="black" />

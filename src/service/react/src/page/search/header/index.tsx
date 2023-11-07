@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import {
-	SearchPageHeaderBookmarkStyle,
-	SearchPageHeaderSearchBoxStyle,
-	SearchPageHeaderStyle,
-} from './index.style';
+import SearchPageHeaderStyle from './index.style';
 import { BookmarkIcon, SearchIcon } from './icon';
 
 const Bookmark = () => {
 	return (
-		<div className={SearchPageHeaderBookmarkStyle}>
+		<div>
 			<BookmarkIcon width={15} height={21} marked={true} />
 			<span>북마크 목록</span>
 		</div>
@@ -19,7 +15,7 @@ const SearchBox = () => {
 	const [searchWord, setSearchWord] = useState<string | undefined>(undefined);
 
 	return (
-		<div className={SearchPageHeaderSearchBoxStyle}>
+		<div>
 			<form
 				onSubmit={event => {
 					event.preventDefault();
