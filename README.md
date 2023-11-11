@@ -2,13 +2,8 @@
 <div align="center">
   <img src="https://img.shields.io/badge/-Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=white">
   <img src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=white">
-  <img src="https://img.shields.io/badge/-Recoil-FF0000?style=flat-square">
   <img src="https://img.shields.io/badge/-Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white">
-  <img src="https://img.shields.io/badge/-Phasor-000000?style=flat-square">
   <img src="https://img.shields.io/badge/-Emotion-D26AC2?style=flat-square">
-  <img src="https://img.shields.io/badge/-Socket.io-010101?style=flat-square&logo=Socket.io&logoColor=white">
-  <br />
-  <img src="https://img.shields.io/badge/-Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=white">
   <img src="https://img.shields.io/badge/-NestJS-E0234E?style=flat-square&logo=NestJS&logoColor=white">
 </div>
 <br/>
