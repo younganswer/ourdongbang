@@ -4,6 +4,7 @@ import SearchClubPageReviewStyle from './index.style';
 import axios from 'axios';
 import { DownArrowIcon } from 'page/Audit/body/icon';
 import { EditIcon } from 'page/my/profile/header/icon';
+import { useNavigate } from 'react-router-dom';
 
 type Review = {
 	_id: Types.ObjectId;
@@ -66,8 +67,9 @@ const Review = (props: { review: Review }) => {
 	);
 };
 
-const Reviews = (props: { reviews: Review[] | null }) => {
-	const { reviews } = props;
+const Reviews = (props: { clubId: Types.ObjectId; reviews: Review[] | null }) => {
+	const { clubId, reviews } = props;
+	const navigate = useNavigate();
 
 	return (
 		<div>
@@ -82,15 +84,13 @@ const Reviews = (props: { reviews: Review[] | null }) => {
 						}}
 					/>
 				</div>
-				<div>
+				<div
+					onClick={() => {
+						navigate(`/main/search/${clubId}/review/register`);
+					}}
+				>
 					<span>작성</span>
-					<EditIcon
-						width={20}
-						height={20}
-						onClick={() => {
-							alert('업데이트 예정입니다!');
-						}}
-					/>
+					<EditIcon width={18} height={18} />
 				</div>
 			</div>
 			<div>
@@ -161,7 +161,7 @@ const SearchClubPageReview = (props: { clubId: Types.ObjectId }) => {
 	return (
 		<div className={SearchClubPageReviewStyle}>
 			<Header reviews={reviews} />
-			<Reviews reviews={reviews} />
+			<Reviews clubId={clubId} reviews={reviews} />
 		</div>
 	);
 };

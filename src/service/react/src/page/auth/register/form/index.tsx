@@ -4,7 +4,7 @@ import { AuthContext, User } from 'context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-	RegisterFormPageStyle,
+	FormRegisterPageStyle,
 	RegisterFormStyle,
 	RegisterPageCustomInputStyle,
 } from './index.style';
@@ -13,7 +13,7 @@ import { RegisterContext, RegisterInfo } from 'context/RegisterContext';
 import RegisterFormPagePasswordInput from './password';
 import RegisterFormPageIdInput from './id';
 import RegisterFormPagePasswordCheckInput from './password-check';
-import RegisterFormPageDone from './done';
+import DoneFormRegisterPage from './done';
 
 const registerHandler = async (
 	event: FormEvent,
@@ -128,7 +128,7 @@ const RegisterForm = (props: {
 	);
 };
 
-const RegisterFormPage = () => {
+const FormRegisterPage = () => {
 	const { registerInfo } = useContext(RegisterContext);
 	const navigate = useNavigate();
 	const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
@@ -155,9 +155,9 @@ const RegisterFormPage = () => {
 	}, [registerInfo, navigate, timer]);
 
 	return (
-		<div className={RegisterFormPageStyle}>
+		<div className={FormRegisterPageStyle}>
 			{isRegistered ? (
-				<RegisterFormPageDone />
+				<DoneFormRegisterPage />
 			) : registerInfo ? (
 				<div>
 					<span>회원가입</span>
@@ -168,4 +168,4 @@ const RegisterFormPage = () => {
 	);
 };
 
-export default RegisterFormPage;
+export default FormRegisterPage;

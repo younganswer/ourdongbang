@@ -1,13 +1,13 @@
 import React from 'react';
 import { PartyPopperIcon } from './icon';
-import { RegisterFormPageDoneStyle } from './index.style';
+import DoneFormRegisterPageStyle from './index.style';
 import { useNavigate } from 'react-router-dom';
 
-const RegisterFormPageDone = () => {
+const DoneFormRegisterPage = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className={RegisterFormPageDoneStyle}>
+		<div className={DoneFormRegisterPageStyle}>
 			<div>
 				<span>우리동방</span>
 				<span>회원가입 완료!</span>
@@ -24,4 +24,4 @@ const RegisterFormPageDone = () => {
 	);
 };
 
-export default RegisterFormPageDone;
+export default DoneFormRegisterPage;

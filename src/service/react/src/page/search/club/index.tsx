@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Club } from 'context/ClubContext';
 import axios from 'axios';
-import SearchClubPageStyle from './index.style';
+import ClubSearchPageStyle from './index.style';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import { BackwardIcon } from './icon';
 import SearchClubPageBody from './body';
@@ -20,7 +20,7 @@ const Header = (props: { clubName: string; navigate: NavigateFunction }) => {
 	);
 };
 
-const SearchClubPage = () => {
+const ClubSearchPage = () => {
 	const location = useLocation();
 	const clubId = location.pathname.split('/').pop() as string;
 	const [club, setClub] = useState<Club | null>(null);
@@ -45,11 +45,11 @@ const SearchClubPage = () => {
 	}
 
 	return (
-		<div className={SearchClubPageStyle}>
+		<div className={ClubSearchPageStyle}>
 			<Header clubName={club.name} navigate={navigate} />
 			<SearchClubPageBody club={club} />
 		</div>
 	);
 };
 
-export default SearchClubPage;
+export default ClubSearchPage;

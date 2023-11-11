@@ -59,12 +59,10 @@ const ReviewsStyle = css({
 			display: 'flex',
 			alignItems: 'center',
 			gap: 10,
+			cursor: 'pointer',
 			'> span': {
 				fontSize: 20,
 				fontFamily: 'Pretendard-regular',
-			},
-			'> svg': {
-				cursor: 'pointer',
 			},
 		},
 	},
