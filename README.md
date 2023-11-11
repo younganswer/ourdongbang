@@ -11,7 +11,15 @@
   <img src="https://img.shields.io/badge/-Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=white">
   <img src="https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white">
   <img src="https://img.shields.io/badge/-Flask-000000?style=flat-square&logo=Flask&logoColor=white">
-  <br/>
+</div>
+<div align="center">
+  <img src="https://img.shields.io/badge/-AmazonAWS-232F3E?style=flat-square&logo=AmazonAWS&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonRoute53-8C4FFF?style=flat-square&logo=AmazonRoute53&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonEC2-FF9900?style=flat-square&logo=AmazonEC2&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonS3-569A31?style=flat-square&logo=AmazonS3&logoColor=white">
+  <img src="https://img.shields.io/badge/-AWSLambda-FF9900?style=flat-square&logo=AWSLambda&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonCloudWatch-FF4F8B?style=flat-square&logo=AmazonCloudWatch&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonIAM-DD344C?style=flat-square&logo=AmazonIAM&logoColor=white">
 </div>
 <br/>
 <br/>
