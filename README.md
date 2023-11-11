@@ -9,7 +9,7 @@
 <br/>
 <br/>
 
-<h1 align="center">배포 페이지</h1>
+<h2 align="center"><a href="https://www.ourdongbang.com">배포 페이지</a></h2>
 <br/>
 <br/>
 
