@@ -47,6 +47,7 @@
 
 ![Information Page](./assets/information-page.png)
 <br/>
+<br/>
 ![Audit Page](./assets/audit-page.png)
 <br/>
 <br/>
