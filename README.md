@@ -9,16 +9,28 @@
 <br/>
 <br/>
 
+<h1 align="center">배포 페이지</h1>
+<br/>
+<br/>
+
 ## Index
 
 - [Software Architecture](#software-architecture)
+- [Preview](#preview)
 - [Contacts](#contacts)
-  <br/>
-  <br/>
+<br/>
+<br/>
 
 ## Software Architecture
 
 ![Software Architecture](./assets/Software%20Architecture.png)
+<br/>
+<br/>
+
+## Preview
+
+![Information Page](./assets/information-page.png)
+![Audit Page](./assets/audit-page.png)
 <br/>
 <br/>
 
@@ -40,7 +52,7 @@
 </p>
 <br/>
 
-### 윤현승(Backend dev)
+### 윤현승(Fullstack dev)
 
 <p>
 	<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
@@ -49,7 +61,7 @@
 </p>
 <br/>
 
-### 황영서(Backend & AI dev)
+### 황영서(Fullstack dev)
 
 <p>
 	<a href="https://github.com/younganswer"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
