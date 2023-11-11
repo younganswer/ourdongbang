@@ -5,8 +5,10 @@
   <img src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=white">
   <img src="https://img.shields.io/badge/-Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white">
   <img src="https://img.shields.io/badge/-Emotion-D26AC2?style=flat-square">
-  <img src="https://img.shields.io/badge/-NestJS-E0234E?style=flat-square&logo=NestJS&logoColor=white">
   <img src="https://img.shields.io/badge/-Mongoose-F04D35?style=flat-square&logo=Mongoosedotws&logoColor=white">
+  <img src="https://img.shields.io/badge/-NestJS-E0234E?style=flat-square&logo=NestJS&logoColor=white">
+  <img src="https://img.shields.io/badge/-Express-000000?style=flat-square&logo=express&logoColor=white">
+  <img src="https://img.shields.io/badge/-Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=white">
   <img src="https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white">
   <img src="https://img.shields.io/badge/-Flask-000000?style=flat-square&logo=Flask&logoColor=white">
   <br/>
