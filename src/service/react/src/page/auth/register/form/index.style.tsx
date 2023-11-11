@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import { PageStyle } from 'page/page.style';
 
-export const RegisterFormPageStyle = css(PageStyle, {
+export const FormRegisterPageStyle = css(PageStyle, {
 	margin: '0 auto',
 	width: 1000,
 	height: 800,

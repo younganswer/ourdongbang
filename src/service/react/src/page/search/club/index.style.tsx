@@ -13,15 +13,15 @@ const HeaderStyle = css({
 		cursor: 'pointer',
 	},
 	'> span': {
-		fontSize: 24,
+		fontSize: 23,
 		fontFamily: 'Pretendard-medium',
 	},
 });
 
-const SearchClubPageStyle = css(PageStyle, {
+const ClubSearchPageStyle = css(PageStyle, {
 	border: '1px solid black',
 
 	'> div:nth-child(1)': HeaderStyle,
 });
 
-export default SearchClubPageStyle;
+export default ClubSearchPageStyle;
