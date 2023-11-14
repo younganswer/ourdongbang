@@ -3,10 +3,10 @@ import { AuditDocumentBodyTitleStyle } from './title.style';
 
 const AuditDocumentBodyTitle = (props: {
 	title: string;
-	setTitle: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setTitle?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { title, setTitle, isEditting } = props;
+	const { title, isEditting = false, setTitle = undefined } = props;
 
 	return (
 		<div className={AuditDocumentBodyTitleStyle}>
@@ -14,7 +14,7 @@ const AuditDocumentBodyTitle = (props: {
 				<span>제 목</span>
 			</div>
 			<div>
-				{isEditting ? (
+				{isEditting && setTitle ? (
 					<input type="text" value={title} onChange={event => setTitle(event.target.value)} />
 				) : (
 					<span>{title}</span>

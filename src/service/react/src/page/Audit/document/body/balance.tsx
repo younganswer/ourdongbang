@@ -3,10 +3,10 @@ import { AuditDocumentBodyBalanceStyle } from './balance.style';
 
 const AuditDocumentBodyBalance = (props: {
 	balance: string;
-	setBalance: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setBalance?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { balance, setBalance, isEditting } = props;
+	const { balance, isEditting = false, setBalance = undefined } = props;
 	const [currentBalance, setCurrentBalance] = useState<string>(balance);
 
 	return (
@@ -15,7 +15,7 @@ const AuditDocumentBodyBalance = (props: {
 				<span>잔 액</span>
 			</div>
 			<div>
-				{isEditting ? (
+				{isEditting && setBalance ? (
 					<input
 						type="text"
 						value={currentBalance}

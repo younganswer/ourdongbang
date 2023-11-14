@@ -12,71 +12,63 @@ import AuditDocumentBodyAttachment from './attachment';
 
 const AuditDocumentBody = (props: {
 	title: string;
-	setTitle: Dispatch<SetStateAction<string>>;
 	date: string;
-	setDate: Dispatch<SetStateAction<string>>;
 	franchise: string;
-	setFranchise: Dispatch<SetStateAction<string>>;
 	amount: string;
-	setAmount: Dispatch<SetStateAction<string>>;
 	isExpense: boolean;
-	setIsExpense: Dispatch<SetStateAction<boolean>>;
 	balance: string;
-	setBalance: Dispatch<SetStateAction<string>>;
 	remark: string;
-	setRemark: Dispatch<SetStateAction<string>>;
 	receiptId: string;
 	cardSlipId: string;
 	attachmentId: string | undefined;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setTitle?: Dispatch<SetStateAction<string>>;
+	setDate?: Dispatch<SetStateAction<string>>;
+	setFranchise?: Dispatch<SetStateAction<string>>;
+	setAmount?: Dispatch<SetStateAction<string>>;
+	setIsExpense?: Dispatch<SetStateAction<boolean>>;
+	setBalance?: Dispatch<SetStateAction<string>>;
+	setRemark?: Dispatch<SetStateAction<string>>;
 }) => {
 	const {
 		title,
-		setTitle,
 		date,
-		setDate,
 		franchise,
-		setFranchise,
 		amount,
-		setAmount,
 		isExpense,
-		setIsExpense,
 		balance,
-		setBalance,
 		remark,
-		setRemark,
 		receiptId,
 		cardSlipId,
 		attachmentId,
-		isEditting,
+		isEditting = false,
+		setTitle = undefined,
+		setDate = undefined,
+		setFranchise = undefined,
+		setAmount = undefined,
+		setIsExpense = undefined,
+		setBalance = undefined,
+		setRemark = undefined,
 	} = props;
 
 	return (
 		<div className={AuditDocumentBodyStyle}>
-			<AuditDocumentBodyTitle title={title} setTitle={setTitle} isEditting={isEditting} />
+			<AuditDocumentBodyTitle title={title} isEditting={isEditting} setTitle={setTitle} />
 			<div>
-				<AuditDocumentBodyDate date={date} setDate={setDate} isEditting={isEditting} />
-				<AuditDocumentBodyFranchise
-					franchise={franchise}
-					setFranchise={setFranchise}
-					isEditting={isEditting}
-				/>
+				<AuditDocumentBodyDate date={date} isEditting={isEditting} setDate={setDate} />
+				<AuditDocumentBodyFranchise franchise={franchise} isEditting={isEditting} setFranchise={setFranchise} />
 			</div>
 			<div>
 				<AuditDocumentBodyAmount
 					amount={amount}
-					setAmount={setAmount}
 					isExpense={isExpense}
+					isEditting={isEditting}
+					setAmount={setAmount}
 					setIsExpense={setIsExpense}
-					isEditting={isEditting}
 				/>
-				<AuditDocumentBodyBalance
-					balance={balance}
-					setBalance={setBalance}
-					isEditting={isEditting}
-				/>
+				<AuditDocumentBodyBalance balance={balance} isEditting={isEditting} setBalance={setBalance} />
 			</div>
-			<AuditDocumentBodyRemark remark={remark} setRemark={setRemark} isEditting={isEditting} />
+			<AuditDocumentBodyRemark remark={remark} isEditting={isEditting} setRemark={setRemark} />
 			<div>
 				<AuditDocumentBodyReceipt receiptId={receiptId} />
 				<AuditDocumentBodyCardSlip cardSlipId={cardSlipId} />

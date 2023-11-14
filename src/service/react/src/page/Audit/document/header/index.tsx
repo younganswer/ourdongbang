@@ -4,12 +4,19 @@ import { AuditFormHeaderMetaStyle, AuditFormHeaderStyle } from './index.style';
 const MetaData = (props: {
 	clubName: string;
 	auditor: string;
-	setAuditor: Dispatch<SetStateAction<string>>;
 	created: string;
-	setCreated: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setAuditor?: Dispatch<SetStateAction<string>>;
+	setCreated?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { clubName, auditor, setAuditor, created, setCreated, isEditting } = props;
+	const {
+		clubName,
+		auditor,
+		created,
+		isEditting = false,
+		setAuditor = undefined,
+		setCreated = undefined,
+	} = props;
 	const [currentCreated, setCurrentCreated] = useState<string>(created);
 
 	return (
@@ -27,7 +34,7 @@ const MetaData = (props: {
 					<span>작 성 자</span>
 				</div>
 				<div>
-					{isEditting ? (
+					{isEditting && setAuditor ? (
 						<input type="text" value={auditor} onChange={event => setAuditor(event.target.value)} />
 					) : (
 						<span>{auditor}</span>
@@ -40,7 +47,7 @@ const MetaData = (props: {
 				</div>
 				<div>
 					<div>
-						{isEditting ? (
+						{isEditting && setCreated ? (
 							<input
 								type="text"
 								value={currentCreated.split('-')[0]}
@@ -70,7 +77,7 @@ const MetaData = (props: {
 						<span>년</span>
 					</div>
 					<div>
-						{isEditting ? (
+						{isEditting && setCreated ? (
 							<input
 								type="text"
 								value={currentCreated.split('-')[1]}
@@ -100,7 +107,7 @@ const MetaData = (props: {
 						<span>월</span>
 					</div>
 					<div>
-						{isEditting ? (
+						{isEditting && setCreated ? (
 							<input
 								type="text"
 								value={currentCreated.split('-')[2]}
@@ -139,12 +146,20 @@ const AuditDocumentHeader = (props: {
 	index: number | null;
 	clubName: string;
 	auditor: string;
-	setAuditor: Dispatch<SetStateAction<string>>;
 	created: string;
-	setCreated: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setAuditor?: Dispatch<SetStateAction<string>>;
+	setCreated?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { index, clubName, auditor, setAuditor, created, setCreated, isEditting } = props;
+	const {
+		index,
+		clubName,
+		auditor,
+		created,
+		isEditting = false,
+		setAuditor = undefined,
+		setCreated = undefined,
+	} = props;
 
 	return (
 		<div className={AuditFormHeaderStyle}>
@@ -153,10 +168,10 @@ const AuditDocumentHeader = (props: {
 			<MetaData
 				clubName={clubName}
 				auditor={auditor}
-				setAuditor={setAuditor}
 				created={created}
-				setCreated={setCreated}
 				isEditting={isEditting}
+				setAuditor={setAuditor}
+				setCreated={setCreated}
 			/>
 		</div>
 	);
