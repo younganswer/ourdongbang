@@ -40,27 +40,29 @@ const MetaDataStyle = css({
 	},
 });
 
-const HeaderStyle = css({
+const RowStyle = css({
+	height: '9.52mm',
+	display: 'grid',
+	gridTemplateColumns: '1fr 3fr 5fr 4fr 3fr 2.98fr 2.98fr',
+	borderBottom: '1px solid black',
 	'> div': {
-		display: 'grid',
-		gridTemplateColumns: '1fr 2.5fr 4.5fr 4.5fr 3.5fr 2.98fr 2.98fr',
-		borderBottom: '1px solid black',
-		'> div': {
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-			'> span': {
-				fontSize: 16,
-				fontFamily: 'Pretendard-regular',
-			},
-		},
-		'> div:not(:last-child)': {
-			borderRight: '1px solid black',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		'> span': {
+			fontSize: 16,
+			fontFamily: 'Pretendard-regular',
 		},
 	},
+	'> div:not(:last-child)': {
+		borderRight: '1px solid black',
+	},
+});
+
+const HeaderStyle = css({
+	'> div': RowStyle,
 	'> div:nth-child(1)': {
-		height: '8.4mm',
-		backgroundColor: 'black',
+		backgroundColor: '#EAEAEA',
 	},
 	'> div:nth-child(2)': {
 		height: '0.6mm',
@@ -73,7 +75,7 @@ const AuditExportStyle = css({
 
 	'> div:nth-child(1)': {
 		width: '100%',
-		height: '18.8mm',
+		height: '25mm',
 		display: 'grid',
 		gridTemplateColumns: '3fr 5fr 3fr',
 
@@ -84,11 +86,16 @@ const AuditExportStyle = css({
 		'> div:nth-child(3)': MetaDataStyle,
 	},
 	'> div:nth-child(2)': {
-		height: '243.3mm',
+		height: '265mm',
 		borderTop: '1px solid black',
 		borderLeft: '1px solid black',
 		borderRight: '1px solid black',
-		'> div:nth-child(1)': HeaderStyle,
+		'> div:first-child': HeaderStyle,
+		'> div:not(:first-child)': RowStyle,
+	},
+	'> div:nth-child(n+3)': {
+		width: '210mm',
+		height: '290mm',
 	},
 });
 

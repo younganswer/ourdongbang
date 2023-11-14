@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import AuditExportStyle from './index.style';
 import { RefObject } from '@fullcalendar/core/preact';
 import { ClubContext } from 'context/ClubContext';
+import { Audit, AuditContext } from 'context/AuditContext';
+import AuditDocument from '../document';
 
 const Title = (props: { clubName: string }) => {
 	const { clubName } = props;
@@ -90,9 +92,55 @@ const Header = () => {
 	);
 };
 
+const Summary = (props: { index: number | null; audit: Audit | null }) => {
+	const { index, audit } = props;
+
+	if (!index || !audit) {
+		return (
+			<div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		);
+	}
+
+	return (
+		<div>
+			<div>
+				<span>{index}</span>
+			</div>
+			<div>
+				<span>{audit.created}</span>
+			</div>
+			<div>
+				<span>{audit.title}</span>
+			</div>
+			<div>
+				<span>{audit.franchise}</span>
+			</div>
+			<div>
+				<span>{audit.isExpense ? audit.amount : ''}</span>
+			</div>
+			<div>
+				<span>{!audit.isExpense ? audit.amount : ''}</span>
+			</div>
+			<div>
+				<span>{audit.balance}</span>
+			</div>
+		</div>
+	);
+};
+
 const AuditExport = (props: { divRef: RefObject<HTMLDivElement> }) => {
 	const { divRef } = props;
 	const { club } = useContext(ClubContext);
+	const { audits } = useContext(AuditContext);
+	const rowNum = 26;
 
 	return (
 		<div ref={divRef} className={AuditExportStyle}>
@@ -103,7 +151,44 @@ const AuditExport = (props: { divRef: RefObject<HTMLDivElement> }) => {
 			</div>
 			<div>
 				<Header />
+				{audits?.map((audit, index) => {
+					return <Summary key={index} index={index} audit={audit} />;
+				})}
+				{[...Array(rowNum - (audits?.length || 0))].map((_, index) => {
+					return <Summary key={index} index={null} audit={null} />;
+				})}
 			</div>
+			{audits?.map((audit, index) => {
+				return (
+					<AuditDocument
+						key={index}
+						index={index}
+						clubName={club?.name || ''}
+						auditor={''}
+						setAuditor={() => {}}
+						created={audit.created}
+						setCreated={() => {}}
+						title={audit.title}
+						setTitle={() => {}}
+						date={audit.date}
+						setDate={() => {}}
+						franchise={audit.franchise}
+						setFranchise={() => {}}
+						amount={audit.amount}
+						setAmount={() => {}}
+						isExpense={audit.isExpense}
+						setIsExpense={() => {}}
+						balance={audit.balance}
+						setBalance={() => {}}
+						remark={audit.remark}
+						setRemark={() => {}}
+						receiptId={audit.receiptId.toString()}
+						cardSlipId={audit.cardSlipId?.toString() || ''}
+						attachmentId={audit.attachmentId?.toString() || ''}
+						isEditting={false}
+					/>
+				);
+			})}
 		</div>
 	);
 };
