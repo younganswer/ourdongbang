@@ -9,8 +9,8 @@ const AuditDocumentPreviewImageStyle = css({
 	backgroundColor: '#D9D9D9',
 
 	'> img': {
-		width: '100%',
-		height: '100%',
+		width: 211,
+		height: 208,
 		objectFit: 'cover',
 	},
 });

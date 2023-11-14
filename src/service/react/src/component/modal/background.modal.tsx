@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Dispatch, ReactNode, SetStateAction } from 'react';
 import { ModalBackgroundStyle } from './background.modal.style';
 import { createPortal } from 'react-dom';
 import { CloseIcon } from './icon';
 
 export const ModalBackground = (props: {
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
-	children: React.ReactNode;
+	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
+	children: ReactNode;
 }) => {
 	const { setIsModalOpened, children } = props;
 

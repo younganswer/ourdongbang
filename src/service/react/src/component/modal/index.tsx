@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, ReactNode, SetStateAction, useEffect } from 'react';
 import { ModalBackground } from './background.modal';
 
 export const Modal = (props: {
-	setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
-	children: React.ReactNode;
+	setIsModalOpened: Dispatch<SetStateAction<boolean>>;
+	children: ReactNode;
 }) => {
 	const { setIsModalOpened, children } = props;
 
 	useEffect(() => {
-		document.body.style.cssText = `
-		    position: fixed; 
-		    top: -${window.scrollY}px;
-		    overflow-y: scroll;
-		    width: 100%;`;
+		if (document.body.children.length === 4) {
+			document.body.style.cssText = `
+			    position: fixed; 
+			    top: -${window.scrollY}px;
+			    overflow-y: scroll;
+			    width: 100%;
+			`;
+		}
 		return () => {
-			const scrollY = document.body.style.top;
+			if (document.body.children.length === 4) {
+				const scrollY = document.body.style.top;
 
-			document.body.style.cssText = '';
-			window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+				document.body.style.cssText = '';
+				window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+			}
 		};
 	}, []);
 
