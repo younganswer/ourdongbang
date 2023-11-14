@@ -3,10 +3,10 @@ import { AuditDocumentBodyRemarkStyle } from './remark.style';
 
 const AuditDocumentBodyRemark = (props: {
 	remark: string;
-	setRemark: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setRemark?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { remark, setRemark, isEditting } = props;
+	const { remark, isEditting = false, setRemark = undefined } = props;
 
 	return (
 		<div className={AuditDocumentBodyRemarkStyle}>
@@ -14,7 +14,7 @@ const AuditDocumentBodyRemark = (props: {
 				<span>비 고</span>
 			</div>
 			<div>
-				{isEditting ? (
+				{isEditting && setRemark ? (
 					<textarea value={remark} onChange={event => setRemark(event.target.value)} />
 				) : (
 					<span>{remark}</span>

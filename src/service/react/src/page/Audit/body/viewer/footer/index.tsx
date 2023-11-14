@@ -7,7 +7,7 @@ import ReactToPrint from 'react-to-print';
 import { RefObject } from '@fullcalendar/core/preact';
 import { EditIcon } from 'page/my/profile/header/icon';
 
-const resizeBeforeGetContent = (content: HTMLElement | null) => {
+export const resizeBeforeGetContent = (content: HTMLElement | null) => {
 	if (content) {
 		content.style.width = '210mm';
 		content.style.height = '288mm';

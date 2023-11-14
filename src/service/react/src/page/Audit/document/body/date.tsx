@@ -3,10 +3,10 @@ import { AuditDocumentBodyDateStyle } from './date.style';
 
 const AuditDocumentBodyDate = (props: {
 	date: string;
-	setDate: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setDate?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { date, setDate, isEditting } = props;
+	const { date, isEditting = false, setDate = undefined } = props;
 
 	return (
 		<div className={AuditDocumentBodyDateStyle}>
@@ -14,7 +14,7 @@ const AuditDocumentBodyDate = (props: {
 				<span>일 자</span>
 			</div>
 			<div>
-				{isEditting ? (
+				{isEditting && setDate ? (
 					<input
 						type="date"
 						value={date}

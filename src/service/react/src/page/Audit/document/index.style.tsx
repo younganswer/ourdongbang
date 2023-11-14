@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const AuditDocumentStyle = css({
+const AuditDocumentStyle = css({
 	width: '100%',
 	height: '100%',
 	display: 'flex',
@@ -25,3 +25,5 @@ export const AuditDocumentStyle = css({
 		},
 	},
 });
+
+export default AuditDocumentStyle;

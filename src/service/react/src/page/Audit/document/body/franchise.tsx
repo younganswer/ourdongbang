@@ -3,10 +3,10 @@ import { AuditDocumentBodyFranchiseStyle } from './franchise.style';
 
 const AuditDocumentBodyFranchise = (props: {
 	franchise: string;
-	setFranchise: Dispatch<SetStateAction<string>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setFranchise?: Dispatch<SetStateAction<string>>;
 }) => {
-	const { franchise, setFranchise, isEditting } = props;
+	const { franchise, isEditting = false, setFranchise = undefined } = props;
 
 	return (
 		<div className={AuditDocumentBodyFranchiseStyle}>
@@ -14,7 +14,7 @@ const AuditDocumentBodyFranchise = (props: {
 				<span>상호명</span>
 			</div>
 			<div>
-				{isEditting ? (
+				{isEditting && setFranchise ? (
 					<input
 						type="text"
 						value={franchise}

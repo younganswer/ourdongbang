@@ -7,8 +7,11 @@ import { Audit, AuditContext } from 'context/AuditContext';
 import { Club } from 'context/ClubContext';
 import ReactToPrint from 'react-to-print';
 import AuditExport from '../export';
+import AuditExportStyle, { AuditExportDocumentStyle } from '../export/index.style';
+import { resizeBeforeGetContent } from './viewer/footer';
 
-const Header = () => {
+const Header = (props: { club: Club; audits: Audit[] | null }) => {
+	const { club, audits } = props;
 	const printRef = useRef<HTMLDivElement>(null);
 
 	return (
@@ -23,6 +26,11 @@ const Header = () => {
 							margin: 12mm 10mm;
 						}
 						@media print {
+							.${AuditExportStyle} {
+								> div {
+									page-break-before: always;
+								}
+							}
 							body {
 								-webkit-print-color-adjust: exact;
 							}
@@ -30,7 +38,14 @@ const Header = () => {
 					`}
 					onBeforeGetContent={() => {
 						if (printRef.current) {
-							printRef.current.style.display = 'block';
+							const children = printRef.current.children as HTMLCollectionOf<HTMLDivElement>;
+
+							for (let i = 0; i < children.length; i++) {
+								if (children[i].className !== AuditExportDocumentStyle) {
+									continue;
+								}
+								resizeBeforeGetContent(children[i].children[0] as HTMLElement);
+							}
 						}
 					}}
 					trigger={() => (
@@ -43,7 +58,7 @@ const Header = () => {
 				/>
 			</div>
 			<div>
-				<AuditExport divRef={printRef} />
+				<AuditExport divRef={printRef} club={club} audits={audits} />
 			</div>
 		</div>
 	);
@@ -94,7 +109,7 @@ const AuditPageBody = (props: { club: Club }) => {
 
 	return (
 		<div className={AuditPageBodyStyle}>
-			<Header />
+			<Header club={club} audits={audits} />
 			<Body audits={audits} setAudits={setAudits} />
 		</div>
 	);

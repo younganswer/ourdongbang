@@ -3,12 +3,18 @@ import { AuditDocumentBodyAmountStyle } from './amount.style';
 
 const AuditDocumentBodyAmount = (props: {
 	amount: string;
-	setAmount: Dispatch<SetStateAction<string>>;
 	isExpense: boolean;
-	setIsExpense: Dispatch<SetStateAction<boolean>>;
-	isEditting: boolean;
+	isEditting?: boolean;
+	setAmount?: Dispatch<SetStateAction<string>>;
+	setIsExpense?: Dispatch<SetStateAction<boolean>>;
 }) => {
-	const { amount, setAmount, isEditting, isExpense, setIsExpense } = props;
+	const {
+		amount,
+		isExpense,
+		isEditting = false,
+		setAmount = undefined,
+		setIsExpense = undefined,
+	} = props;
 	const [currentAmount, setCurrentAmount] = useState<string>(amount);
 
 	return (
@@ -17,7 +23,7 @@ const AuditDocumentBodyAmount = (props: {
 				<span>금 액</span>
 			</div>
 			<div>
-				{isEditting ? (
+				{isEditting && setAmount ? (
 					<input
 						type="text"
 						value={currentAmount}
@@ -46,7 +52,7 @@ const AuditDocumentBodyAmount = (props: {
 						type="radio"
 						checked={isExpense}
 						onChange={() => {
-							if (isEditting) {
+							if (isEditting && setIsExpense) {
 								setIsExpense(true);
 							}
 						}}
@@ -58,7 +64,7 @@ const AuditDocumentBodyAmount = (props: {
 						type="radio"
 						checked={!isExpense}
 						onChange={() => {
-							if (isEditting) {
+							if (isEditting && setIsExpense) {
 								setIsExpense(false);
 							}
 						}}
