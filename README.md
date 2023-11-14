@@ -1,7 +1,31 @@
 <h1 align="center">우리동방 (대학교 동아리 플랫폼 서비스)</h1>
-<p align="center">
-  <img src="https://img.shields.io/badge/-Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=flat-square&logo=React%20Query&logoColor=white"> <img src="https://img.shields.io/badge/-Recoil-FF0000?style=flat-square"> <img src="https://img.shields.io/badge/-Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/-Phasor-000000?style=flat-square"> <img src="https://img.shields.io/badge/-Emotion-D26AC2?style=flat-square"> <img src="https://img.shields.io/badge/-Socket.io-010101?style=flat-square&logo=Socket.io&logoColor=white"> <br /> <img src="https://img.shields.io/badge/-Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/-NestJS-E0234E?style=flat-square&logo=NestJS&logoColor=white">
-</p>
+<div align="center">
+  <img src="https://img.shields.io/badge/-Nginx-009639?style=flat-square&logo=Nginx&logoColor=white">
+  <img src="https://img.shields.io/badge/-Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=white">
+  <img src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=white">
+  <img src="https://img.shields.io/badge/-Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white">
+  <img src="https://img.shields.io/badge/-Emotion-D26AC2?style=flat-square">
+  <img src="https://img.shields.io/badge/-Mongoose-F04D35?style=flat-square&logo=Mongoosedotws&logoColor=white">
+  <img src="https://img.shields.io/badge/-NestJS-E0234E?style=flat-square&logo=NestJS&logoColor=white">
+  <img src="https://img.shields.io/badge/-Express-000000?style=flat-square&logo=express&logoColor=white">
+  <img src="https://img.shields.io/badge/-Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=white">
+  <img src="https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white">
+  <img src="https://img.shields.io/badge/-Flask-000000?style=flat-square&logo=Flask&logoColor=white">
+</div>
+<div align="center">
+  <img src="https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=Docker&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonAWS-232F3E?style=flat-square&logo=AmazonAWS&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonRoute53-8C4FFF?style=flat-square&logo=AmazonRoute53&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonEC2-FF9900?style=flat-square&logo=AmazonEC2&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonS3-569A31?style=flat-square&logo=AmazonS3&logoColor=white">
+  <img src="https://img.shields.io/badge/-AWSLambda-FF9900?style=flat-square&logo=AWSLambda&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonCloudWatch-FF4F8B?style=flat-square&logo=AmazonCloudWatch&logoColor=white">
+  <img src="https://img.shields.io/badge/-AmazonIAM-DD344C?style=flat-square&logo=AmazonIAM&logoColor=white">
+</div>
+<br/>
+<br/>
+
+<h2 align="center"><a href="https://www.ourdongbang.com">배포 페이지</a></h2>
 <br/>
 <br/>
 
@@ -15,6 +39,15 @@
 ## Software Architecture
 
 ![Software Architecture](./assets/Software%20Architecture.png)
+<br/>
+<br/>
+
+## Preview
+
+![Information Page](./assets/information-page.png)
+<br/>
+<br/>
+![Audit Page](./assets/audit-page.png)
 <br/>
 <br/>
 
@@ -36,7 +69,7 @@
 </p>
 <br/>
 
-### 윤현승(Backend dev)
+### 윤현승(Fullstack dev)
 
 <p>
 	<a href=""><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
@@ -45,7 +78,7 @@
 </p>
 <br/>
 
-### 황영서(Backend & AI dev)
+### 황영서(Fullstack dev)
 
 <p>
 	<a href="https://github.com/younganswer"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="height: 30px"/></a>
