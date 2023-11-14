@@ -31,11 +31,10 @@
 
 ## Index
 
-- [Software Architecture](#software-architecture)
-- [Preview](#preview)
-- [Contacts](#contacts)
-<br/>
-<br/>
+-   [Software Architecture](#software-architecture)
+-   [Contacts](#contacts)
+    <br/>
+    <br/>
 
 ## Software Architecture
 
