@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const AuditDocumentBodyReceiptStyle = css({
+const AuditDocumentBodyReceiptStyle = css({
 	display: 'grid',
 	gridTemplateRows: '1fr 6fr',
 	borderRight: '2px solid black',
@@ -24,6 +24,9 @@ export const AuditDocumentBodyReceiptStyle = css({
 			height: '125px',
 			objectFit: 'cover',
 			border: '2px solid black',
+			cursor: 'zoom-in',
 		},
 	},
 });
+
+export default AuditDocumentBodyReceiptStyle;

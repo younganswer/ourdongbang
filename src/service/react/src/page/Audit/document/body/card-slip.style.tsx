@@ -23,6 +23,7 @@ export const AuditDocumentBodyCardSlipStyle = css({
 			height: '125px',
 			objectFit: 'cover',
 			border: '2px solid black',
+			cursor: 'zoom-in',
 		},
 	},
 });
