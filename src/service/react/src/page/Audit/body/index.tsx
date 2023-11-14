@@ -1,31 +1,44 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useRef } from 'react';
 import AuditRegisterButton from './register/button';
 import AuditPageBodyStyle from './index.style';
 import { DownArrowIcon, ExportIcon } from './icon';
 import AuditDocumentPreview from './preview';
 import { Audit, AuditContext } from 'context/AuditContext';
 import { Club } from 'context/ClubContext';
+import ReactToPrint from 'react-to-print';
+import AuditExport from '../export';
 
 const Header = () => {
+	const printRef = useRef<HTMLDivElement>(null);
+
 	return (
 		<div>
 			<span>회계 문서</span>
 			<div>
 				<span>|</span>
-				<div
-					onClick={() => {
-						console.log('export');
+				<ReactToPrint
+					pageStyle={`
+						@page {
+							size: 210mm 290mm;
+							margin: 12mm 10mm;
+						}
+					`}
+					onBeforeGetContent={() => {
+						if (printRef.current) {
+							printRef.current.style.display = 'block';
+						}
 					}}
-				>
-					<span
-						onClick={() => {
-							alert('업데이트 예정입니다!');
-						}}
-					>
-						회계 장부 내보내기
-					</span>
-					<ExportIcon width={24} height={24} />
-				</div>
+					trigger={() => (
+						<div>
+							<span>회계 장부 내보내기</span>
+							<ExportIcon width={24} height={24} />
+						</div>
+					)}
+					content={() => (printRef.current as HTMLDivElement) || null}
+				/>
+			</div>
+			<div>
+				<AuditExport divRef={printRef} />
 			</div>
 		</div>
 	);

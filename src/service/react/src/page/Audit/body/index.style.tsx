@@ -36,6 +36,10 @@ const HeaderStyle = css({
 
 	'> span:nth-child(1)': HeaderTitleStyle,
 	'> div:nth-child(2)': HeaderExportStyle,
+	'> div:nth-child(3)': {
+		position: 'absolute',
+		left: '100vw',
+	},
 });
 
 const BodySortStyle = css({
