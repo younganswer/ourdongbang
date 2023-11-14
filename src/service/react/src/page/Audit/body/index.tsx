@@ -22,6 +22,11 @@ const Header = () => {
 							size: 210mm 290mm;
 							margin: 12mm 10mm;
 						}
+						@media print {
+							body {
+								-webkit-print-color-adjust: exact;
+							}
+						}
 					`}
 					onBeforeGetContent={() => {
 						if (printRef.current) {
