@@ -8,7 +8,7 @@ import RegisterReviewClubSearchPageBody from './body';
 const Header = (props: { clubId: string; navigate: NavigateFunction }) => {
 	const { clubId, navigate } = props;
 	const handleClick = () => {
-		navigate('/main/search/club/' + clubId);
+		navigate(`/main/search/${clubId}`);
 	};
 
 	return (
@@ -32,7 +32,7 @@ const Header = (props: { clubId: string; navigate: NavigateFunction }) => {
 const RegisterReviewClubSearchPage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const clubId = location.pathname.split('/')[2];
+	const clubId = location.pathname.split('/')[3];
 
 	return (
 		<div className={RegisterReviewClubSearchPageStyle}>
