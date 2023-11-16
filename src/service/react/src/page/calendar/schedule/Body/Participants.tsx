@@ -86,7 +86,7 @@ const Participants = (props: {
 			<TitleContainer
 				titleIcon={<ParticipantsIcon width={27} height={27} />}
 				title="참여자"
-				subtitle="인원을 선택해주세요"
+				subtitle="부원을 선택해주세요"
 			/>
 			<div className={SelectContainerStyle}>
 				<div>

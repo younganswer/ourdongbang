@@ -9,6 +9,53 @@ export const datePickerStyle = css`
 		border-top: 1px solid black;
 	}
 
+	//always today's date background color change to gray
+	.react-datepicker__day--today {
+		background-color: transparent;
+	}
+	.react-datepicker__day--today: hover {
+		background-color: transparent;
+	}
+
+	// selected start date and end date color change to black, and change margin's color to black
+	.react-datepicker__day--selected,
+	.react-datepicker__day--in-selecting-range,
+	.react-datepicker__day--in-range {
+		background-color: black;
+		color: white;
+		border-color: black;
+	}
+
+	// only transparent not selected date
+	.react-datepicker__day--keyboard-selected:not(.react-datepicker__day--in-selecting-range):not(
+			.react-datepicker__day--in-range
+		) {
+		background-color: transparent;
+		color: black;
+	}
+
+	// fix the problem that the selected current month's end date and next month's date's what is same date color
+
+	.react-datepicker__day--in-selecting-range:last-child,
+	.react-datepicker__day--in-range:last-child,
+	.react-datepicker__day--selected:last-child {
+		background-color: black;
+		color: white;
+		border-color: black;
+	}
+
+	// when selecting start date, end date color change to black
+	.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range) {
+		background-color: black;
+		color: white;
+	}
+
+	// after selected start date, end date then hover color change to black
+	.react-datepicker__day--in-range:hover {
+		background-color: black;
+		color: white;
+	}
+
 	.react-datepicker__navigation {
 		margin-left: 20px; /* 왼쪽 여백을 줄임 */
 		margin-right: 20px; /* 오른쪽 여백을 줄임 */
@@ -23,6 +70,7 @@ export const datePickerStyle = css`
 	}
 
 	.react-datepicker__current-month {
+		padding-bottom: 10px;
 	}
 
 	.react-datepicker__week {
@@ -36,9 +84,15 @@ export const datePickerStyle = css`
 	.react-datepicker__header {
 		background-color: transparent;
 		border-bottom: none;
-		padding-top: 14px;
+		padding-top: 20px;
+		padding-bottom: 3px;
 	}
 
+	// adjust react-datepicker__header's height and react-datepicker__navigation--next, react-datepicker__navigation--previous's padding-top
+	.react-datepicker__navigation--next,
+	.react-datepicker__navigation--previous {
+		top: 15px;
+	}
 	.react-datepicker__day-name {
 		width: 40px;
 		font-size: 0;
