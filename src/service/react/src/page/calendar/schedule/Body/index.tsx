@@ -28,7 +28,7 @@ const ScheduleBody = (props: {
 		<div className={ScheduleBodyContainer}>
 			<DateRangePicker setStartDate={setStartDate} setEndDate={setEndDate} />
 			<Participants setAttendances={setAttendances} />
-			<Dues />
+			<Dues setFeeAmount={setFeeAmount} />
 		</div>
 	);
 };

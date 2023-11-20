@@ -17,7 +17,7 @@ const DateRangePicker: React.FC<{
 	return (
 		<div className={DateContainerStyle}>
 			<TitleContainer
-				titleIcon={<CalendarIcon height={25} width={25} />}
+				titleIcon={<CalendarIcon height={27} width={27} />}
 				title="기간"
 				subtitle="달력에서 선택해주세요"
 			/>
