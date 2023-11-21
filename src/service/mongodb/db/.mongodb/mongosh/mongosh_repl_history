@@ -1,0 +1,625 @@
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $pop: { rules: 1 }}, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $pop: { rules: ObjectId("65420251e90c6887d48b9bcd") }}, { new: true })
+db.clubs.find()
+db.rules.deleteOne({ _id: ObjectId("65420251e90c6887d48b9bcd") })
+db.rules.find()
+use ourdongbang
+db.audits.find().sort({ amount: -1 })
+it
+db.audits.find().sort({ amount: 1 })
+it
+db.audits.find().sort({ amount: -1 })
+db.audits.find().sort({ amount: -1})
+db.audits.find({}, { $sort: { amount: -1 } })
+db.audits.find({ $sort: { amount: -1 } })
+db.audits.find()
+use ourdongbang
+db.audits.dropIndex({ attachmentId: 1 })
+db.audits.dropIndex({ cardSlipId: 1 })
+db.audits.getIndexes()
+use ourdongbang
+db.members.findOneAndUpdate({ userId: ObjectId("6540fa1568a5ee82ab31198b") }, { $set: { participation: 0 } }, { new: true })
+db.members.findOneAndUpdate({ userId: ObjectId("65410a40df414b9e303e365c") }, { $set: { participation: 5 } }, { new: true })
+db.members.findOneAndUpdate({ userId: ObjectId("6540fa1568a5ee82ab31198b") }, { $set: { participation: 5 } }, { new: true })
+db.users.find()
+use ourdongbang
+db.members.findOneAndUpdate({ userId: ObjectId("6540fa1568a5ee82ab31198b") }, { $set: { role: 'member' } }, { new: true })
+db.members.find()
+db.users.find()
+db.members.findOneAndUpdate({ userId: '65410a40df414b9e303e365c' }, { $set: { userId: ObjectId("65410a40df414b9e303e365c"), role: 'manager' } }, { new: true })
+db.users.find()
+db.members.findOneAndUpdate({ userId: '6540fa1568a5ee82ab31198b' }, { $set: { userId: ObjectId("6540fa1568a5ee82ab31198b"), role: 'manager' } }, { new: true })
+db.members.findOneAndUpdate({ userId: ObjectId("6540fa1568a5ee82ab31198b") }, { $set: { role: 'manager' } }, { new: true })
+db.users.find()
+db.members.findOneAndUpdate({ userId: '65213e948a21d99239038c95' }, { $set: { userId: ObjectId("65213e948a21d99239038c95"), role: 'member' } }, { new: true })
+db.members.find()
+db.members.findOneAndUpdate({ userId: ObjectId("65213e948a21d99239038c95") }, { $set: { role: 'member' } }, { new: true })
+db.users.find()
+use ourdongbang
+db.members.find()
+db.users.find()
+db.clubs.find()
+use ourdongbang
+db.users.find()
+db.users.findOneAndUpdate({ _id: ObjectId("65410a40df414b9e303e365c") }, { $push: { clubs: ObjectId("653947878c27dceb2a012ce5") } }, { new: true })
+db.users.findOneAndUpdate({ _id: ObjectId("65411e7bc80c2fde432c54db") }, { $push: { clubs: ObjectId("653947878c27dceb2a012ce5") } }, { new: true })
+db.users.find()
+db.users.findOneAndUpdate({ _id: ObjectId("65411e7bc80c2fde432c54db") }, { $push: { clubs: ObjectId("652cd6795a4c15a525bd97a3") } }, { new: true })
+db.users.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("65411efc81ae5f5813d9e80d") } }, { new: true })
+db.members.insertOne({userId: ObjectId("65411e7bc80c2fde432c54db"), role: "member", participation: 0})
+db.users.find()
+use ourdongbang
+db.members.find()
+db.members.findOneAndUpdate({ userId: ObjectId("651cf8c827d6b94207c22e8d") }, { $set: { role: 'manager' } }, { new: true })
+db.members.findOneAndUpdate({ userId: "651cf8c827d6b94207c22e8d" }, { $set: { role: 'manager' } }, { new: true })
+use ourdongbang
+db.members.findOneAndUpdate({ userId: "651cf8c827d6b94207c22e8d" }, { $set: { userId: ObjectId("651cf8c827d6b94207c22e8d") } }, { new: true })
+db.members.find()
+db.members.findOneAndUpdate({ userId: ObjectId("651cf8c827d6b94207c22e8d") }, { $set: { role: 'manager' } }, { new: true })
+db.users.find()
+db.members.findOneAndUpdate({ userId: ObjectId("651cf8c827d6b94207c22e8d") }, { $set: { role: 'manager' } }, { new: true })
+db.members.find({ userId: ObjectId("651cf8c827d6b94207c22e8d") }, { $set: { role: 'manager' } }, { new: true })
+db.members.find()
+db.users.find()
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("65410abd4536fb0a7ce2449f") } }, { new: true })
+db.members.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $pop: { members: 1 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $pop: { members: ObjectId("65410a40df414b9e303e365c") } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $delete: { members: ObjectId("65410a40df414b9e303e365c") } }, { new: true })
+db.clubs.find()
+db.members.find()
+use ourdongbang
+db.users.findOneAndUpdate({ _id: ObjectId("65410a40df414b9e303e365c") }, { $push: { clubs: ObjectId("652cd6795a4c15a525bd97a3") } }, { new: true })
+db.users.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("65410a40df414b9e303e365c") } }, { new: true })
+db.clubs.find()
+db.clubs.find
+db.members.insertOne({userId: ObjectId("65410a40df414b9e303e365c"), role: "member", participation: 0})
+db.users.find()
+use ourdongbang
+db.members.findOneAndUpdate({ userId: ObjectId("651edcf6a0ce8b28449841b0") }, { $set: { role: 'manager' } }, { new: true })
+db.users.find()
+db.members.findOneAndUpdate({ userId: ObjectId("65213e948a21d99239038c95") }, { $set: { role: 'manager' } }, { new: true })
+db.members.find()
+db.users.find( )
+db.images.drop()
+db.users.find()
+db.images.find()
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { audits: [], balance: 3000000 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: {audits: [] } }, { new: true })
+db.clubs.find()
+db.images.drop()
+db.audits.drop()
+use ourdongbang
+db.audits.drop()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { balance: 3000000 } }, { new: true })
+db.clubs.find()
+db.users.findOneAndUpdate({ _id: ObjectId("6540fa1568a5ee82ab31198b") }, { $push: { clubs: ObjectId("653947878c27dceb2a012ce5") } }, { new: true })
+db.users.find()
+show collections
+db.clubs.find()
+db.clubs.updateMany({}, { $set: { audits: [] } }, { new: true })
+db.audits.drop()
+show collections
+db.members.find()
+db.members.findOneAndUpdate({ userId: '652cf74e87ce1961bdf3001a' }, { $set: { userId: ObjectId("652cf74e87ce1961bdf3001a") } }, { new: true })
+db.members.find()
+db.members.findOneAndUpdate({ userId: '65213e948a21d99239038c95' }, { $set: { userId: ObjectId("65213e948a21d99239038c95") } }, { new: true })
+db.members.find()
+db.members.findOneAndUpdate({ userId: '651edcf6a0ce8b28449841b0' }, { $set: { userId: ObjectId("651edcf6a0ce8b28449841b0") } }, { new: true })
+db.members.find()
+db.members.findOneAndUpdate({ userId: '651cf8c827d6b94207c22e8d' }, { $set: { userId: ObjectId("651cf8c827d6b94207c22e8d") } }, { new: true })
+db.members.find()
+db.members.findOneAndUpdate({ userId: '65111497e780cf514e75b8a7' }, { $set: { userId: ObjectId("65111497e780cf514e75b8a7") } }, { new: true })
+db.members.findOneAndUpdate({ userId: '65111497e780cf514e75b8a7' }, { $set { userId: ObjectId("65111497e780cf514e75b8a7") } }, { new: true })
+db.members.findOneAndUpdate({ userId: '65111497e780cf514e75b8a7' }, { userId: ObjectId("65111497e780cf514e75b8a7") }, { new: true })
+db.members.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("652cd86d5a4c15a525bd97a7") } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("65394cdbde231b49fcfd0f50") } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("652cd8665a4c15a525bd97a6") } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("652cd85e5a4c15a525bd97a5") } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("652cd8485a4c15a525bd97a4") } }, { new: true })
+db.members.find()
+db.users.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("6541041e182def3d3f2a9e5a") } }, { new: true })
+db.members.find()
+db.users.find()
+db.members.insertOne({userId: ObjectId("6540fa1568a5ee82ab31198b"), role: "member", participation: 0})
+db.members.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $unset: { members: ObjectId("6540fa1568a5ee82ab31198b") } }, { new: true })
+db.clubs.find()
+db.users.findOneAndUpdate({ _id: ObjectId("6540fa1568a5ee82ab31198b") }, { $push: { clubs: ObjectId("652cd6795a4c15a525bd97a3") } }, { new: true })
+db.users.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: ObjectId("6540fa1568a5ee82ab31198b") } }, { new: true })
+db.clubs.find()
+db.users.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.rules.findOneAndUpdate({ _id: ObjectId("6540f82e68a5ee82ab31191d") }, { $set: { content: [ '"항목추가+" 버튼을 통해 공지를 남겨보실 수 있습니다.', '서비스 체험을 해주셔서 감사드립니다!!' ] } }, { new: true })
+db.rules.find()
+use ourdongbang
+db.clubs.findOneAndUpdate({_id: ObjectId("652cd6795a4c15a525bd97a3")}, { $set: { rules: [ ] } }, { new: true })
+db.clubs.find()
+db.rules.drop()
+db.rules.find()
+db.reviews.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.audits.dropIndex({ cardSlipId: 1 })
+db.audits.dropIndex({ attachmentId: 1 })
+db.audits.getIndexes()
+db.audits.find()
+use ourdongbang
+db.members.find()
+db.clubs.find()
+db.users.findOneAndUpdate({ _id: ObjectId("65213e948a21d99239038c95") }, { $set: {} }, { new: true } )
+db.users.find()
+use ourdongbang
+db.users.find()
+db.clubs.find()
+db.members.find()
+db.users.find()
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { balance: 3000000 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { balance: 300000 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { audits: [] } }, { new: true })
+db.clubs.find()
+db.clubs.findOneAndUpdate()
+db.audits.drop()
+use ourdongbang
+db.audits.drop()
+use ourdongbang
+db.users.findOneAndUpdate({_id: ObjectId("65111497e780cf514e75b8a7")}, { $set: { profileImageId: ObjectId("653f164b2e4532e5f5c1bf8e") } }, { new: true })
+db.users.findOneAndUpdate({_id: ObjectId("65111497e780cf514e75b8a7")}, { $set { profileImageId: ObjectId("653f164b2e4532e5f5c1bf8e") } }, { new: true })
+db.users.find()
+db.users.updateMany({}, { $set: { clubs: [ ObjectId("652cd6795a4c15a525bd97a3"), ObjectId("653947878c27dceb2a012ce5") ] } }, { new: true })
+db.users.findOneAndUpdate({_id: ObjectId("652cf74e87ce1961bdf3001a")}, { $set: { clubs: [ ObjectId("652cd6795a4c15a525bd97a3"), ObjectId("653947878c27dceb2a012ce5") ] } }, { new: true })
+db.users.find()
+db.users.updateMany({}, { $unset:  { profileImageId: '653e9100a04975a409f093e6' } }, { new: true })
+db.users.updateMany({}, { $unset:  { profileImageId } }, { new: true })
+db.users.updateMany({}, { $unset:  profileImageId }, { new: true })
+db.users.updateMany({}, { $set: { profileImageId: null } }, { new: true })
+db.users.find()
+show collections
+db.audits.drop()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { audits: [] } }, { new: true })
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { balance: 3000000 } }, { new: true })
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $unset: { totalBudjet: 3000000 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { totalBudget: 3000000, balance: 0 } }, { new: true })
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $unset: { totalBalance: 3000000, currentBalance: 0 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $remove: { totalBalance, currentBalance } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $remove: { totalBalance: 3000000, currentBalance: 0 } }, { new: true })
+db.clubs.find()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $remove: { totalBalance, currentBalance } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $remove: { totalBalance, currentBalance } }, currentBalance }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $unset: totalBalance, currentBalance }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $remove: totalBalance, currentBalance }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { totalBudjet: 3000000, balance: 0 } }, { new: true })
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { totalBalance: 3000000, currentBalance: 0 } }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { totalBalance: 3000000, currentBalance: 0 }, { new: true })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { members: [ ObjectId("652cd8485a4c15a525bd97a4"), ObjectId("652cd85e5a4c15a525bd97a5"), ObjectId("652cd8665a4c15a525bd97a6"), ObjectId("652cd86d5a4c15a525bd97a7"), ObjectId("65394cdbde231b49fcfd0f50")]} }, { new: true })
+'652cd8485a4c15a525bd97a4', '652cd85e5a4c15a525bd97a5', '652cd8665a4c15a525bd97a6', '652cd86d5a4c15a525bd97a7', '65394cdbde231b49fcfd0f50'
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: {members: [} }, { new: true })
+db.clubs.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.audits.drop()
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { audits: [] } }, { new: true } )
+db.clubs.find()
+use ourdongbang
+ues our
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.users.updateMany({}, { $set: { clubs: [ "652cd6795a4c15a525bd97a3", "653947878c27dceb2a012ce5" ] } }, { new: true })
+db.users.find()
+db.clubs.find()
+db.users.find()
+db.clubs.find()
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: "65394cdbde231b49fcfd0f50" } }, { new: true })
+db.clubs.findOneAndUpdate({ ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { members: "65394cdbde231b49fcfd0f50" } }, { new: true })
+db.clubs.find()
+db.members.find()
+db.members.insertOne({userId: "652cf74e87ce1961bdf3001a", role: "member", participation: 0})
+db.members.insertOnt({userId: "652cf74e87ce1961bdf3001a", role: "member", participation: 0})
+db.members.find()
+db.users.find()
+db.users.updateMany({}, { $set: { clubs: [ "652cd6795a4c15a525bd97a3", "653949248c27dceb2a012ce6" ] } }, { new: true })
+db.users.updateMany({}, { $remove: { clubs: [ "653949248c27dceb2a012ce6" ] } }, { new: true })
+db.users.find()
+db.users.updateMany({}, { $push: { clubs: [ "653949248c27dceb2a012ce6" ] } }, { new: true })
+db.clubs.find()
+db.users.findOneAndUpdate({_id: ObjectId("652cf74e87ce1961bdf3001a")}, { $set: { name: "장시아", clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true })
+db.users.findOneAndUpdate({_id: ObjectId("65111497e780cf514e75b8a7")}, { $set: { name: "황영서", clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true })
+db.users.findOneAndUpdate({_id: ObjectId("65111497e780cf514e75b8a7")}, { $set: { name: "황영서" clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true })
+db.users.find()
+db.users.findOneAndUpdate({ _id: ObjectId("652cf74e87ce1961bdf3001a") }, { $set: { name: "황영서", clubs: [ "652cd6795a4c15a525bd97a3" ] } })
+db.users.find()
+db.users.findOneAndUpdate({ _id: ObjectId("652cf74e87ce1961bdf3001a") }, { $set: { name: "장시아", clubs: [ "653947878c27dceb2a012ce5" ] } }, { new: true })
+db.users.findOneAndUpdate({}, { $set: { name: "장시아", clubs: [ "653947878c27dceb2a012ce5" ] } }, { new: true })
+db.users.find()
+db.users.find
+db.clubs.find()
+use ourdongbang
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $push: { audits: "653949248c27dceb2a012ce6" }}, { new: true })
+db.clubs.find()
+db.audits.find()
+use ourdongbang
+db.audits.find()
+db.audits.insertOne({ auditor: "장시아", created: "2023-10-16", title: "알파프로젝트 회식", date: "2023-10-16", franchise: "소한마리 정릉점", amount: "200000", isExpense: true, balance: "800000", remark: "냉면 할인 행사로 3000원 할인 받음" })
+db.audits.getIndexes()
+db.audits.dropIndex({ images: 1 })
+db.audits.dropIndex({ attachment: 1 })
+db.audits.getIndexes()
+db.audits.getIndexes
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+db.clubs.dropIndex({ 'members.user': 1 })
+db.clubs.getIndexes()
+db.clubs.dropIndex()
+db.clubs.dropIndex("members.user")
+db.clubs.dropIndex({"members.user"})
+db.clubs.dropIndex({members.user"})
+db.clubs.dropIndex({'members.user'})
+db.clubs.dropIndex({members.user})
+db.clubs.getIndexes()
+db.collection.getIndexes()
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+db.users.find()
+show collections
+db.clubs.find()
+db.members.find()
+show collections
+db.images.find()
+db.audits.find()
+show collections
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다", members: null })
+db.clubs.find()
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다", members: [] })
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.members.find()
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+db.clubs.find()
+db.members.find()
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+db.clubs.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.clubs.insertOne({ name: "소바", introduction: "서비스 운영진만 가입할 수 있습니다" })
+db.clubs.findOneAndUpdate({ _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { introduction: "서비스 운영진만 가입할 수 있습니다" } }, { new: true })
+db.clubs.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.clubs.findOneAndUpdate( { _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { members: [ "652cd8485a4c15a525bd97a4", "652cd85e5a4c15a525bd97a5", "652cd8665a4c15a525bd97a6", "652cd86d5a4c15a525bd97a7" ] } }, { new: true } )
+db.clubs.find()
+db.members.find()
+db.users.updateMany({}, { $set: { clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true })
+db.users.updateMany({}, { $set: { clubs: [ "65111497e780cf514e75b8a7" ] } }, { new: true })
+db.users.updateMany( { $set: { clubs: [ "652cd6795a4c15a525bd97a3" ] } })
+db.users.updateMany( { clubs: [ "652cd6795a4c15a525bd97a3" ] }, { new: true } )
+db.users.updateMany( { $set: { clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true } )
+db.clubs.find()
+db.users.find()
+use ourdongbang
+db.users.find()
+db.members.find()
+db.clubs.find()
+db.clubs.findOneAndUpdate( { _id: ObjectId("652cd6795a4c15a525bd97a3") }, { $set: { members: [ "652cd6795a4c15a525bd97a3", "652cd85e5a4c15a525bd97a5", "652cd8665a4c15a525bd97a6", "652cd86d5a4c15a525bd97a7" ]} }, { new: true })
+db.clubs.findOneAndUpdate( { _id: "652cd6795a4c15a525bd97a3" }, { $set: { members: [ "652cd6795a4c15a525bd97a3", "652cd85e5a4c15a525bd97a5", "652cd8665a4c15a525bd97a6", "652cd86d5a4c15a525bd97a7" ]} }, { new: true })
+db.clubs.find()
+db.members.find()
+db.members.insertOne({ userId: "65213e948a21d99239038c95", role: "member", participation: 0 })
+db.members.insertOne({ userId: "651edcf6a0ce8b28449841b0", role: "member", participation: 0 })
+db.members.insertOne({ userId: "651cf8c827d6b94207c22e8d", role: "member", participation: 0 })
+db.members.insertOne({ userId: "65111497e780cf514e75b8a7", role: "manager", participation: 0 })
+db.users.find()
+db.users.find({}, {_id})
+db.users.find()['_id']
+db.users.find()
+db.users.find()._id
+db.users.find({_id})
+db.members.find()
+db.users.find()
+db.users.updateMany({}, { $set: { clubs: [ "65111497e780cf514e75b8a7" ] } }, { new: true })
+db.users.find()
+db.users.updateMany({}, { $set: { clubs: [ ObjectId("65111497e780cf514e75b8a7") ] } }, { new: true })
+db.useres.updateMany({}, { $set: { clubs: [ ObjectId("65111497e780cf514e75b8a7") ] } }, { new: true })
+db.users.findOneAndUpdate({_id: "65111497e780cf514e75b8a7"}, { $set: { clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true })
+db.users.find()
+db.users.findOneAndUpdate({_id: ""}, { $set: { clubs: [ "652cd6795a4c15a525bd97a3" ] } }, { new: true })
+db.clubs.insertOne({name: "우동"})
+db.clubs.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.users.find()
+db.audits.find()
+db.clubs.find()
+db.schedules.find()
+db.reviews.find()
+db.members.find()
+db.clubs.find()
+show collections
+db.users.find()
+use ourdongbang
+db.users.find()
+db.users.findOneAndDelete({id: "jhanks1221"})
+db.users.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.users.find()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.users.drop()
+use ourdongbang
+db.users.drop()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.users.drop()
+use ourdongbang
+db.users.drop()
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.users.drop()
+db.users.drop( )
+use ourdongbang
+db.users.drop()
+use ourdongbang
+db.users.drop()
+show collections
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
+db.createUser({ user: 'sia', pwd: 'yeonjeong', roles: [{ role: 'readWrite', db: 'ourdongbang' }] })
+use ourdongbang
+})
+	}]
+		db: 'ourdongbang'
+		role: 'readWrite',
+	roles: [{
+	pwd: 'yeonjeong',
+	user: 'sia',
+db.createUser({
+use ourdongbang
