@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 
 export const textAreaContainer = css({
 	width: '100%',
