@@ -5,7 +5,6 @@ export const DuesContainerStyle = css({
 	flexDirection: 'column',
 	alignItems: 'center',
 	justifyContent: 'center',
-	borderRight: '1px solid black',
 });
 
 export const InputFeeAmountContainer = css({
