@@ -38,14 +38,22 @@ const Header = (props: { club: Club; audits: Audit[] | null }) => {
 					`}
 					onBeforeGetContent={() => {
 						if (printRef.current) {
-							const children = printRef.current.children as HTMLCollectionOf<HTMLDivElement>;
+							printRef.current.style.display = 'block';
+							{
+								const children = printRef.current.children as HTMLCollectionOf<HTMLDivElement>;
 
-							for (let i = 0; i < children.length; i++) {
-								if (children[i].className !== AuditExportDocumentStyle) {
-									continue;
+								for (let i = 0; i < children.length; i++) {
+									if (children[i].className !== AuditExportDocumentStyle) {
+										continue;
+									}
+									resizeBeforeGetContent(children[i].children[0] as HTMLElement);
 								}
-								resizeBeforeGetContent(children[i].children[0] as HTMLElement);
 							}
+						}
+					}}
+					onAfterPrint={() => {
+						if (printRef.current) {
+							printRef.current.style.display = 'none';
 						}
 					}}
 					trigger={() => (

@@ -46,9 +46,7 @@ const MemberProfile = (props: { member: Member }) => {
 					setIsModalOpened(true);
 				}}
 			>
-				<div>
-					<img src={src} alt="profile" />
-				</div>
+				<div>{src ? <img src={src} alt="profile" /> : null}</div>
 				<div>
 					<span>{userInfo?.name}</span>
 					<span>|</span>
